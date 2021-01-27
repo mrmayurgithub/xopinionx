@@ -7,7 +7,6 @@ part 'problem_model.g.dart';
 class ProblemModel {
   ProblemModel({
     this.userId,
-    this.langPrefs,
     this.problemId,
     this.problemTitle,
     this.problemDescription,
@@ -17,7 +16,6 @@ class ProblemModel {
     this.meetLink,
   });
   String userId;
-  List<Languages> langPrefs;
   String problemId;
   String problemTitle;
   String problemDescription;

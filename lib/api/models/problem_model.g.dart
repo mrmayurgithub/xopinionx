@@ -9,9 +9,6 @@ part of 'problem_model.dart';
 ProblemModel _$ProblemModelFromJson(Map<String, dynamic> json) {
   return ProblemModel(
     userId: json['userId'] as String,
-    langPrefs: (json['langPrefs'] as List)
-        ?.map((e) => _$enumDecodeNullable(_$LanguagesEnumMap, e))
-        ?.toList(),
     problemId: json['problemId'] as String,
     problemTitle: json['problemTitle'] as String,
     problemDescription: json['problemDescription'] as String,
@@ -22,11 +19,8 @@ ProblemModel _$ProblemModelFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$ProblemModelToJson(ProblemModel instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ProblemModelToJson(ProblemModel instance) => <String, dynamic>{
       'userId': instance.userId,
-      'langPrefs':
-          instance.langPrefs?.map((e) => _$LanguagesEnumMap[e])?.toList(),
       'problemId': instance.problemId,
       'problemTitle': instance.problemTitle,
       'problemDescription': instance.problemDescription,
@@ -46,9 +40,7 @@ T _$enumDecode<T>(
         '${enumValues.values.join(', ')}');
   }
 
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
+  final value = enumValues.entries.singleWhere((e) => e.value == source, orElse: () => null)?.key;
 
   if (value == null && unknownValue == null) {
     throw ArgumentError('`$source` is not one of the supported values: '
@@ -67,11 +59,6 @@ T _$enumDecodeNullable<T>(
   }
   return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
 }
-
-const _$LanguagesEnumMap = {
-  Languages.Hindi: 'Hindi',
-  Languages.English: 'English',
-};
 
 const _$TagsEnumMap = {
   Tags.Coding: 'Coding',

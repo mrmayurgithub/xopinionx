@@ -10,7 +10,6 @@ class ProblemFunctions {
     await _firestore.collection('problems').doc(_docId).set({
       'id': _docId,
       'userId': problem.userId,
-      'langPrefs': problem.langPrefs,
       'problemTitle': problem.problemTitle,
       'problemDescription': problem.problemDescription,
       'datePosted': problem.datePosted,
@@ -35,7 +34,6 @@ class ProblemFunctions {
     await _firestore.collection('problems').doc(problem.problemId).set({
       'id': problem.problemId,
       'userId': problem.userId,
-      'langPrefs': problem.langPrefs,
       'problemTitle': problem.problemTitle,
       'problemDescription': problem.problemDescription,
       'datePosted': problem.datePosted,
