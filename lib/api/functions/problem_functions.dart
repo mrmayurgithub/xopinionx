@@ -14,7 +14,7 @@ class ProblemFunctions {
       'problemDescription': problem.problemDescription,
       'datePosted': problem.datePosted,
       'status': problem.status,
-      'tag': problem.tag,
+      'tag': problem.tag.toString(),
     });
   }
 

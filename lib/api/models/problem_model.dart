@@ -21,7 +21,7 @@ class ProblemModel {
   String problemDescription;
   String datePosted;
   bool status;
-  Tags tag;
+  String tag;
   String meetLink;
   factory ProblemModel.fromJson(Map<String, dynamic> data) => _$ProblemModelFromJson(data);
   Map<String, dynamic> toJson() => _$ProblemModelToJson(this);

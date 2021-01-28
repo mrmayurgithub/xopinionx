@@ -14,7 +14,7 @@ ProblemModel _$ProblemModelFromJson(Map<String, dynamic> json) {
     problemDescription: json['problemDescription'] as String,
     datePosted: json['datePosted'] as String,
     status: json['status'] as bool,
-    tag: _$enumDecodeNullable(_$TagsEnumMap, json['tag']),
+    tag: json['tag'] as String,
     meetLink: json['meetLink'] as String,
   );
 }
@@ -26,42 +26,6 @@ Map<String, dynamic> _$ProblemModelToJson(ProblemModel instance) => <String, dyn
       'problemDescription': instance.problemDescription,
       'datePosted': instance.datePosted,
       'status': instance.status,
-      'tag': _$TagsEnumMap[instance.tag],
+      'tag': instance.tag,
       'meetLink': instance.meetLink,
     };
-
-T _$enumDecode<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError('A value must be provided. Supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-
-  final value = enumValues.entries.singleWhere((e) => e.value == source, orElse: () => null)?.key;
-
-  if (value == null && unknownValue == null) {
-    throw ArgumentError('`$source` is not one of the supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-  return value ?? unknownValue;
-}
-
-T _$enumDecodeNullable<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
-}
-
-const _$TagsEnumMap = {
-  Tags.Coding: 'Coding',
-  Tags.Electrial: 'Electrial',
-  Tags.Mechanical: 'Mechanical',
-};

@@ -50,7 +50,7 @@ class App extends StatelessWidget {
                       problemTitle: 'ddd',
                       datePosted: 'dd',
                       status: true,
-                      tag: Tags.Electrial,
+                      tag: Tags.Electrial.toString(),
                     ),
                   );
                 },
