@@ -15,7 +15,6 @@ ProblemModel _$ProblemModelFromJson(Map<String, dynamic> json) {
     datePosted: json['datePosted'] as String,
     status: json['status'] as bool,
     tag: json['tag'] as String,
-    meetLink: json['meetLink'] as String,
   );
 }
 
@@ -27,5 +26,4 @@ Map<String, dynamic> _$ProblemModelToJson(ProblemModel instance) => <String, dyn
       'datePosted': instance.datePosted,
       'status': instance.status,
       'tag': instance.tag,
-      'meetLink': instance.meetLink,
     };

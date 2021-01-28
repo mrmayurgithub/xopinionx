@@ -15,6 +15,7 @@ class ApplicationFunctions {
       'problemId': applicationModel.problemId,
       'from': applicationModel.from,
       'applicationId': _docId,
+      'meetLink': applicationModel.meetLink,
     });
 
     final _queryList = _firestore.collection('users').doc(globalUser.id).collection('applications');
@@ -23,9 +24,11 @@ class ApplicationFunctions {
       'problemId': applicationModel.problemId,
       'from': applicationModel.from,
       'applicationId': _docId,
+      'meetLink': applicationModel.meetLink,
     });
   }
 
+//Returns applications where the user have applied
   static Future<List<ApplicationModel>> getUserApplications() async {
     final _queryList = await _firestore.collection('users').doc(globalUser.id).collection('applications').get();
     final _docList = _queryList.docs;
@@ -36,6 +39,7 @@ class ApplicationFunctions {
     return _applicationsList;
   }
 
+// Get current user's application from someone else's problem
   static Future<List<ApplicationModel>> getApplicationsForProblem({ProblemModel problemModel}) async {
     final _queryList = _firestore.collection('problems').doc(problemModel.problemId);
     final _docList = await _queryList.collection('applications').get();
@@ -47,6 +51,7 @@ class ApplicationFunctions {
     return _applicationsList;
   }
 
+// Delete current user's application from someone else's problem
   static Future<void> deleteApplicationFromProblem({ApplicationModel applicationModel}) async {
     //TODO: update in both global problems
     await _firestore.collection('problems').doc(applicationModel.problemId).collection('applications').doc(applicationModel.applicationId).delete();

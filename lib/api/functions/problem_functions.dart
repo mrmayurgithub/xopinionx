@@ -42,9 +42,6 @@ class ProblemFunctions {
     });
   }
 
-//TODO: complete
-  static Future<void> deleteAllApplications({ProblemModel problem}) async {}
-
   static Future<void> deleteProblem({ProblemModel problem}) async {
     //TODO: maybe also delete from the local list or update the list
     await _firestore.collection('problems').doc(problem.problemId).delete();

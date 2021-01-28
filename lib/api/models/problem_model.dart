@@ -13,7 +13,6 @@ class ProblemModel {
     this.datePosted,
     this.status,
     this.tag,
-    this.meetLink,
   });
   String userId;
   String problemId;
@@ -22,7 +21,6 @@ class ProblemModel {
   String datePosted;
   bool status;
   String tag;
-  String meetLink;
   factory ProblemModel.fromJson(Map<String, dynamic> data) => _$ProblemModelFromJson(data);
   Map<String, dynamic> toJson() => _$ProblemModelToJson(this);
 }

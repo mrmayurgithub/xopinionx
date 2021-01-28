@@ -2,13 +2,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:xopinionx/api/models/user_model.dart';
+import 'package:xopinionx/global/global_helpers.dart';
 
 class UserFunctions {
   static final _firestore = FirebaseFirestore.instance;
 
   static Future<void> createUser(UserModel user) async {
     //TODO: Check if user is already registered before calling this function
-    final _docId = _firestore.collection('users').doc().id;
+    // final _docId = _firestore.collection('users').doc().id;
+    final _docId = globalUser.id;
     await _firestore.collection('users').doc(_docId).set(
       {
         'id': _docId,

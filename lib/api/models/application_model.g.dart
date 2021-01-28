@@ -12,6 +12,7 @@ ApplicationModel _$ApplicationModelFromJson(Map<String, dynamic> json) {
     problemId: json['problemId'] as String,
     from: json['from'] as String,
     applicationId: json['applicationId'] as String,
+    meetLink: json['meetLink'] as String,
   );
 }
 
@@ -20,4 +21,5 @@ Map<String, dynamic> _$ApplicationModelToJson(ApplicationModel instance) => <Str
       'problemId': instance.problemId,
       'from': instance.from,
       'applicationId': instance.applicationId,
+      'meetLink': instance.meetLink,
     };
