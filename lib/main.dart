@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 // Import the firebase_core plugin
 import 'package:firebase_core/firebase_core.dart';
 import 'package:xopinionx/api/functions/problem_functions.dart';
-import 'package:xopinionx/api/functions/user_functions.dart';
 import 'package:xopinionx/api/models/problem_model.dart';
-import 'package:xopinionx/api/models/user_model.dart';
 import 'package:xopinionx/global/enums.dart';
 import 'package:xopinionx/global/logger.dart';
 

@@ -22,6 +22,7 @@ class UserFunctions {
         'eduYear': user.eduYear,
         'overallReview': user.overallReview,
         'languagePreferences': user.languagePreferences,
+        'registrationStatus': user.registrationStatus,
       },
       //TODO: merge = false option is probably unavailable in new update
     ).catchError((e) => {});

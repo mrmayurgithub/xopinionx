@@ -13,6 +13,7 @@ class UserModel {
     this.eduYear,
     this.overallReview,
     this.languagePreferences,
+    this.registrationStatus,
   });
   String fname;
   String lname;
@@ -23,9 +24,16 @@ class UserModel {
   int eduYear;
   int overallReview;
   List<String> languagePreferences;
+  String registrationStatus;
 
   factory UserModel.fromJson(Map<String, dynamic> data) => _$UserModelFromJson(data);
 
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
 }
+
 //TODO: Something to confirm the user's education level
+enum registrationStatus {
+  registered,
+  invited,
+  dummy,
+}
