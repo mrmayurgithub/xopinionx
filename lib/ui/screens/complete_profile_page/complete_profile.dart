@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  static const String id = "login_page";
+class ProfileRegPage extends StatelessWidget {
+  static const String id = "profile_reg_page";
+
   @override
   Widget build(BuildContext context) {
     return Container();

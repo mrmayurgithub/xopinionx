@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  static const String id = "login_page";
+class HistoryPage extends StatelessWidget {
+  static const id = 'history_page';
   @override
   Widget build(BuildContext context) {
     return Container();

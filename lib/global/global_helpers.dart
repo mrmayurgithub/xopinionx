@@ -4,6 +4,7 @@ import 'package:xopinionx/api/functions/user_functions.dart';
 import 'package:xopinionx/api/models/problem_model.dart';
 import 'package:xopinionx/api/models/user_model.dart';
 
+//TODO: TODO: TODO: Compplete
 Future<void> _initializeApi() async {
   await loadCurrentUser();
   await loadUserProblems();
@@ -20,6 +21,11 @@ Future<void> loadCurrentUser() async {
 //TODO: Maybe sort by tags
 Future<void> loadUserProblems() async {
   _userProblemsList = await ProblemFunctions.getUserProblems();
+}
+
+Future<void> _disposeApi() async {
+  _globalProblemsList = [];
+  _userProblemsList = [];
 }
 
 Future<void> loadApplicationsForProblem() async {}
@@ -41,3 +47,4 @@ List<ProblemModel> get userProblemsList => _userProblemsList;
 List<ProblemModel> get globalProblemsList => _globalProblemsList;
 // List<ApplicationModel> get historyList => _historyList;
 Future<void> get initializeApi => _initializeApi();
+Future<void> get disposeApi => _disposeApi();
