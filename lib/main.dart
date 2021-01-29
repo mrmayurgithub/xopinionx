@@ -121,6 +121,12 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
         title: 'Opinionx',
         debugShowCheckedModeBanner: false,
         // theme: widget.state.appThemeData,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          textTheme: Theme.of(context).textTheme.apply(
+                fontFamily: 'Open Sans',
+              ),
+        ),
         navigatorObservers: [FirebaseAnalyticsObserver(analytics: _analytics)],
         routes: {
           LoginPage.id: (context) => LoginPage(),
