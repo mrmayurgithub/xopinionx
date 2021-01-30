@@ -136,18 +136,10 @@ class HomePageMainBody extends StatelessWidget {
 //             if (state is HomePageFailure) {}
 //           },
 //           builder: (context, state) {
-//             return CenteredView(
-//               child: Column(
-//                 children: [
-//                   Expanded(
-//                     child: ScreenTypeLayout(
-//                       mobile: HomePageMobile(),
-//                       desktop: HomePageDesktop(),
-//                       tablet: HomePageDesktop(),
-//                     ),
-//                   ),
-//                 ],
-//               ),
+//             return ScreenTypeLayout(
+//               mobile: HomePageMobile(),
+//               desktop: HomePageDesktop(),
+//               tablet: HomePageDesktop(),
 //             );
 //           },
 //         );

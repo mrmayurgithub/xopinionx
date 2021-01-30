@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:xopinionx/ui/global/utils.dart';
 
 class HomePageDesktop extends StatefulWidget {
   @override
@@ -6,21 +8,75 @@ class HomePageDesktop extends StatefulWidget {
 }
 
 class _HomePageDesktopState extends State<HomePageDesktop> {
+  Color _color1 = Color.fromARGB(255, 9, 220, 129);
+  Color _color2 = Color.fromARGB(255, 255, 107, 74);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        child: Container(
-          padding: EdgeInsets.all(8.0),
-          height: 80,
-          color: Color.fromARGB(255, 255, 107, 74),
-          child: Row(
-            children: [Text('dhdhdh')],
+      appBar: AppBar(
+        elevation: 1,
+        leading: Icon(
+          Icons.connect_without_contact_outlined,
+          color: Colors.black,
+        ),
+        backgroundColor: _color1,
+        title: Text(
+          'OPINIONX',
+          style: TextStyle(
+            color: Colors.black,
+            fontFamily: 'Open Sans',
           ),
         ),
-        preferredSize: Size.fromHeight(80),
+        actions: [
+          FlatButton(
+            child: Text('HOME'),
+            onPressed: () {},
+          ),
+          FlatButton(
+            child: Text('BLOG'),
+            onPressed: () {},
+          ),
+          FlatButton(
+            child: Text('DONATE'),
+            onPressed: () {},
+          ),
+        ],
       ),
-      body: ListView(),
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            ClipPath(
+              clipper: WaveClipperOne(),
+              child: Container(
+                height: 600,
+                color: _color1,
+              ),
+            ),
+            Wrap(
+              runAlignment: WrapAlignment.spaceBetween,
+              alignment: WrapAlignment.center,
+              children: [
+                Padding(
+                  // padding: EdgeInsets.symmetric(vertical: 20),
+                  child: Image.asset(
+                    'assets/images/home_page_images/1.png',
+                    width: screenWidth / 2,
+                    height: screenHeight / 2,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Container(
+                    color: _color2,
+                    height: 300,
+                    width: 300,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
