@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:xopinionx/ui/components/custom_autosizetext.dart';
 
 class RoundedButton extends StatelessWidget {
   final Function onPressed;
-  final String title;
+  final CustomAutoSizeText title;
 
   const RoundedButton({this.onPressed, this.title});
 
@@ -16,7 +17,7 @@ class RoundedButton extends StatelessWidget {
       onPressed: onPressed,
       child: Padding(
         padding: EdgeInsets.all(8.0),
-        child: Text(title),
+        child: title,
       ),
     );
   }

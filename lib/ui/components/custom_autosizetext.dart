@@ -6,16 +6,22 @@ class CustomAutoSizeText extends StatelessWidget {
   final String title;
   final fontSize;
   final int maxLines;
-
-  const CustomAutoSizeText({@required this.width, @required this.title, @required this.fontSize, @required this.maxLines});
+  final Color color;
+  const CustomAutoSizeText({@required this.width, @required this.title, @required this.fontSize, @required this.maxLines, @required this.color});
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: width,
+      ),
       child: AutoSizeText(
         title,
         maxLines: maxLines,
-        style: TextStyle(fontSize: fontSize),
+        style: TextStyle(
+          fontSize: fontSize,
+          color: color,
+        ),
+        textAlign: TextAlign.justify,
       ),
     );
   }

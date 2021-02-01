@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/ui/components/home_navigation_bar.dart/home_navigation_bar.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/screens/home_page/bloc/home_page_bloc.dart';
 import 'package:xopinionx/ui/screens/home_page/home_centered_view.dart';
 import 'package:xopinionx/ui/screens/home_page/home_page_desktop.dart';
 import 'package:xopinionx/ui/screens/home_page/home_page_mobile.dart';
+import 'package:xopinionx/ui/screens/register_page/register_page.dart';
 
 class HomePage extends StatelessWidget {
   static const String id = "home_page";
@@ -124,6 +126,7 @@ class HomePageMainBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
       builder: (context, sizingInformation) {
+        bool _isMobile = sizingInformation.isMobile ? true : false;
         return BlocConsumer<HomePageBloc, HomePageState>(
           listener: (context, state) async {
             if (state is HomePageInitial) {}
@@ -131,7 +134,10 @@ class HomePageMainBody extends StatelessWidget {
             if (state is HomePageProgress) {}
             if (state is BlogPageLoaded) {}
             if (state is LoginPageLoaded) {}
-            if (state is SignUpPageLoaded) {}
+            if (state is SignUpPageLoaded) {
+              logger.i('SignUpPage Loading');
+              Navigator.of(context).pushNamed(RegisterPage.id);
+            }
             if (state is DonationPageLoaded) {}
             if (state is HomePageFailure) {}
           },
