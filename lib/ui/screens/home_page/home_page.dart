@@ -21,105 +21,9 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class HomePageMainBody extends StatelessWidget {
-  Color _color1 = Color.fromARGB(255, 9, 220, 129);
-  Color _color2 = Color.fromARGB(255, 255, 107, 74);
-  @override
-  Widget build(BuildContext context) {
-    return ResponsiveBuilder(
-      builder: (context, sizingInformation) {
-        return BlocConsumer<HomePageBloc, HomePageState>(
-          listener: (context, state) async {
-            if (state is HomePageInitial) {}
-            if (state is HomePageLoaded) {}
-            if (state is HomePageProgress) {}
-            if (state is BlogPageLoaded) {}
-            if (state is LoginPageLoaded) {}
-            if (state is SignUpPageLoaded) {}
-            if (state is DonationPageLoaded) {}
-            if (state is HomePageFailure) {}
-          },
-          builder: (context, state) {
-            bool isMobile =
-                sizingInformation.deviceScreenType == DeviceScreenType.mobile;
-            return Scaffold(
-              appBar: AppBar(
-                elevation: 1,
-                leading: Icon(
-                  Icons.connect_without_contact_outlined,
-                  color: Colors.black,
-                ),
-                backgroundColor: _color1,
-                title: Text(
-                  'OPINIONX',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: 'Open Sans',
-                  ),
-                ),
-                actions: isMobile
-                    ? null
-                    : [
-                        FlatButton(
-                          child: Text('HOME'),
-                          onPressed: () {},
-                        ),
-                        FlatButton(
-                          child: Text('BLOG'),
-                          onPressed: () {},
-                        ),
-                        FlatButton(
-                          child: Text('DONATE'),
-                          onPressed: () {},
-                        ),
-                      ],
-              ),
-              body: SingleChildScrollView(
-                child: Wrap(
-                  children: [
-                    Stack(
-                      children: [
-                        ClipPath(
-                          clipper: WaveClipperOne(),
-                          child: Container(
-                            height: 600,
-                            color: _color1,
-                          ),
-                        ),
-                        Wrap(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 20),
-                              child: Image.asset(
-                                'assets/images/home_page_images/1.png',
-                                width: screenWidth / 2,
-                                height: screenHeight / 2,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Container(
-                                color: _color2,
-                                height: 300,
-                                width: 300,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        );
-      },
-    );
-  }
-}
-
 // class HomePageMainBody extends StatelessWidget {
+//   Color _color1 = Color.fromARGB(255, 9, 220, 129);
+//   Color _color2 = Color.fromARGB(255, 255, 107, 74);
 //   @override
 //   Widget build(BuildContext context) {
 //     return ResponsiveBuilder(
@@ -136,10 +40,77 @@ class HomePageMainBody extends StatelessWidget {
 //             if (state is HomePageFailure) {}
 //           },
 //           builder: (context, state) {
-//             return ScreenTypeLayout(
-//               mobile: HomePageMobile(),
-//               desktop: HomePageDesktop(),
-//               tablet: HomePageDesktop(),
+//             bool isMobile =
+//                 sizingInformation.deviceScreenType == DeviceScreenType.mobile;
+//             return Scaffold(
+//               appBar: AppBar(
+//                 elevation: 1,
+//                 leading: Icon(
+//                   Icons.connect_without_contact_outlined,
+//                   color: Colors.black,
+//                 ),
+//                 backgroundColor: _color1,
+//                 title: Text(
+//                   'OPINIONX',
+//                   style: TextStyle(
+//                     color: Colors.black,
+//                     fontFamily: 'Open Sans',
+//                   ),
+//                 ),
+//                 actions: isMobile
+//                     ? null
+//                     : [
+//                         FlatButton(
+//                           child: Text('HOME'),
+//                           onPressed: () {},
+//                         ),
+//                         FlatButton(
+//                           child: Text('BLOG'),
+//                           onPressed: () {},
+//                         ),
+//                         FlatButton(
+//                           child: Text('DONATE'),
+//                           onPressed: () {},
+//                         ),
+//                       ],
+//               ),
+//               body: SingleChildScrollView(
+//                 child: Wrap(
+//                   children: [
+//                     Stack(
+//                       children: [
+//                         ClipPath(
+//                           clipper: WaveClipperOne(),
+//                           child: Container(
+//                             height: 600,
+//                             color: _color1,
+//                           ),
+//                         ),
+//                         Wrap(
+//                           children: [
+//                             Padding(
+//                               padding: EdgeInsets.symmetric(vertical: 20),
+//                               child: Image.asset(
+//                                 'assets/images/home_page_images/1.png',
+//                                 width: screenWidth / 2,
+//                                 height: screenHeight / 2,
+//                               ),
+//                             ),
+//                             Padding(
+//                               padding: EdgeInsets.all(8.0),
+//                               child: Container(
+//                                 color: _color2,
+//                                 height: 300,
+//                                 width: 300,
+//                               ),
+//                             ),
+//                           ],
+//                         ),
+//                       ],
+//                     ),
+//                   ],
+//                 ),
+//               ),
 //             );
 //           },
 //         );
@@ -147,3 +118,32 @@ class HomePageMainBody extends StatelessWidget {
 //     );
 //   }
 // }
+
+class HomePageMainBody extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ResponsiveBuilder(
+      builder: (context, sizingInformation) {
+        return BlocConsumer<HomePageBloc, HomePageState>(
+          listener: (context, state) async {
+            if (state is HomePageInitial) {}
+            if (state is HomePageLoaded) {}
+            if (state is HomePageProgress) {}
+            if (state is BlogPageLoaded) {}
+            if (state is LoginPageLoaded) {}
+            if (state is SignUpPageLoaded) {}
+            if (state is DonationPageLoaded) {}
+            if (state is HomePageFailure) {}
+          },
+          builder: (context, state) {
+            return ScreenTypeLayout(
+              mobile: HomePageMobile(),
+              desktop: HomePageDesktop(),
+              tablet: HomePageDesktop(),
+            );
+          },
+        );
+      },
+    );
+  }
+}
