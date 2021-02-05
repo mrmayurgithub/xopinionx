@@ -1,5 +1,7 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 // Import the firebase_core plugin
@@ -7,6 +9,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:responsive_framework/responsive_framework.dart';
+import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:xopinionx/api/functions/problem_functions.dart';
 import 'package:xopinionx/api/models/problem_model.dart';
 import 'package:xopinionx/auth/auth_bloc.dart';
@@ -30,8 +34,13 @@ import 'package:xopinionx/ui/screens/verification_page/verification_page.dart';
 void main() {
   Bloc.observer = SimpleBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
-  // runApp(App());
   runApp(App());
+  // runApp(
+  //   DevicePreview(
+  //     builder: (context) => App(),
+  //     enabled: !kReleaseMode,
+  //   ),
+  // );
 }
 
 class App extends StatelessWidget {
@@ -53,21 +62,6 @@ class App extends StatelessWidget {
     );
   }
 }
-
-// class OpinionxApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocProvider(
-//       create: (context) => ThemeBloc(),
-//       child: BlocBuilder<ThemeBloc, ThemeState>(
-//         builder: (context, state) => MainAppWithTheme(
-//           context: context,
-//           state: state,
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 class MainAppWithTheme extends StatefulWidget {
   // const MainAppWithTheme({
@@ -128,6 +122,25 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
               ),
         ),
         navigatorObservers: [FirebaseAnalyticsObserver(analytics: _analytics)],
+        // locale: DevicePreview.locale(context),
+
+        builder: (context, widget) {
+          return ResponsiveWrapper.builder(
+            BouncingScrollWrapper.builder(context, widget),
+            maxWidth: 1920,
+            minWidth: 480,
+            defaultScale: true,
+            breakpoints: [
+              ResponsiveBreakpoint.resize(480, name: MOBILE),
+              ResponsiveBreakpoint.autoScale(800, name: TABLET),
+              ResponsiveBreakpoint.resize(1200, name: DESKTOP),
+              ResponsiveBreakpoint.autoScale(2460, name: "4K"),
+            ],
+            background: Container(
+              color: Color(0xFFF5F5F5),
+            ),
+          );
+        },
         routes: {
           LoginPage.id: (context) => LoginPage(),
           RegisterPage.id: (context) => RegisterPage(),

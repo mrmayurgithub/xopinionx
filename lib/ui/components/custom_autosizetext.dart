@@ -13,6 +13,7 @@ class CustomAutoSizeText extends StatelessWidget {
     return ConstrainedBox(
       constraints: BoxConstraints(
         maxWidth: width,
+        minWidth: 30,
       ),
       child: AutoSizeText(
         title,
@@ -20,7 +21,10 @@ class CustomAutoSizeText extends StatelessWidget {
         style: TextStyle(
           fontSize: fontSize,
           color: color,
+          fontWeight: FontWeight.w600,
         ),
+        minFontSize: 14,
+        overflow: TextOverflow.ellipsis,
         textAlign: TextAlign.justify,
       ),
     );
