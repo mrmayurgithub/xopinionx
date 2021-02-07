@@ -5,6 +5,8 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:xopinionx/ui/components/customFormField.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/global/validators.dart';
+import 'package:xopinionx/ui/screens/complete_profile_page/complete_profile.dart';
+import 'package:xopinionx/ui/screens/profile_page/profile_page.dart';
 import 'package:xopinionx/ui/screens/register_page/bloc/register_bloc.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -76,9 +78,11 @@ class SignUpForm extends StatefulWidget {
 class _SignUpFormState extends State<SignUpForm> {
   GlobalKey _formkey = GlobalKey<ScaffoldState>();
   final _emailTextController = TextEditingController();
-  final _nameTextController = TextEditingController();
+  final _firstnameTextController = TextEditingController();
+  final _lastnameTextController = TextEditingController();
   final _passtextController = TextEditingController();
-  final _nameNode = FocusNode();
+  final _firstnameNode = FocusNode();
+  final _lastnameNode = FocusNode();
   final _emailNode = FocusNode();
   final _passwordNode = FocusNode();
   final _validator = Validator();
@@ -105,19 +109,32 @@ class _SignUpFormState extends State<SignUpForm> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          Text('Get Started with Opinionx'),
+          SizedBox(height: screenHeight * 0.024459975), // 22
           CustomTextFormField(
-            currentNode: _nameNode,
+            currentNode: _firstnameNode,
             nextNode: _emailNode,
             textInputAction: TextInputAction.next,
             maxLines: 1,
-            fieldController: _nameTextController,
+            fieldController: _firstnameTextController,
             hintText: 'Full Name',
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.name,
             validator: _validator.validateName,
             prefixIcon: Icon(Icons.person_outline),
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
-
+          CustomTextFormField(
+            currentNode: _lastnameNode,
+            nextNode: _emailNode,
+            textInputAction: TextInputAction.next,
+            maxLines: 1,
+            fieldController: _lastnameTextController,
+            hintText: 'Last Name',
+            keyboardType: TextInputType.name,
+            validator: _validator.validateName,
+            prefixIcon: Icon(Icons.person_outline),
+          ),
+          SizedBox(height: screenHeight * 0.024459975), // 22
           CustomTextFormField(
             currentNode: _emailNode,
             nextNode: _passwordNode,
@@ -144,12 +161,26 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
           FlatButton(
-            onPressed: () {},
-            child: Text(
-              'Continue',
+            color: Colors.green,
+            onPressed: () {
+              Navigator.of(context).pushNamed(ProfileRegPage.id);
+            },
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 16,
+                horizontal: 120,
+              ),
+              child: Text(
+                'Continue',
+                style: TextStyle(
+                  letterSpacing: 1.3,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
         ],
