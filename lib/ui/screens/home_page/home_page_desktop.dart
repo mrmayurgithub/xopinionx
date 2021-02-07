@@ -4,6 +4,7 @@ import 'package:xopinionx/ui/components/custom_autosizetext.dart';
 import 'package:xopinionx/ui/components/rounded_button.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/screens/home_page/bloc/home_page_bloc.dart';
+import 'package:xopinionx/ui/screens/register_page/register_page.dart';
 
 class HomePageDesktop extends StatefulWidget {
   @override
@@ -15,50 +16,59 @@ class _HomePageDesktopState extends State<HomePageDesktop> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Row(
+        scrollDirection: Axis.vertical,
+        child: Column(
           children: [
-            Container(
-              color: Color.fromARGB(255, 118, 222, 140),
-              width: screenWidth / 2,
-              height: screenHeight,
-              child: Column(
-                children: [],
-              ),
-            ),
-            Container(
-              width: screenWidth / 2,
-              height: screenHeight,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CustomAutoSizeText(
-                    width: screenWidth / 5,
-                    title: "Got some doubts ?",
-                    fontSize: 30,
-                    maxLines: 3,
-                    color: Colors.black,
+            Row(
+              children: [
+                Container(
+                  color: Color.fromARGB(255, 118, 222, 140),
+                  width: screenWidth / 2,
+                  height: screenHeight,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CustomAutoSizeText(
+                        width: screenWidth / 5,
+                        title: "Got some doubts ?",
+                        fontSize: 30,
+                        maxLines: 3,
+                        color: Colors.white,
+                      ),
+                      CustomAutoSizeText(
+                        width: screenWidth / 5,
+                        title: " Want a genuine  opinion ?",
+                        fontSize: 30,
+                        maxLines: 3,
+                        color: Colors.white,
+                      ),
+                      CustomAutoSizeText(
+                        width: screenWidth / 5,
+                        title: "Ask your doubts now",
+                        fontSize: 30,
+                        maxLines: 3,
+                        color: Colors.white,
+                      ),
+                    ],
                   ),
-                  CustomAutoSizeText(
-                    width: screenWidth / 5,
-                    title: " Want a genuine  opinion ?",
-                    fontSize: 30,
-                    maxLines: 3,
-                    color: Colors.black,
+                ),
+                Container(
+                  width: screenWidth / 2,
+                  height: screenHeight,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SignUpButton(),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      LoginButton(),
+                    ],
                   ),
-                  CustomAutoSizeText(
-                    width: screenWidth / 5,
-                    title: "Ask your doubts now",
-                    fontSize: 30,
-                    maxLines: 3,
-                    color: Colors.black,
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  SignUpButton(),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),
@@ -77,10 +87,12 @@ class _SignUpButtonState extends State<SignUpButton> {
   Widget build(BuildContext context) {
     return FlatButton(
       color: Colors.green,
-      onPressed: () {},
+      onPressed: () {
+        Navigator.of(context).pushNamed(RegisterPage.id);
+      },
       child: Padding(
         padding: EdgeInsets.symmetric(
-          vertical: 13,
+          vertical: 16,
           horizontal: 120,
         ),
         child: Text(
@@ -93,7 +105,41 @@ class _SignUpButtonState extends State<SignUpButton> {
         ),
       ),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(25),
+      ),
+    );
+  }
+}
+
+class LoginButton extends StatefulWidget {
+  @override
+  _LoginButtonState createState() => _LoginButtonState();
+}
+
+class _LoginButtonState extends State<LoginButton> {
+  @override
+  Widget build(BuildContext context) {
+    return FlatButton(
+      onPressed: () {},
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: 16,
+          horizontal: 120,
+        ),
+        child: Text(
+          'Login',
+          style: TextStyle(
+            letterSpacing: 1.3,
+            color: Colors.green,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25),
+        side: BorderSide(
+          color: Colors.green,
+        ),
       ),
     );
   }
