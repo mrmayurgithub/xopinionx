@@ -19,19 +19,14 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   Stream<RegisterState> mapEventToState(
     RegisterEvent event,
   ) async* {
-    if (event is RegisterButtonClicked) {
-      try {
+    try {
+      if (event is RegisterButtonClicked) {
         yield (RegisterInProgress());
         await signUpWithEmailAndPass(email: event.email, password: event.password);
         await FirebaseAnalytics().logSignUp(signUpMethod: "email_pass");
         yield (RegisterSuccess());
-      } catch (e) {
-        yield (RegisterFailed(message: e.toString()));
-      }
-    } else if (event is GoogleSignUpClicked) {
-      try {
+      } else if (event is GoogleSignUpClicked) {
         yield (RegisterInProgress());
-
         final _googleSignIn = GoogleSignIn();
         final GoogleSignInAccount _googleUser = await _googleSignIn.signIn();
         final GoogleSignInAuthentication _googleAuth = await _googleUser.authentication;
@@ -44,15 +39,15 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         await FirebaseAnalytics().logSignUp(signUpMethod: "google_signup");
 
         yield (RegisterSuccess());
-      } on PlatformException catch (e) {
-        yield (RegisterFailed(message: "Error: ${e.message}"));
-      } on FirebaseAuthException catch (e) {
-        yield (RegisterFailed(message: "Error: ${e.message}"));
-      } on TimeoutException catch (e) {
-        yield (RegisterFailed(message: "Timeout: ${e.message}"));
-      } catch (e) {
-        yield (RegisterFailed(message: e.toString()));
       }
+    } on PlatformException catch (e) {
+      yield (RegisterFailed(message: "Error: ${e.message}"));
+    } on FirebaseAuthException catch (e) {
+      yield (RegisterFailed(message: "Error: ${e.message}"));
+    } on TimeoutException catch (e) {
+      yield (RegisterFailed(message: "Timeout: ${e.message}"));
+    } catch (e) {
+      yield (RegisterFailed(message: e.toString()));
     }
   }
 }

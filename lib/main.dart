@@ -20,7 +20,6 @@ import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/ui/components/googleButton.dart';
 import 'package:xopinionx/ui/global/theme/bloc/theme_bloc.dart';
 import 'package:xopinionx/ui/global/utils.dart';
-import 'package:xopinionx/ui/screens/complete_profile_page/complete_profile.dart';
 import 'package:xopinionx/ui/screens/donation_page/donation_page.dart';
 import 'package:xopinionx/ui/screens/history_page/history_page.dart';
 import 'package:xopinionx/ui/screens/home_page/home_page.dart';
@@ -145,7 +144,6 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
           LoginPage.id: (context) => LoginPage(),
           RegisterPage.id: (context) => RegisterPage(),
           VerificationPage.id: (context) => VerificationPage(),
-          ProfileRegPage.id: (context) => ProfileRegPage(),
           SeeProblemsPage.id: (context) => SeeProblemsPage(),
           DonationPage.id: (context) => DonationPage(),
           HomePage.id: (context) => HomePage(),

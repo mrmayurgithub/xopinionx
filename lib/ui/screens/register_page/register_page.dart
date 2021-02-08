@@ -5,7 +5,6 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:xopinionx/ui/components/customFormField.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/global/validators.dart';
-import 'package:xopinionx/ui/screens/complete_profile_page/complete_profile.dart';
 import 'package:xopinionx/ui/screens/profile_page/profile_page.dart';
 import 'package:xopinionx/ui/screens/register_page/bloc/register_bloc.dart';
 
@@ -53,7 +52,7 @@ class RegistrationPageMainBody extends StatelessWidget {
                         ),
                       ],
                     ),
-                    height: screenHeight / 2,
+                    // height: screenHeight / 2,
                     width: 570,
                     child: Padding(
                       padding: EdgeInsets.all(40.0),
@@ -87,7 +86,11 @@ class _SignUpFormState extends State<SignUpForm> {
   final _passwordNode = FocusNode();
   final _validator = Validator();
   bool _isObscure = true;
-
+  final _eduYearTextController = TextEditingController();
+  final _eduYearNode = FocusNode();
+  String _education;
+  String _langPref;
+  int eduYear;
   @override
   Widget build(BuildContext context) {
     Widget _showPassIcon() {
@@ -160,11 +163,83 @@ class _SignUpFormState extends State<SignUpForm> {
             suffix: _showPassIcon(),
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
+          DropdownButtonFormField(
+            value: _education,
+            decoration: InputDecoration(
+              labelText: 'Education Level',
+              hintText: 'Education Level',
+              disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            items: [
+              DropdownMenuItem<String>(
+                child: Text('School Student'),
+                value: 'ss',
+              ),
+              DropdownMenuItem<String>(
+                child: Text('College Student'),
+                value: 'cs',
+              ),
+              DropdownMenuItem<String>(
+                child: Text('Professional'),
+                value: 'pr',
+              ),
+            ],
+            onChanged: (value) {
+              setState(() {
+                _education = value;
+              });
+            },
+          ),
+          SizedBox(height: screenHeight * 0.024459975), // 22
+          _education == 'ss'
+              ? TextFormField(
+                  decoration: InputDecoration(hintText: 'Enter your School Year'),
+                )
+              : SizedBox(),
+          _education == 'cs'
+              ? TextFormField(
+                  decoration: InputDecoration(hintText: 'Enter your College Year'),
+                )
+              : SizedBox(),
+          _education == 'pr'
+              ? TextFormField(
+                  decoration: InputDecoration(hintText: 'Enter years of experience'),
+                )
+              : SizedBox(),
+
+          SizedBox(height: screenHeight * 0.024459975), // 22
+          DropdownButtonFormField(
+            value: _langPref,
+            decoration: InputDecoration(
+              labelText: 'Language Preference',
+              hintText: 'Preferred mode of communication',
+            ),
+            items: [
+              DropdownMenuItem<String>(
+                child: Text('English'),
+                value: 'en',
+              ),
+              DropdownMenuItem<String>(
+                child: Text('Hindi'),
+                value: 'hi',
+              ),
+            ],
+            onChanged: (value) {
+              setState(() {
+                _langPref = value;
+              });
+            },
+          ),
+          SizedBox(height: screenHeight * 0.024459975), // 22
+
           FlatButton(
             color: Colors.green,
-            onPressed: () {
-              Navigator.of(context).pushNamed(ProfileRegPage.id);
-            },
+            onPressed: () {},
             child: Padding(
               padding: EdgeInsets.symmetric(
                 vertical: 16,
