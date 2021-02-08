@@ -34,6 +34,27 @@ class RegistrationPageMainBody extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            elevation: 0.0,
+            backgroundColor: Colors.transparent,
+            title: Text(
+              'OPINIONX',
+              style: TextStyle(
+                color: Colors.green,
+              ),
+            ),
+            actions: [
+              FlatButton(
+                onPressed: () {},
+                child: Text('About Us'),
+              ),
+              FlatButton(
+                onPressed: () {},
+                child: Text('Donate'),
+              ),
+            ],
+          ),
           body: Center(
             child: SingleChildScrollView(
               child: Column(
@@ -75,7 +96,7 @@ class SignUpForm extends StatefulWidget {
 }
 
 class _SignUpFormState extends State<SignUpForm> {
-  GlobalKey _formkey = GlobalKey<ScaffoldState>();
+  final _formkey = GlobalKey<FormState>();
   final _emailTextController = TextEditingController();
   final _firstnameTextController = TextEditingController();
   final _lastnameTextController = TextEditingController();
@@ -163,83 +184,115 @@ class _SignUpFormState extends State<SignUpForm> {
             suffix: _showPassIcon(),
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
-          DropdownButtonFormField(
-            value: _education,
-            decoration: InputDecoration(
-              labelText: 'Education Level',
-              hintText: 'Education Level',
-              disabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                  color: Colors.black,
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            child: DropdownButtonFormField(
+              value: _education,
+              decoration: InputDecoration(
+                labelText: 'Education Level',
+                hintText: 'Education Level',
+                disabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: Colors.black,
+                  ),
                 ),
               ),
+              items: [
+                DropdownMenuItem<String>(
+                  child: Text('School Student'),
+                  value: 'ss',
+                ),
+                DropdownMenuItem<String>(
+                  child: Text('College Student'),
+                  value: 'cs',
+                ),
+                DropdownMenuItem<String>(
+                  child: Text('Professional'),
+                  value: 'pr',
+                ),
+              ],
+              onChanged: (value) {
+                setState(() {
+                  _education = value;
+                });
+              },
             ),
-            items: [
-              DropdownMenuItem<String>(
-                child: Text('School Student'),
-                value: 'ss',
-              ),
-              DropdownMenuItem<String>(
-                child: Text('College Student'),
-                value: 'cs',
-              ),
-              DropdownMenuItem<String>(
-                child: Text('Professional'),
-                value: 'pr',
-              ),
-            ],
-            onChanged: (value) {
-              setState(() {
-                _education = value;
-              });
-            },
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
+
           _education == 'ss'
-              ? TextFormField(
-                  decoration: InputDecoration(hintText: 'Enter your School Year'),
+              ? CustomTextFormField(
+                  currentNode: _eduYearNode,
+                  textInputAction: TextInputAction.done,
+                  maxLines: 1,
+                  fieldController: _eduYearTextController,
+                  hintText: 'Education Year',
+                  prefixIcon: Icon(Icons.lock_outline),
+                  keyboardType: TextInputType.text,
+                  validator: (val) {},
+                  obscureText: _isObscure,
                 )
               : SizedBox(),
           _education == 'cs'
-              ? TextFormField(
-                  decoration: InputDecoration(hintText: 'Enter your College Year'),
+              ? CustomTextFormField(
+                  currentNode: _eduYearNode,
+                  textInputAction: TextInputAction.done,
+                  maxLines: 1,
+                  fieldController: _eduYearTextController,
+                  hintText: 'Enter your College Year',
+                  prefixIcon: Icon(Icons.lock_outline),
+                  keyboardType: TextInputType.text,
+                  validator: (val) {},
+                  obscureText: _isObscure,
                 )
               : SizedBox(),
-          _education == 'pr'
-              ? TextFormField(
-                  decoration: InputDecoration(hintText: 'Enter years of experience'),
+          _education == 'ss'
+              ? CustomTextFormField(
+                  currentNode: _eduYearNode,
+                  textInputAction: TextInputAction.done,
+                  maxLines: 1,
+                  fieldController: _eduYearTextController,
+                  hintText: 'Enter years of experience',
+                  prefixIcon: Icon(Icons.lock_outline),
+                  keyboardType: TextInputType.text,
+                  validator: (val) {},
+                  obscureText: _isObscure,
                 )
               : SizedBox(),
-
           SizedBox(height: screenHeight * 0.024459975), // 22
-          DropdownButtonFormField(
-            value: _langPref,
-            decoration: InputDecoration(
-              labelText: 'Language Preference',
-              hintText: 'Preferred mode of communication',
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            child: DropdownButtonFormField(
+              value: _langPref,
+              decoration: InputDecoration(
+                labelText: 'Language Preference',
+                hintText: 'Preferred mode of communication',
+              ),
+              items: [
+                DropdownMenuItem<String>(
+                  child: Text('English'),
+                  value: 'en',
+                ),
+                DropdownMenuItem<String>(
+                  child: Text('Hindi'),
+                  value: 'hi',
+                ),
+              ],
+              onChanged: (value) {
+                setState(() {
+                  _langPref = value;
+                });
+              },
             ),
-            items: [
-              DropdownMenuItem<String>(
-                child: Text('English'),
-                value: 'en',
-              ),
-              DropdownMenuItem<String>(
-                child: Text('Hindi'),
-                value: 'hi',
-              ),
-            ],
-            onChanged: (value) {
-              setState(() {
-                _langPref = value;
-              });
-            },
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
-
           FlatButton(
             color: Colors.green,
-            onPressed: () {},
+            onPressed: () {
+              if (_formkey.currentState.validate()) {
+              } else {}
+            },
             child: Padding(
               padding: EdgeInsets.symmetric(
                 vertical: 16,

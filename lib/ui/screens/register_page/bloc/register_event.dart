@@ -10,8 +10,16 @@ abstract class RegisterEvent extends Equatable {
 class RegisterButtonClicked extends RegisterEvent {
   final String email;
   final String password;
-  RegisterButtonClicked({@required this.email, @required this.password})
-      : assert(email != null),
+  final String educationLevel;
+  final int eduYear;
+  final String langpref;
+  RegisterButtonClicked({
+    @required this.educationLevel,
+    @required this.eduYear,
+    @required this.langpref,
+    @required this.email,
+    @required this.password,
+  })  : assert(email != null),
         assert(password != null);
 
   @override

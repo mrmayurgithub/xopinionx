@@ -15,6 +15,22 @@ class _HomePageDesktopState extends State<HomePageDesktop> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: Colors.transparent,
+        title: Text('OPINIONX'),
+        actions: [
+          FlatButton(
+            onPressed: () {},
+            child: Text('About Us'),
+          ),
+          FlatButton(
+            onPressed: () {},
+            child: Text('Donate'),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
