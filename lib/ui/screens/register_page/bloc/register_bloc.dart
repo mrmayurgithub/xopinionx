@@ -7,7 +7,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:xopinionx/api/functions/user_functions.dart';
+import 'package:xopinionx/api/models/user_model.dart';
 import 'package:xopinionx/auth/functions/signUp.dart';
+import 'package:xopinionx/global/logger.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';
@@ -23,6 +26,21 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       if (event is RegisterButtonClicked) {
         yield (RegisterInProgress());
         await signUpWithEmailAndPass(email: event.email, password: event.password);
+        logger.i('Signup successfull');
+        await UserFunctions.createUser(
+          UserModel(
+            fname: event.fname,
+            lname: event.lname,
+            email: event.email,
+            sessionBalance: 2,
+            schoolORCollege: event.educationLevel,
+            eduYear: event.eduYear,
+            overallReview: 0,
+            languagePreferences: event.langpref,
+            registrationStatus: registrationStatus.registered.toString(),
+          ),
+        );
+        logger.i('User created successfully');
         await FirebaseAnalytics().logSignUp(signUpMethod: "email_pass");
         yield (RegisterSuccess());
       } else if (event is GoogleSignUpClicked) {

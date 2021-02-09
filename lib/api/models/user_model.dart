@@ -23,7 +23,7 @@ class UserModel {
   String schoolORCollege; // CS OR SS
   int eduYear;
   int overallReview;
-  List<String> languagePreferences;
+  String languagePreferences;
   String registrationStatus;
 
   factory UserModel.fromJson(Map<String, dynamic> data) => _$UserModelFromJson(data);

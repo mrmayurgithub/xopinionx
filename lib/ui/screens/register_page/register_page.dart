@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/ui/components/customFormField.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/global/validators.dart';
 import 'package:xopinionx/ui/screens/profile_page/profile_page.dart';
 import 'package:xopinionx/ui/screens/register_page/bloc/register_bloc.dart';
+import 'package:xopinionx/ui/screens/verification_page/verification_page.dart';
 
 class RegisterPage extends StatelessWidget {
   static const String id = 'register_page';
@@ -29,8 +32,12 @@ class RegistrationPageMainBody extends StatelessWidget {
           return CircularProgressIndicator();
         }
         if (state is RegisterInProgress) {}
-        if (state is RegisterSuccess) {}
-        if (state is RegisterFailed) {}
+        if (state is RegisterSuccess) {
+          Navigator.of(context).pushReplacementNamed(VerificationPage.id);
+        }
+        if (state is RegisterFailed) {
+          logger.d(state.message);
+        }
       },
       builder: (context, state) {
         return Scaffold(
@@ -187,6 +194,32 @@ class _SignUpFormState extends State<SignUpForm> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8),
             child: DropdownButtonFormField(
+              value: _langPref,
+              decoration: InputDecoration(
+                labelText: 'Language Preference',
+                hintText: 'Preferred mode of communication',
+              ),
+              items: [
+                DropdownMenuItem<String>(
+                  child: Text('English'),
+                  value: 'en',
+                ),
+                DropdownMenuItem<String>(
+                  child: Text('Hindi'),
+                  value: 'hi',
+                ),
+              ],
+              onChanged: (value) {
+                setState(() {
+                  _langPref = value;
+                });
+              },
+            ),
+          ),
+          SizedBox(height: screenHeight * 0.024459975), // 22
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            child: DropdownButtonFormField(
               value: _education,
               decoration: InputDecoration(
                 labelText: 'Education Level',
@@ -219,7 +252,7 @@ class _SignUpFormState extends State<SignUpForm> {
               },
             ),
           ),
-          SizedBox(height: screenHeight * 0.024459975), // 22
+          _education != '' ? SizedBox(height: screenHeight * 0.024459975) : SizedBox(), // 22
 
           _education == 'ss'
               ? CustomTextFormField(
@@ -227,11 +260,17 @@ class _SignUpFormState extends State<SignUpForm> {
                   textInputAction: TextInputAction.done,
                   maxLines: 1,
                   fieldController: _eduYearTextController,
-                  hintText: 'Education Year',
+                  hintText: 'School Year',
                   prefixIcon: Icon(Icons.lock_outline),
                   keyboardType: TextInputType.text,
-                  validator: (val) {},
-                  obscureText: _isObscure,
+                  validator: (val) {
+                    int x = int.parse(_eduYearTextController.text.toString());
+                    if (x >= 9 && x <= 12) {
+                      return null;
+                    } else {
+                      return 'Only students from 9th class upto 12th can register.';
+                    }
+                  },
                 )
               : SizedBox(),
           _education == 'cs'
@@ -243,8 +282,14 @@ class _SignUpFormState extends State<SignUpForm> {
                   hintText: 'Enter your College Year',
                   prefixIcon: Icon(Icons.lock_outline),
                   keyboardType: TextInputType.text,
-                  validator: (val) {},
-                  obscureText: _isObscure,
+                  validator: (val) {
+                    int x = int.parse(_eduYearTextController.text.toString());
+                    if (x >= 1 && x <= 4) {
+                      return null;
+                    } else {
+                      return 'Only students from 1st year class upto 5th year can register.';
+                    }
+                  },
                 )
               : SizedBox(),
           _education == 'ss'
@@ -256,42 +301,37 @@ class _SignUpFormState extends State<SignUpForm> {
                   hintText: 'Enter years of experience',
                   prefixIcon: Icon(Icons.lock_outline),
                   keyboardType: TextInputType.text,
-                  validator: (val) {},
-                  obscureText: _isObscure,
+                  validator: (val) {
+                    int x = int.parse(_eduYearTextController.text.toString());
+                    if (x <= 50) {
+                      return null;
+                    } else {
+                      return 'Enter a valid value';
+                    }
+                  },
                 )
               : SizedBox(),
           SizedBox(height: screenHeight * 0.024459975), // 22
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            child: DropdownButtonFormField(
-              value: _langPref,
-              decoration: InputDecoration(
-                labelText: 'Language Preference',
-                hintText: 'Preferred mode of communication',
-              ),
-              items: [
-                DropdownMenuItem<String>(
-                  child: Text('English'),
-                  value: 'en',
-                ),
-                DropdownMenuItem<String>(
-                  child: Text('Hindi'),
-                  value: 'hi',
-                ),
-              ],
-              onChanged: (value) {
-                setState(() {
-                  _langPref = value;
-                });
-              },
-            ),
-          ),
-          SizedBox(height: screenHeight * 0.024459975), // 22
+
           FlatButton(
             color: Colors.green,
             onPressed: () {
               if (_formkey.currentState.validate()) {
-              } else {}
+                logger.i('validated');
+                BlocProvider.of<RegisterBloc>(context).add(
+                  RegisterButtonClicked(
+                    fname: _firstnameTextController.text,
+                    lname: _lastnameTextController.text,
+                    educationLevel: _education,
+                    eduYear: int.parse(_eduYearTextController.text),
+                    langpref: _langPref,
+                    email: _emailTextController.text,
+                    password: _passtextController.text,
+                  ),
+                );
+              } else {
+                Fluttertoast.showToast(msg: 'Check if the information you filled is correct');
+              }
             },
             child: Padding(
               padding: EdgeInsets.symmetric(

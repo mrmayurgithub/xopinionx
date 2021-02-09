@@ -17,7 +17,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
     eduYear: json['eduYear'] as int,
     overallReview: json['overallReview'] as int,
     registrationStatus: json['registrationStatus'] as String,
-    languagePreferences: (json['languagePreferences'] as List)?.map((e) => e as String)?.toList(),
+    languagePreferences: json['languagePreferences'] as String,
   );
 }
 

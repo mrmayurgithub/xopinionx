@@ -15,8 +15,6 @@ class LoginSuccess extends LoginState {}
 
 class LoginNeedsVerification extends LoginState {}
 
-class LoginNeedsProfileComplete extends LoginState {}
-
 class ForgetPasswordSuccess extends LoginState {}
 
 class LoginFailure extends LoginState {

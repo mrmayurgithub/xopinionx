@@ -136,7 +136,9 @@ class _LoginButtonState extends State<LoginButton> {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
-      onPressed: () {},
+      onPressed: () {
+        BlocProvider.of<HomePageBloc>(context).add(LoginPageRequested());
+      },
       child: Padding(
         padding: EdgeInsets.symmetric(
           vertical: 16,

@@ -9,8 +9,8 @@ class UserFunctions {
 
   static Future<void> createUser(UserModel user) async {
     //TODO: Check if user is already registered before calling this function
-    // final _docId = _firestore.collection('users').doc().id;
-    final _docId = globalUser.id;
+    final _docId = _firestore.collection('users').doc().id;
+    // final _docId = globalUser.id;
     await _firestore.collection('users').doc(_docId).set(
       {
         'id': _docId,

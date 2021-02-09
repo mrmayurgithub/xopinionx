@@ -30,16 +30,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
         if (_currentUser.emailVerified) {
           logger.i('Initializing API');
+          yield LoginInProgress();
           await initializeApi;
           logger.i("API Initialized");
-          logger.i("Checking whether profile is complete");
-          if (globalUser.registrationStatus != "${registrationStatus.registered}") {
-            logger.i('User Profile Incomplete');
-            yield LoginNeedsProfileComplete();
-          } else {
-            logger.i('All Checks Passed');
-            yield LoginSuccess();
-          }
+          yield LoginSuccess();
         } else {
           yield LoginNeedsVerification();
         }
@@ -56,24 +50,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         await FirebaseAuth.instance.signInWithCredential(_authCredentials);
         await FirebaseAnalytics().logLogin(loginMethod: "google_signin");
 
-        final _currentUser = FirebaseAuth.instance.currentUser;
-        logger.i("Checking Whether Profile is Complete");
+        logger.i("All Checks Passed");
 
-        final _querySnapshot = await FirebaseFirestore.instance.collection('users').where('email', isEqualTo: _currentUser.email).get();
-
-        final _doc = _querySnapshot.docs;
-
-        if (_doc.length == 0) {
-          logger.i("User Profile Incomplete");
-
-          yield (LoginNeedsProfileComplete());
-        } else {
-          logger.i("All Checks Passed");
-
-          logger.i("Initializing API");
-          await initializeApi;
-          yield (LoginSuccess());
-        }
+        logger.i("Initializing API");
+        await initializeApi;
+        yield (LoginSuccess());
       } else if (event is ForgetPassword) {
         yield LoginInProgress();
         await FirebaseAuth.instance.sendPasswordResetEmail(email: event.email);
