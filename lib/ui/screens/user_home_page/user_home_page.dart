@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xopinionx/ui/components/list_item.dart';
+import 'package:xopinionx/ui/screens/ask_query_page/ask_query_page.dart';
 import 'package:xopinionx/ui/screens/user_home_page/bloc/user_home_bloc.dart';
 
 class UserHomePage extends StatelessWidget {
@@ -25,6 +26,9 @@ class UserHomeMainBody extends StatelessWidget {
         if (state is UserHomeInProgress) {}
         if (state is UserHomeSuccess) {}
         if (state is UserHomeFailure) {}
+        if (state is AskQueryLoaded) {
+          Navigator.of(context).pushNamed(AskQueryPage.id);
+        }
       },
       builder: (context, state) {
         return Scaffold(
@@ -92,7 +96,11 @@ class UserHomeMainBody extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      BlocProvider.of<UserHomeBloc>(context).add(
+                        UserHomeAskQueryRequested(),
+                      );
+                    },
                     child: Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text('Ask my Query'),

@@ -13,6 +13,8 @@ class UserHomeInProgress extends UserHomeState {}
 
 class UserHomeSuccess extends UserHomeState {}
 
+class AskQueryLoaded extends UserHomeState {}
+
 class UserHomeFailure extends UserHomeState {
   final String message;
 

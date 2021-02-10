@@ -24,6 +24,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       if (event is LoginButtonPressed) {
         yield LoginInProgress();
         await signInWithEmailAndPass(email: event.email, password: event.password);
+
         await FirebaseAnalytics().logLogin(loginMethod: 'email_pass');
         logger.i('Checking weather user email is verified');
         final _currentUser = FirebaseAuth.instance.currentUser;

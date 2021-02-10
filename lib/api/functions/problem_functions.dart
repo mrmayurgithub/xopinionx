@@ -6,7 +6,7 @@ class ProblemFunctions {
   static final _firestore = FirebaseFirestore.instance;
   static Future<void> createProblem({ProblemModel problem}) async {
     //TODO: maybe also add to the local list for optimization and don't use await then
-    final _docId = _firestore.collection('problems').id;
+    final _docId = _firestore.collection('problems').doc().id;
     await _firestore.collection('problems').doc(_docId).set({
       'id': _docId,
       'userId': problem.userId,

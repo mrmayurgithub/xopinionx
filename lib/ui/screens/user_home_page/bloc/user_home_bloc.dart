@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xopinionx/global/logger.dart';
 
 part 'user_home_state.dart';
 part 'user_home_event.dart';
@@ -20,7 +21,10 @@ class UserHomeBloc extends Bloc<UserHomeEvent, UserHomeState> {
       if (event is UserHomeLogoutRequested) {}
       if (event is UserHomeBlogRequested) {}
       if (event is UserHomeDonateRequested) {}
-      if (event is UserHomeAskQueryRequested) {}
+      if (event is UserHomeAskQueryRequested) {
+        logger.i('Ask Query Loaded');
+        yield AskQueryLoaded();
+      }
     } on PlatformException catch (e) {
       yield (UserHomeFailure(message: "Error: ${e.message}"));
     } on FirebaseAuthException catch (e) {
