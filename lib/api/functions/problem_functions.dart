@@ -8,13 +8,22 @@ class ProblemFunctions {
     //TODO: maybe also add to the local list for optimization and don't use await then
     final _docId = _firestore.collection('problems').doc().id;
     await _firestore.collection('problems').doc(_docId).set({
-      'id': _docId,
-      'userId': problem.userId,
-      'problemTitle': problem.problemTitle,
-      'problemDescription': problem.problemDescription,
-      'datePosted': problem.datePosted,
-      'status': problem.status,
-      'tag': problem.tag.toString(),
+      // 'id': _docId,
+      // 'userId': problem.userId,
+      // 'problemTitle': problem.problemTitle,
+      // 'problemDescription': problem.problemDescription,
+      // 'datePosted': problem.datePosted,
+      // 'status': problem.status,
+      // 'tag': problem.tag.toString(),
+      'problem': ProblemModel(
+        problemId: _docId,
+        userId: problem.userId,
+        problemTitle: problem.problemTitle,
+        problemDescription: problem.problemDescription,
+        datePosted: problem.datePosted,
+        status: problem.status,
+        tag: problem.tag,
+      ).toJson(),
     });
   }
 

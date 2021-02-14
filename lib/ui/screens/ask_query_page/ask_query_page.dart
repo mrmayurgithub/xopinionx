@@ -126,6 +126,16 @@ class _QueryFormState extends State<QueryForm> {
           SizedBox(height: screenHeight * 0.024459975), // 22
           DropdownButtonFormField(
             value: _tag,
+            decoration: InputDecoration(
+              labelText: 'Select a tag',
+              hintText: 'Select a Tag',
+              disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Colors.black,
+                ),
+              ),
+            ),
             onChanged: (value) {
               setState(() {
                 _tag = value;
@@ -164,10 +174,10 @@ class _QueryFormState extends State<QueryForm> {
                 child: Text('Career'),
                 value: 'career',
               ),
-              DropdownMenuItem<String>(
-                child: Text('Branch Selection'),
-                value: 'branchselection',
-              ),
+              // DropdownMenuItem<String>(
+              //   child: Text('Branch Selection'),
+              //   value: 'branchselection',
+              // ),
               DropdownMenuItem<String>(
                 child: Text('Abroad Internship'),
                 value: 'abroadinternship',

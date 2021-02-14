@@ -2,8 +2,11 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xopinionx/auth/auth_bloc.dart';
 import 'package:xopinionx/ui/components/list_item.dart';
 import 'package:xopinionx/ui/screens/ask_query_page/ask_query_page.dart';
+import 'package:xopinionx/ui/screens/home_page/home_page.dart';
+import 'package:xopinionx/ui/screens/login_page/login_page.dart';
 import 'package:xopinionx/ui/screens/user_home_page/bloc/user_home_bloc.dart';
 
 class UserHomePage extends StatelessWidget {
@@ -33,6 +36,7 @@ class UserHomeMainBody extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
+            elevation: 0.0,
             centerTitle: true,
             title: Text('Opinionx'),
             actions: [
@@ -83,7 +87,10 @@ class UserHomeMainBody extends StatelessWidget {
                   ListTile(
                     title: Text('Logout'),
                     leading: Icon(Icons.login_outlined),
-                    onTap: () {},
+                    onTap: () async {
+                      BlocProvider.of<AuthBloc>(context).add(JustLoggedOut());
+                      Navigator.of(context).pushReplacementNamed(HomePage.id);
+                    },
                   ),
                 ],
               ),

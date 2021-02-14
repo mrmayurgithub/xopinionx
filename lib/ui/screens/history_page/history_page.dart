@@ -1,9 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xopinionx/ui/screens/history_page/bloc/history_bloc.dart';
 
 class HistoryPage extends StatelessWidget {
   static const id = 'history_page';
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return BlocProvider(
+      create: (context) => HistoryBloc(),
+      child: HistoryMainBody(),
+    );
+  }
+}
+
+class HistoryMainBody extends StatefulWidget {
+  @override
+  _HistoryMainBodyState createState() => _HistoryMainBodyState();
+}
+
+class _HistoryMainBodyState extends State<HistoryMainBody> {
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<HistoryBloc, HistoryState>(
+      listener: (context, state) async {
+        if (state is HistoryInitial) {}
+        if (state is HistorySuccess) {}
+        if (state is HistoryFailure) {}
+      },
+      builder: (context, state) {
+        return Scaffold(
+          body: Center(
+            child: SingleChildScrollView(),
+          ),
+        );
+      },
+    );
   }
 }

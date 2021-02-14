@@ -10,6 +10,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:xopinionx/api/functions/user_functions.dart';
 import 'package:xopinionx/api/models/user_model.dart';
 import 'package:xopinionx/auth/functions/signUp.dart';
+import 'package:xopinionx/global/enums.dart';
 import 'package:xopinionx/global/logger.dart';
 
 part 'register_event.dart';
@@ -38,6 +39,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
             overallReview: 0,
             languagePreferences: event.langpref,
             registrationStatus: registrationStatus.registered.toString(),
+            userTags: event.usertags,
           ),
         );
         logger.i('User created successfully');

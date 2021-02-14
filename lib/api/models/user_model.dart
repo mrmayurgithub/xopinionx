@@ -1,7 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:xopinionx/global/enums.dart';
 part 'user_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class UserModel {
   UserModel({
     this.fname,
@@ -14,6 +15,7 @@ class UserModel {
     this.overallReview,
     this.languagePreferences,
     this.registrationStatus,
+    this.userTags,
   });
   String fname;
   String lname;
@@ -25,7 +27,7 @@ class UserModel {
   int overallReview;
   String languagePreferences;
   String registrationStatus;
-
+  List<Tags> userTags;
   factory UserModel.fromJson(Map<String, dynamic> data) => _$UserModelFromJson(data);
 
   Map<String, dynamic> toJson() => _$UserModelToJson(this);

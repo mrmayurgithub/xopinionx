@@ -18,7 +18,8 @@ ProblemModel _$ProblemModelFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$ProblemModelToJson(ProblemModel instance) => <String, dynamic>{
+Map<String, dynamic> _$ProblemModelToJson(ProblemModel instance) =>
+    <String, dynamic>{
       'userId': instance.userId,
       'problemId': instance.problemId,
       'problemTitle': instance.problemTitle,

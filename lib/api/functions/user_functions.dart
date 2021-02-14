@@ -11,18 +11,34 @@ class UserFunctions {
     //TODO: Check if user is already registered before calling this function
     final _docId = _firestore.collection('users').doc().id;
     // final _docId = globalUser.id;
+    // await _firestore.collection('users').doc(_docId).set(
+    //   {
+    //     'id': _docId,
+    //     'fname': user.fname,
+    //     'lname': user.lname,
+    //     'email': user.email,
+    //     'sessionBalance': user.sessionBalance,
+    //     'schoolORCollege': user.schoolORCollege,
+    //     'eduYear': user.eduYear,
+    //     'overallReview': user.overallReview,
+    //     'languagePreferences': user.languagePreferences,
+    //     'registrationStatus': user.registrationStatus,
+    //     'usertags': user.userTags,
+    //   },
     await _firestore.collection('users').doc(_docId).set(
       {
-        'id': _docId,
-        'fname': user.fname,
-        'lname': user.lname,
-        'email': user.email,
-        'sessionBalance': user.sessionBalance,
-        'schoolORCollege': user.schoolORCollege,
-        'eduYear': user.eduYear,
-        'overallReview': user.overallReview,
-        'languagePreferences': user.languagePreferences,
-        'registrationStatus': user.registrationStatus,
+        'user': UserModel(
+          id: _docId,
+          fname: user.fname,
+          lname: user.lname,
+          email: user.email,
+          sessionBalance: user.sessionBalance,
+          eduYear: user.eduYear,
+          overallReview: user.overallReview,
+          languagePreferences: user.languagePreferences,
+          registrationStatus: user.registrationStatus,
+          userTags: user.userTags,
+        ).toJson(),
       },
       //TODO: merge = false option is probably unavailable in new update
     ).catchError((e) => {});

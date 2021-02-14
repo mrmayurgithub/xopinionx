@@ -1,8 +1,15 @@
+import 'dart:collection';
+
+import 'package:dropdownfield/dropdownfield.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_chips_input/flutter_chips_input.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:xopinionx/global/enums.dart';
 import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/ui/components/customFormField.dart';
 import 'package:xopinionx/ui/global/utils.dart';
@@ -103,6 +110,7 @@ class SignUpForm extends StatefulWidget {
 }
 
 class _SignUpFormState extends State<SignUpForm> {
+  final _chipKey = GlobalKey<ChipsInputState>();
   final _formkey = GlobalKey<FormState>();
   final _emailTextController = TextEditingController();
   final _firstnameTextController = TextEditingController();
@@ -112,10 +120,12 @@ class _SignUpFormState extends State<SignUpForm> {
   final _lastnameNode = FocusNode();
   final _emailNode = FocusNode();
   final _passwordNode = FocusNode();
+  final _chipNode = FocusNode();
   final _validator = Validator();
   bool _isObscure = true;
   final _eduYearTextController = TextEditingController();
   final _eduYearNode = FocusNode();
+  List<Tags> _usertags = [];
   String _education;
   String _langPref;
   int eduYear;
@@ -256,6 +266,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
           _education == 'ss'
               ? CustomTextFormField(
+                  nextNode: _chipNode,
                   currentNode: _eduYearNode,
                   textInputAction: TextInputAction.done,
                   maxLines: 1,
@@ -275,6 +286,7 @@ class _SignUpFormState extends State<SignUpForm> {
               : SizedBox(),
           _education == 'cs'
               ? CustomTextFormField(
+                  nextNode: _chipNode,
                   currentNode: _eduYearNode,
                   textInputAction: TextInputAction.done,
                   maxLines: 1,
@@ -292,8 +304,9 @@ class _SignUpFormState extends State<SignUpForm> {
                   },
                 )
               : SizedBox(),
-          _education == 'ss'
+          _education == 'pr'
               ? CustomTextFormField(
+                  nextNode: _chipNode,
                   currentNode: _eduYearNode,
                   textInputAction: TextInputAction.done,
                   maxLines: 1,
@@ -312,12 +325,73 @@ class _SignUpFormState extends State<SignUpForm> {
                 )
               : SizedBox(),
           SizedBox(height: screenHeight * 0.024459975), // 22
+          Center(
+            child: Text('Select the fields you feel free to talk about'),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            child: Column(
+              children: [
+                ChipsInput(
+                  key: _chipKey,
+                  // maxChips: 3,
+                  focusNode: _chipNode,
+                  enabled: false,
+                  findSuggestions: (String query) {
+                    var lowercaseQuery = query.toLowerCase();
+                    if (query.isNotEmpty) {
+                      return choiceTags.where((tag) {
+                        return tag.tagname.toLowerCase().contains(query.toLowerCase());
+                      }).toList(growable: false)
+                        ..sort(
+                          (a, b) => a.tagname.toLowerCase().indexOf(lowercaseQuery).compareTo(
+                                b.tagname.toLowerCase().indexOf(lowercaseQuery),
+                              ),
+                        );
+                    }
+                    return choiceTags;
+                  },
+                  onChanged: (val) {},
+                  textOverflow: TextOverflow.ellipsis,
+                  chipBuilder: (context, state, TagModel tag) {
+                    return InputChip(
+                      key: ObjectKey(tag),
+                      label: Text(tag.tagname),
+                      onDeleted: () {
+                        state.deleteChip(tag);
+                        _usertags.remove(tag.tagcode);
+                      },
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    );
+                  },
+                  // decoration: InputDecoration(
+                  //   border: kInputBorderStyle,
+                  //   focusedBorder: kInputBorderStyle,
+                  //   enabledBorder: kInputBorderStyle,
+                  // ),
 
+                  suggestionBuilder: (context, state, TagModel tag) {
+                    return ListTile(
+                      key: ObjectKey(tag),
+                      title: Text(tag.tagname),
+                      onTap: () {
+                        state.selectSuggestion(tag);
+                        _usertags.add(tag.tagcode);
+                        logger.w('tag pressed ${tag.tagname}');
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: screenHeight * 0.024459975), // 22
           FlatButton(
             color: Colors.green,
             onPressed: () {
               if (_formkey.currentState.validate()) {
                 logger.i('validated');
+                print(_usertags.toString());
                 BlocProvider.of<RegisterBloc>(context).add(
                   RegisterButtonClicked(
                     fname: _firstnameTextController.text,
@@ -327,6 +401,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     langpref: _langPref,
                     email: _emailTextController.text,
                     password: _passtextController.text,
+                    usertags: _usertags,
                   ),
                 );
               } else {
@@ -351,8 +426,55 @@ class _SignUpFormState extends State<SignUpForm> {
               borderRadius: BorderRadius.circular(10),
             ),
           ),
+          // SizedBox(height: screenHeight * 0.024459975), // 22
+          // Padding(
+          //   padding: EdgeInsets.symmetric(horizontal: 8),
+          //   child: DropDownField(
+          //     hintText: 'Field you wanna talk about',
+          //     enabled: true,
+          //     itemsVisibleInDropdown: 5,
+          //     items: choicetags,
+          //   ),
+          // ),
         ],
       ),
     );
   }
+}
+
+// List<String> choicetags = [
+//   "Time Management",
+//   "Coding",
+//   "Interview",
+//   "Internship",
+//   "Projects",
+//   "College Admission",
+//   "Boards",
+//   "Career",
+//   "Abroad Internship",
+//   "Higher Studies",
+//   "Productivity",
+//   "Motivation",
+// ];
+
+List<TagModel> choiceTags = <TagModel>[
+  TagModel(tagcode: Tags.timemanagement, tagname: 'Time Management'),
+  TagModel(tagcode: Tags.coding, tagname: 'Coding'),
+  TagModel(tagcode: Tags.interview, tagname: 'Interview'),
+  TagModel(tagcode: Tags.internship, tagname: 'Internship'),
+  TagModel(tagcode: Tags.projects, tagname: 'Projects'),
+  TagModel(tagcode: Tags.collegeadmission, tagname: 'College Admission'),
+  TagModel(tagcode: Tags.boards, tagname: 'Career'),
+  TagModel(tagcode: Tags.abroadinternship, tagname: 'Abroad Internship'),
+  TagModel(tagcode: Tags.higherstudies, tagname: 'Abroad Studies'),
+  TagModel(tagcode: Tags.productivity, tagname: 'Productivity'),
+];
+
+class TagModel extends Equatable {
+  final Tags tagcode;
+  final String tagname;
+  TagModel({@required this.tagcode, @required this.tagname});
+
+  @override
+  List<Object> get props => [tagcode, tagname];
 }
