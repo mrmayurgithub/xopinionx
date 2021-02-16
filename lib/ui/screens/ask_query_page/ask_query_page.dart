@@ -7,6 +7,7 @@ import 'package:xopinionx/ui/components/custom_autosizetext.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/screens/ask_query_page/bloc/ask_query_bloc.dart';
+import 'package:xopinionx/ui/screens/user_home_page/user_home_page.dart';
 
 class AskQueryPage extends StatelessWidget {
   static const id = "ask_query_page";
@@ -33,7 +34,10 @@ class _AskQueryMainBodyState extends State<AskQueryMainBody> {
         if (state is AskQueryInProgress) {
           showProgress(context);
         }
-        if (state is AskQueryPostedSuccess) {}
+        if (state is AskQueryPostedSuccess) {
+          logger.i('Success: Query Posted');
+          Navigator.of(context).pushReplacementNamed(UserHomePage.id);
+        }
         if (state is AskQueryCancelled) {}
         if (state is AskQueryFailure) {}
       },

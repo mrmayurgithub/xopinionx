@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:bloc/bloc.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,14 +24,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         yield LoginInProgress();
         await signInWithEmailAndPass(email: event.email, password: event.password);
 
-        await FirebaseAnalytics().logLogin(loginMethod: 'email_pass');
         logger.i('Checking weather user email is verified');
         final _currentUser = FirebaseAuth.instance.currentUser;
 
         if (_currentUser.emailVerified) {
           logger.i('Initializing API');
           yield LoginInProgress();
-          await initializeApi;
+          // await initializeApi;
           logger.i("API Initialized");
           yield LoginSuccess();
         } else {
@@ -49,7 +47,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           accessToken: _googleAuth.accessToken,
         );
         await FirebaseAuth.instance.signInWithCredential(_authCredentials);
-        await FirebaseAnalytics().logLogin(loginMethod: "google_signin");
 
         logger.i("All Checks Passed");
 

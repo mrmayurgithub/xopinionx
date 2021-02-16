@@ -8,6 +8,7 @@ import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/global/validators.dart';
 import 'package:xopinionx/ui/screens/home_page/home_page.dart';
 import 'package:xopinionx/ui/screens/login_page/bloc/login_bloc.dart';
+import 'package:xopinionx/ui/screens/register_page/register_page.dart';
 import 'package:xopinionx/ui/screens/user_home_page/user_home_page.dart';
 
 class LoginPage extends StatelessWidget {
@@ -28,7 +29,7 @@ class LoginMainBody extends StatelessWidget {
       listener: (context, state) async {
         if (state is LoginFailure) {
           Navigator.of(context).pop();
-          Fluttertoast.showToast(msg: state.message);
+          Fluttertoast.showToast(msg: "LoginPage Error: " + state.message);
           logger.wtf(state.message);
         }
         if (state is LoginSuccess) {
@@ -67,6 +68,12 @@ class LoginMainBody extends StatelessWidget {
               FlatButton(
                 onPressed: () {},
                 child: Text('Donate'),
+              ),
+              FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(RegisterPage.id);
+                },
+                child: Text('SignUp'),
               ),
             ],
           ),
@@ -206,7 +213,12 @@ class _LoginFormState extends State<LoginForm> {
             color: Colors.blue,
             onPressed: () {
               if (_formkey.currentState.validate()) {
-                // BlocProvider.of<LoginBloc>(context).add();
+                // BlocProvider.of<LoginBloc>(context).add(
+                //   LoginButtonPressed(
+                //     email: _emailTextController.text,
+                //     password: _passtextController.text,
+                //   ),
+                // );
               } else {
                 Fluttertoast.showToast(msg: 'Email or password is incorrect !');
               }

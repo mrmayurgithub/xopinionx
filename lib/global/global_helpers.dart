@@ -7,11 +7,7 @@ import 'package:xopinionx/api/models/user_model.dart';
 //TODO: TODO: TODO: Compplete
 Future<void> _initializeApi() async {
   await loadCurrentUser();
-  await loadUserProblems();
-  await loadApplicationsForProblem();
   await loadGlobalProblems();
-  await loadUserApplications();
-  await loadHistory();
 }
 
 Future<void> loadCurrentUser() async {

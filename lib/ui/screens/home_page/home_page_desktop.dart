@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xopinionx/ui/components/custom_autosizetext.dart';
-import 'package:xopinionx/ui/components/rounded_button.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/screens/home_page/bloc/home_page_bloc.dart';
 import 'package:xopinionx/ui/screens/register_page/register_page.dart';

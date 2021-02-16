@@ -1,12 +1,11 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:xopinionx/auth/auth_bloc.dart';
-import 'package:xopinionx/ui/components/list_item.dart';
+import 'package:xopinionx/global/logger.dart';
+import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/screens/ask_query_page/ask_query_page.dart';
 import 'package:xopinionx/ui/screens/home_page/home_page.dart';
-import 'package:xopinionx/ui/screens/login_page/login_page.dart';
 import 'package:xopinionx/ui/screens/user_home_page/bloc/user_home_bloc.dart';
 
 class UserHomePage extends StatelessWidget {
@@ -26,9 +25,15 @@ class UserHomeMainBody extends StatelessWidget {
     return BlocConsumer<UserHomeBloc, UserHomeState>(
       listener: (context, state) {
         if (state is UserHomeIntial) {}
-        if (state is UserHomeInProgress) {}
+        if (state is UserHomeInProgress) {
+          showProgress(context);
+        }
         if (state is UserHomeSuccess) {}
-        if (state is UserHomeFailure) {}
+        if (state is UserHomeFailure) {
+          Navigator.of(context).pop();
+          Fluttertoast.showToast(msg: state.message);
+          logger.wtf(state.message);
+        }
         if (state is AskQueryLoaded) {
           Navigator.of(context).pushNamed(AskQueryPage.id);
         }
