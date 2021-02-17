@@ -6,6 +6,7 @@ import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/screens/ask_query_page/ask_query_page.dart';
 import 'package:xopinionx/ui/screens/home_page/home_page.dart';
+import 'package:xopinionx/ui/screens/settings_page/settings_page.dart';
 import 'package:xopinionx/ui/screens/user_home_page/bloc/user_home_bloc.dart';
 
 class UserHomePage extends StatelessWidget {
@@ -88,6 +89,13 @@ class UserHomeMainBody extends StatelessWidget {
                     title: Text('History'),
                     leading: Icon(Icons.history_outlined),
                     onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text('Settings'),
+                    leading: Icon(Icons.settings_outlined),
+                    onTap: () {
+                      Navigator.of(context).pushNamed(SettingsPage.id);
+                    },
                   ),
                   ListTile(
                     title: Text('Logout'),

@@ -18,6 +18,7 @@ import 'package:xopinionx/ui/screens/profile_page/profile_page.dart';
 import 'package:xopinionx/ui/screens/register_page/providers.dart';
 import 'package:xopinionx/ui/screens/register_page/register_page.dart';
 import 'package:xopinionx/ui/screens/see_problems_page/see_problems.dart';
+import 'package:xopinionx/ui/screens/settings_page/settings_page.dart';
 import 'package:xopinionx/ui/screens/user_home_page/user_home_page.dart';
 import 'package:xopinionx/ui/screens/verification_page/verification_page.dart';
 
@@ -126,6 +127,7 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
             ProfilePage.id: (context) => ProfilePage(),
             UserHomePage.id: (context) => UserHomePage(),
             AskQueryPage.id: (context) => AskQueryPage(),
+            SettingsPage.id: (context) => SettingsPage(),
           },
           home: BlocBuilder<AuthBloc, AuthState>(
             builder: (context, state) {
