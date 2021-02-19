@@ -14,6 +14,8 @@ class SettingsPageLoaded extends SettingsState {}
 
 class EditableSettingsPage extends SettingsState {}
 
+class SettingsCancelled extends SettingsState {}
+
 class SettingsSaved extends SettingsState {}
 
 class SettingsFailure extends SettingsState {

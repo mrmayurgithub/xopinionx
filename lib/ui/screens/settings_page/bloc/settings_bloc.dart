@@ -18,7 +18,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         //TODO: complete
       }
       if (event is CancelButtonPressed) {
-        //TODO: complete
+        yield SettingsCancelled();
       }
       if (event is EditButtonPressed) {
         yield EditableSettingsPage();

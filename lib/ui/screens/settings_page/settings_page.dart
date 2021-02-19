@@ -101,7 +101,9 @@ class _SettingsMainBodyState extends State<SettingsMainBody> {
                     editable = false;
                     Fluttertoast.showToast(msg: 'Settings Updated.');
                   }
-
+                  if (state is SettingsCancelled) {
+                    editable = false;
+                  }
                   if (state is SettingsInProgress) {
                     showProgress(context);
                   }
@@ -154,7 +156,6 @@ class _SettingsFormState extends State<SettingsForm> {
   final _emailNode = FocusNode();
   final _chipNode = FocusNode();
   final _validator = Validator();
-  bool _isObscure = true;
   final _eduYearTextController = TextEditingController();
   final _eduYearNode = FocusNode();
   List<Tags> _usertags = [];
@@ -175,20 +176,6 @@ class _SettingsFormState extends State<SettingsForm> {
 
   @override
   Widget build(BuildContext context) {
-    Widget _showPassIcon() {
-      return AnimatedContainer(
-        duration: Duration(milliseconds: 200),
-        child: IconButton(
-          icon: _isObscure ? Icon(Icons.visibility_off_outlined) : Icon(Icons.visibility_outlined),
-          onPressed: () {
-            setState(() {
-              _isObscure = !_isObscure;
-            });
-          },
-        ),
-      );
-    }
-
     return Form(
       key: _formkey,
       child: Column(
@@ -288,6 +275,7 @@ class _SettingsFormState extends State<SettingsForm> {
 
           _education == 'ss'
               ? CustomTextFormField(
+                  enabled: widget.enabled,
                   nextNode: _chipNode,
                   currentNode: _eduYearNode,
                   textInputAction: TextInputAction.done,
@@ -308,6 +296,7 @@ class _SettingsFormState extends State<SettingsForm> {
               : SizedBox(),
           _education == 'cs'
               ? CustomTextFormField(
+                  enabled: widget.enabled,
                   nextNode: _chipNode,
                   currentNode: _eduYearNode,
                   textInputAction: TextInputAction.done,
@@ -328,6 +317,7 @@ class _SettingsFormState extends State<SettingsForm> {
               : SizedBox(),
           _education == 'pr'
               ? CustomTextFormField(
+                  enabled: widget.enabled,
                   nextNode: _chipNode,
                   currentNode: _eduYearNode,
                   textInputAction: TextInputAction.done,
@@ -347,9 +337,9 @@ class _SettingsFormState extends State<SettingsForm> {
                 )
               : SizedBox(),
           SizedBox(height: screenHeight * 0.024459975), // 22
-          Center(
-            child: Text('Select the fields you feel free to talk about'),
-          ),
+          // Center(
+          //   child: Text('Select the fields you feel free to talk about'),
+          // ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8),
             child: Column(
@@ -404,15 +394,64 @@ class _SettingsFormState extends State<SettingsForm> {
           SizedBox(height: screenHeight * 0.024459975), // 22
           widget.enabled == true
               ? Row(
-                  children: [],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FlatButton(
+                      color: Colors.grey,
+                      onPressed: () {
+                        _firstnameTextController.text = globalUser.fname;
+                        _lastnameTextController.text = globalUser.lname;
+
+                        BlocProvider.of<SettingsBloc>(context).add(CancelButtonPressed());
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 16,
+                          horizontal: 60,
+                        ),
+                        child: Text(
+                          'Cancel',
+                          style: TextStyle(
+                            letterSpacing: 1.3,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                    FlatButton(
+                      color: Colors.blue,
+                      onPressed: () {
+                        BlocProvider.of<SettingsBloc>(context).add(SaveButtonPressed());
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 16,
+                          horizontal: 60,
+                        ),
+                        child: Text(
+                          'Save',
+                          style: TextStyle(
+                            letterSpacing: 1.3,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ],
                 )
               : FlatButton(
                   color: Colors.green,
                   onPressed: () {
-                    // if (_formkey.currentState.validate()) {
-                    // } else {
-                    //   Fluttertoast.showToast(msg: 'Check if the information you filled is correct');
-                    // }
+                    BlocProvider.of<SettingsBloc>(context).add(EditButtonPressed());
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(
