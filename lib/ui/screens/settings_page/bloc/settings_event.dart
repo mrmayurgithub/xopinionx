@@ -7,6 +7,8 @@ abstract class SettingsEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class EditButtonPressed extends SettingsEvent {}
+
 class SaveButtonPressed extends SettingsEvent {
   //TODO: complete
 }

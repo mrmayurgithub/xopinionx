@@ -10,6 +10,10 @@ class SettingsInitial extends SettingsState {}
 
 class SettingsInProgress extends SettingsState {}
 
+class SettingsPageLoaded extends SettingsState {}
+
+class EditableSettingsPage extends SettingsState {}
+
 class SettingsSaved extends SettingsState {}
 
 class SettingsFailure extends SettingsState {

@@ -30,7 +30,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         if (_currentUser.emailVerified) {
           logger.i('Initializing API');
           yield LoginInProgress();
-          // await initializeApi;
+          await initializeApi;
           logger.i("API Initialized");
           yield LoginSuccess();
         } else {

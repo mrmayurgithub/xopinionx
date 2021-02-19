@@ -25,23 +25,26 @@ class UserFunctions {
     //     'registrationStatus': user.registrationStatus,
     //     'usertags': user.userTags,
     //   },
-    await _firestore.collection('users').doc(_docId).set(
-      {
-        'user': UserModel(
-          id: _docId,
-          fname: user.fname,
-          lname: user.lname,
-          email: user.email,
-          sessionBalance: user.sessionBalance,
-          eduYear: user.eduYear,
-          overallReview: user.overallReview,
-          languagePreferences: user.languagePreferences,
-          registrationStatus: user.registrationStatus,
-          userTags: user.userTags,
-        ).toJson(),
-      },
-      //TODO: merge = false option is probably unavailable in new update
-    ).catchError((e) => {});
+    await _firestore
+        .collection('users')
+        .doc(_docId)
+        .set(
+          UserModel(
+            id: _docId,
+            fname: user.fname,
+            lname: user.lname,
+            email: user.email,
+            sessionBalance: user.sessionBalance,
+            eduYear: user.eduYear,
+            overallReview: user.overallReview,
+            languagePreferences: user.languagePreferences,
+            registrationStatus: user.registrationStatus,
+            userTags: user.userTags,
+          ).toJson(),
+
+          //TODO: merge = false option is probably unavailable in new update
+        )
+        .catchError((e) => {});
   }
 
   static Future<void> deleteUser(UserModel user) async {

@@ -20,6 +20,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       if (event is CancelButtonPressed) {
         //TODO: complete
       }
+      if (event is EditButtonPressed) {
+        yield EditableSettingsPage();
+      }
     } on PlatformException catch (e) {
       yield (SettingsFailure(message: "Error: ${e.message}"));
     } on FirebaseAuthException catch (e) {
