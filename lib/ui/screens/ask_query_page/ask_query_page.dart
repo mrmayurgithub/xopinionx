@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/ui/components/customFormField.dart';
-import 'package:xopinionx/ui/components/custom_autosizetext.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/screens/ask_query_page/bloc/ask_query_bloc.dart';
@@ -100,6 +99,7 @@ class _QueryFormState extends State<QueryForm> {
           Text('About your Query'),
           SizedBox(height: screenHeight * 0.024459975), // 22
           _CustomTextFormField(
+            currentNode: _problemNode,
             fieldController: _problemTextController,
             hintText: 'Title for your problem',
             keyboardType: TextInputType.text,

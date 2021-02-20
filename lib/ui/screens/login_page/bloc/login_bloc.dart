@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,7 +8,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:xopinionx/auth/functions/signIn.dart';
 import 'package:xopinionx/global/global_helpers.dart';
 import 'package:xopinionx/global/logger.dart';
-import 'package:xopinionx/api/models/user_model.dart';
 part 'login_event.dart';
 part 'login_state.dart';
 

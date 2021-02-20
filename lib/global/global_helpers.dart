@@ -1,7 +1,5 @@
 //TODO: Complete
-import 'package:xopinionx/api/functions/problem_functions.dart';
 import 'package:xopinionx/api/functions/user_functions.dart';
-import 'package:xopinionx/api/models/problem_model.dart';
 import 'package:xopinionx/api/models/user_model.dart';
 
 //TODO: TODO: TODO: Compplete

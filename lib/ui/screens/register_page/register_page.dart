@@ -1,20 +1,13 @@
-import 'dart:collection';
-
-import 'package:dropdownfield/dropdownfield.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
-import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 import 'package:xopinionx/global/enums.dart';
 import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/ui/components/customFormField.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/global/validators.dart';
-import 'package:xopinionx/ui/screens/profile_page/profile_page.dart';
 import 'package:xopinionx/ui/screens/register_page/bloc/register_bloc.dart';
 import 'package:xopinionx/ui/screens/verification_page/verification_page.dart';
 

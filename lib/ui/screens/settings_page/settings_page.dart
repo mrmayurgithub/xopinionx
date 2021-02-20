@@ -13,6 +13,7 @@ import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/global/validators.dart';
 import 'package:xopinionx/ui/screens/home_page/home_page.dart';
 import 'package:xopinionx/ui/screens/settings_page/bloc/settings_bloc.dart';
+import 'package:xopinionx/ui/screens/user_home_page/user_home_page.dart';
 
 class SettingsPage extends StatelessWidget {
   static const id = "settings_page";
@@ -49,6 +50,13 @@ class _SettingsMainBodyState extends State<SettingsMainBody> {
                     ),
                     subtitle: Text('mr.mayurrrr@gmail.com'),
                     onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text('Home'),
+                    leading: Icon(Icons.home_outlined),
+                    onTap: () {
+                      Navigator.of(context).pushReplacementNamed(UserHomePage.id);
+                    },
                   ),
                   ListTile(
                     title: Text('Chats'),
@@ -160,6 +168,7 @@ class _SettingsFormState extends State<SettingsForm> {
   final _eduYearNode = FocusNode();
   List<Tags> _usertags = [];
   String _education;
+  // List<Tags> _tagstemplist = [];
   String _langPref;
   int eduYear;
   @override
@@ -171,6 +180,7 @@ class _SettingsFormState extends State<SettingsForm> {
     _eduYearTextController.text = globalUser.eduYear.toString();
     _education = globalUser.schoolORCollege;
     _usertags = globalUser.userTags;
+    // _tagstemplist = _usertags;
     super.initState();
   }
 
@@ -377,6 +387,9 @@ class _SettingsFormState extends State<SettingsForm> {
                     );
                   },
                   suggestionBuilder: (context, state, TagModel tag) {
+                    // if (_tagstemplist.length != 0) {
+                    //   for (Tags tag in _usertags) state.selectSuggestion(tag);
+                    // }
                     return ListTile(
                       key: ObjectKey(tag),
                       title: Text(tag.tagname),
@@ -426,7 +439,16 @@ class _SettingsFormState extends State<SettingsForm> {
                     FlatButton(
                       color: Colors.blue,
                       onPressed: () {
-                        BlocProvider.of<SettingsBloc>(context).add(SaveButtonPressed());
+                        BlocProvider.of<SettingsBloc>(context).add(
+                          SaveButtonPressed(
+                            fname: _firstnameTextController.text,
+                            lname: _lastnameTextController.text,
+                            educationLevel: _education,
+                            eduYear: int.parse(_eduYearTextController.text),
+                            langpref: _langPref,
+                            usertags: _usertags,
+                          ),
+                        );
                       },
                       child: Padding(
                         padding: EdgeInsets.symmetric(

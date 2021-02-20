@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:xopinionx/global/enums.dart';
 
 part 'problem_model.g.dart';
 
