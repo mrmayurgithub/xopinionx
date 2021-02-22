@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:xopinionx/global/enums.dart';
 import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/ui/components/customFormField.dart';
+import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/global/validators.dart';
 import 'package:xopinionx/ui/screens/register_page/bloc/register_bloc.dart';
@@ -31,7 +32,9 @@ class RegistrationPageMainBody extends StatelessWidget {
         if (state is RegisterInitial) {
           return CircularProgressIndicator();
         }
-        if (state is RegisterInProgress) {}
+        if (state is RegisterInProgress) {
+          showProgress(context);
+        }
         if (state is RegisterSuccess) {
           Navigator.of(context).pushReplacementNamed(VerificationPage.id);
         }

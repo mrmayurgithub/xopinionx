@@ -30,7 +30,18 @@ class _HistoryMainBodyState extends State<HistoryMainBody> {
       builder: (context, state) {
         return Scaffold(
           body: Center(
-            child: SingleChildScrollView(),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('History'),
+                  ExpansionTile(
+                    title: Text('data'),
+                  ),
+                ],
+              ),
+            ),
           ),
         );
       },

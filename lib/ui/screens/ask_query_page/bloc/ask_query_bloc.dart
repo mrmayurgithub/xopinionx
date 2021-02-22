@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xopinionx/api/functions/problem_functions.dart';
 import 'package:xopinionx/api/models/problem_model.dart';
+import 'package:xopinionx/global/global_helpers.dart';
 import 'package:xopinionx/global/logger.dart';
 
 part 'ask_query_state.dart';
@@ -24,11 +25,11 @@ class AskQueryBloc extends Bloc<AskQueryEvent, AskQueryState> {
         DateTime now = DateTime.now();
         DateTime date = DateTime(now.year, now.month, now.day);
         // var parsedDate = DateTime.parse('1974-03-20 00:00:00.000');
-        final _currentUser = FirebaseAuth.instance.currentUser;
+        // final _currentUser = FirebaseAuth.instance.currentUser;
 
         await ProblemFunctions.createProblem(
           problem: ProblemModel(
-            userId: _currentUser.uid,
+            userId: globalUser.id,
             problemDescription: event.description,
             datePosted: date.toString(),
             problemTitle: event.problem,

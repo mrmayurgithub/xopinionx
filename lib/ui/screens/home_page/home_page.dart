@@ -51,7 +51,7 @@ class HomePageMainBody extends StatelessWidget {
           },
           builder: (context, state) {
             return ScreenTypeLayout(
-              mobile: HomePageMobile(),
+              mobile: HomePageDesktop(),
               desktop: HomePageDesktop(),
               tablet: HomePageDesktop(),
             );

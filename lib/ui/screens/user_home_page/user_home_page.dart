@@ -1,10 +1,14 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:xopinionx/api/models/problem_model.dart';
 import 'package:xopinionx/auth/auth_bloc.dart';
+import 'package:xopinionx/global/global_helpers.dart';
 import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/screens/ask_query_page/ask_query_page.dart';
+import 'package:xopinionx/ui/screens/history_page/history_page.dart';
 import 'package:xopinionx/ui/screens/home_page/home_page.dart';
 import 'package:xopinionx/ui/screens/settings_page/settings_page.dart';
 import 'package:xopinionx/ui/screens/user_home_page/bloc/user_home_bloc.dart';
@@ -21,6 +25,8 @@ class UserHomePage extends StatelessWidget {
 }
 
 class UserHomeMainBody extends StatelessWidget {
+  List<ProblemModel> _problems = globalProblemsList;
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserHomeBloc, UserHomeState>(
@@ -61,11 +67,11 @@ class UserHomeMainBody extends StatelessWidget {
               child: ListBody(
                 children: [
                   ListTile(
-                    title: Text('Mayur Agarwal'),
+                    title: Text(globalUser.fname + globalUser.lname),
                     leading: CircleAvatar(
                       child: Icon(Icons.face_outlined),
                     ),
-                    subtitle: Text('mr.mayurrrr@gmail.com'),
+                    subtitle: Text(globalUser.email.toString()),
                     onTap: () {},
                   ),
                   ListTile(
@@ -82,13 +88,15 @@ class UserHomeMainBody extends StatelessWidget {
                   ListTile(
                     title: Text('Session Balance'),
                     leading: Icon(Icons.account_balance_outlined),
-                    subtitle: Text('2/2'),
+                    subtitle: Text(globalUser.sessionBalance.toString()),
                     onTap: () {},
                   ),
                   ListTile(
                     title: Text('History'),
                     leading: Icon(Icons.history_outlined),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).pushNamed(HistoryPage.id);
+                    },
                   ),
                   ListTile(
                     title: Text('Settings'),
@@ -135,6 +143,19 @@ class UserHomeMainBody extends StatelessWidget {
                     subtitle: Center(
                       child: Text('Help your juniors'),
                     ),
+                  ),
+                  ListView(
+                    children: [
+                      for (ProblemModel ele in _problems)
+                        ExpansionTile(
+                          title: Text(ele.problemTitle),
+                          children: [
+                            AutoSizeText(
+                              ele.problemDescription,
+                            ),
+                          ],
+                        ),
+                    ],
                   ),
                 ],
               ),

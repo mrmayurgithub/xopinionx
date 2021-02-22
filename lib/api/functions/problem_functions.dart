@@ -7,24 +7,17 @@ class ProblemFunctions {
   static Future<void> createProblem({ProblemModel problem}) async {
     //TODO: maybe also add to the local list for optimization and don't use await then
     final _docId = _firestore.collection('problems').doc().id;
-    await _firestore.collection('problems').doc(_docId).set({
-      // 'id': _docId,
-      // 'userId': problem.userId,
-      // 'problemTitle': problem.problemTitle,
-      // 'problemDescription': problem.problemDescription,
-      // 'datePosted': problem.datePosted,
-      // 'status': problem.status,
-      // 'tag': problem.tag.toString(),
-      'problem': ProblemModel(
-        problemId: _docId,
-        userId: problem.userId,
-        problemTitle: problem.problemTitle,
-        problemDescription: problem.problemDescription,
-        datePosted: problem.datePosted,
-        status: problem.status,
-        tag: problem.tag,
-      ).toJson(),
-    });
+    await _firestore.collection('problems').doc(_docId).set(
+          ProblemModel(
+            problemId: _docId,
+            userId: problem.userId,
+            problemTitle: problem.problemTitle,
+            problemDescription: problem.problemDescription,
+            datePosted: problem.datePosted,
+            status: problem.status,
+            tag: problem.tag,
+          ).toJson(),
+        );
   }
 
   static Future<List<ProblemModel>> getUserProblems() async {
@@ -55,4 +48,21 @@ class ProblemFunctions {
     //TODO: maybe also delete from the local list or update the list
     await _firestore.collection('problems').doc(problem.problemId).delete();
   }
+
+  static Future<List<ProblemModel>> getGlobalProblems() async {
+    List<ProblemModel> _problems = [];
+    Query q = _firestore.collection('problems').where('userId', isNotEqualTo: globalUser.id).limit(20);
+    QuerySnapshot querySnapshot = await q.get();
+    var _data = querySnapshot.docs;
+    _data.forEach((element) {
+      var a = element.data();
+      ProblemModel _problem = ProblemModel.fromJson(a);
+      if (globalUser.userTags.contains(_problem.tag)) {
+        _problems.add(_problem);
+      }
+    });
+    return _problems;
+  }
+
+  static Future<List<ProblemModel>> againGetGlobalProblems() async {}
 }
