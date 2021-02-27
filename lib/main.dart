@@ -8,6 +8,7 @@ import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:xopinionx/auth/auth_bloc.dart';
 import 'package:xopinionx/global/bloc_observer.dart';
 import 'package:xopinionx/global/logger.dart';
+import 'package:xopinionx/ui/global/theme/bloc/theme_bloc.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/screens/ask_query_page/ask_query_page.dart';
 import 'package:xopinionx/ui/screens/donation_page/donation_page.dart';
@@ -25,7 +26,12 @@ import 'package:xopinionx/ui/screens/verification_page/verification_page.dart';
 void main() {
   Bloc.observer = SimpleBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(App());
+  runApp(
+    BlocProvider<AuthBloc>(
+      create: (context) => AuthBloc()..add(AppStarted()),
+      child: App(),
+    ),
+  );
 }
 
 class App extends StatelessWidget {
@@ -39,9 +45,14 @@ class App extends StatelessWidget {
         if (snapshot.hasError) {
           return Text('ERROR');
         }
-        return BlocProvider<AuthBloc>(
-          create: (context) => AuthBloc()..add(AppStarted()),
-          child: MainAppWithTheme(),
+        return BlocProvider(
+          create: (context) => ThemeBloc(),
+          child: BlocBuilder<ThemeBloc, ThemeState>(
+            builder: (context, state) => MainAppWithTheme(
+              context: context,
+              state: state,
+            ),
+          ),
         );
       },
     );
@@ -49,6 +60,15 @@ class App extends StatelessWidget {
 }
 
 class MainAppWithTheme extends StatefulWidget {
+  final BuildContext context;
+  final ThemeState state;
+
+  const MainAppWithTheme({
+    Key key,
+    this.context,
+    this.state,
+  }) : super(key: key);
+
   @override
   _MainAppWithThemeState createState() => _MainAppWithThemeState();
 }
@@ -93,12 +113,13 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
         child: MaterialApp(
           title: 'Opinionx',
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            textTheme: Theme.of(context).textTheme.apply(
-                  fontFamily: 'Open Sans',
-                ),
-          ),
+          // theme: ThemeData(
+          //   primarySwatch: Colors.blue,
+          //   textTheme: Theme.of(context).textTheme.apply(
+          //         fontFamily: 'Open Sans',
+          //       ),
+          // ),
+          theme: widget.state.appThemeData,
           builder: (context, widget) {
             return ResponsiveWrapper.builder(
               BouncingScrollWrapper.builder(context, widget),

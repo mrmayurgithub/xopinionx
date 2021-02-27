@@ -6,6 +6,7 @@ import 'package:xopinionx/ui/components/customFormField.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/global/validators.dart';
+import 'package:xopinionx/ui/screens/home_page/home_page.dart';
 import 'package:xopinionx/ui/screens/login_page/bloc/login_bloc.dart';
 import 'package:xopinionx/ui/screens/register_page/register_page.dart';
 import 'package:xopinionx/ui/screens/user_home_page/user_home_page.dart';
@@ -49,25 +50,27 @@ class LoginMainBody extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
-          extendBodyBehindAppBar: true,
+          // extendBodyBehindAppBar: true,
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             elevation: 0.0,
             backgroundColor: Colors.transparent,
-            title: Text(
-              'OPINIONX',
-              style: TextStyle(
-                color: Colors.green,
+            title: GestureDetector(
+              onTap: () {
+                // Navigator.of(context).pushReplacementNamed(HomePage.id);
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  HomePage.id,
+                  (route) => false,
+                );
+              },
+              child: Text(
+                'OPINIONX',
+                style: TextStyle(
+                  color: Colors.green,
+                ),
               ),
             ),
             actions: [
-              FlatButton(
-                onPressed: () {},
-                child: Text('About Us'),
-              ),
-              FlatButton(
-                onPressed: () {},
-                child: Text('Donate'),
-              ),
               FlatButton(
                 onPressed: () {
                   Navigator.of(context).pushNamed(RegisterPage.id);

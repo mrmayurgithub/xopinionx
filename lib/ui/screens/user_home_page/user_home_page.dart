@@ -1,12 +1,17 @@
+import 'dart:html';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:xopinionx/api/models/problem_model.dart';
 import 'package:xopinionx/auth/auth_bloc.dart';
 import 'package:xopinionx/global/global_helpers.dart';
 import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
+import 'package:xopinionx/ui/global/theme/app_themes.dart';
+import 'package:xopinionx/ui/global/theme/bloc/theme_bloc.dart';
 import 'package:xopinionx/ui/screens/ask_query_page/ask_query_page.dart';
 import 'package:xopinionx/ui/screens/history_page/history_page.dart';
 import 'package:xopinionx/ui/screens/home_page/home_page.dart';
@@ -26,7 +31,7 @@ class UserHomePage extends StatelessWidget {
 
 class UserHomeMainBody extends StatelessWidget {
   List<ProblemModel> _problems = globalProblemsList;
-
+  bool positionTheme = true;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserHomeBloc, UserHomeState>(
@@ -64,7 +69,9 @@ class UserHomeMainBody extends StatelessWidget {
           ),
           drawer: Drawer(
             child: SingleChildScrollView(
-              child: ListBody(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ListTile(
                     title: Text(globalUser.fname + globalUser.lname),
@@ -77,6 +84,11 @@ class UserHomeMainBody extends StatelessWidget {
                   ListTile(
                     title: Text('Chats'),
                     leading: Icon(Icons.meeting_room_outlined),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text('Your Queries'),
+                    leading: Icon(Icons.question_answer_outlined),
                     onTap: () {},
                   ),
                   ListTile(
@@ -113,6 +125,38 @@ class UserHomeMainBody extends StatelessWidget {
                       Navigator.of(context).pushReplacementNamed(HomePage.id);
                     },
                   ),
+                  // SwitchListTile(
+                  //   title: Text("Dark Theme"),
+                  //   value: positionTheme,
+                  //   onChanged: (bool pos) {
+                  //     if (pos) {
+                  //       BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(appTheme: AppTheme.Dark));
+                  //     } else {
+                  //       BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(appTheme: AppTheme.Light));
+                  //     }
+                  //   },
+                  // ),
+                  ListTile(
+                    leading: Icon(Icons.colorize),
+                    title: Theme.of(context).brightness == Brightness.dark ? Text("Dark Theme") : Text("Light Theme"),
+                    onTap: () {
+                      if (Theme.of(context).brightness == Brightness.light) {
+                        BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(appTheme: AppTheme.Dark));
+                      } else {
+                        BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(appTheme: AppTheme.Light));
+                      }
+                    },
+                    // trailing: LiteRollingSwitch(
+                    //   value: positionTheme,
+                    //   onChanged: (bool pos) {
+                    //     if (pos) {
+                    //       BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(appTheme: AppTheme.Dark));
+                    //     } else {
+                    //       BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(appTheme: AppTheme.Light));
+                    //     }
+                    //   },
+                    // ),
+                  ),
                 ],
               ),
             ),
@@ -144,19 +188,21 @@ class UserHomeMainBody extends StatelessWidget {
                       child: Text('Help your juniors'),
                     ),
                   ),
-                  ListView(
-                    children: [
-                      for (ProblemModel ele in _problems)
-                        ExpansionTile(
-                          title: Text(ele.problemTitle),
+                  _problems.length != 0
+                      ? ListView(
                           children: [
-                            AutoSizeText(
-                              ele.problemDescription,
-                            ),
+                            for (ProblemModel ele in _problems)
+                              ExpansionTile(
+                                title: Text(ele.problemTitle),
+                                children: [
+                                  AutoSizeText(
+                                    ele.problemDescription,
+                                  ),
+                                ],
+                              ),
                           ],
-                        ),
-                    ],
-                  ),
+                        )
+                      : Text('No Queries to show'),
                 ],
               ),
             ),

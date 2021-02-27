@@ -42,7 +42,10 @@ class _AskQueryMainBodyState extends State<AskQueryMainBody> {
       },
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(),
+          // appBar: AppBar(
+          //   automaticallyImplyLeading: false,
+
+          // ),
           body: Center(
             child: SingleChildScrollView(
               child: Column(
@@ -51,15 +54,15 @@ class _AskQueryMainBodyState extends State<AskQueryMainBody> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      // color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
                       shape: BoxShape.rectangle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 15.0,
-                        ),
-                      ],
+                      // boxShadow: [
+                      //   BoxShadow(
+                      //     color: Colors.grey,
+                      //     blurRadius: 15.0,
+                      //   ),
+                      // ],
                     ),
                     // height: screenHeight / 2,
                     width: 570,

@@ -9,6 +9,9 @@ import 'package:xopinionx/ui/components/customFormField.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/global/validators.dart';
+import 'package:xopinionx/ui/screens/home_page/bloc/home_page_bloc.dart';
+import 'package:xopinionx/ui/screens/home_page/home_page.dart';
+import 'package:xopinionx/ui/screens/login_page/login_page.dart';
 import 'package:xopinionx/ui/screens/register_page/bloc/register_bloc.dart';
 import 'package:xopinionx/ui/screens/verification_page/verification_page.dart';
 
@@ -44,24 +47,32 @@ class RegistrationPageMainBody extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
-          extendBodyBehindAppBar: true,
+          // extendBodyBehindAppBar: true,
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             elevation: 0.0,
             backgroundColor: Colors.transparent,
-            title: Text(
-              'OPINIONX',
-              style: TextStyle(
-                color: Colors.green,
+            title: GestureDetector(
+              onTap: () {
+                // Navigator.of(context).pushReplacementNamed(HomePage.id);
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  HomePage.id,
+                  (route) => false,
+                );
+              },
+              child: Text(
+                'OPINIONX',
+                style: TextStyle(
+                  color: Colors.green,
+                ),
               ),
             ),
             actions: [
               FlatButton(
-                onPressed: () {},
-                child: Text('About Us'),
-              ),
-              FlatButton(
-                onPressed: () {},
-                child: Text('Donate'),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(LoginPage.id);
+                },
+                child: Text("Login"),
               ),
             ],
           ),
@@ -73,15 +84,15 @@ class RegistrationPageMainBody extends StatelessWidget {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      // color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
                       shape: BoxShape.rectangle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 15.0,
-                        ),
-                      ],
+                      // boxShadow: [
+                      //   BoxShadow(
+                      //     color: Colors.grey,
+                      //     blurRadius: 15.0,
+                      //   ),
+                      // ],
                     ),
                     // height: screenHeight / 2,
                     width: 570,

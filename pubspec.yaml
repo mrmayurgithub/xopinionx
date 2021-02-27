@@ -48,6 +48,7 @@ dependencies:
   responsive_framework: ^0.0.14
   dropdownfield: ^1.0.3
   flutter_chips_input: ^1.9.5
+  lite_rolling_switch: ^0.1.1
 
 dev_dependencies:
   flutter_test:
