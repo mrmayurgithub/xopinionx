@@ -137,7 +137,7 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
               ),
             );
           },
-          routes: {
+          routes: <String, WidgetBuilder>{
             LoginPage.id: (context) => LoginPage(),
             RegisterPage.id: (context) => RegisterPage(),
             VerificationPage.id: (context) => VerificationPage(),

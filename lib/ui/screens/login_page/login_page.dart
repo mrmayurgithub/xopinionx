@@ -87,15 +87,15 @@ class LoginMainBody extends StatelessWidget {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      // color: Colors.black,
                       borderRadius: BorderRadius.circular(20),
                       shape: BoxShape.rectangle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 15.0,
-                        ),
-                      ],
+                      // boxShadow: [
+                      //   BoxShadow(
+                      //     color: Colors.grey,
+                      //     blurRadius: 15.0,
+                      //   ),
+                      // ],
                     ),
                     // height: screenHeight / 2,
                     width: 570,

@@ -25,19 +25,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           logger.i('Checking whether user is verified');
           if (_currentUser.emailVerified) {
             logger.i('Checking whether profile is Complete');
-            final _querySnapshot = await FirebaseFirestore.instance.collection('users').where('email', isEqualTo: _currentUser.email).get();
+            // final _querySnapshot = await FirebaseFirestore.instance.collection('users').where('email', isEqualTo: _currentUser.email).get();
 
-            final _doc = _querySnapshot.docs;
-            if (_doc.length == 0) {
-              logger.i('Profile is incomplete');
-              yield AuthNeedsProfileComplete();
-            } else {
-              logger.i('All Checks Completed');
-              logger.i('Initializing API');
-              await initializeApi;
-              logger.i('API Initialized');
-              yield AuthAuthenticated();
-            }
+            // final _doc = _querySnapshot.docs;
+            // if (_doc.length == 0) {
+            //   logger.i('Profile is incomplete');
+            //   yield AuthNeedsProfileComplete();
+            // }
+            // else {
+            logger.i('All Checks Completed');
+            logger.i('Initializing API');
+            await initializeApi;
+            logger.i('API Initialized');
+            yield AuthAuthenticated();
+            // }
           } else {
             yield AuthNeedsVerification();
           }

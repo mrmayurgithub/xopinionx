@@ -11,6 +11,8 @@ class UserHomeIntial extends UserHomeState {}
 
 class UserHomeInProgress extends UserHomeState {}
 
+class QueryNotAllowed extends UserHomeState {}
+
 class UserHomeSuccess extends UserHomeState {}
 
 class AskQueryLoaded extends UserHomeState {}

@@ -30,62 +30,40 @@ class _HomePageDesktopState extends State<HomePageDesktop> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Container(
-                  color: Color.fromARGB(255, 118, 222, 140),
-                  width: screenWidth / 2,
-                  height: screenHeight,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CustomAutoSizeText(
-                        width: screenWidth / 5,
-                        title: "Got some doubts ?",
-                        fontSize: 30,
-                        maxLines: 3,
-                        color: Colors.white,
-                      ),
-                      CustomAutoSizeText(
-                        width: screenWidth / 5,
-                        title: " Want a genuine  opinion ?",
-                        fontSize: 30,
-                        maxLines: 3,
-                        color: Colors.white,
-                      ),
-                      CustomAutoSizeText(
-                        width: screenWidth / 5,
-                        title: "Ask your doubts now",
-                        fontSize: 30,
-                        maxLines: 3,
-                        color: Colors.white,
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  width: screenWidth / 2,
-                  height: screenHeight,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SignUpButton(),
-                      SizedBox(
-                        height: 50,
-                      ),
-                      LoginButton(),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ],
+      body: Center(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CustomAutoSizeText(
+                width: screenWidth / 2.5,
+                title: "Got some doubts ?",
+                fontSize: 30,
+                maxLines: 2,
+                color: Colors.white,
+              ),
+              CustomAutoSizeText(
+                width: screenWidth / 2.5,
+                title: "Want a genuine opinion ?",
+                fontSize: 30,
+                maxLines: 3,
+                color: Colors.white,
+              ),
+              CustomAutoSizeText(
+                width: screenWidth / 2.5,
+                title: "Ask your doubts now",
+                fontSize: 30,
+                maxLines: 2,
+                color: Colors.white,
+              ),
+              SizedBox(height: 50),
+              SignUpButton(),
+              SizedBox(height: 50),
+              LoginButton(),
+            ],
+          ),
         ),
       ),
     );
@@ -114,7 +92,7 @@ class _SignUpButtonState extends State<SignUpButton> {
           'SignUp',
           style: TextStyle(
             letterSpacing: 1.3,
-            color: Colors.white,
+            // color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
         ),

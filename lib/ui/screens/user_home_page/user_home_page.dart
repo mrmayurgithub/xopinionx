@@ -40,6 +40,9 @@ class UserHomeMainBody extends StatelessWidget {
         if (state is UserHomeInProgress) {
           showProgress(context);
         }
+        if (state is QueryNotAllowed) {
+          Fluttertoast.showToast(msg: 'You cannot ask more than 3 Queries at a time');
+        }
         if (state is UserHomeSuccess) {}
         if (state is UserHomeFailure) {
           Navigator.of(context).pop();
@@ -67,6 +70,7 @@ class UserHomeMainBody extends StatelessWidget {
               ),
             ],
           ),
+          drawerScrimColor: Colors.transparent,
           drawer: Drawer(
             child: SingleChildScrollView(
               child: Column(
@@ -121,6 +125,7 @@ class UserHomeMainBody extends StatelessWidget {
                     title: Text('Logout'),
                     leading: Icon(Icons.login_outlined),
                     onTap: () async {
+                      BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(appTheme: AppTheme.Light));
                       BlocProvider.of<AuthBloc>(context).add(JustLoggedOut());
                       Navigator.of(context).pushReplacementNamed(HomePage.id);
                     },
@@ -161,49 +166,59 @@ class UserHomeMainBody extends StatelessWidget {
               ),
             ),
           ),
-          body: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  FlatButton(
-                    onPressed: () {
-                      BlocProvider.of<UserHomeBloc>(context).add(
-                        UserHomeAskQueryRequested(),
-                      );
-                    },
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text('Ask my Query'),
+          body: RefreshIndicator(
+            onRefresh: () async {
+              await loadGlobalProblems();
+            },
+            child: Center(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    FlatButton(
+                      onPressed: () {
+                        BlocProvider.of<UserHomeBloc>(context).add(
+                          UserHomeAskQueryRequested(),
+                        );
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text('Ask my Query'),
+                      ),
+                      color: Colors.blue,
                     ),
-                    color: Colors.blue,
-                  ),
-                  SizedBox(height: 100),
-                  ListTile(
-                    title: Center(
-                      child: Text('Answer Some Queries'),
+                    SizedBox(height: 100),
+                    ListTile(
+                      title: Center(
+                        child: Text('Answer Some Queries'),
+                      ),
+                      subtitle: Center(
+                        child: Text('Help your juniors'),
+                      ),
                     ),
-                    subtitle: Center(
-                      child: Text('Help your juniors'),
-                    ),
-                  ),
-                  _problems.length != 0
-                      ? ListView(
-                          children: [
-                            for (ProblemModel ele in _problems)
-                              ExpansionTile(
-                                title: Text(ele.problemTitle),
-                                children: [
-                                  AutoSizeText(
-                                    ele.problemDescription,
+                    SizedBox(height: 10),
+                    _problems.length != 0
+                        ? ListView(
+                            shrinkWrap: true,
+                            children: [
+                              for (ProblemModel ele in _problems)
+                                ExpansionTile(
+                                  title: Text(ele.problemTitle),
+                                  children: [
+                                    AutoSizeText(ele.problemDescription),
+                                  ],
+                                  trailing: IconButton(
+                                    icon: Icon(Icons.chat),
+                                    onPressed: () {},
                                   ),
-                                ],
-                              ),
-                          ],
-                        )
-                      : Text('No Queries to show'),
-                ],
+                                  childrenPadding: EdgeInsets.all(10),
+                                ),
+                            ],
+                          )
+                        : Text('No Queries to show'),
+                  ],
+                ),
               ),
             ),
           ),

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:xopinionx/api/models/problem_model.dart';
 import 'package:xopinionx/global/global_helpers.dart';
@@ -53,19 +55,20 @@ class ProblemFunctions {
   static Future<List<ProblemModel>> getGlobalProblems() async {
     logger.i('GETGLOBALPROBLEMS: getting problems');
     List<ProblemModel> _problems = [];
-    Query q = _firestore.collection('problems').where('userId', isNotEqualTo: globalUser.id).limit(20);
+    Query q = _firestore.collection('problems').limit(20);
     QuerySnapshot querySnapshot = await q.get();
     var _data = querySnapshot.docs;
-    // logger.e(_data.length);
+    logger.e(_data.length);
     _data.forEach((element) {
-      var a = element.data();
+      Map<String, dynamic> json = element.data();
       // logger.v(a);
-      ProblemModel _problem = ProblemModel.fromJson(a);
-      if (globalUser.userTags.contains(_problem.tag)) {
-        _problems.add(_problem);
-      }
+      ProblemModel _problem = ProblemModel.fromJson(json);
+      // if (globalUser.userTags.contains(_problem.tag)) {
+      _problems.add(_problem);
+      // }
     });
-    _problems.length != 0 ? logger.d('GETGLOBALPROBLEMS: ${_problems.length}') : logger.wtf('GETGLOBALPROBLEMS: 0 Length');
+
+    logger.d('GETGLOBALPROBLEMS: ${_problems.length}');
 
     return _problems;
   }
