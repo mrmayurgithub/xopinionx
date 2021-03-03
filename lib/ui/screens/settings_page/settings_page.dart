@@ -191,7 +191,15 @@ class _SettingsFormState extends State<SettingsForm> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('Get Started with Opinionx'),
+          // Text('Get Started with Opinionx'),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: ListTile(
+              title: Text('Profile Settings'),
+              // tileColor: Colors.green,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+            ),
+          ),
           SizedBox(height: screenHeight * 0.024459975), // 22
           CustomTextFormField(
             enabled: widget.enabled,

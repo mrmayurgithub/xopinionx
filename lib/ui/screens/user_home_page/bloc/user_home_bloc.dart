@@ -24,16 +24,23 @@ class UserHomeBloc extends Bloc<UserHomeEvent, UserHomeState> {
       if (event is UserHomeDonateRequested) {}
       if (event is UserHomeAskQueryRequested) {
         yield UserHomeInProgress();
-        await loadUserProblems();
-        List<ProblemModel> _problems = [];
-        _problems = userProblemsList;
-        if (_problems.length >= 3) {
+        if (globalUser.sessionBalance >= 3) {
           logger.i('Askign Queries not allowed');
           yield QueryNotAllowed();
         } else {
           logger.i('Ask Query Loaded');
           yield AskQueryLoaded();
         }
+        // await loadUserProblems();
+        // List<ProblemModel> _problems = [];
+        // _problems = userProblemsList;
+        // if (_problems.length >= 3) {
+        //   logger.i('Askign Queries not allowed');
+        //   yield QueryNotAllowed();
+        // } else {
+        //   logger.i('Ask Query Loaded');
+        //   yield AskQueryLoaded();
+        // }
       }
     } on PlatformException catch (e) {
       yield (UserHomeFailure(message: "Error: ${e.message}"));
