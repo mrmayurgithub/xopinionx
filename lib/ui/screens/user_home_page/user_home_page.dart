@@ -1,10 +1,7 @@
-import 'dart:html';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:xopinionx/api/models/problem_model.dart';
 import 'package:xopinionx/auth/auth_bloc.dart';
 import 'package:xopinionx/global/global_helpers.dart';

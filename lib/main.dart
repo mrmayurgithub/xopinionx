@@ -11,6 +11,7 @@ import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/ui/global/theme/bloc/theme_bloc.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/screens/ask_query_page/ask_query_page.dart';
+import 'package:xopinionx/ui/screens/chats_page/chats_screen.dart';
 import 'package:xopinionx/ui/screens/donation_page/donation_page.dart';
 import 'package:xopinionx/ui/screens/history_page/history_page.dart';
 import 'package:xopinionx/ui/screens/home_page/home_page.dart';
@@ -18,7 +19,6 @@ import 'package:xopinionx/ui/screens/login_page/login_page.dart';
 import 'package:xopinionx/ui/screens/profile_page/profile_page.dart';
 import 'package:xopinionx/ui/screens/register_page/providers.dart';
 import 'package:xopinionx/ui/screens/register_page/register_page.dart';
-import 'package:xopinionx/ui/screens/see_problems_page/see_problems.dart';
 import 'package:xopinionx/ui/screens/settings_page/settings_page.dart';
 import 'package:xopinionx/ui/screens/user_home_page/user_home_page.dart';
 import 'package:xopinionx/ui/screens/verification_page/verification_page.dart';
@@ -141,7 +141,6 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
             LoginPage.id: (context) => LoginPage(),
             RegisterPage.id: (context) => RegisterPage(),
             VerificationPage.id: (context) => VerificationPage(),
-            SeeProblemsPage.id: (context) => SeeProblemsPage(),
             DonationPage.id: (context) => DonationPage(),
             HomePage.id: (context) => HomePage(),
             HistoryPage.id: (context) => HistoryPage(),
@@ -149,6 +148,7 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
             UserHomePage.id: (context) => UserHomePage(),
             AskQueryPage.id: (context) => AskQueryPage(),
             SettingsPage.id: (context) => SettingsPage(),
+            ChatPage.id: (context) => ChatPage(),
           },
           home: BlocBuilder<AuthBloc, AuthState>(
             builder: (context, state) {

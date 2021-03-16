@@ -23,6 +23,7 @@ class LoginPage extends StatelessWidget {
 }
 
 class LoginMainBody extends StatelessWidget {
+  bool isProgress = false;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginBloc, LoginState>(
@@ -33,12 +34,13 @@ class LoginMainBody extends StatelessWidget {
           logger.wtf(state.message);
         }
         if (state is LoginSuccess) {
-          Navigator.of(context).pop();
+          // Navigator.of(context).pop();
           await Fluttertoast.showToast(msg: 'Login Successful');
           Navigator.of(context).pushReplacementNamed(UserHomePage.id);
         }
         if (state is LoginInProgress) {
-          showProgress(context);
+          // showProgress(context);
+          isProgress = true;
         }
         if (state is LoginNeedsVerification) {
           Navigator.of(context).popUntil((route) => route.isFirst);
@@ -71,7 +73,7 @@ class LoginMainBody extends StatelessWidget {
               ),
             ),
             actions: [
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   Navigator.of(context).pushNamed(RegisterPage.id);
                 },
@@ -101,7 +103,7 @@ class LoginMainBody extends StatelessWidget {
                     width: 570,
                     child: Padding(
                       padding: EdgeInsets.all(40.0),
-                      child: LoginForm(),
+                      child: LoginForm(isProgress),
                     ),
                   ),
                 ],
@@ -115,6 +117,9 @@ class LoginMainBody extends StatelessWidget {
 }
 
 class LoginForm extends StatefulWidget {
+  final bool isLoading;
+
+  const LoginForm(this.isLoading);
   @override
   _LoginFormState createState() => _LoginFormState();
 }
@@ -196,53 +201,58 @@ class _LoginFormState extends State<LoginForm> {
                 vertical: 16,
                 horizontal: 120,
               ),
-              child: Text(
-                'Login',
-                style: TextStyle(
-                  letterSpacing: 1.3,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              child: widget.isLoading
+                  ? CircularProgressIndicator()
+                  : Text(
+                      'Login',
+                      style: TextStyle(
+                        letterSpacing: 1.3,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
             ),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          SizedBox(height: screenHeight * 0.024459975), // 22
+          // SizedBox(height: screenHeight * 0.024459975), // 22
 
-          FlatButton(
-            color: Colors.blue,
-            onPressed: () {
-              if (_formkey.currentState.validate()) {
-                // BlocProvider.of<LoginBloc>(context).add(
-                //   LoginButtonPressed(
-                //     email: _emailTextController.text,
-                //     password: _passtextController.text,
-                //   ),
-                // );
-              } else {
-                Fluttertoast.showToast(msg: 'Email or password is incorrect !');
-              }
-            },
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: 16,
-                horizontal: 120,
-              ),
-              child: Text(
-                'Continue with Google',
-                style: TextStyle(
-                  letterSpacing: 1.3,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
+          // TextButton(s
+          //   // color: Colors.blue,
+          //   // shape: RoundedRectangleBorder(
+          //   //   borderRadius: BorderRadius.circular(10),
+          //   // ),
+
+          //   onPressed: () {
+          //     if (_formkey.currentState.validate()) {
+          //       // BlocProvider.of<LoginBloc>(context).add(
+          //       //   LoginButtonPressed(
+          //       //     email: _emailTextController.text,
+          //       //     password: _passtextController.text,
+          //       //   ),
+          //       // );
+          //     } else {
+          //       Fluttertoast.showToast(msg: 'Email or password is incorrect !');
+          //     }
+          //   },
+          //   child: Padding(
+          //     padding: EdgeInsets.symmetric(
+          //       vertical: 16,
+          //       horizontal: 120,
+          //     ),
+          //     child: widget.isLoading
+          //         ? CircularProgressIndicator()
+          //         : Text(
+          //             'Continue with Google',
+          //             style: TextStyle(
+          //               letterSpacing: 1.3,
+          //               color: Colors.white,
+          //               fontWeight: FontWeight.bold,
+          //             ),
+          //           ),
+          //   ),
+          // ),
         ],
       ),
     );

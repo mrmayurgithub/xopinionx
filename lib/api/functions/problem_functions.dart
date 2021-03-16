@@ -63,6 +63,7 @@ class ProblemFunctions {
       Map<String, dynamic> json = element.data();
       // logger.v(a);
       ProblemModel _problem = ProblemModel.fromJson(json);
+      //TODO: complete
       // if (globalUser.userTags.contains(_problem.tag)) {
       _problems.add(_problem);
       // }
