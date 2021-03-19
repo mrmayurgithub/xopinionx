@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xopinionx/ui/components/drawer.dart';
 import 'package:xopinionx/ui/screens/history_page/bloc/history_bloc.dart';
 
 class HistoryPage extends StatelessWidget {
@@ -29,6 +30,7 @@ class _HistoryMainBodyState extends State<HistoryMainBody> {
       },
       builder: (context, state) {
         return Scaffold(
+          drawer: MainDrawer(),
           body: Center(
             child: SingleChildScrollView(
               child: Column(

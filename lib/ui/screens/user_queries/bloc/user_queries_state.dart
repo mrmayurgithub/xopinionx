@@ -31,3 +31,8 @@ class UserQueriesFailure extends UserQueriesState {
   @override
   List<Object> get props => [message];
 }
+
+class UserQueriesLoaded extends UserQueriesState {
+  @override
+  List<Object> get props => [];
+}

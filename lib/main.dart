@@ -21,6 +21,7 @@ import 'package:xopinionx/ui/screens/register_page/providers.dart';
 import 'package:xopinionx/ui/screens/register_page/register_page.dart';
 import 'package:xopinionx/ui/screens/settings_page/settings_page.dart';
 import 'package:xopinionx/ui/screens/user_home_page/user_home_page.dart';
+import 'package:xopinionx/ui/screens/user_queries/user_queries.dart';
 import 'package:xopinionx/ui/screens/verification_page/verification_page.dart';
 
 void main() {
@@ -149,6 +150,7 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
             AskQueryPage.id: (context) => AskQueryPage(),
             SettingsPage.id: (context) => SettingsPage(),
             ChatPage.id: (context) => ChatPage(),
+            UserQueries.id: (context) => UserQueries(),
           },
           home: BlocBuilder<AuthBloc, AuthState>(
             builder: (context, state) {

@@ -8,6 +8,7 @@ import 'package:xopinionx/global/enums.dart';
 import 'package:xopinionx/global/global_helpers.dart';
 import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/ui/components/customFormField.dart';
+import 'package:xopinionx/ui/components/drawer.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/global/validators.dart';
@@ -39,64 +40,7 @@ class _SettingsMainBodyState extends State<SettingsMainBody> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(),
-          drawer: Drawer(
-            child: SingleChildScrollView(
-              child: ListBody(
-                children: [
-                  ListTile(
-                    title: Text('Mayur Agarwal'),
-                    leading: CircleAvatar(
-                      child: Icon(Icons.face_outlined),
-                    ),
-                    subtitle: Text('mr.mayurrrr@gmail.com'),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text('Home'),
-                    leading: Icon(Icons.home_outlined),
-                    onTap: () {
-                      Navigator.of(context).pushReplacementNamed(UserHomePage.id);
-                    },
-                  ),
-                  ListTile(
-                    title: Text('Chats'),
-                    leading: Icon(Icons.meeting_room_outlined),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text('Overall Review'),
-                    leading: Icon(Icons.rate_review_outlined),
-                    subtitle: Text('⭐⭐⭐⭐'),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text('Session Balance'),
-                    leading: Icon(Icons.account_balance_outlined),
-                    subtitle: Text('2/2'),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text('History'),
-                    leading: Icon(Icons.history_outlined),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text('Settings'),
-                    leading: Icon(Icons.settings_outlined),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text('Logout'),
-                    leading: Icon(Icons.login_outlined),
-                    onTap: () async {
-                      BlocProvider.of<AuthBloc>(context).add(JustLoggedOut());
-                      Navigator.of(context).pushReplacementNamed(HomePage.id);
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
+          drawer: MainDrawer(),
           body: Builder(
             builder: (context) {
               return BlocListener<SettingsBloc, SettingsState>(

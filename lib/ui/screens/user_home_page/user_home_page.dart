@@ -6,14 +6,17 @@ import 'package:xopinionx/api/models/problem_model.dart';
 import 'package:xopinionx/auth/auth_bloc.dart';
 import 'package:xopinionx/global/global_helpers.dart';
 import 'package:xopinionx/global/logger.dart';
+import 'package:xopinionx/ui/components/drawer.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/theme/app_themes.dart';
 import 'package:xopinionx/ui/global/theme/bloc/theme_bloc.dart';
 import 'package:xopinionx/ui/screens/ask_query_page/ask_query_page.dart';
+import 'package:xopinionx/ui/screens/chats_page/chats_screen.dart';
 import 'package:xopinionx/ui/screens/history_page/history_page.dart';
 import 'package:xopinionx/ui/screens/home_page/home_page.dart';
 import 'package:xopinionx/ui/screens/settings_page/settings_page.dart';
 import 'package:xopinionx/ui/screens/user_home_page/bloc/user_home_bloc.dart';
+import 'package:xopinionx/ui/screens/user_queries/user_queries.dart';
 
 class UserHomePage extends StatelessWidget {
   static const id = 'user_home_page';
@@ -57,135 +60,51 @@ class UserHomeMainBody extends StatelessWidget {
             centerTitle: true,
             title: Text('Opinionx'),
             actions: [
-              FlatButton(
-                onPressed: () {},
-                child: Text('Blog'),
-              ),
-              FlatButton(
-                onPressed: () {},
-                child: Text('Donate'),
+              // TextButton(
+              //   onPressed: () {},
+              //   child: Text('Blog'),
+              // ),
+              // TextButton(
+              //   onPressed: () {},
+              //   child: Text('Donate'),
+              // ),
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: TextButton(
+                  onPressed: () {
+                    BlocProvider.of<UserHomeBloc>(context).add(
+                      UserHomeAskQueryRequested(),
+                    );
+                    // return showDialog(
+                    //   context: context,
+                    //   builder: (context) {
+                    //     return Padding(
+                    //       padding: EdgeInsets.all(8.0),
+                    //       child: AlertDialog(
+                    //         content: QueryForm(),
+                    //       ),
+                    //     );
+                    //   },
+                    // );
+                  },
+                  child: Text('Ask Query'),
+                ),
               ),
             ],
           ),
           drawerScrimColor: Colors.transparent,
-          drawer: Drawer(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ListTile(
-                    title: Text(globalUser.fname + globalUser.lname),
-                    leading: CircleAvatar(
-                      child: Icon(Icons.face_outlined),
-                    ),
-                    subtitle: Text(globalUser.email.toString()),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text('Chats'),
-                    leading: Icon(Icons.meeting_room_outlined),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text('Your Queries'),
-                    leading: Icon(Icons.question_answer_outlined),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text('Overall Review'),
-                    leading: Icon(Icons.rate_review_outlined),
-                    subtitle: Text('⭐⭐⭐⭐'),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text('Session Balance'),
-                    leading: Icon(Icons.account_balance_outlined),
-                    subtitle: Text(globalUser.sessionBalance.toString()),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text('History'),
-                    leading: Icon(Icons.history_outlined),
-                    onTap: () {
-                      Navigator.of(context).pushNamed(HistoryPage.id);
-                    },
-                  ),
-                  ListTile(
-                    title: Text('Settings'),
-                    leading: Icon(Icons.settings_outlined),
-                    onTap: () {
-                      Navigator.of(context).pushNamed(SettingsPage.id);
-                    },
-                  ),
-                  ListTile(
-                    title: Text('Logout'),
-                    leading: Icon(Icons.login_outlined),
-                    onTap: () async {
-                      BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(appTheme: AppTheme.Light));
-                      BlocProvider.of<AuthBloc>(context).add(JustLoggedOut());
-                      Navigator.of(context).pushReplacementNamed(HomePage.id);
-                    },
-                  ),
-                  // SwitchListTile(
-                  //   title: Text("Dark Theme"),
-                  //   value: positionTheme,
-                  //   onChanged: (bool pos) {
-                  //     if (pos) {
-                  //       BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(appTheme: AppTheme.Dark));
-                  //     } else {
-                  //       BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(appTheme: AppTheme.Light));
-                  //     }
-                  //   },
-                  // ),
-                  ListTile(
-                    leading: Icon(Icons.colorize),
-                    title: Theme.of(context).brightness == Brightness.dark ? Text("Dark Theme") : Text("Light Theme"),
-                    onTap: () {
-                      if (Theme.of(context).brightness == Brightness.light) {
-                        BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(appTheme: AppTheme.Dark));
-                      } else {
-                        BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(appTheme: AppTheme.Light));
-                      }
-                    },
-                    // trailing: LiteRollingSwitch(
-                    //   value: positionTheme,
-                    //   onChanged: (bool pos) {
-                    //     if (pos) {
-                    //       BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(appTheme: AppTheme.Dark));
-                    //     } else {
-                    //       BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(appTheme: AppTheme.Light));
-                    //     }
-                    //   },
-                    // ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          drawer: MainDrawer(),
           body: RefreshIndicator(
             onRefresh: () async {
               await loadGlobalProblems();
             },
-            child: Center(
+            child: Padding(
+              padding: EdgeInsets.all(10),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    FlatButton(
-                      onPressed: () {
-                        BlocProvider.of<UserHomeBloc>(context).add(
-                          UserHomeAskQueryRequested(),
-                        );
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text('Ask my Query'),
-                      ),
-                      color: Colors.blue,
-                    ),
-                    SizedBox(height: 100),
                     ListTile(
                       title: Center(
                         child: Text('Answer Some Queries'),
@@ -196,22 +115,40 @@ class UserHomeMainBody extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     _problems.length != 0
-                        ? ListView(
-                            shrinkWrap: true,
-                            children: [
-                              for (ProblemModel ele in _problems)
-                                ExpansionTile(
-                                  title: Text(ele.problemTitle),
-                                  children: [
-                                    AutoSizeText(ele.problemDescription),
-                                  ],
-                                  trailing: IconButton(
-                                    icon: Icon(Icons.chat),
-                                    onPressed: () {},
+                        ? Scrollbar(
+                            child: ListView(
+                              shrinkWrap: true,
+                              children: [
+                                for (ProblemModel ele in _problems)
+                                  ExpansionTile(
+                                    title: Text(ele.problemTitle),
+                                    children: [
+                                      AutoSizeText(ele.problemDescription),
+                                      SizedBox(height: 10),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          TextButton(
+                                            onPressed: () {},
+                                            child: Text(ele.tag.toString()),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pushNamed(ChatPage.id);
+                                            },
+                                            child: Text('Chat'),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                    trailing: IconButton(
+                                      icon: Icon(Icons.report_outlined),
+                                      onPressed: () {},
+                                    ),
+                                    childrenPadding: EdgeInsets.all(10),
                                   ),
-                                  childrenPadding: EdgeInsets.all(10),
-                                ),
-                            ],
+                              ],
+                            ),
                           )
                         : Text('No Queries to show'),
                   ],

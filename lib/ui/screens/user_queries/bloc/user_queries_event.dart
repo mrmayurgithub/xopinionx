@@ -42,3 +42,5 @@ class SolveProblem extends UserQueriesEvent {
   @override
   List<Object> get props => [problem];
 }
+
+class UserQueriesRequested extends UserQueriesEvent {}

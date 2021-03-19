@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/ui/components/customFormField.dart';
+import 'package:xopinionx/ui/components/drawer.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/screens/ask_query_page/bloc/ask_query_bloc.dart';
@@ -37,15 +38,26 @@ class _AskQueryMainBodyState extends State<AskQueryMainBody> {
           logger.i('Success: Query Posted');
           Navigator.of(context).pushReplacementNamed(UserHomePage.id);
         }
-        if (state is AskQueryCancelled) {}
-        if (state is AskQueryFailure) {}
+        if (state is AskQueryCancelled) {
+          Navigator.of(context).pop();
+        }
+        if (state is AskQueryFailure) {
+          Navigator.of(context).pop();
+        }
       },
       builder: (context, state) {
         return Scaffold(
-          // appBar: AppBar(
-          //   automaticallyImplyLeading: false,
-
-          // ),
+          appBar: AppBar(
+            actions: [
+              IconButton(
+                icon: Icon(Icons.cancel),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+          drawer: MainDrawer(),
           body: Center(
             child: SingleChildScrollView(
               child: Column(
@@ -98,6 +110,7 @@ class _QueryFormState extends State<QueryForm> {
     return Form(
       key: _formkey,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text('About your Query'),
           SizedBox(height: screenHeight * 0.024459975), // 22
@@ -200,6 +213,10 @@ class _QueryFormState extends State<QueryForm> {
               DropdownMenuItem<String>(
                 child: Text('Motivation'),
                 value: 'motivation',
+              ),
+              DropdownMenuItem<String>(
+                child: Text('Mindset'),
+                value: 'mindset',
               ),
             ],
           ),

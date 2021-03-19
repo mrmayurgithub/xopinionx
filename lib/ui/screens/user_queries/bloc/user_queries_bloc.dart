@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xopinionx/api/models/problem_model.dart';
+import 'package:xopinionx/global/global_helpers.dart';
 
 part 'user_queries_event.dart';
 part 'user_queries_state.dart';
@@ -14,6 +15,12 @@ class UserQueriesBloc extends Bloc<UserQueriesEvent, UserQueriesState> {
   @override
   Stream<UserQueriesState> mapEventToState(UserQueriesEvent event) async* {
     try {
+      if (event is UserQueriesRequested) {
+        yield UserQueriesInProgress();
+        await loadUserProblems();
+        yield UserQueriesLoaded();
+        // yield UserQueriesSuccess();
+      }
       if (event is ChatRequested) {
         //TODO: complete
       }
