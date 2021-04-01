@@ -18,3 +18,12 @@ class UserHomeBlogRequested extends UserHomeEvent {}
 class UserHomeDonateRequested extends UserHomeEvent {}
 
 class UserHomeAskQueryRequested extends UserHomeEvent {}
+
+class UserHomeChatRequested extends UserHomeEvent {
+  final String chatUserId;
+
+  UserHomeChatRequested({this.chatUserId});
+
+  @override
+  List<Object> get props => [chatUserId];
+}

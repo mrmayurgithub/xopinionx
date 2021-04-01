@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xopinionx/global/global_helpers.dart';
 import 'package:xopinionx/global/logger.dart';
+import 'package:xopinionx/ui/screens/user_queries/bloc/user_queries_bloc.dart';
 
 part 'user_home_state.dart';
 part 'user_home_event.dart';
@@ -40,6 +41,9 @@ class UserHomeBloc extends Bloc<UserHomeEvent, UserHomeState> {
         //   logger.i('Ask Query Loaded');
         //   yield AskQueryLoaded();
         // }
+      }
+      if (event is ChatRequested) {
+        //TODO:implement
       }
     } on PlatformException catch (e) {
       yield (UserHomeFailure(message: "Error: ${e.message}"));

@@ -58,7 +58,7 @@ class UserHomeMainBody extends StatelessWidget {
           appBar: AppBar(
             elevation: 0.0,
             centerTitle: true,
-            title: Text('Opinionx'),
+            title: SelectableText('Opinionx'),
             actions: [
               // TextButton(
               //   onPressed: () {},
@@ -87,7 +87,7 @@ class UserHomeMainBody extends StatelessWidget {
                     //   },
                     // );
                   },
-                  child: Text('Ask Query'),
+                  child: SelectableText('Ask Query'),
                 ),
               ),
             ],
@@ -106,11 +106,14 @@ class UserHomeMainBody extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     ListTile(
-                      title: Center(
-                        child: Text('Answer Some Queries'),
+                      title: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Center(
+                          child: SelectableText('Answer Some Queries'),
+                        ),
                       ),
                       subtitle: Center(
-                        child: Text('Help your juniors'),
+                        child: SelectableText('Help your juniors'),
                       ),
                     ),
                     SizedBox(height: 10),
@@ -130,13 +133,22 @@ class UserHomeMainBody extends StatelessWidget {
                                         children: [
                                           TextButton(
                                             onPressed: () {},
-                                            child: Text(ele.tag.toString()),
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(horizontal: 8.0),
+                                              child: Text(ele.tag.toString()),
+                                            ),
+                                            style: TextButton.styleFrom(backgroundColor: Colors.grey[800]),
                                           ),
                                           TextButton(
                                             onPressed: () {
-                                              Navigator.of(context).pushNamed(ChatPage.id);
+                                              //TODO: implement
+                                              // Navigator.of(context).pushNamed(ChatPage.id);
                                             },
-                                            child: Text('Chat'),
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(horizontal: 8.0),
+                                              child: Text('Chat'),
+                                            ),
+                                            style: TextButton.styleFrom(backgroundColor: Colors.grey[800]),
                                           ),
                                         ],
                                       ),
@@ -150,7 +162,7 @@ class UserHomeMainBody extends StatelessWidget {
                               ],
                             ),
                           )
-                        : Text('No Queries to show'),
+                        : SelectableText('No Queries to show'),
                   ],
                 ),
               ),
