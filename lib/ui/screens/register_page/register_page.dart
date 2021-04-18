@@ -9,11 +9,7 @@ import 'package:xopinionx/ui/components/customFormField.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/global/validators.dart';
-import 'package:xopinionx/ui/screens/home_page/bloc/home_page_bloc.dart';
-import 'package:xopinionx/ui/screens/home_page/home_page.dart';
-import 'package:xopinionx/ui/screens/login_page/login_page.dart';
 import 'package:xopinionx/ui/screens/register_page/bloc/register_bloc.dart';
-import 'package:xopinionx/ui/screens/verification_page/verification_page.dart';
 import 'package:xopinionx/utils/routes.dart';
 
 class RegisterPage extends StatelessWidget {

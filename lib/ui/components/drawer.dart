@@ -4,11 +4,6 @@ import 'package:xopinionx/auth/auth_bloc.dart';
 import 'package:xopinionx/global/global_helpers.dart';
 import 'package:xopinionx/ui/global/theme/app_themes.dart';
 import 'package:xopinionx/ui/global/theme/bloc/theme_bloc.dart';
-import 'package:xopinionx/ui/screens/chats_page/chats_screen.dart';
-import 'package:xopinionx/ui/screens/history_page/history_page.dart';
-import 'package:xopinionx/ui/screens/home_page/home_page.dart';
-import 'package:xopinionx/ui/screens/settings_page/settings_page.dart';
-import 'package:xopinionx/ui/screens/user_queries/user_queries.dart';
 import 'package:xopinionx/utils/routes.dart';
 
 class MainDrawer extends StatelessWidget {

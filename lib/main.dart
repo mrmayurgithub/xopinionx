@@ -115,12 +115,6 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
         child: MaterialApp(
           title: 'Opinionx',
           debugShowCheckedModeBanner: false,
-          // theme: ThemeData(
-          //   primarySwatch: Colors.blue,
-          //   textTheme: Theme.of(context).textTheme.apply(
-          //         fontFamily: 'Open Sans',
-          //       ),
-          // ),
           theme: widget.state.appThemeData,
           builder: (context, widget) {
             return ResponsiveWrapper.builder(

@@ -6,9 +6,6 @@ import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/screens/home_page/bloc/home_page_bloc.dart';
 import 'package:xopinionx/ui/screens/home_page/home_page_desktop.dart';
-import 'package:xopinionx/ui/screens/home_page/home_page_mobile.dart';
-import 'package:xopinionx/ui/screens/login_page/login_page.dart';
-import 'package:xopinionx/ui/screens/register_page/register_page.dart';
 import 'package:xopinionx/utils/routes.dart';
 
 class HomePage extends StatelessWidget {

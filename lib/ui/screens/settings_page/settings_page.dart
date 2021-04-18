@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:xopinionx/auth/auth_bloc.dart';
 import 'package:xopinionx/global/enums.dart';
 import 'package:xopinionx/global/global_helpers.dart';
 import 'package:xopinionx/global/logger.dart';
@@ -12,9 +11,7 @@ import 'package:xopinionx/ui/components/drawer.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/global/validators.dart';
-import 'package:xopinionx/ui/screens/home_page/home_page.dart';
 import 'package:xopinionx/ui/screens/settings_page/bloc/settings_bloc.dart';
-import 'package:xopinionx/ui/screens/user_home_page/user_home_page.dart';
 
 class SettingsPage extends StatelessWidget {
   @override

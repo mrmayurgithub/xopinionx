@@ -3,20 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:xopinionx/api/models/problem_model.dart';
-import 'package:xopinionx/auth/auth_bloc.dart';
 import 'package:xopinionx/global/global_helpers.dart';
 import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/ui/components/drawer.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
-import 'package:xopinionx/ui/global/theme/app_themes.dart';
-import 'package:xopinionx/ui/global/theme/bloc/theme_bloc.dart';
-import 'package:xopinionx/ui/screens/ask_query_page/ask_query_page.dart';
-import 'package:xopinionx/ui/screens/chats_page/chats_screen.dart';
-import 'package:xopinionx/ui/screens/history_page/history_page.dart';
-import 'package:xopinionx/ui/screens/home_page/home_page.dart';
-import 'package:xopinionx/ui/screens/settings_page/settings_page.dart';
 import 'package:xopinionx/ui/screens/user_home_page/bloc/user_home_bloc.dart';
-import 'package:xopinionx/ui/screens/user_queries/user_queries.dart';
 import 'package:xopinionx/utils/routes.dart';
 
 class UserHomePage extends StatelessWidget {

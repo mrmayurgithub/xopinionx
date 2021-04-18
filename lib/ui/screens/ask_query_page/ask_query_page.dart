@@ -7,7 +7,6 @@ import 'package:xopinionx/ui/components/drawer.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/screens/ask_query_page/bloc/ask_query_bloc.dart';
-import 'package:xopinionx/ui/screens/user_home_page/user_home_page.dart';
 import 'package:xopinionx/utils/routes.dart';
 
 class AskQueryPage extends StatelessWidget {

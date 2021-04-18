@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/utils.dart';
-import 'package:xopinionx/ui/screens/user_home_page/user_home_page.dart';
 import 'package:xopinionx/ui/screens/verification_page/bloc/verification_bloc.dart';
 import 'package:xopinionx/utils/routes.dart';
 
