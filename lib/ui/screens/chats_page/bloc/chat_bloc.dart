@@ -14,9 +14,9 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   @override
   Stream<ChatState> mapEventToState(ChatEvent event) async* {
     try {
-      if (event is ChatRequested) {
-        //TODO: complete
-      }
+      // if (event is ChatRequested) {
+      //   //TODO: complete
+      // }
     } on PlatformException catch (e) {
       yield (ChatFailure(message: "Error: ${e.message}"));
     } on TimeoutException catch (e) {

@@ -17,7 +17,6 @@ import 'package:xopinionx/ui/screens/settings_page/bloc/settings_bloc.dart';
 import 'package:xopinionx/ui/screens/user_home_page/user_home_page.dart';
 
 class SettingsPage extends StatelessWidget {
-  static const id = "settings_page";
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

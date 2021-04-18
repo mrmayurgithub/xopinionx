@@ -13,7 +13,6 @@ import 'package:xopinionx/ui/screens/settings_page/settings_page.dart';
 import 'package:xopinionx/ui/screens/user_queries/bloc/user_queries_bloc.dart';
 
 class UserQueries extends StatelessWidget {
-  static const id = "user_queries_page";
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

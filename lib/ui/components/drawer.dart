@@ -9,6 +9,7 @@ import 'package:xopinionx/ui/screens/history_page/history_page.dart';
 import 'package:xopinionx/ui/screens/home_page/home_page.dart';
 import 'package:xopinionx/ui/screens/settings_page/settings_page.dart';
 import 'package:xopinionx/ui/screens/user_queries/user_queries.dart';
+import 'package:xopinionx/utils/routes.dart';
 
 class MainDrawer extends StatelessWidget {
   @override
@@ -31,14 +32,14 @@ class MainDrawer extends StatelessWidget {
               title: Text('Chats'),
               leading: Icon(Icons.meeting_room_outlined),
               onTap: () {
-                Navigator.of(context).pushNamed(ChatPage.id);
+                Navigator.of(context).pushNamed(MainRoutes.chatRoute);
               },
             ),
             ListTile(
               title: Text('Your Queries'),
               leading: Icon(Icons.question_answer_outlined),
               onTap: () {
-                Navigator.of(context).pushNamed(UserQueries.id);
+                Navigator.of(context).pushNamed(MainRoutes.userQueries);
               },
             ),
             ListTile(
@@ -57,14 +58,14 @@ class MainDrawer extends StatelessWidget {
               title: Text('History'),
               leading: Icon(Icons.history_outlined),
               onTap: () {
-                Navigator.of(context).pushNamed(HistoryPage.id);
+                Navigator.of(context).pushNamed(MainRoutes.historyRoute);
               },
             ),
             ListTile(
               title: Text('Settings'),
               leading: Icon(Icons.settings_outlined),
               onTap: () {
-                Navigator.of(context).pushNamed(SettingsPage.id);
+                Navigator.of(context).pushNamed(MainRoutes.settingsRoute);
               },
             ),
             ListTile(
@@ -74,7 +75,7 @@ class MainDrawer extends StatelessWidget {
                 BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(appTheme: AppTheme.Light));
                 BlocProvider.of<AuthBloc>(context).add(JustLoggedOut());
                 //TODO: change this to streams instead
-                Navigator.of(context).pushReplacementNamed(HomePage.id);
+                Navigator.of(context).pushReplacementNamed(MainRoutes.homePageRoute);
               },
             ),
             ListTile(

@@ -27,12 +27,14 @@ dependencies:
   build_runner: ^1.11.0
   cloud_firestore: ^0.16.0
   cupertino_icons: ^1.0.1
+  dropdownfield: ^1.0.3
   # device_preview: ^0.5.5
   equatable: ^1.2.5
   firebase_analytics: ^7.0.1
   firebase_auth: ^0.20.0+1
   firebase_core: ^0.7.0
   flutter_bloc: ^6.1.1
+  flutter_chips_input: ^1.9.5
   flutter_custom_clippers: ^1.1.2
   flutter_svg: ^0.19.2+1
   fluttertoast: ^7.1.6
@@ -42,13 +44,13 @@ dependencies:
   json_annotation: ^3.1.1
   json_serializable: ^3.5.1
   logger: ^0.9.4
+  navigation_rail: ^1.5.0
   provider: ^4.3.3
   pull_to_refresh: ^1.6.4
   responsive_builder: ^0.3.0
   responsive_framework: ^0.0.14
-  dropdownfield: ^1.0.3
-  flutter_chips_input: ^1.9.5
-  navigation_rail: ^1.5.0
+  url_strategy: ^0.2.0
+
 
 dev_dependencies:
   flutter_test:

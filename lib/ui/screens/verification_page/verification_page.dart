@@ -5,9 +5,9 @@ import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/screens/user_home_page/user_home_page.dart';
 import 'package:xopinionx/ui/screens/verification_page/bloc/verification_bloc.dart';
+import 'package:xopinionx/utils/routes.dart';
 
 class VerificationPage extends StatelessWidget {
-  static const String id = "verification_page";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +40,7 @@ class VerificationMainBody extends StatelessWidget {
           Fluttertoast.showToast(msg: 'Verification Successful');
           Navigator.of(context).popUntil((route) => route.isFirst);
           // Navigator.of(context).pushReplacementNamed(ProfileRegPage.id);
-          Navigator.of(context).pushReplacementNamed(UserHomePage.id);
+          Navigator.of(context).pushReplacementNamed(MainRoutes.userHomeRoute);
         }
         if (state is VerificationInProgress) {
           showProgress(context);

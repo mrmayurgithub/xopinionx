@@ -10,9 +10,9 @@ import 'package:xopinionx/ui/screens/home_page/home_page.dart';
 import 'package:xopinionx/ui/screens/login_page/bloc/login_bloc.dart';
 import 'package:xopinionx/ui/screens/register_page/register_page.dart';
 import 'package:xopinionx/ui/screens/user_home_page/user_home_page.dart';
+import 'package:xopinionx/utils/routes.dart';
 
 class LoginPage extends StatelessWidget {
-  static const String id = "login_page";
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -36,7 +36,7 @@ class LoginMainBody extends StatelessWidget {
         if (state is LoginSuccess) {
           // Navigator.of(context).pop();
           await Fluttertoast.showToast(msg: 'Login Successful');
-          Navigator.of(context).pushReplacementNamed(UserHomePage.id);
+          Navigator.of(context).pushReplacementNamed(MainRoutes.userHomeRoute);
         }
         if (state is LoginInProgress) {
           // showProgress(context);
@@ -61,7 +61,7 @@ class LoginMainBody extends StatelessWidget {
               onTap: () {
                 // Navigator.of(context).pushReplacementNamed(HomePage.id);
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                  HomePage.id,
+                  MainRoutes.homePageRoute,
                   (route) => false,
                 );
               },
@@ -75,7 +75,7 @@ class LoginMainBody extends StatelessWidget {
             actions: [
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed(RegisterPage.id);
+                  Navigator.of(context).pushNamed(MainRoutes.registerRoute);
                 },
                 child: Text('SignUp'),
               ),

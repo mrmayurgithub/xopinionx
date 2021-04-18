@@ -17,9 +17,9 @@ import 'package:xopinionx/ui/screens/home_page/home_page.dart';
 import 'package:xopinionx/ui/screens/settings_page/settings_page.dart';
 import 'package:xopinionx/ui/screens/user_home_page/bloc/user_home_bloc.dart';
 import 'package:xopinionx/ui/screens/user_queries/user_queries.dart';
+import 'package:xopinionx/utils/routes.dart';
 
 class UserHomePage extends StatelessWidget {
-  static const id = 'user_home_page';
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -50,7 +50,7 @@ class UserHomeMainBody extends StatelessWidget {
           logger.wtf(state.message);
         }
         if (state is AskQueryLoaded) {
-          Navigator.of(context).pushNamed(AskQueryPage.id);
+          Navigator.of(context).pushNamed(MainRoutes.askQueryRoute);
         }
       },
       builder: (context, state) {

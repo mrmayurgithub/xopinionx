@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:xopinionx/ui/components/drawer.dart';
 
 class ChatPage extends StatelessWidget {
-  static const id = 'chats_screen';
   final String chatUserId;
 
   const ChatPage({Key key, this.chatUserId}) : super(key: key);

@@ -9,10 +9,9 @@ import 'package:xopinionx/ui/screens/home_page/home_page_desktop.dart';
 import 'package:xopinionx/ui/screens/home_page/home_page_mobile.dart';
 import 'package:xopinionx/ui/screens/login_page/login_page.dart';
 import 'package:xopinionx/ui/screens/register_page/register_page.dart';
+import 'package:xopinionx/utils/routes.dart';
 
 class HomePage extends StatelessWidget {
-  static const String id = "home_page";
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -36,11 +35,11 @@ class HomePageMainBody extends StatelessWidget {
             }
             if (state is BlogPageLoaded) {}
             if (state is LoginPageLoaded) {
-              Navigator.of(context).pushNamed(LoginPage.id);
+              Navigator.of(context).pushNamed(MainRoutes.loginRoute);
             }
             if (state is SignUpPageLoaded) {
               logger.i('SignUpPage Loading');
-              Navigator.of(context).pushNamed(RegisterPage.id);
+              Navigator.of(context).pushNamed(MainRoutes.registerRoute);
             }
             if (state is DonationPageLoaded) {}
             if (state is HomePageFailure) {

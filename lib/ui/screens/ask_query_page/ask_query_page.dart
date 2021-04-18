@@ -8,9 +8,9 @@ import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/screens/ask_query_page/bloc/ask_query_bloc.dart';
 import 'package:xopinionx/ui/screens/user_home_page/user_home_page.dart';
+import 'package:xopinionx/utils/routes.dart';
 
 class AskQueryPage extends StatelessWidget {
-  static const id = "ask_query_page";
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -36,7 +36,7 @@ class _AskQueryMainBodyState extends State<AskQueryMainBody> {
         }
         if (state is AskQueryPostedSuccess) {
           logger.i('Success: Query Posted');
-          Navigator.of(context).pushReplacementNamed(UserHomePage.id);
+          Navigator.of(context).pushReplacementNamed(MainRoutes.userHomeRoute);
         }
         if (state is AskQueryCancelled) {
           Navigator.of(context).pop();

@@ -14,10 +14,9 @@ import 'package:xopinionx/ui/screens/home_page/home_page.dart';
 import 'package:xopinionx/ui/screens/login_page/login_page.dart';
 import 'package:xopinionx/ui/screens/register_page/bloc/register_bloc.dart';
 import 'package:xopinionx/ui/screens/verification_page/verification_page.dart';
+import 'package:xopinionx/utils/routes.dart';
 
 class RegisterPage extends StatelessWidget {
-  static const String id = 'register_page';
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -39,7 +38,7 @@ class RegistrationPageMainBody extends StatelessWidget {
           showProgress(context);
         }
         if (state is RegisterSuccess) {
-          Navigator.of(context).pushReplacementNamed(VerificationPage.id);
+          Navigator.of(context).pushReplacementNamed(MainRoutes.verificationRoute);
         }
         if (state is RegisterFailed) {
           logger.d(state.message);
@@ -56,7 +55,7 @@ class RegistrationPageMainBody extends StatelessWidget {
               onTap: () {
                 // Navigator.of(context).pushReplacementNamed(HomePage.id);
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                  HomePage.id,
+                  MainRoutes.homePageRoute,
                   (route) => false,
                 );
               },
@@ -70,7 +69,7 @@ class RegistrationPageMainBody extends StatelessWidget {
             actions: [
               FlatButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed(LoginPage.id);
+                  Navigator.of(context).pushNamed(MainRoutes.loginRoute);
                 },
                 child: Text("Login"),
               ),

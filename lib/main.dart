@@ -23,6 +23,7 @@ import 'package:xopinionx/ui/screens/settings_page/settings_page.dart';
 import 'package:xopinionx/ui/screens/user_home_page/user_home_page.dart';
 import 'package:xopinionx/ui/screens/user_queries/user_queries.dart';
 import 'package:xopinionx/ui/screens/verification_page/verification_page.dart';
+import 'package:xopinionx/utils/routes.dart';
 
 void main() {
   Bloc.observer = SimpleBlocObserver();
@@ -139,18 +140,18 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
             );
           },
           routes: <String, WidgetBuilder>{
-            LoginPage.id: (context) => LoginPage(),
-            RegisterPage.id: (context) => RegisterPage(),
-            VerificationPage.id: (context) => VerificationPage(),
-            DonationPage.id: (context) => DonationPage(),
-            HomePage.id: (context) => HomePage(),
-            HistoryPage.id: (context) => HistoryPage(),
-            ProfilePage.id: (context) => ProfilePage(),
-            UserHomePage.id: (context) => UserHomePage(),
-            AskQueryPage.id: (context) => AskQueryPage(),
-            SettingsPage.id: (context) => SettingsPage(),
-            ChatPage.id: (context) => ChatPage(),
-            UserQueries.id: (context) => UserQueries(),
+            MainRoutes.loginRoute: (context) => LoginPage(),
+            MainRoutes.registerRoute: (context) => RegisterPage(),
+            MainRoutes.verificationRoute: (context) => VerificationPage(),
+            MainRoutes.donationRoute: (context) => DonationPage(),
+            MainRoutes.homePageRoute: (context) => HomePage(),
+            MainRoutes.historyRoute: (context) => HistoryPage(),
+            MainRoutes.profileRoute: (context) => ProfilePage(),
+            MainRoutes.userHomeRoute: (context) => UserHomePage(),
+            MainRoutes.askQueryRoute: (context) => AskQueryPage(),
+            MainRoutes.settingsRoute: (context) => SettingsPage(),
+            MainRoutes.chatRoute: (context) => ChatPage(),
+            MainRoutes.userQueries: (context) => UserQueries(),
           },
           home: BlocBuilder<AuthBloc, AuthState>(
             builder: (context, state) {

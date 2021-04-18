@@ -4,6 +4,7 @@ import 'package:xopinionx/ui/components/custom_autosizetext.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/screens/home_page/bloc/home_page_bloc.dart';
 import 'package:xopinionx/ui/screens/register_page/register_page.dart';
+import 'package:xopinionx/utils/routes.dart';
 
 class HomePageDesktop extends StatefulWidget {
   @override
@@ -81,7 +82,7 @@ class _SignUpButtonState extends State<SignUpButton> {
     return FlatButton(
       color: Colors.green,
       onPressed: () {
-        Navigator.of(context).pushNamed(RegisterPage.id);
+        Navigator.of(context).pushNamed(MainRoutes.registerRoute);
       },
       child: Padding(
         padding: EdgeInsets.symmetric(

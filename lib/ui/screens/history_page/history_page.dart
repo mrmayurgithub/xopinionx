@@ -4,7 +4,6 @@ import 'package:xopinionx/ui/components/drawer.dart';
 import 'package:xopinionx/ui/screens/history_page/bloc/history_bloc.dart';
 
 class HistoryPage extends StatelessWidget {
-  static const id = 'history_page';
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
