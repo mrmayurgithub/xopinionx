@@ -6,7 +6,9 @@ import 'package:xopinionx/ui/components/customFormField.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/global/validators.dart';
 import 'package:xopinionx/ui/screens/login_page/bloc/login_bloc.dart';
+import 'package:xopinionx/utils/navigations.dart';
 import 'package:xopinionx/utils/routes.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -25,21 +27,25 @@ class LoginMainBody extends StatelessWidget {
     return BlocConsumer<LoginBloc, LoginState>(
       listener: (context, state) async {
         if (state is LoginFailure) {
-          Navigator.of(context).pop();
+          // Navigator.of(context).pop();
+          context.vxNav.pop();
           Fluttertoast.showToast(msg: "LoginPage Error: " + state.message);
           logger.wtf(state.message);
         }
         if (state is LoginSuccess) {
           // Navigator.of(context).pop();
           await Fluttertoast.showToast(msg: 'Login Successful');
-          Navigator.of(context).pushReplacementNamed(MainRoutes.userHomeRoute);
+          // Navigator.of(context).pushReplacementNamed(MainRoutes.userHomeRoute);
+          pNavigator(context, MainRoutes.userHomeRoute);
         }
         if (state is LoginInProgress) {
           // showProgress(context);
           isProgress = true;
         }
         if (state is LoginNeedsVerification) {
-          Navigator.of(context).popUntil((route) => route.isFirst);
+          //TODO: change
+          // Navigator.of(context).popUntil((route) => route.isFirst);
+          context.vxNav.popToRoot();
           Fluttertoast.showToast(msg: 'Please verify your email');
         }
         if (state is ForgetPasswordSuccess) {
@@ -56,10 +62,11 @@ class LoginMainBody extends StatelessWidget {
             title: GestureDetector(
               onTap: () {
                 // Navigator.of(context).pushReplacementNamed(HomePage.id);
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                  MainRoutes.homePageRoute,
-                  (route) => false,
-                );
+                // Navigator.of(context).pushNamedAndRemoveUntil(
+                //   MainRoutes.homePageRoute,
+                //   (route) => false,
+                // );
+                pNavigator(context, MainRoutes.homePageRoute);
               },
               child: Text(
                 'OPINIONX',
@@ -71,7 +78,8 @@ class LoginMainBody extends StatelessWidget {
             actions: [
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed(MainRoutes.registerRoute);
+                  // Navigator.of(context).pushNamed(MainRoutes.registerRoute);
+                  nNavigator(context, MainRoutes.registerRoute);
                 },
                 child: Text('SignUp'),
               ),

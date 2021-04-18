@@ -8,7 +8,9 @@ import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/ui/components/drawer.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/screens/user_home_page/bloc/user_home_bloc.dart';
+import 'package:xopinionx/utils/navigations.dart';
 import 'package:xopinionx/utils/routes.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class UserHomePage extends StatelessWidget {
   @override
@@ -36,12 +38,14 @@ class UserHomeMainBody extends StatelessWidget {
         }
         if (state is UserHomeSuccess) {}
         if (state is UserHomeFailure) {
-          Navigator.of(context).pop();
+          // Navigator.of(context).pop();
+          context.vxNav.pop();
           Fluttertoast.showToast(msg: state.message);
           logger.wtf(state.message);
         }
         if (state is AskQueryLoaded) {
-          Navigator.of(context).pushNamed(MainRoutes.askQueryRoute);
+          // Navigator.of(context).pushNamed(MainRoutes.askQueryRoute);
+          nNavigator(context, MainRoutes.askQueryRoute);
         }
       },
       builder: (context, state) {
@@ -78,7 +82,7 @@ class UserHomeMainBody extends StatelessWidget {
                     //   },
                     // );
                   },
-                  child: SelectableText('Ask Query'),
+                  child: Text('Ask Query'),
                 ),
               ),
             ],

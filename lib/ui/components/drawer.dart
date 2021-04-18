@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xopinionx/auth/auth_bloc.dart';
 import 'package:xopinionx/global/global_helpers.dart';
 import 'package:xopinionx/ui/global/theme/app_themes.dart';
 import 'package:xopinionx/ui/global/theme/bloc/theme_bloc.dart';
+import 'package:xopinionx/utils/navigations.dart';
 import 'package:xopinionx/utils/routes.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -24,17 +26,29 @@ class MainDrawer extends StatelessWidget {
               onTap: () {},
             ),
             ListTile(
+              title: Text('Home Page'),
+              leading: CircleAvatar(
+                child: Icon(Icons.home),
+              ),
+              onTap: () {
+                // Navigator.of(context).pushNamed(MainRoutes.userHomeRoute);
+                nNavigator(context, MainRoutes.userHomeRoute);
+              },
+            ),
+            ListTile(
               title: Text('Chats'),
               leading: Icon(Icons.meeting_room_outlined),
               onTap: () {
-                Navigator.of(context).pushNamed(MainRoutes.chatRoute);
+                // Navigator.of(context).pushNamed(MainRoutes.chatRoute);
+                nNavigator(context, MainRoutes.chatRoute);
               },
             ),
             ListTile(
               title: Text('Your Queries'),
               leading: Icon(Icons.question_answer_outlined),
               onTap: () {
-                Navigator.of(context).pushNamed(MainRoutes.userQueries);
+                // Navigator.of(context).pushNamed(MainRoutes.userQueries);
+                nNavigator(context, MainRoutes.userQueries);
               },
             ),
             ListTile(
@@ -53,14 +67,16 @@ class MainDrawer extends StatelessWidget {
               title: Text('History'),
               leading: Icon(Icons.history_outlined),
               onTap: () {
-                Navigator.of(context).pushNamed(MainRoutes.historyRoute);
+                // Navigator.of(context).pushNamed(MainRoutes.historyRoute);
+                nNavigator(context, MainRoutes.historyRoute);
               },
             ),
             ListTile(
               title: Text('Settings'),
               leading: Icon(Icons.settings_outlined),
               onTap: () {
-                Navigator.of(context).pushNamed(MainRoutes.settingsRoute);
+                // Navigator.of(context).pushNamed(MainRoutes.settingsRoute);
+                nNavigator(context, MainRoutes.settingsRoute);
               },
             ),
             ListTile(
@@ -70,7 +86,8 @@ class MainDrawer extends StatelessWidget {
                 BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(appTheme: AppTheme.Light));
                 BlocProvider.of<AuthBloc>(context).add(JustLoggedOut());
                 //TODO: change this to streams instead
-                Navigator.of(context).pushReplacementNamed(MainRoutes.homePageRoute);
+                // Navigator.of(context).pushReplacementNamed(MainRoutes.homePageRoute);
+                pNavigator(context, MainRoutes.homePageRoute);
               },
             ),
             ListTile(

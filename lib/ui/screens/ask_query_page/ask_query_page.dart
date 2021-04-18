@@ -7,7 +7,9 @@ import 'package:xopinionx/ui/components/drawer.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/screens/ask_query_page/bloc/ask_query_bloc.dart';
+import 'package:xopinionx/utils/navigations.dart';
 import 'package:xopinionx/utils/routes.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class AskQueryPage extends StatelessWidget {
   @override
@@ -35,13 +37,16 @@ class _AskQueryMainBodyState extends State<AskQueryMainBody> {
         }
         if (state is AskQueryPostedSuccess) {
           logger.i('Success: Query Posted');
-          Navigator.of(context).pushReplacementNamed(MainRoutes.userHomeRoute);
+          // Navigator.of(context).pushReplacementNamed(MainRoutes.userHomeRoute);
+          pNavigator(context, MainRoutes.userHomeRoute);
         }
         if (state is AskQueryCancelled) {
-          Navigator.of(context).pop();
+          // Navigator.of(context).pop();
+          context.vxNav.pop();
         }
         if (state is AskQueryFailure) {
-          Navigator.of(context).pop();
+          // Navigator.of(context).pop();
+          context.vxNav.pop();
         }
       },
       builder: (context, state) {
@@ -51,7 +56,8 @@ class _AskQueryMainBodyState extends State<AskQueryMainBody> {
               IconButton(
                 icon: Icon(Icons.cancel),
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  // Navigator.of(context).pop();
+                  context.vxNav.pop();
                 },
               ),
             ],

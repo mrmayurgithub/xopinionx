@@ -10,7 +10,9 @@ import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/global/validators.dart';
 import 'package:xopinionx/ui/screens/register_page/bloc/register_bloc.dart';
+import 'package:xopinionx/utils/navigations.dart';
 import 'package:xopinionx/utils/routes.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class RegisterPage extends StatelessWidget {
   @override
@@ -34,7 +36,8 @@ class RegistrationPageMainBody extends StatelessWidget {
           showProgress(context);
         }
         if (state is RegisterSuccess) {
-          Navigator.of(context).pushReplacementNamed(MainRoutes.verificationRoute);
+          // Navigator.of(context).pushReplacementNamed(MainRoutes.verificationRoute);
+          pNavigator(context, MainRoutes.verificationRoute);
         }
         if (state is RegisterFailed) {
           logger.d(state.message);
@@ -50,10 +53,11 @@ class RegistrationPageMainBody extends StatelessWidget {
             title: GestureDetector(
               onTap: () {
                 // Navigator.of(context).pushReplacementNamed(HomePage.id);
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                  MainRoutes.homePageRoute,
-                  (route) => false,
-                );
+                // Navigator.of(context).pushNamedAndRemoveUntil(
+                //   MainRoutes.homePageRoute,
+                //   (route) => false,
+                // );
+                pNavigator(context, MainRoutes.userHomeRoute);
               },
               child: Text(
                 'OPINIONX',
@@ -65,7 +69,8 @@ class RegistrationPageMainBody extends StatelessWidget {
             actions: [
               FlatButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed(MainRoutes.loginRoute);
+                  // Navigator.of(context).pushNamed(MainRoutes.loginRoute);
+                  nNavigator(context, MainRoutes.loginRoute);
                 },
                 child: Text("Login"),
               ),

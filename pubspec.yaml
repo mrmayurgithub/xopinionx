@@ -25,22 +25,22 @@ dependencies:
     sdk: flutter
   auto_size_text: ^2.1.0
   build_runner: ^1.11.0
-  cloud_firestore: ^0.16.0
+  cloud_firestore: ^1.0.5
   cupertino_icons: ^1.0.1
   dropdownfield: ^1.0.3
   # device_preview: ^0.5.5
   equatable: ^1.2.5
   firebase_analytics: ^7.0.1
-  firebase_auth: ^0.20.0+1
-  firebase_core: ^0.7.0
+  firebase_auth: ^1.1.0
+  firebase_core: ^1.0.3
   flutter_bloc: ^6.1.1
   flutter_chips_input: ^1.9.5
   flutter_custom_clippers: ^1.1.2
   flutter_svg: ^0.19.2+1
   fluttertoast: ^7.1.6
-  google_fonts: ^1.1.2
+  google_fonts: ^2.0.0
   google_sign_in: ^4.5.9
-  http: ^0.12.2
+  http: ^0.13.1
   json_annotation: ^3.1.1
   json_serializable: ^3.5.1
   logger: ^0.9.4
@@ -50,6 +50,7 @@ dependencies:
   responsive_builder: ^0.3.0
   responsive_framework: ^0.0.14
   url_strategy: ^0.2.0
+  velocity_x: ^2.6.1
 
 
 dev_dependencies:

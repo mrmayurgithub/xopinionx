@@ -4,7 +4,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/screens/verification_page/bloc/verification_bloc.dart';
+import 'package:xopinionx/utils/navigations.dart';
 import 'package:xopinionx/utils/routes.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class VerificationPage extends StatelessWidget {
   @override
@@ -32,20 +34,26 @@ class VerificationMainBody extends StatelessWidget {
     return BlocConsumer<VerificationBloc, VerificationState>(
       listener: (context, state) {
         if (state is VerificationFailed) {
-          Navigator.of(context).pop();
+          // Navigator.of(context).pop();
+          context.vxNav.pop();
           Fluttertoast.showToast(msg: state.message);
         }
         if (state is VerificationSuccess) {
           Fluttertoast.showToast(msg: 'Verification Successful');
-          Navigator.of(context).popUntil((route) => route.isFirst);
+          //TODO: check
+          // Navigator.of(context).popUntil((route) => route.isFirst);
+          context.vxNav.popToRoot();
           // Navigator.of(context).pushReplacementNamed(ProfileRegPage.id);
-          Navigator.of(context).pushReplacementNamed(MainRoutes.userHomeRoute);
+          // Navigator.of(context).pushReplacementNamed(MainRoutes.userHomeRoute);
+          pNavigator(context, MainRoutes.userHomeRoute);
         }
         if (state is VerificationInProgress) {
           showProgress(context);
         }
         if (state is ResendVerification) {
-          Navigator.of(context).pop();
+          //check
+          context.vxNav.pop();
+          // Navigator.of(context).pop();
           BlocProvider.of<VerificationBloc>(context).add(VerificationInitiated());
         }
       },
