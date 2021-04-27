@@ -70,17 +70,6 @@ class UserHomeMainBody extends StatelessWidget {
                     BlocProvider.of<UserHomeBloc>(context).add(
                       UserHomeAskQueryRequested(),
                     );
-                    // return showDialog(
-                    //   context: context,
-                    //   builder: (context) {
-                    //     return Padding(
-                    //       padding: EdgeInsets.all(8.0),
-                    //       child: AlertDialog(
-                    //         content: QueryForm(),
-                    //       ),
-                    //     );
-                    //   },
-                    // );
                   },
                   child: Text('Ask Query'),
                 ),

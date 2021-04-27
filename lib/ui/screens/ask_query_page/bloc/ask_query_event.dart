@@ -9,7 +9,7 @@ abstract class AskQueryEvent extends Equatable {
 class QuerySubmitButtonPressed extends AskQueryEvent {
   final String problem;
   final String description;
-  final String tag;
+  final Tags tag;
 
   QuerySubmitButtonPressed({
     @required this.problem,

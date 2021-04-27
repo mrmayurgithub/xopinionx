@@ -27,9 +27,7 @@ class MainDrawer extends StatelessWidget {
             ),
             ListTile(
               title: Text('Home Page'),
-              leading: CircleAvatar(
-                child: Icon(Icons.home),
-              ),
+              leading: Icon(Icons.home),
               onTap: () {
                 // Navigator.of(context).pushNamed(MainRoutes.userHomeRoute);
                 nNavigator(context, MainRoutes.userHomeRoute);

@@ -1,8 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:xopinionx/global/enums.dart';
 
 part 'problem_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class ProblemModel {
   ProblemModel({
     this.userId,
@@ -19,7 +20,7 @@ class ProblemModel {
   String problemDescription;
   String datePosted;
   bool status;
-  String tag;
+  Tags tag;
   factory ProblemModel.fromJson(Map<String, dynamic> data) => _$ProblemModelFromJson(data);
   Map<String, dynamic> toJson() => _$ProblemModelToJson(this);
 }

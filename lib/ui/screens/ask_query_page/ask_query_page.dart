@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xopinionx/global/enums.dart';
 import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/ui/components/customFormField.dart';
 import 'package:xopinionx/ui/components/drawer.dart';
@@ -109,7 +110,7 @@ class _QueryFormState extends State<QueryForm> {
   final _descriptionTextController = TextEditingController();
   FocusNode _problemNode = FocusNode();
   FocusNode _descriptionNode = FocusNode();
-  String _tag;
+  Tags _tag;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -167,61 +168,58 @@ class _QueryFormState extends State<QueryForm> {
               });
             },
             items: [
-              DropdownMenuItem<String>(
+              DropdownMenuItem<Tags>(
                 child: Text('Time Management'),
-                value: 'timemanagement',
+                // value: 'timemanagement',
+                value: Tags.timemanagement,
               ),
-              DropdownMenuItem<String>(
+              DropdownMenuItem<Tags>(
                 child: Text('Coding'),
-                value: 'coding',
+                value: Tags.coding,
               ),
-              DropdownMenuItem<String>(
+              DropdownMenuItem<Tags>(
                 child: Text('Interview'),
-                value: 'interview',
+                value: Tags.interview,
               ),
-              DropdownMenuItem<String>(
+              DropdownMenuItem<Tags>(
                 child: Text('Internship'),
-                value: 'internship',
+                value: Tags.internship,
               ),
-              DropdownMenuItem<String>(
+              DropdownMenuItem<Tags>(
                 child: Text('Projects'),
-                value: 'projects',
+                value: Tags.projects,
               ),
-              DropdownMenuItem<String>(
+              DropdownMenuItem<Tags>(
                 child: Text('College Admission'),
-                value: 'collegeadmission',
+                value: Tags.collegeadmission,
               ),
-              DropdownMenuItem<String>(
+              DropdownMenuItem<Tags>(
                 child: Text('Boards'),
-                value: 'boards',
+                value: Tags.boards,
               ),
-              DropdownMenuItem<String>(
+              DropdownMenuItem<Tags>(
                 child: Text('Career'),
-                value: 'career',
+                value: Tags.career,
               ),
               // DropdownMenuItem<String>(
               //   child: Text('Branch Selection'),
               //   value: 'branchselection',
               // ),
-              DropdownMenuItem<String>(
+              DropdownMenuItem<Tags>(
                 child: Text('Abroad Internship'),
-                value: 'abroadinternship',
+                value: Tags.abroadinternship,
               ),
-              DropdownMenuItem<String>(
+              DropdownMenuItem<Tags>(
                 child: Text('HigerStudies'),
-                value: 'higherstudies',
+                value: Tags.higherstudies,
               ),
-              DropdownMenuItem<String>(
+              DropdownMenuItem<Tags>(
                 child: Text('Productivity'),
-                value: 'productivity',
+                value: Tags.productivity,
               ),
-              DropdownMenuItem<String>(
+              DropdownMenuItem<Tags>(
                 child: Text('Motivation'),
-                value: 'motivation',
-              ),
-              DropdownMenuItem<String>(
-                child: Text('Mindset'),
-                value: 'mindset',
+                value: Tags.motivation,
               ),
             ],
           ),

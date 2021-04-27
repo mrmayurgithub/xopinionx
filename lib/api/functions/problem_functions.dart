@@ -62,12 +62,15 @@ class ProblemFunctions {
       // logger.v(a);
       ProblemModel _problem = ProblemModel.fromJson(json);
       //TODO: complete
-      // if (globalUser.userTags.contains(_problem.tag)) {
-      _problems.add(_problem);
-      // }
+      for (var tag in globalUser.userTags) {
+        if (tag.toString().toLowerCase() == _problem.tag.toString().toLowerCase()) {
+          _problems.add(_problem);
+        }
+      }
+      logger.d('PROBLEM: ${_problem.tag.toString()}');
     });
 
-    logger.d('GETGLOBALPROBLEMS: ${_problems.length}');
+    logger.d('GETGLOBALPROBLEMS: ${_problems.length} ${globalUser.userTags.toString()}');
 
     return _problems;
   }

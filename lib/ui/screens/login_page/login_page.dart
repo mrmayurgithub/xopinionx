@@ -157,7 +157,10 @@ class _LoginFormState extends State<LoginForm> {
       key: _formkey,
       child: Column(
         children: [
-          Text('Get Started with Opinionx'),
+          Text(
+            'Get Started with Opinionx',
+            style: TextStyle(fontSize: 30),
+          ),
           SizedBox(height: screenHeight * 0.024459975), // 22
           CustomTextFormField(
             currentNode: _emailNode,
