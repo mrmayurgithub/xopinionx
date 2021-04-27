@@ -81,24 +81,23 @@ class MainDrawer extends StatelessWidget {
               title: Text('Logout'),
               leading: Icon(Icons.login_outlined),
               onTap: () async {
-                BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(appTheme: AppTheme.Light));
                 BlocProvider.of<AuthBloc>(context).add(JustLoggedOut());
                 //TODO: change this to streams instead
                 // Navigator.of(context).pushReplacementNamed(MainRoutes.homePageRoute);
                 pNavigator(context, MainRoutes.homePageRoute);
               },
             ),
-            ListTile(
-              leading: Icon(Icons.colorize),
-              title: Theme.of(context).brightness == Brightness.dark ? Text("Dark Theme") : Text("Light Theme"),
-              onTap: () {
-                if (Theme.of(context).brightness == Brightness.light) {
-                  BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(appTheme: AppTheme.Dark));
-                } else {
-                  BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(appTheme: AppTheme.Light));
-                }
-              },
-            ),
+            // ListTile(
+            //   leading: Icon(Icons.colorize),
+            //   title: Theme.of(context).brightness == Brightness.dark ? Text("Dark Theme") : Text("Light Theme"),
+            //   onTap: () {
+            //     if (Theme.of(context).brightness == Brightness.light) {
+            //       BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(appTheme: AppTheme.Dark));
+            //     } else {
+            //       BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(appTheme: AppTheme.Light));
+            //     }
+            //   },
+            // ),
           ],
         ),
       ),

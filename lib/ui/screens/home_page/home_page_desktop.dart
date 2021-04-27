@@ -17,6 +17,7 @@ class _HomePageDesktopState extends State<HomePageDesktop> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         title: Text('OPINIONX'),

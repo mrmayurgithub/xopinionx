@@ -30,13 +30,16 @@ class _UserQueriesMainBodyState extends State<UserQueriesMainBody> {
           showProgress(context);
         }
         // if (state is UserQueriesSuccess) {}
-        if (state is ProblemChatLoaded) {}
+        if (state is ProblemChatLoaded) {
+          Navigator.of(context).pop();
+        }
         if (state is ProblemDeleted) {}
         if (state is ProblemEdited) {}
         if (state is ProblemSolved) {}
         if (state is UserQueriesFailure) {}
         if (state is UserQueriesLoaded) {
           logger.d('UserQueriesLoaded');
+          Navigator.of(context).pop();
         }
       },
       builder: (context, state) {
@@ -66,27 +69,32 @@ class _UserQueriesMainBodyState extends State<UserQueriesMainBody> {
                     ),
                   ),
                   for (var ele in userProblemsList)
-                    Container(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          ListTile(
-                            title: Text(ele.problemTitle.toString()),
-                            subtitle: Text(ele.problemDescription),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: TextButton(
-                                  child: Text('Chats'),
-                                  onPressed: () {},
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Container(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ExpansionTile(
+                              title: Text(ele.problemTitle.toString()),
+                              children: [
+                                Text(ele.problemDescription),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: TextButton(
+                                    child: Text(ele.tag.toString()),
+                                    onPressed: () {},
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                 ],
