@@ -1,17 +1,9 @@
-# xopinionx
+# OpinionX
 
-A new Flutter project.
+## A Flutter based webapp where students can ask their queries to the experienced seniors and is using Firebase for authentication, and it also uses BLOC Architecture. It is currently under development.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# xopinionx
+- App tries to follow Clean Architecture guidelines. Logic is separated into 3 layers:
+    - `UI`
+    - `BLoC`
+    - `API`
+- App uses [BLoC](https://bloclibrary.dev/#/coreconcepts) extensively
