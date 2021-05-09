@@ -3,12 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/ui/components/customFormField.dart';
+import 'package:xopinionx/ui/global/constants.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/global/validators.dart';
 import 'package:xopinionx/ui/screens/login_page/bloc/login_bloc.dart';
 import 'package:xopinionx/utils/navigations.dart';
 import 'package:xopinionx/utils/routes.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../../../responsive.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -24,6 +27,8 @@ class LoginMainBody extends StatelessWidget {
   bool isProgress = false;
   @override
   Widget build(BuildContext context) {
+    bool isMobile = Responsive.isMobile(context);
+
     return BlocConsumer<LoginBloc, LoginState>(
       listener: (context, state) async {
         if (state is LoginFailure) {
@@ -53,64 +58,87 @@ class LoginMainBody extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return Scaffold(
-          // extendBodyBehindAppBar: true,
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            elevation: 0.0,
-            backgroundColor: Colors.transparent,
-            title: GestureDetector(
-              onTap: () {
-                // Navigator.of(context).pushReplacementNamed(HomePage.id);
-                // Navigator.of(context).pushNamedAndRemoveUntil(
-                //   MainRoutes.homePageRoute,
-                //   (route) => false,
-                // );
-                pNavigator(context, MainRoutes.homePageRoute);
-              },
-              child: Text(
-                'OPINIONX',
-                style: TextStyle(
-                  color: Colors.green,
+        return SafeArea(
+          child: Scaffold(
+            // extendBodyBehindAppBar: true,
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              elevation: 0.0,
+              backgroundColor: Colors.transparent,
+              title: GestureDetector(
+                onTap: () {
+                  // Navigator.of(context).pushReplacementNamed(HomePage.id);
+                  // Navigator.of(context).pushNamedAndRemoveUntil(
+                  //   MainRoutes.homePageRoute,
+                  //   (route) => false,
+                  // );
+                  pNavigator(context, MainRoutes.homePageRoute);
+                },
+                child: Text(
+                  'OPINIONX',
+                  style: TextStyle(
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  // Navigator.of(context).pushNamed(MainRoutes.registerRoute);
-                  nNavigator(context, MainRoutes.registerRoute);
-                },
-                child: Text('SignUp'),
-              ),
-            ],
-          ),
-          body: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      // color: Colors.black,
-                      borderRadius: BorderRadius.circular(20),
-                      shape: BoxShape.rectangle,
-                      // boxShadow: [
-                      //   BoxShadow(
-                      //     color: Colors.grey,
-                      //     blurRadius: 15.0,
-                      //   ),
-                      // ],
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    // Navigator.of(context).pushNamed(MainRoutes.registerRoute);
+                    nNavigator(context, MainRoutes.registerRoute);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      vertical: kDefaultPadding / 4,
+                      horizontal: kDefaultPadding / 3,
                     ),
-                    // height: screenHeight / 2,
-                    width: 570,
-                    child: Padding(
-                      padding: EdgeInsets.all(40.0),
-                      child: LoginForm(isProgress),
+                    child: Text(
+                      'Sign Up',
+                      style: TextStyle(
+                        letterSpacing: 1.2,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
-                ],
+                ),
+              ],
+            ),
+            body: Center(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Get started with Opinionx",
+                      maxLines: 3,
+                      style: TextStyle(
+                        fontSize: isMobile ? 22 : 30,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        // color: Colors.black,
+                        borderRadius: BorderRadius.circular(20),
+                        shape: BoxShape.rectangle,
+                        // boxShadow: [
+                        //   BoxShadow(
+                        //     color: Colors.grey,
+                        //     blurRadius: 15.0,
+                        //   ),
+                        // ],
+                      ),
+                      // height: screenHeight / 2,
+                      width: 570,
+                      child: Padding(
+                        padding: EdgeInsets.all(kDefaultPadding * 1.5),
+                        child: LoginForm(isProgress),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -143,7 +171,9 @@ class _LoginFormState extends State<LoginForm> {
       return AnimatedContainer(
         duration: Duration(milliseconds: 200),
         child: IconButton(
-          icon: _isObscure ? Icon(Icons.visibility_off_outlined) : Icon(Icons.visibility_outlined),
+          icon: _isObscure
+              ? Icon(Icons.visibility_off_outlined)
+              : Icon(Icons.visibility_outlined),
           onPressed: () {
             setState(() {
               _isObscure = !_isObscure;
@@ -157,11 +187,6 @@ class _LoginFormState extends State<LoginForm> {
       key: _formkey,
       child: Column(
         children: [
-          Text(
-            'Get Started with Opinionx',
-            style: TextStyle(fontSize: 30),
-          ),
-          SizedBox(height: screenHeight * 0.024459975), // 22
           CustomTextFormField(
             currentNode: _emailNode,
             nextNode: _passwordNode,
@@ -188,8 +213,30 @@ class _LoginFormState extends State<LoginForm> {
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
 
-          FlatButton(
-            color: Colors.green,
+          TextButton(
+            child: widget.isLoading
+                ? Container(
+                    child: CircularProgressIndicator(),
+                    padding: EdgeInsets.symmetric(
+                      vertical: kDefaultPadding / 3.5,
+                      horizontal: kDefaultPadding * 3.9,
+                    ),
+                  )
+                : Container(
+                    padding: EdgeInsets.symmetric(
+                      vertical: kDefaultPadding / 2.5,
+                      horizontal: kDefaultPadding * 3,
+                    ),
+                    child: Text(
+                      'Login',
+                      style: TextStyle(
+                        letterSpacing: 1.3,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
             onPressed: () {
               if (_formkey.currentState.validate()) {
                 logger.i('validated');
@@ -203,24 +250,11 @@ class _LoginFormState extends State<LoginForm> {
                 Fluttertoast.showToast(msg: 'Email or password is incorrect !');
               }
             },
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: 16,
-                horizontal: 120,
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.green,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(kDefaultPadding / 2),
               ),
-              child: widget.isLoading
-                  ? CircularProgressIndicator()
-                  : Text(
-                      'Login',
-                      style: TextStyle(
-                        letterSpacing: 1.3,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
             ),
           ),
           // SizedBox(height: screenHeight * 0.024459975), // 22

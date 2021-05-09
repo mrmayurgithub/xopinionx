@@ -26,42 +26,34 @@ class HomePage extends StatelessWidget {
 class HomePageMainBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ResponsiveBuilder(
-      builder: (context, sizingInformation) {
-        return BlocConsumer<HomePageBloc, HomePageState>(
-          listener: (context, state) async {
-            if (state is HomePageInitial) {}
-            if (state is HomePageLoaded) {}
-            if (state is HomePageProgress) {
-              showProgress(context);
-            }
-            if (state is BlogPageLoaded) {}
-            if (state is LoginPageLoaded) {
-              // Navigator.of(context).pushNamed(MainRoutes.loginRoute);
-              // context.vxNav.push(Uri.parse(MainRoutes.loginRoute));
-              nNavigator(context, MainRoutes.loginRoute);
-            }
-            if (state is SignUpPageLoaded) {
-              logger.i('SignUpPage Loading');
-              // Navigator.of(context).pushNamed(MainRoutes.registerRoute);
-              nNavigator(context, MainRoutes.registerRoute);
-            }
-            if (state is DonationPageLoaded) {}
-            if (state is HomePageFailure) {
-              // Navigator.of(context).pop();
-              context.vxNav.pop();
-              Fluttertoast.showToast(msg: "HomePage Error: " + state.message);
-              logger.wtf(state.message);
-            }
-          },
-          builder: (context, state) {
-            return ScreenTypeLayout(
-              mobile: HomePageDesktop(),
-              desktop: HomePageDesktop(),
-              tablet: HomePageDesktop(),
-            );
-          },
-        );
+    return BlocConsumer<HomePageBloc, HomePageState>(
+      listener: (context, state) async {
+        if (state is HomePageInitial) {}
+        if (state is HomePageLoaded) {}
+        if (state is HomePageProgress) {
+          showProgress(context);
+        }
+        if (state is BlogPageLoaded) {}
+        if (state is LoginPageLoaded) {
+          // Navigator.of(context).pushNamed(MainRoutes.loginRoute);
+          // context.vxNav.push(Uri.parse(MainRoutes.loginRoute));
+          nNavigator(context, MainRoutes.loginRoute);
+        }
+        if (state is SignUpPageLoaded) {
+          logger.i('SignUpPage Loading');
+          // Navigator.of(context).pushNamed(MainRoutes.registerRoute);
+          nNavigator(context, MainRoutes.registerRoute);
+        }
+        if (state is DonationPageLoaded) {}
+        if (state is HomePageFailure) {
+          // Navigator.of(context).pop();
+          context.vxNav.pop();
+          Fluttertoast.showToast(msg: "HomePage Error: " + state.message);
+          logger.wtf(state.message);
+        }
+      },
+      builder: (context, state) {
+        return HomePageDesktop();
       },
     );
   }

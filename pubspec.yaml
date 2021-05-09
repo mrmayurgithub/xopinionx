@@ -51,6 +51,7 @@ dependencies:
   responsive_framework: ^0.0.14
   url_strategy: ^0.2.0
   velocity_x: ^2.6.1
+  get: ^4.1.4
 
 
 dev_dependencies:

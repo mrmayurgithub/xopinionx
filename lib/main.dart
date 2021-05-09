@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
@@ -80,11 +81,6 @@ class MainAppWithTheme extends StatefulWidget {
 
 class _MainAppWithThemeState extends State<MainAppWithTheme> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   void didChangeDependencies() async {
     super.didChangeDependencies();
   }
@@ -103,7 +99,9 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
           Fluttertoast.showToast(
             msg: state.message,
             textColor: Theme.of(context).textTheme.bodyText2.color,
-            backgroundColor: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).backgroundColor : Colors.grey[800],
+            backgroundColor: Theme.of(context).brightness == Brightness.dark
+                ? Theme.of(context).backgroundColor
+                : Colors.grey[800],
             toastLength: Toast.LENGTH_LONG,
             timeInSecForIosWeb: 4,
           );
@@ -176,7 +174,7 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
         // ),
         child: BlocProvider<AuthBloc>(
           create: (context) => AuthBloc(),
-          child: MaterialApp.router(
+          child: GetMaterialApp.router(
             title: 'Opinionx',
             debugShowCheckedModeBanner: false,
             theme: widget.state.appThemeData,
@@ -184,18 +182,30 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
             routerDelegate: VxNavigator(
               routes: {
                 '/': (_, __) => MaterialPage(child: HomePage()),
-                MainRoutes.homePageRoute: (_, __) => MaterialPage(child: HomePage()),
-                MainRoutes.loginRoute: (_, __) => MaterialPage(child: LoginPage()),
-                MainRoutes.registerRoute: (_, __) => MaterialPage(child: RegisterPage()),
-                MainRoutes.verificationRoute: (_, __) => MaterialPage(child: VerificationPage()),
-                MainRoutes.donationRoute: (_, __) => MaterialPage(child: DonationPage()),
-                MainRoutes.historyRoute: (_, __) => MaterialPage(child: HistoryPage()),
-                MainRoutes.profileRoute: (_, __) => MaterialPage(child: ProfilePage()),
-                MainRoutes.userHomeRoute: (_, __) => MaterialPage(child: UserHomePage()),
-                MainRoutes.askQueryRoute: (_, __) => MaterialPage(child: AskQueryPage()),
-                MainRoutes.settingsRoute: (_, __) => MaterialPage(child: SettingsPage()),
-                MainRoutes.chatRoute: (_, __) => MaterialPage(child: ChatPage()),
-                MainRoutes.userQueries: (_, __) => MaterialPage(child: UserQueries()),
+                MainRoutes.homePageRoute: (_, __) =>
+                    MaterialPage(child: HomePage()),
+                MainRoutes.loginRoute: (_, __) =>
+                    MaterialPage(child: LoginPage()),
+                MainRoutes.registerRoute: (_, __) =>
+                    MaterialPage(child: RegisterPage()),
+                MainRoutes.verificationRoute: (_, __) =>
+                    MaterialPage(child: VerificationPage()),
+                MainRoutes.donationRoute: (_, __) =>
+                    MaterialPage(child: DonationPage()),
+                MainRoutes.historyRoute: (_, __) =>
+                    MaterialPage(child: HistoryPage()),
+                MainRoutes.profileRoute: (_, __) =>
+                    MaterialPage(child: ProfilePage()),
+                MainRoutes.userHomeRoute: (_, __) =>
+                    MaterialPage(child: UserHomePage()),
+                MainRoutes.askQueryRoute: (_, __) =>
+                    MaterialPage(child: AskQueryPage()),
+                MainRoutes.settingsRoute: (_, __) =>
+                    MaterialPage(child: SettingsPage()),
+                MainRoutes.chatRoute: (_, __) =>
+                    MaterialPage(child: ChatPage()),
+                MainRoutes.userQueries: (_, __) =>
+                    MaterialPage(child: UserQueries()),
               },
             ),
             builder: (context, widget) {
