@@ -15,7 +15,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
     sessionBalance: json['sessionBalance'] as int,
     schoolORCollege: json['schoolORCollege'] as String,
     eduYear: json['eduYear'] as int,
-    overallReview: json['overallReview'] as int,
+    overallReview: (json['overallReview'] as num)?.toDouble(),
     languagePreferences: json['languagePreferences'] as String,
     registrationStatus: json['registrationStatus'] as String,
     userTags: (json['userTags'] as List)

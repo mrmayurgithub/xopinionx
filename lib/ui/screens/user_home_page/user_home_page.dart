@@ -275,12 +275,43 @@ class UserHomeMainBody extends StatelessWidget {
                             Spacer(),
                             Container(
                               color: Colors.transparent,
-                              child: TextButton(
-                                child: Icon(
-                                  Icons.person_outline,
-                                  color: Colors.white,
-                                ),
-                                onPressed: () {},
+                              child: PopupMenuButton(
+                                elevation: 0.0,
+                                offset: Offset(1, 1),
+                                icon: Icon(Icons.person),
+                                itemBuilder: (context) {
+                                  return [
+                                    PopupMenuItem(
+                                      child: ListTile(
+                                        title: Text("Profile Settings"),
+                                        trailing: Icon(Icons.settings),
+                                      ),
+                                    ),
+                                    PopupMenuItem(
+                                      child: ListTile(
+                                        title: Text("Overall Review"),
+                                        subtitle: Text('⭐⭐⭐⭐'),
+                                        trailing:
+                                            Icon(Icons.rate_review_outlined),
+                                      ),
+                                    ),
+                                    PopupMenuItem(
+                                      child: ListTile(
+                                        title: Text("Session Balance"),
+                                        trailing: Icon(
+                                            Icons.account_balance_outlined),
+                                        subtitle: Text(globalUser.sessionBalance
+                                            .toString()),
+                                      ),
+                                    ),
+                                    PopupMenuItem(
+                                      child: ListTile(
+                                        title: Text("History"),
+                                        trailing: Icon(Icons.history_outlined),
+                                      ),
+                                    ),
+                                  ];
+                                },
                               ),
                             ),
                           ],

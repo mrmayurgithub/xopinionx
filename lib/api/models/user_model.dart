@@ -24,11 +24,12 @@ class UserModel {
   int sessionBalance;
   String schoolORCollege; // CS OR SS
   int eduYear;
-  int overallReview;
+  double overallReview;
   String languagePreferences;
   String registrationStatus;
   List<Tags> userTags;
-  factory UserModel.fromJson(Map<String, dynamic> data) => _$UserModelFromJson(data);
+  factory UserModel.fromJson(Map<String, dynamic> data) =>
+      _$UserModelFromJson(data);
 
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
 }
