@@ -64,11 +64,11 @@ class _WebMenuItemState extends State<WebMenuItem> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: widget.press,
-      onHover: (value) {
-        setState(() {
-          _isHover = value;
-        });
-      },
+      // onHover: (value) {
+      //   setState(() {
+      //     _isHover = value;
+      //   });
+      // },
       child: AnimatedContainer(
         child: Container(
           // color: _borderColor(),

@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:flutter/widgets.dart';
 import 'package:velocity_x/velocity_x.dart';
 

@@ -3,9 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xopinionx/global/enums.dart';
 import 'package:xopinionx/global/logger.dart';
+import 'package:xopinionx/responsive.dart';
 import 'package:xopinionx/ui/components/customFormField.dart';
 import 'package:xopinionx/ui/components/drawer.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
+import 'package:xopinionx/ui/global/constants.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/screens/ask_query_page/bloc/ask_query_bloc.dart';
 import 'package:xopinionx/utils/navigations.dart';
@@ -39,6 +41,7 @@ class _AskQueryMainBodyState extends State<AskQueryMainBody> {
         if (state is AskQueryPostedSuccess) {
           logger.i('Success: Query Posted');
           // Navigator.of(context).pushReplacementNamed(MainRoutes.userHomeRoute);
+          context.vxNav.popToRoot();
           pNavigator(context, MainRoutes.userHomeRoute);
         }
         if (state is AskQueryCancelled) {
@@ -52,18 +55,61 @@ class _AskQueryMainBodyState extends State<AskQueryMainBody> {
       },
       builder: (context, state) {
         return Scaffold(
+          // appBar: AppBar(
+          //   actions: [
+          //     IconButton(
+          //       icon: Icon(Icons.cancel),
+          //       onPressed: () {
+          //         // Navigator.of(context).pop();
+          //         context.vxNav.pop();
+          //       },
+          //     ),
+          //   ],
+          // ),
+          // drawer: MainDrawer(),
           appBar: AppBar(
-            actions: [
-              IconButton(
-                icon: Icon(Icons.cancel),
-                onPressed: () {
-                  // Navigator.of(context).pop();
-                  context.vxNav.pop();
-                },
+            backgroundColor: Colors.black54,
+            automaticallyImplyLeading: false,
+            elevation: 0.0,
+            centerTitle: true,
+            title: Container(
+              width: double.infinity,
+              color: Colors.black54,
+              child: Column(
+                children: [
+                  Container(
+                    constraints: BoxConstraints(maxWidth: kMaxWidth),
+                    padding: EdgeInsets.all(kDefaultPadding),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            if (!Responsive.isDesktop(context))
+                              IconButton(
+                                icon: Icon(
+                                  Icons.menu,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () {},
+                              ),
+                            Text("OPINIONX"),
+                            Spacer(),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                "Cancel",
+                                style: TextStyle(),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-          drawer: MainDrawer(),
           body: Center(
             child: SingleChildScrollView(
               child: Column(
@@ -72,7 +118,7 @@ class _AskQueryMainBodyState extends State<AskQueryMainBody> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      // color: Colors.white,
+                      color: Colors.black26,
                       borderRadius: BorderRadius.circular(20),
                       shape: BoxShape.rectangle,
                       // boxShadow: [
@@ -83,11 +129,11 @@ class _AskQueryMainBodyState extends State<AskQueryMainBody> {
                       // ],
                     ),
                     // height: screenHeight / 2,
-                    width: 570,
-                    child: Padding(
-                      padding: EdgeInsets.all(40.0),
-                      child: QueryForm(),
-                    ),
+
+                    width: kMaxWidth / 2,
+                    padding: EdgeInsets.all(kDefaultPadding),
+                    constraints: BoxConstraints(maxWidth: kMaxWidth),
+                    child: QueryForm(),
                   ),
                 ],
               ),

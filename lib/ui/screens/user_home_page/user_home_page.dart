@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -271,14 +269,28 @@ class UserHomeMainBody extends StatelessWidget {
                                 ),
                                 onPressed: () {},
                               ),
-                            Text("OPINIONX"),
+                            Text(
+                              "OPINIONX",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.green,
+                              ),
+                            ),
                             Spacer(),
                             Container(
                               color: Colors.transparent,
                               child: PopupMenuButton(
                                 elevation: 0.0,
                                 offset: Offset(1, 1),
-                                icon: Icon(Icons.person),
+                                icon: InkWell(
+                                  child: Container(
+                                    child: Icon(
+                                      Icons.person,
+                                    ),
+                                    padding:
+                                        EdgeInsets.all(kDefaultPadding / 4),
+                                  ),
+                                ),
                                 itemBuilder: (context) {
                                   return [
                                     PopupMenuItem(
@@ -357,6 +369,12 @@ class _HomeMainListState extends State<HomeMainList> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (!Responsive.isMobile(context)) Expanded(child: WebMenu()),
+        if (!Responsive.isMobile(context))
+          Container(
+            width: 1.0,
+            height: MediaQuery.of(context).size.height,
+            color: Colors.grey,
+          ),
         if (!Responsive.isMobile(context)) SizedBox(width: kDefaultPadding),
         QueryList(),
       ],
@@ -416,30 +434,102 @@ class QueryList extends StatelessWidget {
                           Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              ListTile(
-                                onTap: () {},
+                              ExpansionTile(
+                                childrenPadding: EdgeInsets.symmetric(
+                                    vertical: kDefaultPadding / 5,
+                                    horizontal: kDefaultPadding / 4),
                                 title: Text(
                                   ele.problemTitle.toString(),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
-                                subtitle: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
+                                subtitle: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      ele.problemDescription,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    SizedBox(height: kDefaultPadding / 2),
                                     TextButton(
                                       onPressed: () {},
-                                      child: Text(ele.tag.toString()),
+                                      child: Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Text(tagsMap[ele.tag]),
+                                      ),
+                                      style: TextButton.styleFrom(
+                                          backgroundColor: Colors.grey[800]),
                                     ),
                                   ],
                                 ),
+                                trailing: IconButton(
+                                  icon: Icon(Icons.report_outlined),
+                                  onPressed: () {
+                                    return showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return ReportContent();
+                                      },
+                                    );
+                                  },
+                                ),
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: kDefaultPadding / 6,
+                                      horizontal: kDefaultPadding / 6,
+                                    ),
+                                    child: Text(
+                                      ele.problemDescription,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 10,
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          bottom: kDefaultPadding / 5,
+                                        ),
+                                        child: TextButton(
+                                          onPressed: () {
+                                            //TODO: implement
+                                            // Navigator.of(context).pushNamed(ChatPage.id);
+                                          },
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 8.0),
+                                            child: Text('Chat'),
+                                          ),
+                                          style: TextButton.styleFrom(
+                                              backgroundColor:
+                                                  Colors.grey[800]),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
+                              // ListTile(
+                              //   onTap: () {},
+                              //   title: Text(
+                              //     ele.problemTitle.toString(),
+                              //     maxLines: 2,
+                              //     overflow: TextOverflow.ellipsis,
+                              //   ),
+                              //   subtitle: Column(
+                              //     crossAxisAlignment: CrossAxisAlignment.start,
+                              //     mainAxisSize: MainAxisSize.min,
+                              //     children: [
+                              //       Text(
+                              //         ele.problemDescription,
+                              //         maxLines: 2,
+                              //         overflow: TextOverflow.ellipsis,
+                              //       ),
+                              //       SizedBox(height: kDefaultPadding / 2),
+                              //       TextButton(
+                              //         onPressed: () {},
+                              //         child: Text(ele.tag.toString()),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
                               Divider(),
                             ],
                           ),

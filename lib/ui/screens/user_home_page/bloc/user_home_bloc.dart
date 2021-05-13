@@ -31,16 +31,6 @@ class UserHomeBloc extends Bloc<UserHomeEvent, UserHomeState> {
           logger.i('Ask Query Loaded');
           yield AskQueryLoaded();
         }
-        // await loadUserProblems();
-        // List<ProblemModel> _problems = [];
-        // _problems = userProblemsList;
-        // if (_problems.length >= 3) {
-        //   logger.i('Askign Queries not allowed');
-        //   yield QueryNotAllowed();
-        // } else {
-        //   logger.i('Ask Query Loaded');
-        //   yield AskQueryLoaded();
-        // }
       }
       if (event is ChatRequested) {
         //TODO:implement
