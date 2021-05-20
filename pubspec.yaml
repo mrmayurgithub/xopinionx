@@ -52,7 +52,7 @@ dependencies:
   url_strategy: ^0.2.0
   velocity_x: ^2.6.1
   get: ^4.1.4
-
+  font_awesome_flutter: ^9.0.0  
 
 dev_dependencies:
   flutter_test:

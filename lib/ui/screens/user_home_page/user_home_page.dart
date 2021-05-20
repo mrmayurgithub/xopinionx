@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -244,108 +246,109 @@ class UserHomeMainBody extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            automaticallyImplyLeading: false,
-            elevation: 0.0,
-            centerTitle: true,
-            title: Container(
-              width: double.infinity,
-              color: Theme.of(context).scaffoldBackgroundColor,
-              child: Column(
-                children: [
-                  Container(
-                    constraints: BoxConstraints(maxWidth: kMaxWidth),
-                    padding: EdgeInsets.all(kDefaultPadding),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            if (!Responsive.isDesktop(context))
-                              IconButton(
-                                icon: Icon(
-                                  Icons.menu,
-                                  color: Colors.white,
-                                ),
-                                onPressed: () {},
-                              ),
-                            Text(
-                              "OPINIONX",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.green,
-                              ),
-                            ),
-                            Spacer(),
-                            Container(
-                              color: Colors.transparent,
-                              child: PopupMenuButton(
-                                elevation: 0.0,
-                                offset: Offset(1, 1),
-                                icon: InkWell(
-                                  child: Container(
-                                    child: Icon(
-                                      Icons.person,
-                                    ),
-                                    padding:
-                                        EdgeInsets.all(kDefaultPadding / 4),
-                                  ),
-                                ),
-                                itemBuilder: (context) {
-                                  return [
-                                    PopupMenuItem(
-                                      child: ListTile(
-                                        title: Text("Profile Settings"),
-                                        trailing: Icon(Icons.settings),
-                                      ),
-                                    ),
-                                    PopupMenuItem(
-                                      child: ListTile(
-                                        title: Text("Overall Review"),
-                                        subtitle: Text('⭐⭐⭐⭐'),
-                                        trailing:
-                                            Icon(Icons.rate_review_outlined),
-                                      ),
-                                    ),
-                                    PopupMenuItem(
-                                      child: ListTile(
-                                        title: Text("Session Balance"),
-                                        trailing: Icon(
-                                            Icons.account_balance_outlined),
-                                        subtitle: Text(globalUser.sessionBalance
-                                            .toString()),
-                                      ),
-                                    ),
-                                    PopupMenuItem(
-                                      child: ListTile(
-                                        title: Text("History"),
-                                        trailing: Icon(Icons.history_outlined),
-                                      ),
-                                    ),
-                                  ];
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // appBar: AppBar(
+          //   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          //   automaticallyImplyLeading: false,
+          //   elevation: 0.0,
+          //   centerTitle: true,
+          //   title: Container(
+          //     width: double.infinity,
+          //     color: Theme.of(context).scaffoldBackgroundColor,
+          //     child: Column(
+          //       children: [
+          //         Container(
+          //           // constraints: BoxConstraints(maxWidth: kMaxWidth),
+          //           padding: EdgeInsets.all(kDefaultPadding),
+          //           child: Column(
+          //             children: [
+          //               Row(
+          //                 children: [
+          //                   if (!Responsive.isDesktop(context))
+          //                     IconButton(
+          //                       icon: Icon(
+          //                         Icons.menu,
+          //                         color: Colors.white,
+          //                       ),
+          //                       onPressed: () {},
+          //                     ),
+          //                   Text(
+          //                     "OPINIONX",
+          //                     style: TextStyle(
+          //                       fontWeight: FontWeight.bold,
+          //                       color: Colors.green,
+          //                     ),
+          //                   ),
+          //                   Spacer(),
+          //                   Container(
+          //                     color: Colors.transparent,
+          //                     child: PopupMenuButton(
+          //                       elevation: 0.0,
+          //                       offset: Offset(1, 1),
+          //                       icon: InkWell(
+          //                         child: Container(
+          //                           child: Icon(
+          //                             Icons.person,
+          //                           ),
+          //                           padding:
+          //                               EdgeInsets.all(kDefaultPadding / 4),
+          //                         ),
+          //                       ),
+          //                       itemBuilder: (context) {
+          //                         return [
+          //                           PopupMenuItem(
+          //                             child: ListTile(
+          //                               title: Text("Profile Settings"),
+          //                               trailing: Icon(Icons.settings),
+          //                             ),
+          //                           ),
+          //                           PopupMenuItem(
+          //                             child: ListTile(
+          //                               title: Text("Overall Review"),
+          //                               subtitle: Text('⭐⭐⭐⭐'),
+          //                               trailing:
+          //                                   Icon(Icons.rate_review_outlined),
+          //                             ),
+          //                           ),
+          //                           PopupMenuItem(
+          //                             child: ListTile(
+          //                               title: Text("Session Balance"),
+          //                               trailing: Icon(
+          //                                   Icons.account_balance_outlined),
+          //                               subtitle: Text(globalUser.sessionBalance
+          //                                   .toString()),
+          //                             ),
+          //                           ),
+          //                           PopupMenuItem(
+          //                             child: ListTile(
+          //                               title: Text("History"),
+          //                               trailing: Icon(Icons.history_outlined),
+          //                             ),
+          //                           ),
+          //                         ];
+          //                       },
+          //                     ),
+          //                   ),
+          //                 ],
+          //               ),
+          //             ],
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           drawerScrimColor: Colors.transparent,
           // drawer: MainDrawer(),
           body: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Divider(),
+                // Divider(),
                 Container(
-                  padding: EdgeInsets.all(kDefaultPadding),
-                  constraints: BoxConstraints(maxWidth: kMaxWidth),
+                  // padding: EdgeInsets.all(kDefaultPadding),
+                  // constraints: BoxConstraints(maxWidth: kMaxWidth),
                   child: SafeArea(child: HomeMainList()),
                 ),
               ],
@@ -368,14 +371,41 @@ class _HomeMainListState extends State<HomeMainList> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (!Responsive.isMobile(context)) Expanded(child: WebMenu()),
         if (!Responsive.isMobile(context))
-          Container(
-            width: 1.0,
-            height: MediaQuery.of(context).size.height,
-            color: Colors.grey,
+          Expanded(
+            child: Column(
+              children: [
+                Container(
+                  color: kSecondaryColor,
+                  width: double.infinity,
+                  height: 100,
+                  child: Center(
+                    child: SelectableText(
+                      "OpinionX",
+                      style: TextStyle(
+                        color: kPrimaryColor,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 30,
+                        letterSpacing: 1.5,
+                      ),
+                    ),
+                  ),
+                ),
+                Divider(
+                  color: kSecondaryColor,
+                  height: 0.0,
+                ),
+                WebMenu(),
+              ],
+            ),
           ),
-        if (!Responsive.isMobile(context)) SizedBox(width: kDefaultPadding),
+        // if (!Responsive.isMobile(context))
+        //   Container(
+        //     width: 1.0,
+        //     height: MediaQuery.of(context).size.height,
+        //     color: Colors.grey,
+        //   ),
+        // if (!Responsive.isMobile(context)) SizedBox(width: kDefaultPadding),
         QueryList(),
       ],
     );
@@ -388,157 +418,185 @@ class QueryList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       flex: 4,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "All Questions",
-                style: TextStyle(fontSize: 15),
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: kDefaultPadding / 2,
+                vertical: kDefaultPadding,
               ),
-              Spacer(),
-              TextButton(
-                child: Container(
-                  child: Text(
-                    "Ask Question",
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "All Questions",
                     style: TextStyle(
-                      fontSize: 15,
+                      fontSize: 18,
                     ),
                   ),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: kDefaultPadding / 2.5,
-                    vertical: kDefaultPadding / 5,
+                  Spacer(),
+                  TextButton(
+                    child: Container(
+                      child: Text(
+                        "Ask Question",
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: kDefaultPadding / 2.5,
+                        vertical: kDefaultPadding / 5,
+                      ),
+                    ),
+                    onPressed: () {
+                      BlocProvider.of<UserHomeBloc>(context)
+                          .add(UserHomeAskQueryRequested());
+                    },
+                    style: TextButton.styleFrom(backgroundColor: Colors.black),
                   ),
-                ),
-                onPressed: () {
-                  BlocProvider.of<UserHomeBloc>(context)
-                      .add(UserHomeAskQueryRequested());
-                },
-                style: TextButton.styleFrom(backgroundColor: Colors.black),
+                ],
               ),
-            ],
-          ),
-          Divider(
-            thickness: 2.0,
-            color: Colors.grey[600],
-          ),
-          SizedBox(height: kDefaultPadding),
-          _problems.length != 0
-              ? Scrollbar(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        for (ProblemModel ele in _problems)
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              ExpansionTile(
-                                childrenPadding: EdgeInsets.symmetric(
-                                    vertical: kDefaultPadding / 5,
-                                    horizontal: kDefaultPadding / 4),
-                                title: Text(
-                                  ele.problemTitle.toString(),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                subtitle: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    TextButton(
-                                      onPressed: () {},
-                                      child: Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: Text(tagsMap[ele.tag]),
-                                      ),
-                                      style: TextButton.styleFrom(
-                                          backgroundColor: Colors.grey[800]),
-                                    ),
-                                  ],
-                                ),
-                                trailing: IconButton(
-                                  icon: Icon(Icons.report_outlined),
-                                  onPressed: () {
-                                    return showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return ReportContent();
-                                      },
-                                    );
-                                  },
-                                ),
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: kDefaultPadding / 6,
-                                      horizontal: kDefaultPadding / 6,
-                                    ),
-                                    child: Text(
-                                      ele.problemDescription,
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 10,
+            ),
+            Divider(
+              thickness: 2.0,
+              color: Colors.grey[600],
+            ),
+            SizedBox(height: kDefaultPadding),
+            _problems.length != 0
+                ? Scrollbar(
+                    child: SingleChildScrollView(
+                      physics: ClampingScrollPhysics(),
+                      child: Column(
+                        children: [
+                          for (ProblemModel ele in _problems)
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: kDefaultPadding / 4,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      top: BorderSide(color: kSecondaryColor),
+                                      bottom:
+                                          BorderSide(color: kSecondaryColor),
                                     ),
                                   ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                          bottom: kDefaultPadding / 5,
-                                        ),
-                                        child: TextButton(
-                                          onPressed: () {
-                                            //TODO: implement
-                                            // Navigator.of(context).pushNamed(ChatPage.id);
-                                          },
+                                  child: ExpansionTile(
+                                    collapsedTextColor: Colors.white,
+                                    // childrenPadding: EdgeInsets.symmetric(
+                                    //     vertical: kDefaultPadding / 5,
+                                    //     horizontal: kDefaultPadding / 4),
+                                    title: Text(
+                                      ele.problemTitle.toString(),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    subtitle: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        TextButton(
+                                          onPressed: () {},
                                           child: Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 8.0),
-                                            child: Text('Chat'),
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Text(tagsMap[ele.tag]),
                                           ),
                                           style: TextButton.styleFrom(
                                               backgroundColor:
                                                   Colors.grey[800]),
                                         ),
+                                      ],
+                                    ),
+                                    trailing: IconButton(
+                                      icon: Icon(Icons.report),
+                                      onPressed: () {
+                                        return showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return ReportContent();
+                                          },
+                                        );
+                                      },
+                                    ),
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: kDefaultPadding / 6,
+                                          horizontal: kDefaultPadding / 6,
+                                        ),
+                                        child: Text(
+                                          ele.problemDescription,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 10,
+                                        ),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                              bottom: kDefaultPadding / 5,
+                                            ),
+                                            child: TextButton(
+                                              onPressed: () {
+                                                //TODO: implement
+                                                // Navigator.of(context).pushNamed(ChatPage.id);
+                                              },
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8.0),
+                                                child: Text('Chat'),
+                                              ),
+                                              style: TextButton.styleFrom(
+                                                  backgroundColor:
+                                                      Colors.grey[800]),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
-                                ],
-                              ),
-                              // ListTile(
-                              //   onTap: () {},
-                              //   title: Text(
-                              //     ele.problemTitle.toString(),
-                              //     maxLines: 2,
-                              //     overflow: TextOverflow.ellipsis,
-                              //   ),
-                              //   subtitle: Column(
-                              //     crossAxisAlignment: CrossAxisAlignment.start,
-                              //     mainAxisSize: MainAxisSize.min,
-                              //     children: [
-                              //       Text(
-                              //         ele.problemDescription,
-                              //         maxLines: 2,
-                              //         overflow: TextOverflow.ellipsis,
-                              //       ),
-                              //       SizedBox(height: kDefaultPadding / 2),
-                              //       TextButton(
-                              //         onPressed: () {},
-                              //         child: Text(ele.tag.toString()),
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ),
-                              Divider(),
-                            ],
-                          ),
-                      ],
+                                ),
+                                // ListTile(
+                                //   onTap: () {},
+                                //   title: Text(
+                                //     ele.problemTitle.toString(),
+                                //     maxLines: 2,
+                                //     overflow: TextOverflow.ellipsis,
+                                //   ),
+                                //   subtitle: Column(
+                                //     crossAxisAlignment: CrossAxisAlignment.start,
+                                //     mainAxisSize: MainAxisSize.min,
+                                //     children: [
+                                //       Text(
+                                //         ele.problemDescription,
+                                //         maxLines: 2,
+                                //         overflow: TextOverflow.ellipsis,
+                                //       ),
+                                //       SizedBox(height: kDefaultPadding / 2),
+                                //       TextButton(
+                                //         onPressed: () {},
+                                //         child: Text(ele.tag.toString()),
+                                //       ),
+                                //     ],
+                                //   ),
+                                // ),
+                                // Divider(),
+                              ],
+                            ),
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              : SelectableText("No Questions to show"),
-        ],
+                  )
+                : SelectableText("No Questions to show"),
+          ],
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xopinionx/ui/global/constants.dart';
 
 class ReportContent extends StatefulWidget {
   @override
@@ -11,6 +12,7 @@ class _ReportContentState extends State<ReportContent> {
   Widget build(BuildContext context) {
     return AlertDialog(
       content: Container(
+        color: kSecondaryColor,
         child: SingleChildScrollView(
           child: Column(
             children: [

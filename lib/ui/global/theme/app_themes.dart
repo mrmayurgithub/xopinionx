@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xopinionx/ui/global/constants.dart';
 
 enum AppTheme {
   Dark,
@@ -259,4 +260,6 @@ final appThemeData = {
 
 final ThemeData lightTheme = ThemeData.light();
 
-final ThemeData darkTheme = ThemeData.dark();
+final ThemeData darkTheme = ThemeData.dark().copyWith(
+  scaffoldBackgroundColor: kBackgroundColor,
+);

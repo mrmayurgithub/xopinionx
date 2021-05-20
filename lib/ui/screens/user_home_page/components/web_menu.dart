@@ -3,6 +3,7 @@ import 'package:get/state_manager.dart';
 import 'package:xopinionx/controllers/menu_controller.dart';
 import 'package:xopinionx/ui/global/constants.dart';
 import 'package:get/get.dart';
+import 'package:xopinionx/ui/global/utils.dart';
 
 class WebMenu extends StatelessWidget {
   final MenuController _controller = Get.put(MenuController());
@@ -10,14 +11,19 @@ class WebMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: List.generate(
-          _controller.menuItems.length,
-          (index) => WebMenuItem(
-            text: _controller.menuItems[index],
-            isActive: index == _controller.selectedIndex,
-            press: () => _controller.setMenuIndex(index),
+      () => Container(
+        height: screenHeight,
+        color: kSecondaryColor,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: List.generate(
+            _controller.menuItems.length,
+            (index) => WebMenuItem(
+              mainMenuItem: _controller.menuItems[index],
+              isActive: index == _controller.selectedIndex,
+              press: () => _controller.setMenuIndex(index),
+            ),
           ),
         ),
       ),
@@ -27,10 +33,10 @@ class WebMenu extends StatelessWidget {
 
 class WebMenuItem extends StatefulWidget {
   final bool isActive;
-  final String text;
+  final MainMenuItem mainMenuItem;
   final VoidCallback press;
 
-  const WebMenuItem({Key key, this.isActive, this.text, this.press})
+  const WebMenuItem({Key key, this.isActive, this.mainMenuItem, this.press})
       : super(key: key);
 
   @override
@@ -43,10 +49,9 @@ class _WebMenuItemState extends State<WebMenuItem> {
   Color _buttonColor() {
     if (widget.isActive) {
       return Colors.black54;
+    } else if (!widget.isActive & _isHover) {
+      return Colors.black.withOpacity(0.4);
     }
-    // else if (!widget.isActive & _isHover) {
-    //   return Colors.black.withOpacity(0.4);
-    // }
     return Colors.transparent;
   }
 
@@ -64,20 +69,35 @@ class _WebMenuItemState extends State<WebMenuItem> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: widget.press,
-      // onHover: (value) {
-      //   setState(() {
-      //     _isHover = value;
-      //   });
-      // },
+      onHover: (value) {
+        setState(() {
+          _isHover = value;
+        });
+      },
       child: AnimatedContainer(
-        child: Container(
-          // color: _borderColor(),
-          padding: EdgeInsets.symmetric(horizontal: kDefaultPadding / 3),
-          child: Text(
-            widget.text,
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: widget.isActive ? FontWeight.w600 : FontWeight.normal,
+        child: Padding(
+          padding: EdgeInsets.all(6.0),
+          child: Container(
+            // color: _borderColor(),
+            padding: EdgeInsets.symmetric(horizontal: kDefaultPadding / 2.8),
+            child: Row(
+              children: [
+                Icon(
+                  widget.mainMenuItem.icon,
+                  color: kMenuTextColor,
+                  size: 16,
+                ),
+                SizedBox(width: kDefaultPadding / 3),
+                Text(
+                  widget.mainMenuItem.title,
+                  style: TextStyle(
+                    color: kMenuTextColor,
+                    fontSize: 16,
+                    fontWeight:
+                        widget.isActive ? FontWeight.w600 : FontWeight.normal,
+                  ),
+                ),
+              ],
             ),
           ),
         ),

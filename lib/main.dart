@@ -11,6 +11,7 @@ import 'package:velocity_x/velocity_x.dart';
 import 'package:xopinionx/auth/auth_bloc.dart';
 import 'package:xopinionx/global/bloc_observer.dart';
 import 'package:xopinionx/global/logger.dart';
+import 'package:xopinionx/ui/global/constants.dart';
 import 'package:xopinionx/ui/global/theme/bloc/theme_bloc.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/screens/ask_query_page/ask_query_page.dart';
@@ -100,7 +101,8 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
             msg: state.message,
             textColor: Theme.of(context).textTheme.bodyText2.color,
             backgroundColor: Theme.of(context).brightness == Brightness.dark
-                ? Theme.of(context).backgroundColor
+                // ? Theme.of(context).backgroundColor
+                ? kSecondaryColor
                 : Colors.grey[800],
             toastLength: Toast.LENGTH_LONG,
             timeInSecForIosWeb: 4,
