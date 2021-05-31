@@ -19,6 +19,8 @@ class UserHomeDonateRequested extends UserHomeEvent {}
 
 class UserHomeAskQueryRequested extends UserHomeEvent {}
 
+class GlobalProblemsRequested extends UserHomeEvent {}
+
 class UserHomeChatRequested extends UserHomeEvent {
   final String chatUserId;
 

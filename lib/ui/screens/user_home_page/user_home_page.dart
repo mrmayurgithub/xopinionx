@@ -212,19 +212,19 @@ class UserHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => UserHomeBloc(),
-      child: UserHomeMainBody(),
-    );
+        create: (context) => UserHomeBloc()..add(GlobalProblemsRequested()),
+        child: UserHomeMainBody());
   }
 }
 
 class UserHomeMainBody extends StatelessWidget {
-  final List<ProblemModel> _problems = globalProblemsList;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserHomeBloc, UserHomeState>(
       listener: (context, state) {
-        if (state is UserHomeIntial) {}
+        if (state is UserHomeIntial) {
+          showProgress(context);
+        }
         if (state is UserHomeInProgress) {
           showProgress(context);
         }
@@ -232,7 +232,9 @@ class UserHomeMainBody extends StatelessWidget {
           Fluttertoast.showToast(
               msg: 'You cannot ask more than 3 Queries at a time');
         }
-        if (state is UserHomeSuccess) {}
+        if (state is UserHomeSuccess) {
+          Navigator.of(context).pop();
+        }
         if (state is UserHomeFailure) {
           // Navigator.of(context).pop();
           context.vxNav.pop();
@@ -246,99 +248,25 @@ class UserHomeMainBody extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
-          // appBar: AppBar(
-          //   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          //   automaticallyImplyLeading: false,
-          //   elevation: 0.0,
-          //   centerTitle: true,
-          //   title: Container(
-          //     width: double.infinity,
-          //     color: Theme.of(context).scaffoldBackgroundColor,
-          //     child: Column(
-          //       children: [
-          //         Container(
-          //           // constraints: BoxConstraints(maxWidth: kMaxWidth),
-          //           padding: EdgeInsets.all(kDefaultPadding),
-          //           child: Column(
-          //             children: [
-          //               Row(
-          //                 children: [
-          //                   if (!Responsive.isDesktop(context))
-          //                     IconButton(
-          //                       icon: Icon(
-          //                         Icons.menu,
-          //                         color: Colors.white,
-          //                       ),
-          //                       onPressed: () {},
-          //                     ),
-          //                   Text(
-          //                     "OPINIONX",
-          //                     style: TextStyle(
-          //                       fontWeight: FontWeight.bold,
-          //                       color: Colors.green,
-          //                     ),
-          //                   ),
-          //                   Spacer(),
-          //                   Container(
-          //                     color: Colors.transparent,
-          //                     child: PopupMenuButton(
-          //                       elevation: 0.0,
-          //                       offset: Offset(1, 1),
-          //                       icon: InkWell(
-          //                         child: Container(
-          //                           child: Icon(
-          //                             Icons.person,
-          //                           ),
-          //                           padding:
-          //                               EdgeInsets.all(kDefaultPadding / 4),
-          //                         ),
-          //                       ),
-          //                       itemBuilder: (context) {
-          //                         return [
-          //                           PopupMenuItem(
-          //                             child: ListTile(
-          //                               title: Text("Profile Settings"),
-          //                               trailing: Icon(Icons.settings),
-          //                             ),
-          //                           ),
-          //                           PopupMenuItem(
-          //                             child: ListTile(
-          //                               title: Text("Overall Review"),
-          //                               subtitle: Text('⭐⭐⭐⭐'),
-          //                               trailing:
-          //                                   Icon(Icons.rate_review_outlined),
-          //                             ),
-          //                           ),
-          //                           PopupMenuItem(
-          //                             child: ListTile(
-          //                               title: Text("Session Balance"),
-          //                               trailing: Icon(
-          //                                   Icons.account_balance_outlined),
-          //                               subtitle: Text(globalUser.sessionBalance
-          //                                   .toString()),
-          //                             ),
-          //                           ),
-          //                           PopupMenuItem(
-          //                             child: ListTile(
-          //                               title: Text("History"),
-          //                               trailing: Icon(Icons.history_outlined),
-          //                             ),
-          //                           ),
-          //                         ];
-          //                       },
-          //                     ),
-          //                   ),
-          //                 ],
-          //               ),
-          //             ],
-          //           ),
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
-          drawerScrimColor: Colors.transparent,
-          // drawer: MainDrawer(),
+          appBar: AppBar(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            elevation: 0.0,
+            centerTitle: false,
+            title: Text("Opinionx"),
+            actions: [
+              Container(
+                padding: EdgeInsets.all(kDefaultPadding / 4),
+                child: TextButton(
+                  onPressed: () {
+                    BlocProvider.of<UserHomeBloc>(context)
+                        .add(UserHomeAskQueryRequested());
+                  },
+                  child: Text("Ask Question"),
+                ),
+              )
+            ],
+          ),
+          drawer: MainDrawer(),
           body: SingleChildScrollView(
             physics: ClampingScrollPhysics(),
             child: Column(
@@ -346,10 +274,12 @@ class UserHomeMainBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // Divider(),
-                Container(
-                  // padding: EdgeInsets.all(kDefaultPadding),
-                  // constraints: BoxConstraints(maxWidth: kMaxWidth),
-                  child: SafeArea(child: HomeMainList()),
+                Center(
+                  child: Container(
+                    // padding: EdgeInsets.all(kDefaultPadding),
+                    constraints: BoxConstraints(maxWidth: kMaxWidth),
+                    child: SafeArea(child: HomeMainList()),
+                  ),
                 ),
               ],
             ),
@@ -371,41 +301,6 @@ class _HomeMainListState extends State<HomeMainList> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (!Responsive.isMobile(context))
-          Expanded(
-            child: Column(
-              children: [
-                Container(
-                  color: kSecondaryColor,
-                  width: double.infinity,
-                  height: 100,
-                  child: Center(
-                    child: SelectableText(
-                      "OpinionX",
-                      style: TextStyle(
-                        color: kPrimaryColor,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 30,
-                        letterSpacing: 1.5,
-                      ),
-                    ),
-                  ),
-                ),
-                Divider(
-                  color: kSecondaryColor,
-                  height: 0.0,
-                ),
-                WebMenu(),
-              ],
-            ),
-          ),
-        // if (!Responsive.isMobile(context))
-        //   Container(
-        //     width: 1.0,
-        //     height: MediaQuery.of(context).size.height,
-        //     color: Colors.grey,
-        //   ),
-        // if (!Responsive.isMobile(context)) SizedBox(width: kDefaultPadding),
         QueryList(),
       ],
     );
@@ -423,47 +318,6 @@ class QueryList extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: kDefaultPadding / 2,
-                vertical: kDefaultPadding,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "All Questions",
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
-                  ),
-                  Spacer(),
-                  TextButton(
-                    child: Container(
-                      child: Text(
-                        "Ask Question",
-                        style: TextStyle(
-                          fontSize: 18,
-                        ),
-                      ),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: kDefaultPadding / 2.5,
-                        vertical: kDefaultPadding / 5,
-                      ),
-                    ),
-                    onPressed: () {
-                      BlocProvider.of<UserHomeBloc>(context)
-                          .add(UserHomeAskQueryRequested());
-                    },
-                    style: TextButton.styleFrom(backgroundColor: Colors.black),
-                  ),
-                ],
-              ),
-            ),
-            Divider(
-              thickness: 2.0,
-              color: Colors.grey[600],
-            ),
             SizedBox(height: kDefaultPadding),
             _problems.length != 0
                 ? Scrollbar(

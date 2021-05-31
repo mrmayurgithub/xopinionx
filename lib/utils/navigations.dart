@@ -11,10 +11,10 @@ import 'package:xopinionx/utils/status.dart';
 // }
 
 void nNavigator(BuildContext context, String route) {
-  if (UserLoginStatus().isLoggedIn())
-    context.vxNav.push(Uri.parse(route));
-  else
-    context.vxNav.clearAndPush(Uri.parse(MainRoutes.homePageRoute));
+  // if (UserLoginStatus().isLoggedIn())
+  context.vxNav.push(Uri.parse(route));
+  // else
+  //   context.vxNav.clearAndPush(Uri.parse(MainRoutes.homePageRoute));
 }
 
 void pNavigator(BuildContext context, String route) {

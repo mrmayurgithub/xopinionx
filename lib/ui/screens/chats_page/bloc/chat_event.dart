@@ -7,6 +7,19 @@ abstract class ChatEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class ChangeChat extends ChatEvent {}
+class GetChat extends ChatEvent {
+  final ChatModel chatModel;
+
+  GetChat({@required this.chatModel});
+  @override
+  List<Object> get props => [chatModel];
+}
 
 class ChatListRequested extends ChatEvent {}
+
+class GiveReview extends ChatEvent {
+  final ChatModel chatModel;
+  GiveReview({@required this.chatModel});
+  @override
+  List<Object> get props => [chatModel];
+}

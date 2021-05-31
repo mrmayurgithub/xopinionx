@@ -20,6 +20,13 @@ class UserHomeBloc extends Bloc<UserHomeEvent, UserHomeState> {
       if (event is UserHomeReviewsRequested) {}
       if (event is UserHomeHistoryRequested) {}
       if (event is UserHomeLogoutRequested) {}
+      if (event is GlobalProblemsRequested) {
+        yield UserHomeInProgress();
+        logger.d("loading problems");
+        await loadGlobalProblems();
+        logger.d("problems loaded");
+        yield UserHomeSuccess();
+      }
       if (event is UserHomeBlogRequested) {}
       if (event is UserHomeDonateRequested) {}
       if (event is UserHomeAskQueryRequested) {

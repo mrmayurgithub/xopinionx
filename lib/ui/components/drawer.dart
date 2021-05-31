@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xopinionx/auth/auth_bloc.dart';
 import 'package:xopinionx/global/global_helpers.dart';
+import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/ui/global/theme/app_themes.dart';
 import 'package:xopinionx/ui/global/theme/bloc/theme_bloc.dart';
 import 'package:xopinionx/utils/navigations.dart';
 import 'package:xopinionx/utils/routes.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class MainDrawer extends StatelessWidget {
   @override
@@ -18,11 +20,15 @@ class MainDrawer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             ListTile(
-              title: Text(globalUser.fname + globalUser.lname),
+              title: Text((globalUser.fname + globalUser.lname) != null
+                  ? globalUser.fname + globalUser.lname
+                  : ""),
               leading: CircleAvatar(
                 child: Icon(Icons.face_outlined),
               ),
-              subtitle: Text(globalUser.email.toString()),
+              subtitle: Text((globalUser.email.toString()) != null
+                  ? globalUser.email.toString()
+                  : ""),
               onTap: () {},
             ),
             ListTile(
@@ -30,6 +36,7 @@ class MainDrawer extends StatelessWidget {
               leading: Icon(Icons.home),
               onTap: () {
                 // Navigator.of(context).pushNamed(MainRoutes.userHomeRoute);
+                logger.i("User Home Pressed");
                 nNavigator(context, MainRoutes.userHomeRoute);
               },
             ),
