@@ -13,7 +13,8 @@ class VerificationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocProvider(
-        create: (context) => VerificationBloc()..add(VerificationInitiated(isFirstTime: true)),
+        create: (context) =>
+            VerificationBloc()..add(VerificationInitiated(isFirstTime: true)),
         child: VerificationMainBody(),
       ),
     );
@@ -54,13 +55,15 @@ class VerificationMainBody extends StatelessWidget {
           //check
           context.vxNav.pop();
           // Navigator.of(context).pop();
-          BlocProvider.of<VerificationBloc>(context).add(VerificationInitiated());
+          BlocProvider.of<VerificationBloc>(context)
+              .add(VerificationInitiated());
         }
       },
       builder: (context, state) {
         return Center(
           child: Container(
-            margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.072916667), // 30
+            margin: EdgeInsets.symmetric(
+                horizontal: screenWidth * 0.072916667), // 30
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -90,11 +93,11 @@ class VerificationMainBody extends StatelessWidget {
                       ),
                 ),
                 SizedBox(height: screenHeight * 0.050031766), // 45
-                FlatButton(
+                TextButton(
                   onPressed: _onConfirmButtonPressed,
                   child: Text('Confirm Verification'),
                 ),
-                FlatButton(
+                TextButton(
                   onPressed: _onResendButtonPressed,
                   child: Text('Resend Verification Link'),
                 ),

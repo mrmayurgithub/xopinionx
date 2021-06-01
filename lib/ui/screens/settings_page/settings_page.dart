@@ -137,7 +137,8 @@ class _SettingsFormState extends State<SettingsForm> {
             child: ListTile(
               title: Text('Profile Settings'),
               // tileColor: Colors.green,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30)),
             ),
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
@@ -229,7 +230,9 @@ class _SettingsFormState extends State<SettingsForm> {
               },
             ),
           ),
-          _education != '' ? SizedBox(height: screenHeight * 0.024459975) : SizedBox(), // 22
+          _education != ''
+              ? SizedBox(height: screenHeight * 0.024459975)
+              : SizedBox(), // 22
 
           _education == 'ss'
               ? CustomTextFormField(
@@ -311,10 +314,15 @@ class _SettingsFormState extends State<SettingsForm> {
                     var lowercaseQuery = query.toLowerCase();
                     if (query.isNotEmpty) {
                       return choiceTags.where((tag) {
-                        return tag.tagname.toLowerCase().contains(query.toLowerCase());
+                        return tag.tagname
+                            .toLowerCase()
+                            .contains(query.toLowerCase());
                       }).toList(growable: false)
                         ..sort(
-                          (a, b) => a.tagname.toLowerCase().indexOf(lowercaseQuery).compareTo(
+                          (a, b) => a.tagname
+                              .toLowerCase()
+                              .indexOf(lowercaseQuery)
+                              .compareTo(
                                 b.tagname.toLowerCase().indexOf(lowercaseQuery),
                               ),
                         );
@@ -357,13 +365,19 @@ class _SettingsFormState extends State<SettingsForm> {
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    FlatButton(
-                      color: Colors.grey,
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.grey,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
                       onPressed: () {
                         _firstnameTextController.text = globalUser.fname;
                         _lastnameTextController.text = globalUser.lname;
 
-                        BlocProvider.of<SettingsBloc>(context).add(CancelButtonPressed());
+                        BlocProvider.of<SettingsBloc>(context)
+                            .add(CancelButtonPressed());
                       },
                       child: Padding(
                         padding: EdgeInsets.symmetric(
@@ -379,13 +393,15 @@ class _SettingsFormState extends State<SettingsForm> {
                           ),
                         ),
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
                     ),
                     SizedBox(width: 20),
-                    FlatButton(
-                      color: Colors.blue,
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
                       onPressed: () {
                         BlocProvider.of<SettingsBloc>(context).add(
                           SaveButtonPressed(
@@ -412,16 +428,19 @@ class _SettingsFormState extends State<SettingsForm> {
                           ),
                         ),
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
                     ),
                   ],
                 )
-              : FlatButton(
-                  color: Colors.green,
+              : TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
                   onPressed: () {
-                    BlocProvider.of<SettingsBloc>(context).add(EditButtonPressed());
+                    BlocProvider.of<SettingsBloc>(context)
+                        .add(EditButtonPressed());
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(
@@ -436,9 +455,6 @@ class _SettingsFormState extends State<SettingsForm> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
                   ),
                 ),
         ],

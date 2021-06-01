@@ -42,29 +42,13 @@ class _HomePageDesktopState extends State<HomePageDesktop> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  "Got some doubts ?",
-                  maxLines: 3,
+                SelectableText(
+                  "Got some doubts ?\nWant a genuine opinion ?\nAsk your doubts now",
                   style: TextStyle(
                     fontSize: isMobile ? 22 : 30,
                     color: Colors.white,
                   ),
-                ),
-                Text(
-                  "Want a genuine opinion ?",
-                  maxLines: 3,
-                  style: TextStyle(
-                    fontSize: isMobile ? 22 : 30,
-                    color: Colors.white,
-                  ),
-                ),
-                Text(
-                  "Ask your doubts now",
-                  maxLines: 3,
-                  style: TextStyle(
-                    fontSize: isMobile ? 22 : 30,
-                    color: Colors.white,
-                  ),
+                  textAlign: TextAlign.center,
                 ),
                 SizedBox(height: kDefaultPadding * 2),
                 SignUpButton(),

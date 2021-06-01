@@ -13,7 +13,6 @@ import 'package:xopinionx/global/bloc_observer.dart';
 import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/ui/global/constants.dart';
 import 'package:xopinionx/ui/global/theme/bloc/theme_bloc.dart';
-import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/screens/ask_query_page/ask_query_page.dart';
 import 'package:xopinionx/ui/screens/chats_page/chats_screen.dart';
 import 'package:xopinionx/ui/screens/donation_page/donation_page.dart';
@@ -115,65 +114,65 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
             value: TagsProvider(),
           ),
         ],
-        // child: MaterialApp(
-        //   title: 'Opinionx',
-        //   debugShowCheckedModeBanner: false,
-        //   theme: widget.state.appThemeData,
-        //   builder: (context, widget) {
-        //     return ResponsiveWrapper.builder(
-        //       BouncingScrollWrapper.builder(context, widget),
-        //       maxWidth: 1920,
-        //       minWidth: 480,
-        //       defaultScale: true,
-        //       breakpoints: [
-        //         ResponsiveBreakpoint.resize(480, name: MOBILE),
-        //         ResponsiveBreakpoint.autoScale(800, name: TABLET),
-        //         ResponsiveBreakpoint.resize(1200, name: DESKTOP),
-        //         ResponsiveBreakpoint.autoScale(2460, name: "4K"),
-        //       ],
-        //       background: Container(
-        //         color: Color(0xFFF5F5F5),
-        //       ),
-        //     );
-        //   },
-        //   routes: <String, WidgetBuilder>{
-        //     MainRoutes.loginRoute: (context) => LoginPage(),
-        //     MainRoutes.registerRoute: (context) => RegisterPage(),
-        //     MainRoutes.verificationRoute: (context) => VerificationPage(),
-        //     MainRoutes.donationRoute: (context) => DonationPage(),
-        //     MainRoutes.homePageRoute: (context) => HomePage(),
-        //     MainRoutes.historyRoute: (context) => HistoryPage(),
-        //     MainRoutes.profileRoute: (context) => ProfilePage(),
-        //     MainRoutes.userHomeRoute: (context) => UserHomePage(),
-        //     MainRoutes.askQueryRoute: (context) => AskQueryPage(),
-        //     MainRoutes.settingsRoute: (context) => SettingsPage(),
-        //     MainRoutes.chatRoute: (context) => ChatPage(),
-        //     MainRoutes.userQueries: (context) => UserQueries(),
-        //   },
-        //   home: BlocBuilder<AuthBloc, AuthState>(
-        //     builder: (context, state) {
-        //       initializeUtils(context);
-        //       if (state is AuthUnInitialized)
-        //         return HomePage();
-        //       else if (state is AuthUnAuthenticated)
-        //         return HomePage();
-        //       else if (state is AuthAuthenticated) {
-        //         return UserHomePage();
-        //       } else if (state is AuthNeedsVerification)
-        //         return VerificationPage();
-        //       else if (state is AuthNeedsProfileComplete)
-        //         return ProfilePage();
-        //       else
-        //         return SafeArea(
-        //           child: Scaffold(
-        //             body: Center(
-        //               child: CircularProgressIndicator(),
-        //             ),
-        //           ),
-        //         );
-        //     },
-        //   ),
-        // ),
+        // // // // child: MaterialApp(
+        // // // //   title: 'Opinionx',
+        // // // //   debugShowCheckedModeBanner: false,
+        // // // //   theme: widget.state.appThemeData,
+        // // // //   builder: (context, widget) {
+        // // // //     return ResponsiveWrapper.builder(
+        // // // //       BouncingScrollWrapper.builder(context, widget),
+        // // // //       maxWidth: 1920,
+        // // // //       minWidth: 480,
+        // // // //       defaultScale: true,
+        // // // //       breakpoints: [
+        // // // //         ResponsiveBreakpoint.resize(480, name: MOBILE),
+        // // // //         ResponsiveBreakpoint.autoScale(800, name: TABLET),
+        // // // //         ResponsiveBreakpoint.resize(1200, name: DESKTOP),
+        // // // //         ResponsiveBreakpoint.autoScale(2460, name: "4K"),
+        // // // //       ],
+        // // // //       background: Container(
+        // // // //         color: Color(0xFFF5F5F5),
+        // // // //       ),
+        // // // //     );
+        // // // //   },
+        // // // //   routes: <String, WidgetBuilder>{
+        // // // //     MainRoutes.loginRoute: (context) => LoginPage(),
+        // // // //     MainRoutes.registerRoute: (context) => RegisterPage(),
+        // // // //     MainRoutes.verificationRoute: (context) => VerificationPage(),
+        // // // //     MainRoutes.donationRoute: (context) => DonationPage(),
+        // // // //     MainRoutes.homePageRoute: (context) => HomePage(),
+        // // // //     MainRoutes.historyRoute: (context) => HistoryPage(),
+        // // // //     MainRoutes.profileRoute: (context) => ProfilePage(),
+        // // // //     MainRoutes.userHomeRoute: (context) => UserHomePage(),
+        // // // //     MainRoutes.askQueryRoute: (context) => AskQueryPage(),
+        // // // //     MainRoutes.settingsRoute: (context) => SettingsPage(),
+        // // // //     MainRoutes.chatRoute: (context) => ChatPage(),
+        // // // //     MainRoutes.userQueries: (context) => UserQueries(),
+        // // // //   },
+        // // // //   home: BlocBuilder<AuthBloc, AuthState>(
+        // // // //     builder: (context, state) {
+        // // // //       initializeUtils(context);
+        // // // //       if (state is AuthUnInitialized)
+        // // // //         return HomePage();
+        // // // //       else if (state is AuthUnAuthenticated)
+        // // // //         return HomePage();
+        // // // //       else if (state is AuthAuthenticated) {
+        // // // //         return UserHomePage();
+        // // // //       } else if (state is AuthNeedsVerification)
+        // // // //         return VerificationPage();
+        // // // //       else if (state is AuthNeedsProfileComplete)
+        // // // //         return ProfilePage();
+        // // // //       else
+        // // // //         return SafeArea(
+        // // // //           child: Scaffold(
+        // // // //             body: Center(
+        // // // //               child: CircularProgressIndicator(),
+        // // // //             ),
+        // // // //           ),
+        // // // //         );
+        // // // //     },
+        // // // //   ),
+        // // // // ),
         child: BlocProvider<AuthBloc>(
           create: (context) => AuthBloc(),
           child: GetMaterialApp.router(
@@ -204,8 +203,9 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
                     MaterialPage(child: AskQueryPage()),
                 MainRoutes.settingsRoute: (_, __) =>
                     MaterialPage(child: SettingsPage()),
-                MainRoutes.chatRoute: (_, __) =>
-                    MaterialPage(child: ChatPage()),
+                // TODO: Pass Chat Model
+                MainRoutes.chatRoute: (_, chatModel) =>
+                    MaterialPage(child: ChatPage(chatModel: chatModel)),
                 MainRoutes.userQueries: (_, __) =>
                     MaterialPage(child: UserQueries()),
               },
@@ -228,48 +228,32 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
               );
             },
 
-            // home: BlocBuilder<AuthBloc, AuthState>(
-            //   builder: (context, state) {
-            //     initializeUtils(context);
-            //     if (state is AuthUnInitialized)
-            //       return HomePage();
-            //     else if (state is AuthUnAuthenticated)
-            //       return HomePage();
-            //     else if (state is AuthAuthenticated) {
-            //       return UserHomePage();
-            //     } else if (state is AuthNeedsVerification)
-            //       return VerificationPage();
-            //     else if (state is AuthNeedsProfileComplete)
-            //       return ProfilePage();
-            //     else
-            //       return SafeArea(
-            //         child: Scaffold(
-            //           body: Center(
-            //             child: CircularProgressIndicator(),
-            //           ),
-            //         ),
-            //       );
-            //   },
-            // ),
+            // // // // home: BlocBuilder<AuthBloc, AuthState>(
+            // // // //   builder: (context, state) {
+            // // // //     initializeUtils(context);
+            // // // //     if (state is AuthUnInitialized)
+            // // // //       return HomePage();
+            // // // //     else if (state is AuthUnAuthenticated)
+            // // // //       return HomePage();
+            // // // //     else if (state is AuthAuthenticated) {
+            // // // //       return UserHomePage();
+            // // // //     } else if (state is AuthNeedsVerification)
+            // // // //       return VerificationPage();
+            // // // //     else if (state is AuthNeedsProfileComplete)
+            // // // //       return ProfilePage();
+            // // // //     else
+            // // // //       return SafeArea(
+            // // // //         child: Scaffold(
+            // // // //           body: Center(
+            // // // //             child: CircularProgressIndicator(),
+            // // // //           ),
+            // // // //         ),
+            // // // //       );
+            // // // //   },
+            // // // // ),
           ),
         ),
       ),
     );
   }
 }
-
-// class BaseState extends StatefulWidget {
-//   @override
-//   _BaseStateState createState() => _BaseStateState();
-// }
-
-// class _BaseStateState extends State<BaseState> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocBuilder<AuthBloc, AuthState>(
-//       builder: (context, state) {
-//         initializeUtils(context);
-//       },
-//     );
-//   }
-// }

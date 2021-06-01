@@ -9,10 +9,12 @@ class RoundedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
-      color: Colors.green,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5.0),
+    return TextButton(
+      style: TextButton.styleFrom(
+        backgroundColor: Colors.green,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5.0),
+        ),
       ),
       onPressed: onPressed,
       child: Padding(

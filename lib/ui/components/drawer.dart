@@ -4,11 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xopinionx/auth/auth_bloc.dart';
 import 'package:xopinionx/global/global_helpers.dart';
 import 'package:xopinionx/global/logger.dart';
-import 'package:xopinionx/ui/global/theme/app_themes.dart';
-import 'package:xopinionx/ui/global/theme/bloc/theme_bloc.dart';
 import 'package:xopinionx/utils/navigations.dart';
 import 'package:xopinionx/utils/routes.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class MainDrawer extends StatelessWidget {
   @override

@@ -22,7 +22,10 @@ class ProblemFunctions {
   }
 
   static Future<List<ProblemModel>> getUserProblems() async {
-    final _queryList = await _firestore.collection('problems').where('userId', isEqualTo: globalUser.id).get();
+    final _queryList = await _firestore
+        .collection('problems')
+        .where('userId', isEqualTo: globalUser.id)
+        .get();
     final _docList = _queryList.docs;
     List<ProblemModel> _problemsList = [];
     for (var i = 0; i < _docList.length; i++) {
@@ -63,17 +66,19 @@ class ProblemFunctions {
       ProblemModel _problem = ProblemModel.fromJson(json);
       //TODO: complete
       for (var tag in globalUser.userTags) {
-        if (tag.toString().toLowerCase() == _problem.tag.toString().toLowerCase()) {
+        if (tag.toString().toLowerCase() ==
+            _problem.tag.toString().toLowerCase()) {
           _problems.add(_problem);
         }
       }
       logger.d('PROBLEM: ${_problem.tag.toString()}');
     });
 
-    logger.d('GETGLOBALPROBLEMS: ${_problems.length} ${globalUser.userTags.toString()}');
+    logger.d(
+        'GETGLOBALPROBLEMS: ${_problems.length} ${globalUser.userTags.toString()}');
 
     return _problems;
   }
 
-  static Future<List<ProblemModel>> againGetGlobalProblems() async {}
+  // static Future<List<ProblemModel>> againGetGlobalProblems() async {}
 }

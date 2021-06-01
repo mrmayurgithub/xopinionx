@@ -1,6 +1,3 @@
-import 'dart:html';
-
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,13 +6,11 @@ import 'package:xopinionx/api/models/problem_model.dart';
 import 'package:xopinionx/global/global_helpers.dart';
 import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/global/tags_map.dart';
-import 'package:xopinionx/responsive.dart';
 import 'package:xopinionx/ui/components/drawer.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/constants.dart';
 import 'package:xopinionx/ui/screens/user_home_page/bloc/user_home_bloc.dart';
 import 'package:xopinionx/ui/screens/user_home_page/components/report_content.dart';
-import 'package:xopinionx/ui/screens/user_home_page/components/web_menu.dart';
 import 'package:xopinionx/utils/navigations.dart';
 import 'package:xopinionx/utils/routes.dart';
 import 'package:velocity_x/velocity_x.dart';

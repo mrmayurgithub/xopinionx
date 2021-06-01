@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xopinionx/global/global_helpers.dart';
 import 'package:xopinionx/global/logger.dart';
+import 'package:xopinionx/global/tags_map.dart';
 import 'package:xopinionx/ui/components/drawer.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/screens/user_queries/bloc/user_queries_bloc.dart';
@@ -61,7 +62,8 @@ class _UserQueriesMainBodyState extends State<UserQueriesMainBody> {
                   Card(
                     // color: Colors.blueGrey[900],
                     child: Padding(
-                      padding: EdgeInsets.only(left: 200, top: 100, bottom: 100),
+                      padding:
+                          EdgeInsets.only(left: 200, top: 100, bottom: 100),
                       child: SelectableText(
                         'Your Queries',
                         style: TextStyle(fontSize: 40),
@@ -76,6 +78,7 @@ class _UserQueriesMainBodyState extends State<UserQueriesMainBody> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             ExpansionTile(
+                              // leading: ,
                               title: Text(ele.problemTitle.toString()),
                               children: [
                                 Text(ele.problemDescription),
@@ -87,7 +90,7 @@ class _UserQueriesMainBodyState extends State<UserQueriesMainBody> {
                                 Padding(
                                   padding: EdgeInsets.all(8.0),
                                   child: TextButton(
-                                    child: Text(ele.tag.toString()),
+                                    child: Text(tagsMap[ele.tag]),
                                     onPressed: () {},
                                   ),
                                 ),

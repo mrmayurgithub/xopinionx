@@ -12,7 +12,6 @@ import 'package:xopinionx/ui/global/validators.dart';
 import 'package:xopinionx/ui/screens/register_page/bloc/register_bloc.dart';
 import 'package:xopinionx/utils/navigations.dart';
 import 'package:xopinionx/utils/routes.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class RegisterPage extends StatelessWidget {
   @override
@@ -67,7 +66,7 @@ class RegistrationPageMainBody extends StatelessWidget {
               ),
             ),
             actions: [
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   // Navigator.of(context).pushNamed(MainRoutes.loginRoute);
                   nNavigator(context, MainRoutes.loginRoute);
@@ -142,7 +141,9 @@ class _SignUpFormState extends State<SignUpForm> {
       return AnimatedContainer(
         duration: Duration(milliseconds: 200),
         child: IconButton(
-          icon: _isObscure ? Icon(Icons.visibility_off_outlined) : Icon(Icons.visibility_outlined),
+          icon: _isObscure
+              ? Icon(Icons.visibility_off_outlined)
+              : Icon(Icons.visibility_outlined),
           onPressed: () {
             setState(() {
               _isObscure = !_isObscure;
@@ -269,7 +270,9 @@ class _SignUpFormState extends State<SignUpForm> {
               },
             ),
           ),
-          _education != '' ? SizedBox(height: screenHeight * 0.024459975) : SizedBox(), // 22
+          _education != ''
+              ? SizedBox(height: screenHeight * 0.024459975)
+              : SizedBox(), // 22
 
           _education == 'ss'
               ? CustomTextFormField(
@@ -348,10 +351,15 @@ class _SignUpFormState extends State<SignUpForm> {
                     var lowercaseQuery = query.toLowerCase();
                     if (query.isNotEmpty) {
                       return choiceTags.where((tag) {
-                        return tag.tagname.toLowerCase().contains(query.toLowerCase());
+                        return tag.tagname
+                            .toLowerCase()
+                            .contains(query.toLowerCase());
                       }).toList(growable: false)
                         ..sort(
-                          (a, b) => a.tagname.toLowerCase().indexOf(lowercaseQuery).compareTo(
+                          (a, b) => a.tagname
+                              .toLowerCase()
+                              .indexOf(lowercaseQuery)
+                              .compareTo(
                                 b.tagname.toLowerCase().indexOf(lowercaseQuery),
                               ),
                         );
@@ -393,8 +401,13 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
-          FlatButton(
-            color: Colors.green,
+          TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.green,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
             onPressed: () {
               if (_formkey.currentState.validate()) {
                 logger.i('validated');
@@ -412,7 +425,8 @@ class _SignUpFormState extends State<SignUpForm> {
                   ),
                 );
               } else {
-                Fluttertoast.showToast(msg: 'Check if the information you filled is correct');
+                Fluttertoast.showToast(
+                    msg: 'Check if the information you filled is correct');
               }
             },
             child: Padding(
@@ -428,9 +442,6 @@ class _SignUpFormState extends State<SignUpForm> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
             ),
           ),
           // SizedBox(height: screenHeight * 0.024459975), // 22

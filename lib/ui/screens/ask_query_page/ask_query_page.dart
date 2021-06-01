@@ -5,7 +5,6 @@ import 'package:xopinionx/global/enums.dart';
 import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/responsive.dart';
 import 'package:xopinionx/ui/components/customFormField.dart';
-import 'package:xopinionx/ui/components/drawer.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/constants.dart';
 import 'package:xopinionx/ui/global/utils.dart';
@@ -271,8 +270,13 @@ class _QueryFormState extends State<QueryForm> {
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
 
-          FlatButton(
-            color: Colors.green,
+          TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.green,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
             onPressed: () {
               if (_formkey.currentState.validate()) {
                 logger.d('Query Validated');
@@ -300,9 +304,6 @@ class _QueryFormState extends State<QueryForm> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
             ),
           ),
         ],
