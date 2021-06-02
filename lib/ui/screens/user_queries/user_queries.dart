@@ -5,6 +5,7 @@ import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/global/tags_map.dart';
 import 'package:xopinionx/ui/components/drawer.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
+import 'package:xopinionx/ui/global/constants.dart';
 import 'package:xopinionx/ui/screens/user_queries/bloc/user_queries_bloc.dart';
 
 class UserQueries extends StatelessWidget {
@@ -56,10 +57,12 @@ class _UserQueriesMainBodyState extends State<UserQueriesMainBody> {
           drawer: MainDrawer(),
           body: Scrollbar(
             child: SingleChildScrollView(
+              physics: ClampingScrollPhysics(),
               child: ListView(
                 shrinkWrap: true,
                 children: [
                   Card(
+                    color: kBackgroundColor,
                     // color: Colors.blueGrey[900],
                     child: Padding(
                       padding:
@@ -83,18 +86,24 @@ class _UserQueriesMainBodyState extends State<UserQueriesMainBody> {
                               children: [
                                 Text(ele.problemDescription),
                               ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: TextButton(
-                                    child: Text(tagsMap[ele.tag]),
+                              subtitle: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  TextButton(
                                     onPressed: () {},
+                                    child: Padding(
+                                      padding: EdgeInsets.all(4.0),
+                                      child: Text(tagsMap[ele.tag]),
+                                    ),
                                   ),
+                                ],
+                              ),
+                              trailing: IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.delete_forever_outlined,
                                 ),
-                              ],
+                              ),
                             ),
                           ],
                         ),

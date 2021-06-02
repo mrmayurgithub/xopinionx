@@ -10,6 +10,7 @@ import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/global/validators.dart';
 import 'package:xopinionx/ui/screens/register_page/bloc/register_bloc.dart';
+import 'package:xopinionx/ui/screens/settings_page/settings_page.dart';
 import 'package:xopinionx/utils/navigations.dart';
 import 'package:xopinionx/utils/routes.dart';
 
@@ -458,41 +459,4 @@ class _SignUpFormState extends State<SignUpForm> {
       ),
     );
   }
-}
-
-// List<String> choicetags = [
-//   "Time Management",
-//   "Coding",
-//   "Interview",
-//   "Internship",
-//   "Projects",
-//   "College Admission",
-//   "Boards",
-//   "Career",
-//   "Abroad Internship",
-//   "Higher Studies",
-//   "Productivity",
-//   "Motivation",
-// ];
-
-List<TagModel> choiceTags = <TagModel>[
-  TagModel(tagcode: Tags.timemanagement, tagname: 'Time Management'),
-  TagModel(tagcode: Tags.coding, tagname: 'Coding'),
-  TagModel(tagcode: Tags.interview, tagname: 'Interview'),
-  TagModel(tagcode: Tags.internship, tagname: 'Internship'),
-  TagModel(tagcode: Tags.projects, tagname: 'Projects'),
-  TagModel(tagcode: Tags.collegeadmission, tagname: 'College Admission'),
-  TagModel(tagcode: Tags.boards, tagname: 'Career'),
-  TagModel(tagcode: Tags.abroadinternship, tagname: 'Abroad Internship'),
-  TagModel(tagcode: Tags.higherstudies, tagname: 'Abroad Studies'),
-  TagModel(tagcode: Tags.productivity, tagname: 'Productivity'),
-];
-
-class TagModel extends Equatable {
-  final Tags tagcode;
-  final String tagname;
-  TagModel({@required this.tagcode, @required this.tagname});
-
-  @override
-  List<Object> get props => [tagcode, tagname];
 }

@@ -23,6 +23,7 @@ class LoginPage extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class LoginMainBody extends StatelessWidget {
   bool isProgress = false;
   @override
@@ -60,7 +61,6 @@ class LoginMainBody extends StatelessWidget {
       builder: (context, state) {
         return SafeArea(
           child: Scaffold(
-            // extendBodyBehindAppBar: true,
             appBar: AppBar(
               automaticallyImplyLeading: false,
               elevation: 0.0,
@@ -120,17 +120,9 @@ class LoginMainBody extends StatelessWidget {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                        // color: Colors.black,
                         borderRadius: BorderRadius.circular(20),
                         shape: BoxShape.rectangle,
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //     color: Colors.grey,
-                        //     blurRadius: 15.0,
-                        //   ),
-                        // ],
                       ),
-                      // height: screenHeight / 2,
                       width: 570,
                       child: Padding(
                         padding: EdgeInsets.all(kDefaultPadding * 1.5),

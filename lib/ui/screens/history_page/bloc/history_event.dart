@@ -14,3 +14,5 @@ class ChatButtonPressed extends HistoryEvent {
   @override
   List<Object> get props => [problemModel];
 }
+
+class UserHistoryRequested extends HistoryEvent {}

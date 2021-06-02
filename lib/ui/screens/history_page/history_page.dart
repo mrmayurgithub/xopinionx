@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xopinionx/ui/components/drawer.dart';
 import 'package:xopinionx/ui/screens/history_page/bloc/history_bloc.dart';
+import 'package:xopinionx/ui/screens/user_home_page/bloc/user_home_bloc.dart';
 
 class HistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HistoryBloc(),
+      create: (context) => HistoryBloc()..add(UserHistoryRequested()),
       child: HistoryMainBody(),
     );
   }
@@ -29,6 +30,7 @@ class _HistoryMainBodyState extends State<HistoryMainBody> {
       },
       builder: (context, state) {
         return Scaffold(
+          appBar: AppBar(),
           drawer: MainDrawer(),
           body: Center(
             child: SingleChildScrollView(

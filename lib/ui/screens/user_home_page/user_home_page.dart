@@ -304,6 +304,7 @@ class _HomeMainListState extends State<HomeMainList> {
 
 class QueryList extends StatelessWidget {
   final List<ProblemModel> _problems = globalProblemsList;
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -352,7 +353,7 @@ class QueryList extends StatelessWidget {
                                         TextButton(
                                           onPressed: () {},
                                           child: Padding(
-                                            padding: EdgeInsets.all(8.0),
+                                            padding: EdgeInsets.all(4.0),
                                             child: Text(tagsMap[ele.tag]),
                                           ),
                                           style: TextButton.styleFrom(
@@ -439,6 +440,29 @@ class QueryList extends StatelessWidget {
                                 // Divider(),
                               ],
                             ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(
+                                onPressed: () {},
+                                child: Text(
+                                  "Previous",
+                                  style: TextStyle(
+                                    color: currentIndex == 0
+                                        ? Colors.blue.withOpacity(0.3)
+                                        : Colors.blue,
+                                  ),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {},
+                                child: Text(
+                                  "Next",
+                                  style: TextStyle(),
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
