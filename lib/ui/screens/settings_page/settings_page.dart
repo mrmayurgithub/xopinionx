@@ -65,10 +65,11 @@ class _SettingsMainBodyState extends State<SettingsMainBody> {
                 },
                 child: Center(
                   child: SingleChildScrollView(
+                    // ignore: sized_box_for_whitespace
                     child: Container(
                       width: 570,
                       child: Padding(
-                        padding: EdgeInsets.all(40.0),
+                        padding: const EdgeInsets.all(40.0),
                         child: SettingsForm(
                           enabled: editable,
                         ),
@@ -84,6 +85,32 @@ class _SettingsMainBodyState extends State<SettingsMainBody> {
     );
   }
 }
+
+List<DropdownMenuItem<String>> _langs = <DropdownMenuItem<String>>[
+  const DropdownMenuItem<String>(
+    value: 'en',
+    child: Text('English'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'hi',
+    child: Text('Hindi'),
+  ),
+];
+
+List<DropdownMenuItem<String>> _edLevel = <DropdownMenuItem<String>>[
+  const DropdownMenuItem<String>(
+    value: 'ss',
+    child: Text('School Student'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'cs',
+    child: Text('College Student'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'pr',
+    child: Text('Professional'),
+  ),
+];
 
 class SettingsForm extends StatefulWidget {
   final bool enabled;
@@ -135,7 +162,7 @@ class _SettingsFormState extends State<SettingsForm> {
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: ListTile(
-              title: Text('Profile Settings'),
+              title: const Text('Profile Settings'),
               // tileColor: Colors.green,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30)),
@@ -152,7 +179,7 @@ class _SettingsFormState extends State<SettingsForm> {
             hintText: _firstnameTextController.text,
             keyboardType: TextInputType.name,
             validator: _validator.validateName,
-            prefixIcon: Icon(Icons.person_outline),
+            prefixIcon: const Icon(Icons.person_outline),
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
           CustomTextFormField(
@@ -165,28 +192,19 @@ class _SettingsFormState extends State<SettingsForm> {
             hintText: _lastnameTextController.text,
             keyboardType: TextInputType.name,
             validator: _validator.validateName,
-            prefixIcon: Icon(Icons.person_outline),
+            prefixIcon: const Icon(Icons.person_outline),
           ),
 
           SizedBox(height: screenHeight * 0.024459975), // 22
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            child: DropdownButtonFormField(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: DropdownButtonFormField<String>(
               value: _langPref,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Language Preference',
                 hintText: 'Preferred mode of communication',
               ),
-              items: [
-                DropdownMenuItem<String>(
-                  child: Text('English'),
-                  value: 'en',
-                ),
-                DropdownMenuItem<String>(
-                  child: Text('Hindi'),
-                  value: 'hi',
-                ),
-              ],
+              items: _langs,
               onChanged: (value) {
                 setState(() {
                   _langPref = value;
@@ -196,33 +214,17 @@ class _SettingsFormState extends State<SettingsForm> {
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            child: DropdownButtonFormField(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: DropdownButtonFormField<String>(
               value: _education,
               decoration: InputDecoration(
                 labelText: 'Education Level',
                 hintText: 'Education Level',
                 disabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(
-                    color: Colors.black,
-                  ),
                 ),
               ),
-              items: [
-                DropdownMenuItem<String>(
-                  child: Text('School Student'),
-                  value: 'ss',
-                ),
-                DropdownMenuItem<String>(
-                  child: Text('College Student'),
-                  value: 'cs',
-                ),
-                DropdownMenuItem<String>(
-                  child: Text('Professional'),
-                  value: 'pr',
-                ),
-              ],
+              items: _edLevel,
               onChanged: (value) {
                 setState(() {
                   _education = value;
@@ -230,79 +232,83 @@ class _SettingsFormState extends State<SettingsForm> {
               },
             ),
           ),
-          _education != ''
-              ? SizedBox(height: screenHeight * 0.024459975)
-              : SizedBox(), // 22
+          if (_education != '')
+            SizedBox(height: screenHeight * 0.024459975)
+          else
+            const SizedBox(), // 22
 
-          _education == 'ss'
-              ? CustomTextFormField(
-                  enabled: widget.enabled,
-                  nextNode: _chipNode,
-                  currentNode: _eduYearNode,
-                  textInputAction: TextInputAction.done,
-                  maxLines: 1,
-                  fieldController: _eduYearTextController,
-                  hintText: 'School Year',
-                  prefixIcon: Icon(Icons.lock_outline),
-                  keyboardType: TextInputType.text,
-                  validator: (val) {
-                    int x = int.parse(_eduYearTextController.text.toString());
-                    if (x >= 9 && x <= 12) {
-                      return null;
-                    } else {
-                      return 'Only students from 9th class upto 12th can register.';
-                    }
-                  },
-                )
-              : SizedBox(),
-          _education == 'cs'
-              ? CustomTextFormField(
-                  enabled: widget.enabled,
-                  nextNode: _chipNode,
-                  currentNode: _eduYearNode,
-                  textInputAction: TextInputAction.done,
-                  maxLines: 1,
-                  fieldController: _eduYearTextController,
-                  hintText: 'Enter your College Year',
-                  prefixIcon: Icon(Icons.lock_outline),
-                  keyboardType: TextInputType.text,
-                  validator: (val) {
-                    int x = int.parse(_eduYearTextController.text.toString());
-                    if (x >= 1 && x <= 4) {
-                      return null;
-                    } else {
-                      return 'Only students from 1st year class upto 5th year can register.';
-                    }
-                  },
-                )
-              : SizedBox(),
-          _education == 'pr'
-              ? CustomTextFormField(
-                  enabled: widget.enabled,
-                  nextNode: _chipNode,
-                  currentNode: _eduYearNode,
-                  textInputAction: TextInputAction.done,
-                  maxLines: 1,
-                  fieldController: _eduYearTextController,
-                  hintText: 'Enter years of experience',
-                  prefixIcon: Icon(Icons.lock_outline),
-                  keyboardType: TextInputType.text,
-                  validator: (val) {
-                    int x = int.parse(_eduYearTextController.text.toString());
-                    if (x <= 50) {
-                      return null;
-                    } else {
-                      return 'Enter a valid value';
-                    }
-                  },
-                )
-              : SizedBox(),
+          if (_education == 'ss')
+            CustomTextFormField(
+              enabled: widget.enabled,
+              nextNode: _chipNode,
+              currentNode: _eduYearNode,
+              textInputAction: TextInputAction.done,
+              maxLines: 1,
+              fieldController: _eduYearTextController,
+              hintText: 'School Year',
+              prefixIcon: const Icon(Icons.lock_outline),
+              keyboardType: TextInputType.text,
+              validator: (val) {
+                final int x = int.parse(_eduYearTextController.text.toString());
+                if (x >= 9 && x <= 12) {
+                  return null;
+                } else {
+                  return 'Only students from 9th class upto 12th can register.';
+                }
+              },
+            )
+          else
+            const SizedBox(),
+          if (_education == 'cs')
+            CustomTextFormField(
+              enabled: widget.enabled,
+              nextNode: _chipNode,
+              currentNode: _eduYearNode,
+              textInputAction: TextInputAction.done,
+              maxLines: 1,
+              fieldController: _eduYearTextController,
+              hintText: 'Enter your College Year',
+              prefixIcon: const Icon(Icons.lock_outline),
+              keyboardType: TextInputType.text,
+              validator: (val) {
+                final int x = int.parse(_eduYearTextController.text.toString());
+                if (x >= 1 && x <= 4) {
+                  return null;
+                } else {
+                  return 'Only students from 1st year class upto 5th year can register.';
+                }
+              },
+            )
+          else
+            const SizedBox(),
+          if (_education == 'pr')
+            CustomTextFormField(
+              enabled: widget.enabled,
+              nextNode: _chipNode,
+              currentNode: _eduYearNode,
+              textInputAction: TextInputAction.done,
+              maxLines: 1,
+              fieldController: _eduYearTextController,
+              hintText: 'Enter years of experience',
+              prefixIcon: const Icon(Icons.lock_outline),
+              keyboardType: TextInputType.text,
+              validator: (val) {
+                final int x = int.parse(_eduYearTextController.text.toString());
+                if (x <= 50) {
+                  return null;
+                } else {
+                  return 'Enter a valid value';
+                }
+              },
+            )
+          else
+            const SizedBox(),
           SizedBox(height: screenHeight * 0.024459975), // 22
           // Center(
           //   child: Text('Select the fields you feel free to talk about'),
           // ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Column(
               children: [
                 ChipsInput(
@@ -311,7 +317,7 @@ class _SettingsFormState extends State<SettingsForm> {
                   focusNode: _chipNode,
                   enabled: false,
                   findSuggestions: (String query) {
-                    var lowercaseQuery = query.toLowerCase();
+                    final String lowercaseQuery = query.toLowerCase();
                     if (query.isNotEmpty) {
                       return choiceTags.where((tag) {
                         return tag.tagname
@@ -361,94 +367,31 @@ class _SettingsFormState extends State<SettingsForm> {
             ),
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
-          widget.enabled == true
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: Colors.grey,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () {
-                        _firstnameTextController.text = globalUser.fname;
-                        _lastnameTextController.text = globalUser.lname;
-
-                        BlocProvider.of<SettingsBloc>(context)
-                            .add(CancelButtonPressed());
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 16,
-                          horizontal: 60,
-                        ),
-                        child: Text(
-                          'Cancel',
-                          style: TextStyle(
-                            letterSpacing: 1.3,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 20),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () {
-                        BlocProvider.of<SettingsBloc>(context).add(
-                          SaveButtonPressed(
-                            fname: _firstnameTextController.text,
-                            lname: _lastnameTextController.text,
-                            educationLevel: _education,
-                            eduYear: int.parse(_eduYearTextController.text),
-                            langpref: _langPref,
-                            usertags: _usertags,
-                          ),
-                        );
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 16,
-                          horizontal: 60,
-                        ),
-                        child: Text(
-                          'Save',
-                          style: TextStyle(
-                            letterSpacing: 1.3,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              : TextButton(
+          if (widget.enabled == true)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor: Colors.green,
+                    backgroundColor: Colors.grey,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                   onPressed: () {
+                    _firstnameTextController.text = globalUser.fname;
+                    _lastnameTextController.text = globalUser.lname;
+
                     BlocProvider.of<SettingsBloc>(context)
-                        .add(EditButtonPressed());
+                        .add(CancelButtonPressed());
                   },
-                  child: Padding(
+                  child: const Padding(
                     padding: EdgeInsets.symmetric(
                       vertical: 16,
-                      horizontal: 120,
+                      horizontal: 60,
                     ),
                     child: Text(
-                      'Edit',
+                      'Cancel',
                       style: TextStyle(
                         letterSpacing: 1.3,
                         color: Colors.white,
@@ -457,6 +400,69 @@ class _SettingsFormState extends State<SettingsForm> {
                     ),
                   ),
                 ),
+                const SizedBox(width: 20),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  onPressed: () {
+                    BlocProvider.of<SettingsBloc>(context).add(
+                      SaveButtonPressed(
+                        fname: _firstnameTextController.text,
+                        lname: _lastnameTextController.text,
+                        educationLevel: _education,
+                        eduYear: int.parse(_eduYearTextController.text),
+                        langpref: _langPref,
+                        usertags: _usertags,
+                      ),
+                    );
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 16,
+                      horizontal: 60,
+                    ),
+                    child: Text(
+                      'Save',
+                      style: TextStyle(
+                        letterSpacing: 1.3,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          else
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.green,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              onPressed: () {
+                BlocProvider.of<SettingsBloc>(context).add(EditButtonPressed());
+              },
+              child: const Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 16,
+                  horizontal: 120,
+                ),
+                child: Text(
+                  'Edit',
+                  style: TextStyle(
+                    letterSpacing: 1.3,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
     );
@@ -464,22 +470,22 @@ class _SettingsFormState extends State<SettingsForm> {
 }
 
 List<TagModel> choiceTags = <TagModel>[
-  TagModel(tagcode: Tags.timemanagement, tagname: 'Time Management'),
-  TagModel(tagcode: Tags.coding, tagname: 'Coding'),
-  TagModel(tagcode: Tags.interview, tagname: 'Interview'),
-  TagModel(tagcode: Tags.internship, tagname: 'Internship'),
-  TagModel(tagcode: Tags.projects, tagname: 'Projects'),
-  TagModel(tagcode: Tags.collegeadmission, tagname: 'College Admission'),
-  TagModel(tagcode: Tags.boards, tagname: 'Career'),
-  TagModel(tagcode: Tags.abroadinternship, tagname: 'Abroad Internship'),
-  TagModel(tagcode: Tags.higherstudies, tagname: 'Abroad Studies'),
-  TagModel(tagcode: Tags.productivity, tagname: 'Productivity'),
+  const TagModel(tagcode: Tags.timemanagement, tagname: 'Time Management'),
+  const TagModel(tagcode: Tags.coding, tagname: 'Coding'),
+  const TagModel(tagcode: Tags.interview, tagname: 'Interview'),
+  const TagModel(tagcode: Tags.internship, tagname: 'Internship'),
+  const TagModel(tagcode: Tags.projects, tagname: 'Projects'),
+  const TagModel(tagcode: Tags.collegeadmission, tagname: 'College Admission'),
+  const TagModel(tagcode: Tags.boards, tagname: 'Career'),
+  const TagModel(tagcode: Tags.abroadinternship, tagname: 'Abroad Internship'),
+  const TagModel(tagcode: Tags.higherstudies, tagname: 'Abroad Studies'),
+  const TagModel(tagcode: Tags.productivity, tagname: 'Productivity'),
 ];
 
 class TagModel extends Equatable {
   final Tags tagcode;
   final String tagname;
-  TagModel({@required this.tagcode, @required this.tagname});
+  const TagModel({@required this.tagcode, @required this.tagname});
 
   @override
   List<Object> get props => [tagcode, tagname];

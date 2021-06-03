@@ -28,14 +28,15 @@ class LoginMainBody extends StatelessWidget {
   bool isProgress = false;
   @override
   Widget build(BuildContext context) {
-    bool isMobile = Responsive.isMobile(context);
+    //TODO: check if final is good
+    final bool isMobile = Responsive.isMobile(context);
 
     return BlocConsumer<LoginBloc, LoginState>(
       listener: (context, state) async {
         if (state is LoginFailure) {
           // Navigator.of(context).pop();
           context.vxNav.pop();
-          Fluttertoast.showToast(msg: "LoginPage Error: " + state.message);
+          Fluttertoast.showToast(msg: "LoginPage Error: ${state.message}");
           logger.wtf(state.message);
         }
         if (state is LoginSuccess) {
@@ -74,7 +75,7 @@ class LoginMainBody extends StatelessWidget {
                   // );
                   pNavigator(context, MainRoutes.homePageRoute);
                 },
-                child: Text(
+                child: const Text(
                   'OPINIONX',
                   style: TextStyle(
                     color: Colors.green,
@@ -89,11 +90,11 @@ class LoginMainBody extends StatelessWidget {
                     nNavigator(context, MainRoutes.registerRoute);
                   },
                   child: Container(
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       vertical: kDefaultPadding / 4,
                       horizontal: kDefaultPadding / 3,
                     ),
-                    child: Text(
+                    child: const Text(
                       'Sign Up',
                       style: TextStyle(
                         letterSpacing: 1.2,
@@ -108,7 +109,6 @@ class LoginMainBody extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       "Get started with Opinionx",
@@ -121,12 +121,11 @@ class LoginMainBody extends StatelessWidget {
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        shape: BoxShape.rectangle,
                       ),
                       width: 570,
                       child: Padding(
-                        padding: EdgeInsets.all(kDefaultPadding * 1.5),
-                        child: LoginForm(isProgress),
+                        padding: const EdgeInsets.all(kDefaultPadding * 1.5),
+                        child: LoginForm(isLoading: isProgress),
                       ),
                     ),
                   ],
@@ -143,7 +142,7 @@ class LoginMainBody extends StatelessWidget {
 class LoginForm extends StatefulWidget {
   final bool isLoading;
 
-  const LoginForm(this.isLoading);
+  const LoginForm({this.isLoading});
   @override
   _LoginFormState createState() => _LoginFormState();
 }
@@ -161,11 +160,11 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     Widget _showPassIcon() {
       return AnimatedContainer(
-        duration: Duration(milliseconds: 200),
+        duration: const Duration(milliseconds: 200),
         child: IconButton(
           icon: _isObscure
-              ? Icon(Icons.visibility_off_outlined)
-              : Icon(Icons.visibility_outlined),
+              ? const Icon(Icons.visibility_off_outlined)
+              : const Icon(Icons.visibility_outlined),
           onPressed: () {
             setState(() {
               _isObscure = !_isObscure;
@@ -188,7 +187,7 @@ class _LoginFormState extends State<LoginForm> {
             hintText: 'Email',
             keyboardType: TextInputType.emailAddress,
             validator: _validator.validateEmail,
-            prefixIcon: Icon(Icons.email_outlined),
+            prefixIcon: const Icon(Icons.email_outlined),
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
           CustomTextFormField(
@@ -197,7 +196,7 @@ class _LoginFormState extends State<LoginForm> {
             maxLines: 1,
             fieldController: _passtextController,
             hintText: 'Password',
-            prefixIcon: Icon(Icons.lock_outline),
+            prefixIcon: const Icon(Icons.lock_outline),
             keyboardType: TextInputType.text,
             validator: _validator.validatePassword,
             obscureText: _isObscure,
@@ -206,29 +205,6 @@ class _LoginFormState extends State<LoginForm> {
           SizedBox(height: screenHeight * 0.024459975), // 22
 
           TextButton(
-            child: widget.isLoading
-                ? Container(
-                    child: CircularProgressIndicator(),
-                    padding: EdgeInsets.symmetric(
-                      vertical: kDefaultPadding / 3.5,
-                      horizontal: kDefaultPadding * 3.9,
-                    ),
-                  )
-                : Container(
-                    padding: EdgeInsets.symmetric(
-                      vertical: kDefaultPadding / 2.5,
-                      horizontal: kDefaultPadding * 3,
-                    ),
-                    child: Text(
-                      'Login',
-                      style: TextStyle(
-                        letterSpacing: 1.3,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
             onPressed: () {
               FocusScope.of(context).unfocus();
               TextEditingController().clear();
@@ -250,6 +226,29 @@ class _LoginFormState extends State<LoginForm> {
                 borderRadius: BorderRadius.circular(kDefaultPadding / 2),
               ),
             ),
+            child: widget.isLoading
+                ? Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: kDefaultPadding / 3.5,
+                      horizontal: kDefaultPadding * 3.9,
+                    ),
+                    child: const CircularProgressIndicator(),
+                  )
+                : Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: kDefaultPadding / 2.5,
+                      horizontal: kDefaultPadding * 3,
+                    ),
+                    child: const Text(
+                      'Login',
+                      style: TextStyle(
+                        letterSpacing: 1.3,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
           ),
           // SizedBox(height: screenHeight * 0.024459975), // 22
 

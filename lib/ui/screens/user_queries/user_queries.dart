@@ -129,13 +129,11 @@
 //   }
 // }
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:xopinionx/api/functions/problem_functions.dart';
 import 'package:xopinionx/api/models/problem_model.dart';
-import 'package:xopinionx/global/global_helpers.dart';
 import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/global/tags_map.dart';
 import 'package:xopinionx/ui/components/drawer.dart';
@@ -284,7 +282,7 @@ class _UserQueryListState extends State<UserQueryList> {
             Container(
               width: double.infinity,
               color: kBackgroundColor,
-              child: Padding(
+              child: const Padding(
                 padding: EdgeInsets.only(left: 200, top: 100, bottom: 100),
                 child: SelectableText(
                   'Your Queries',
@@ -292,62 +290,60 @@ class _UserQueryListState extends State<UserQueryList> {
                 ),
               ),
             ),
-            userQueries == null
-                ? Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text("No User Queries"),
-                    ),
-                  )
-                : Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: userQueries.length,
-                      itemBuilder: (context, index) {
-                        return ExpansionTile(
-                          title: Text(userQueries[index].problemTitle),
+            if (userQueries == null)
+              const Center(
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text("No User Queries"),
+                ),
+              )
+            else
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: userQueries.length,
+                  itemBuilder: (context, index) {
+                    return ExpansionTile(
+                      title: Text(userQueries[index].problemTitle),
+                      subtitle: TextButton(
+                        onPressed: () {},
+                        child: Row(
                           children: [
-                            SelectableText(
-                                userQueries[index].problemDescription),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                TextButton(
-                                  onPressed: () {},
-                                  child: Text("Chat"),
-                                ),
-                              ],
+                            TextButton(
+                              onPressed: () {},
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Text(tagsMap[userQueries[index].tag]),
+                              ),
                             ),
                           ],
-                          subtitle: TextButton(
-                            onPressed: () {},
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                TextButton(
-                                  onPressed: () {},
-                                  child: Padding(
-                                    padding: EdgeInsets.all(4.0),
-                                    child:
-                                        Text(tagsMap[userQueries[index].tag]),
-                                  ),
-                                ),
-                              ],
+                        ),
+                      ),
+                      trailing: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.delete_outline,
+                        ),
+                      ),
+                      children: [
+                        SelectableText(userQueries[index].problemDescription),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                              onPressed: () {},
+                              child: const Text("Chat"),
                             ),
-                          ),
-                          trailing: IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.delete_outline,
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+                          ],
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
           ],
         ),
       ),

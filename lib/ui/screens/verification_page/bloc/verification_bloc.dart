@@ -22,31 +22,32 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
         logger.wtf('Verification Started');
         final _user = FirebaseAuth.instance.currentUser;
         await _user.reload();
-        bool _isEmailVerified = _user.emailVerified;
+        final bool _isEmailVerified = _user.emailVerified;
         logger.wtf("Email Verified: $_isEmailVerified");
         if (_isEmailVerified) {
           yield VerificationSuccess();
         } else if (event.isFirstTime) {
-          yield (VerificationFailed(
+          yield VerificationFailed(
             message: "Click on the link sent to verify your email id",
-          ));
+          );
         } else {
-          yield (VerificationFailed(
-            message: "Verification Failed. Please Click on the link sent to your email id",
-          ));
+          yield VerificationFailed(
+            message:
+                "Verification Failed. Please Click on the link sent to your email id",
+          );
         }
       } else if (event is ResendVerificationMail) {
-        yield (VerificationInProgress());
+        yield VerificationInProgress();
         final _user = FirebaseAuth.instance.currentUser;
         await _user.sendEmailVerification();
-        yield (ResendVerification());
+        yield ResendVerification();
       }
     } on PlatformException catch (e) {
-      yield (VerificationFailed(message: "Error: ${e.message}"));
+      yield VerificationFailed(message: "Error: ${e.message}");
     } on TimeoutException catch (e) {
-      yield (VerificationFailed(message: "Timeout: ${e.message}"));
+      yield VerificationFailed(message: "Timeout: ${e.message}");
     } catch (e) {
-      yield (VerificationFailed(message: e.toString()));
+      yield VerificationFailed(message: e.toString());
     }
   }
 }

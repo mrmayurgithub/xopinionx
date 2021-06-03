@@ -7,7 +7,7 @@ class NavigationBarMobile extends StatelessWidget {
     return Container(
       // height: ,
       constraints: BoxConstraints(maxHeight: screenHeight / 2),
-      child: Drawer(),
+      child: const Drawer(),
     );
   }
 }

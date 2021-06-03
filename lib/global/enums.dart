@@ -16,6 +16,6 @@ enum Tags {
 }
 
 enum Languages {
-  Hindi,
-  English,
+  hindi,
+  english,
 }

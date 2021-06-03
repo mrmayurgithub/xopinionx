@@ -20,7 +20,7 @@ class ChatInProgress extends ChatState {}
 class ChatFailure extends ChatState {
   final String message;
 
-  ChatFailure({this.message});
+  const ChatFailure({this.message});
 
   @override
   List<Object> get props => [message];

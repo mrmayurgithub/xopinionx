@@ -25,8 +25,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   ) async* {
     try {
       if (event is RegisterButtonClicked) {
-        yield (RegisterInProgress());
-        await signUpWithEmailAndPass(email: event.email, password: event.password);
+        yield RegisterInProgress();
+        await signUpWithEmailAndPass(
+            email: event.email, password: event.password);
         logger.i('Signup successfull');
         await UserFunctions.createUser(
           UserModel(
@@ -44,12 +45,13 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         );
         logger.i('User created successfully');
         await FirebaseAnalytics().logSignUp(signUpMethod: "email_pass");
-        yield (RegisterSuccess());
+        yield RegisterSuccess();
       } else if (event is GoogleSignUpClicked) {
-        yield (RegisterInProgress());
+        yield RegisterInProgress();
         final _googleSignIn = GoogleSignIn();
         final GoogleSignInAccount _googleUser = await _googleSignIn.signIn();
-        final GoogleSignInAuthentication _googleAuth = await _googleUser.authentication;
+        final GoogleSignInAuthentication _googleAuth =
+            await _googleUser.authentication;
         final AuthCredential _authCredentials = GoogleAuthProvider.credential(
           idToken: _googleAuth.idToken,
           accessToken: _googleAuth.accessToken,
@@ -58,16 +60,16 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         await FirebaseAuth.instance.signInWithCredential(_authCredentials);
         await FirebaseAnalytics().logSignUp(signUpMethod: "google_signup");
 
-        yield (RegisterSuccess());
+        yield RegisterSuccess();
       }
     } on PlatformException catch (e) {
-      yield (RegisterFailed(message: "Error: ${e.message}"));
+      yield RegisterFailed(message: "Error: ${e.message}");
     } on FirebaseAuthException catch (e) {
-      yield (RegisterFailed(message: "Error: ${e.message}"));
+      yield RegisterFailed(message: "Error: ${e.message}");
     } on TimeoutException catch (e) {
-      yield (RegisterFailed(message: "Timeout: ${e.message}"));
+      yield RegisterFailed(message: "Timeout: ${e.message}");
     } catch (e) {
-      yield (RegisterFailed(message: e.toString()));
+      yield RegisterFailed(message: e.toString());
     }
   }
 }

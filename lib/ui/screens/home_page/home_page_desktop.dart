@@ -12,6 +12,7 @@ class HomePageDesktop extends StatefulWidget {
 class _HomePageDesktopState extends State<HomePageDesktop> {
   @override
   Widget build(BuildContext context) {
+    // ignore: prefer_final_locals
     bool isMobile = Responsive.isMobile(context);
     return SafeArea(
       child: Scaffold(
@@ -20,27 +21,25 @@ class _HomePageDesktopState extends State<HomePageDesktop> {
           automaticallyImplyLeading: false,
           elevation: 0.0,
           backgroundColor: Colors.transparent,
-          title: Text('OPINIONX'),
+          title: const Text('OPINIONX'),
           centerTitle: isMobile,
           actions: [
             if (!isMobile)
               TextButton(
                 onPressed: () {},
-                child: Text('About Us'),
+                child: const Text('About Us'),
               ),
             if (!isMobile)
               TextButton(
                 onPressed: () {},
-                child: Text('Donate'),
+                child: const Text('Donate'),
               ),
           ],
         ),
         body: Center(
           child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SelectableText(
                   "Got some doubts ?\nWant a genuine opinion ?\nAsk your doubts now",
@@ -50,9 +49,9 @@ class _HomePageDesktopState extends State<HomePageDesktop> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: kDefaultPadding * 2),
+                const SizedBox(height: kDefaultPadding * 2),
                 SignUpButton(),
-                SizedBox(height: kDefaultPadding * 2),
+                const SizedBox(height: kDefaultPadding * 2),
                 LoginButton(),
               ],
             ),

@@ -12,8 +12,21 @@ class _LoginButtonState extends State<LoginButton> {
   @override
   Widget build(BuildContext context) {
     return TextButton(
+      style: TextButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25),
+          side: const BorderSide(color: Colors.green),
+        ),
+      ),
+      onPressed: () {
+        BlocProvider.of<HomePageBloc>(context).add(LoginPageRequested());
+      },
       child: Container(
-        child: Text(
+        padding: const EdgeInsets.symmetric(
+          vertical: kDefaultPadding / 1.5,
+          horizontal: kDefaultPadding * 6,
+        ),
+        child: const Text(
           'Login',
           style: TextStyle(
             letterSpacing: 1.3,
@@ -21,20 +34,7 @@ class _LoginButtonState extends State<LoginButton> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        padding: EdgeInsets.symmetric(
-          vertical: kDefaultPadding / 1.5,
-          horizontal: kDefaultPadding * 6,
-        ),
       ),
-      style: TextButton.styleFrom(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(25),
-          side: BorderSide(color: Colors.green),
-        ),
-      ),
-      onPressed: () {
-        BlocProvider.of<HomePageBloc>(context).add(LoginPageRequested());
-      },
     );
   }
 }

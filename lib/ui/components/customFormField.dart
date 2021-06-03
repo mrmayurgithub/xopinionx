@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  CustomTextFormField({
+  const CustomTextFormField({
     @required TextEditingController fieldController,
     @required String hintText,
     @required Icon prefixIcon,
@@ -80,7 +80,9 @@ class CustomTextFormField extends StatelessWidget {
         hintStyle: Theme.of(context).textTheme.caption.copyWith(
               fontSize: screenHeight * 0.015565438, // 14
             ),
-        contentPadding: EdgeInsets.symmetric(horizontal: screenWidth * 0.036458333, vertical: screenHeight * 0.021124524), // h=15, v=19
+        contentPadding: EdgeInsets.symmetric(
+            horizontal: screenWidth * 0.036458333,
+            vertical: screenHeight * 0.021124524), // h=15, v=19
         hintText: _hintText,
         prefixIcon: _prefixIcon,
       ),
@@ -93,7 +95,6 @@ final kBorderRadius = BorderRadius.circular(7);
 final kInputBorderStyle = OutlineInputBorder(
   borderRadius: kBorderRadius,
   borderSide: BorderSide(
-    width: 1.0,
     color: Colors.grey[300].withOpacity(0.5),
   ),
 );

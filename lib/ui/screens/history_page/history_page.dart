@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xopinionx/ui/components/drawer.dart';
 import 'package:xopinionx/ui/screens/history_page/bloc/history_bloc.dart';
-import 'package:xopinionx/ui/screens/user_home_page/bloc/user_home_bloc.dart';
 
 class HistoryPage extends StatelessWidget {
   @override
@@ -35,11 +34,10 @@ class _HistoryMainBodyState extends State<HistoryMainBody> {
           body: Center(
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('History'),
-                  ExpansionTile(
+                  const Text('History'),
+                  const ExpansionTile(
                     title: Text('data'),
                   ),
                 ],

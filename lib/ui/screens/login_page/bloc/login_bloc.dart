@@ -19,7 +19,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       if (event is LoginButtonPressed) {
         yield LoginInProgress();
-        await signInWithEmailAndPass(email: event.email, password: event.password);
+        await signInWithEmailAndPass(
+            email: event.email, password: event.password);
 
         logger.i('Checking weather user email is verified');
         final _currentUser = FirebaseAuth.instance.currentUser;
@@ -49,7 +50,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
         logger.i("Initializing API");
         await initializeApi;
-        yield (LoginSuccess());
+        yield LoginSuccess();
       } else if (event is ForgetPassword) {
         yield LoginInProgress();
         await FirebaseAuth.instance.sendPasswordResetEmail(email: event.email);
@@ -57,13 +58,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         yield ForgetPasswordSuccess();
       }
     } on PlatformException catch (e) {
-      yield (LoginFailure(message: "Error: ${e.message}"));
+      yield LoginFailure(message: "Error: ${e.message}");
     } on FirebaseAuthException catch (e) {
-      yield (LoginFailure(message: "Error: ${e.message}"));
+      yield LoginFailure(message: "Error: ${e.message}");
     } on TimeoutException catch (e) {
-      yield (LoginFailure(message: "Timeout: ${e.message}"));
+      yield LoginFailure(message: "Timeout: ${e.message}");
     } catch (e) {
-      yield (LoginFailure(message: e.toString()));
+      yield LoginFailure(message: e.toString());
     }
   }
 }

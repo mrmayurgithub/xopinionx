@@ -49,7 +49,7 @@ class App extends StatelessWidget {
       future: _initialization,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return Text('ERROR');
+          return const Text('ERROR');
         }
         return BlocProvider(
           create: (context) => ThemeBloc(),
@@ -81,10 +81,6 @@ class MainAppWithTheme extends StatefulWidget {
 
 class _MainAppWithThemeState extends State<MainAppWithTheme> {
   @override
-  void didChangeDependencies() async {
-    super.didChangeDependencies();
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
@@ -205,7 +201,7 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
                     MaterialPage(child: SettingsPage()),
                 // TODO: Pass Chat Model
                 MainRoutes.chatRoute: (_, chatModel) =>
-                    MaterialPage(child: ChatPage(chatModel: chatModel)),
+                    MaterialPage(child: ChatPage()),
                 MainRoutes.userQueries: (_, __) =>
                     MaterialPage(child: UserQueries()),
               },
@@ -217,13 +213,13 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
                 minWidth: 480,
                 defaultScale: true,
                 breakpoints: [
-                  ResponsiveBreakpoint.resize(480, name: MOBILE),
-                  ResponsiveBreakpoint.autoScale(800, name: TABLET),
-                  ResponsiveBreakpoint.resize(1200, name: DESKTOP),
-                  ResponsiveBreakpoint.autoScale(2460, name: "4K"),
+                  const ResponsiveBreakpoint.resize(480, name: MOBILE),
+                  const ResponsiveBreakpoint.autoScale(800, name: TABLET),
+                  const ResponsiveBreakpoint.resize(1200, name: DESKTOP),
+                  const ResponsiveBreakpoint.autoScale(2460, name: "4K"),
                 ],
                 background: Container(
-                  color: Color(0xFFF5F5F5),
+                  color: const Color(0xFFF5F5F5),
                 ),
               );
             },

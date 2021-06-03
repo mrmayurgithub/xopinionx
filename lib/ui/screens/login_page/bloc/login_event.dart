@@ -10,7 +10,7 @@ abstract class LoginEvent extends Equatable {
 class LoginButtonPressed extends LoginEvent {
   final String email;
   final String password;
-  LoginButtonPressed({@required this.email, @required this.password})
+  const LoginButtonPressed({@required this.email, @required this.password})
       : assert(email != null),
         assert(password != null);
 
@@ -20,7 +20,7 @@ class LoginButtonPressed extends LoginEvent {
 
 class ForgetPassword extends LoginEvent {
   final String email;
-  ForgetPassword({this.email});
+  const ForgetPassword({this.email});
 
   @override
   List<Object> get props => [email];

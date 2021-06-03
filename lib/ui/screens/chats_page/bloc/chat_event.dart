@@ -10,7 +10,7 @@ abstract class ChatEvent extends Equatable {
 class GetChat extends ChatEvent {
   final ChatModel chatModel;
 
-  GetChat({@required this.chatModel});
+  const GetChat({@required this.chatModel});
   @override
   List<Object> get props => [chatModel];
 }
@@ -19,7 +19,7 @@ class ChatListRequested extends ChatEvent {}
 
 class GiveReview extends ChatEvent {
   final ChatModel chatModel;
-  GiveReview({@required this.chatModel});
+  const GiveReview({@required this.chatModel});
   @override
   List<Object> get props => [chatModel];
 }

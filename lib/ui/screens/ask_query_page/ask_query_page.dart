@@ -77,25 +77,25 @@ class _AskQueryMainBodyState extends State<AskQueryMainBody> {
               child: Column(
                 children: [
                   Container(
-                    constraints: BoxConstraints(maxWidth: kMaxWidth),
-                    padding: EdgeInsets.all(kDefaultPadding),
+                    constraints: const BoxConstraints(maxWidth: kMaxWidth),
+                    padding: const EdgeInsets.all(kDefaultPadding),
                     child: Column(
                       children: [
                         Row(
                           children: [
                             if (!Responsive.isDesktop(context))
                               IconButton(
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.menu,
                                   color: Colors.white,
                                 ),
                                 onPressed: () {},
                               ),
-                            Text("OPINIONX"),
-                            Spacer(),
+                            const Text("OPINIONX"),
+                            const Spacer(),
                             TextButton(
                               onPressed: () {},
-                              child: Text(
+                              child: const Text(
                                 "Cancel",
                                 style: TextStyle(),
                               ),
@@ -113,13 +113,11 @@ class _AskQueryMainBodyState extends State<AskQueryMainBody> {
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.black26,
                       borderRadius: BorderRadius.circular(20),
-                      shape: BoxShape.rectangle,
                       // boxShadow: [
                       //   BoxShadow(
                       //     color: Colors.grey,
@@ -130,8 +128,8 @@ class _AskQueryMainBodyState extends State<AskQueryMainBody> {
                     // height: screenHeight / 2,
 
                     width: kMaxWidth / 2,
-                    padding: EdgeInsets.all(kDefaultPadding),
-                    constraints: BoxConstraints(maxWidth: kMaxWidth),
+                    padding: const EdgeInsets.all(kDefaultPadding),
+                    constraints: const BoxConstraints(maxWidth: kMaxWidth),
                     child: QueryForm(),
                   ),
                 ],
@@ -144,6 +142,61 @@ class _AskQueryMainBodyState extends State<AskQueryMainBody> {
   }
 }
 
+List<DropdownMenuItem<Tags>> dropdownMenuItems = [
+  const DropdownMenuItem<Tags>(
+    value: Tags.timemanagement,
+    child: Text('Time Management'),
+  ),
+  const DropdownMenuItem<Tags>(
+    value: Tags.coding,
+    child: Text('Coding'),
+  ),
+  const DropdownMenuItem<Tags>(
+    value: Tags.interview,
+    child: Text('Interview'),
+  ),
+  const DropdownMenuItem<Tags>(
+    value: Tags.internship,
+    child: Text('Internship'),
+  ),
+  const DropdownMenuItem<Tags>(
+    value: Tags.projects,
+    child: Text('Projects'),
+  ),
+  const DropdownMenuItem<Tags>(
+    value: Tags.collegeadmission,
+    child: Text('College Admission'),
+  ),
+  const DropdownMenuItem<Tags>(
+    value: Tags.boards,
+    child: Text('Boards'),
+  ),
+  const DropdownMenuItem<Tags>(
+    value: Tags.career,
+    child: Text('Career'),
+  ),
+  // DropdownMenuItem<String>(
+  //   child: Text('Branch Selection'),
+  //   value: 'branchselection',
+  // ),
+  const DropdownMenuItem<Tags>(
+    value: Tags.abroadinternship,
+    child: Text('Abroad Internship'),
+  ),
+  const DropdownMenuItem<Tags>(
+    value: Tags.higherstudies,
+    child: Text('HigerStudies'),
+  ),
+  const DropdownMenuItem<Tags>(
+    value: Tags.productivity,
+    child: Text('Productivity'),
+  ),
+  const DropdownMenuItem<Tags>(
+    value: Tags.motivation,
+    child: Text('Motivation'),
+  ),
+];
+
 class QueryForm extends StatefulWidget {
   @override
   _QueryFormState createState() => _QueryFormState();
@@ -153,8 +206,8 @@ class _QueryFormState extends State<QueryForm> {
   final _formkey = GlobalKey<FormState>();
   final _problemTextController = TextEditingController();
   final _descriptionTextController = TextEditingController();
-  FocusNode _problemNode = FocusNode();
-  FocusNode _descriptionNode = FocusNode();
+  final FocusNode _problemNode = FocusNode();
+  final FocusNode _descriptionNode = FocusNode();
   Tags _tag;
   @override
   Widget build(BuildContext context) {
@@ -163,7 +216,7 @@ class _QueryFormState extends State<QueryForm> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('About your Query'),
+          const Text('About your Query'),
           SizedBox(height: screenHeight * 0.024459975), // 22
           _CustomTextFormField(
             currentNode: _problemNode,
@@ -174,8 +227,9 @@ class _QueryFormState extends State<QueryForm> {
             validator: (_) {
               if (_problemTextController.text.length <= 30) {
                 return 'The problem title must be atlease 30 characters long';
-              } else
+              } else {
                 return null;
+              }
             },
             maxLines: 1,
             nextNode: _descriptionNode,
@@ -189,84 +243,28 @@ class _QueryFormState extends State<QueryForm> {
             validator: (_) {
               if (_descriptionTextController.text.length <= 150) {
                 return 'The description should consist of 150 characters or more';
-              } else
+              } else {
                 return null;
+              }
             },
             maxLines: 5,
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
-          DropdownButtonFormField(
+          DropdownButtonFormField<Tags>(
             value: _tag,
             decoration: InputDecoration(
               labelText: 'Select a tag',
               hintText: 'Select a Tag',
               disabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                  color: Colors.black,
-                ),
               ),
             ),
-            onChanged: (value) {
+            onChanged: (Tags value) {
               setState(() {
                 _tag = value;
               });
             },
-            items: [
-              DropdownMenuItem<Tags>(
-                child: Text('Time Management'),
-                // value: 'timemanagement',
-                value: Tags.timemanagement,
-              ),
-              DropdownMenuItem<Tags>(
-                child: Text('Coding'),
-                value: Tags.coding,
-              ),
-              DropdownMenuItem<Tags>(
-                child: Text('Interview'),
-                value: Tags.interview,
-              ),
-              DropdownMenuItem<Tags>(
-                child: Text('Internship'),
-                value: Tags.internship,
-              ),
-              DropdownMenuItem<Tags>(
-                child: Text('Projects'),
-                value: Tags.projects,
-              ),
-              DropdownMenuItem<Tags>(
-                child: Text('College Admission'),
-                value: Tags.collegeadmission,
-              ),
-              DropdownMenuItem<Tags>(
-                child: Text('Boards'),
-                value: Tags.boards,
-              ),
-              DropdownMenuItem<Tags>(
-                child: Text('Career'),
-                value: Tags.career,
-              ),
-              // DropdownMenuItem<String>(
-              //   child: Text('Branch Selection'),
-              //   value: 'branchselection',
-              // ),
-              DropdownMenuItem<Tags>(
-                child: Text('Abroad Internship'),
-                value: Tags.abroadinternship,
-              ),
-              DropdownMenuItem<Tags>(
-                child: Text('HigerStudies'),
-                value: Tags.higherstudies,
-              ),
-              DropdownMenuItem<Tags>(
-                child: Text('Productivity'),
-                value: Tags.productivity,
-              ),
-              DropdownMenuItem<Tags>(
-                child: Text('Motivation'),
-                value: Tags.motivation,
-              ),
-            ],
+            items: dropdownMenuItems,
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
 
@@ -291,7 +289,7 @@ class _QueryFormState extends State<QueryForm> {
                 logger.d('Wrong Query');
               }
             },
-            child: Padding(
+            child: const Padding(
               padding: EdgeInsets.symmetric(
                 vertical: 16,
                 horizontal: 120,
@@ -313,7 +311,7 @@ class _QueryFormState extends State<QueryForm> {
 }
 
 class _CustomTextFormField extends StatelessWidget {
-  _CustomTextFormField({
+  const _CustomTextFormField({
     @required TextEditingController fieldController,
     @required String hintText,
     @required TextInputType keyboardType,

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:xopinionx/ui/global/constants.dart';
 
 enum AppTheme {
-  Dark,
-  Light,
+  kDark,
+  kLight,
 }
 
 final appThemeData = {
-  AppTheme.Light: lightTheme,
-  AppTheme.Dark: darkTheme,
+  AppTheme.kLight: lightTheme,
+  AppTheme.kDark: darkTheme,
 };
 
 // final ThemeData lightTheme = ThemeData.light().copyWith(

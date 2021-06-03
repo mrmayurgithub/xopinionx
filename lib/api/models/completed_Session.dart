@@ -20,6 +20,7 @@ class CompletedSessionModel {
   String dateCompleted;
   String applicatantViews;
 
-  factory CompletedSessionModel.fromJson(Map<String, dynamic> data) => _$CompletedSessionModelFromJson(data);
+  factory CompletedSessionModel.fromJson(Map<String, dynamic> data) =>
+      _$CompletedSessionModelFromJson(data);
   Map<String, dynamic> toJson() => _$CompletedSessionModelToJson(this);
 }

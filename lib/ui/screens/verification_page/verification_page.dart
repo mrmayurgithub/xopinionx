@@ -13,8 +13,8 @@ class VerificationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocProvider(
-        create: (context) =>
-            VerificationBloc()..add(VerificationInitiated(isFirstTime: true)),
+        create: (context) => VerificationBloc()
+          ..add(const VerificationInitiated(isFirstTime: true)),
         child: VerificationMainBody(),
       ),
     );
@@ -25,7 +25,8 @@ class VerificationMainBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void _onConfirmButtonPressed() {
-      BlocProvider.of<VerificationBloc>(context).add(VerificationInitiated());
+      BlocProvider.of<VerificationBloc>(context)
+          .add(const VerificationInitiated());
     }
 
     void _onResendButtonPressed() {
@@ -56,7 +57,7 @@ class VerificationMainBody extends StatelessWidget {
           context.vxNav.pop();
           // Navigator.of(context).pop();
           BlocProvider.of<VerificationBloc>(context)
-              .add(VerificationInitiated());
+              .add(const VerificationInitiated());
         }
       },
       builder: (context, state) {
@@ -66,11 +67,11 @@ class VerificationMainBody extends StatelessWidget {
                 horizontal: screenWidth * 0.072916667), // 30
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                // ignore: sized_box_for_whitespace
                 Container(
                   height: screenHeight * 0.222363405, // 200
-                  child: CircularProgressIndicator(),
+                  child: const CircularProgressIndicator(),
                 ),
                 SizedBox(height: screenHeight * 0.044472681), // 40
                 Text(
@@ -95,11 +96,11 @@ class VerificationMainBody extends StatelessWidget {
                 SizedBox(height: screenHeight * 0.050031766), // 45
                 TextButton(
                   onPressed: _onConfirmButtonPressed,
-                  child: Text('Confirm Verification'),
+                  child: const Text('Confirm Verification'),
                 ),
                 TextButton(
                   onPressed: _onResendButtonPressed,
-                  child: Text('Resend Verification Link'),
+                  child: const Text('Resend Verification Link'),
                 ),
               ],
             ),

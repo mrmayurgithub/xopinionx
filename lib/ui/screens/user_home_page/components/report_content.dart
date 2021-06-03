@@ -24,7 +24,7 @@ class _ReportContentState extends State<ReportContent> {
                     grVal = val;
                   });
                 },
-                title: Text('Violent or repulsive'),
+                title: const Text('Violent or repulsive'),
               ),
               RadioListTile<int>(
                 value: 1,
@@ -34,7 +34,7 @@ class _ReportContentState extends State<ReportContent> {
                     grVal = val;
                   });
                 },
-                title: Text('Hateful or abusive'),
+                title: const Text('Hateful or abusive'),
               ),
               RadioListTile<int>(
                 value: 2,
@@ -44,7 +44,7 @@ class _ReportContentState extends State<ReportContent> {
                     grVal = val;
                   });
                 },
-                title: Text('Harmful or dangerous'),
+                title: const Text('Harmful or dangerous'),
               ),
               RadioListTile<int>(
                 value: 3,
@@ -54,7 +54,7 @@ class _ReportContentState extends State<ReportContent> {
                     grVal = val;
                   });
                 },
-                title: Text('Adult content'),
+                title: const Text('Adult content'),
               ),
               RadioListTile<int>(
                 value: 4,
@@ -64,7 +64,7 @@ class _ReportContentState extends State<ReportContent> {
                     grVal = val;
                   });
                 },
-                title: Text('Spam or misleading'),
+                title: const Text('Spam or misleading'),
               ),
             ],
           ),
@@ -75,11 +75,11 @@ class _ReportContentState extends State<ReportContent> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: Text('Cancel'),
+          child: const Text('Cancel'),
         ),
         TextButton(
           onPressed: () {},
-          child: Text('Report'),
+          child: const Text('Report'),
         ),
       ],
     );

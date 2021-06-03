@@ -13,10 +13,10 @@ class HistoryInitial extends HistoryState {}
 
 class HistorySuccess extends HistoryState {}
 
-class HistoryFailure extends Equatable {
+class HistoryFailure extends HistoryState {
   final String message;
+  const HistoryFailure({this.message});
 
-  HistoryFailure({this.message});
   @override
   List<Object> get props => [message];
 }

@@ -20,7 +20,7 @@ class MainDrawer extends StatelessWidget {
               title: Text((globalUser.fname + globalUser.lname) != null
                   ? globalUser.fname + globalUser.lname
                   : ""),
-              leading: CircleAvatar(
+              leading: const CircleAvatar(
                 child: Icon(Icons.face_outlined),
               ),
               subtitle: Text((globalUser.email.toString()) != null
@@ -29,8 +29,8 @@ class MainDrawer extends StatelessWidget {
               onTap: () {},
             ),
             ListTile(
-              title: Text('Home Page'),
-              leading: Icon(Icons.home),
+              title: const Text('Home Page'),
+              leading: const Icon(Icons.home),
               onTap: () {
                 // Navigator.of(context).pushNamed(MainRoutes.userHomeRoute);
                 logger.i("User Home Pressed");
@@ -38,52 +38,52 @@ class MainDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text('Chats'),
-              leading: Icon(Icons.meeting_room_outlined),
+              title: const Text('Chats'),
+              leading: const Icon(Icons.meeting_room_outlined),
               onTap: () {
                 // Navigator.of(context).pushNamed(MainRoutes.chatRoute);
                 nNavigator(context, MainRoutes.chatRoute);
               },
             ),
             ListTile(
-              title: Text('Your Queries'),
-              leading: Icon(Icons.question_answer_outlined),
+              title: const Text('Your Queries'),
+              leading: const Icon(Icons.question_answer_outlined),
               onTap: () {
                 // Navigator.of(context).pushNamed(MainRoutes.userQueries);
                 nNavigator(context, MainRoutes.userQueries);
               },
             ),
             ListTile(
-              title: Text('Overall Review'),
-              leading: Icon(Icons.rate_review_outlined),
-              subtitle: Text('⭐⭐⭐⭐'),
+              title: const Text('Overall Review'),
+              leading: const Icon(Icons.rate_review_outlined),
+              subtitle: const Text('⭐⭐⭐⭐'),
               onTap: () {},
             ),
             ListTile(
-              title: Text('Session Balance'),
-              leading: Icon(Icons.account_balance_outlined),
+              title: const Text('Session Balance'),
+              leading: const Icon(Icons.account_balance_outlined),
               subtitle: Text(globalUser.sessionBalance.toString()),
               onTap: () {},
             ),
             ListTile(
-              title: Text('History'),
-              leading: Icon(Icons.history_outlined),
+              title: const Text('History'),
+              leading: const Icon(Icons.history_outlined),
               onTap: () {
                 // Navigator.of(context).pushNamed(MainRoutes.historyRoute);
                 nNavigator(context, MainRoutes.historyRoute);
               },
             ),
             ListTile(
-              title: Text('Settings'),
-              leading: Icon(Icons.settings_outlined),
+              title: const Text('Settings'),
+              leading: const Icon(Icons.settings_outlined),
               onTap: () {
                 // Navigator.of(context).pushNamed(MainRoutes.settingsRoute);
                 nNavigator(context, MainRoutes.settingsRoute);
               },
             ),
             ListTile(
-              title: Text('Logout'),
-              leading: Icon(Icons.login_outlined),
+              title: const Text('Logout'),
+              leading: const Icon(Icons.login_outlined),
               onTap: () async {
                 BlocProvider.of<AuthBloc>(context).add(JustLoggedOut());
                 //TODO: change this to streams instead

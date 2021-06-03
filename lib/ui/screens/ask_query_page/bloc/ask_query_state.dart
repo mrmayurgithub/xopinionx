@@ -17,7 +17,7 @@ class AskQueryCancelled extends AskQueryState {}
 class AskQueryFailure extends AskQueryState {
   final String message;
 
-  AskQueryFailure({@required this.message});
+  const AskQueryFailure({@required this.message});
   @override
   List<Object> get props => [message];
 }

@@ -43,13 +43,13 @@ class UserHomeBloc extends Bloc<UserHomeEvent, UserHomeState> {
         //TODO:implement
       }
     } on PlatformException catch (e) {
-      yield (UserHomeFailure(message: "Error: ${e.message}"));
+      yield UserHomeFailure(message: "Error: ${e.message}");
     } on FirebaseAuthException catch (e) {
-      yield (UserHomeFailure(message: "Error: ${e.message}"));
+      yield UserHomeFailure(message: "Error: ${e.message}");
     } on TimeoutException catch (e) {
-      yield (UserHomeFailure(message: "Error: ${e.message}"));
+      yield UserHomeFailure(message: "Error: ${e.message}");
     } catch (e) {
-      yield (UserHomeFailure(message: "Error: ${e.message}"));
+      yield UserHomeFailure(message: "Error: ${e.message}");
     }
   }
 }

@@ -16,7 +16,7 @@ class RegisterButtonClicked extends RegisterEvent {
   final int eduYear;
   final String langpref;
   final List<Tags> usertags;
-  RegisterButtonClicked({
+  const RegisterButtonClicked({
     @required this.fname,
     @required this.lname,
     @required this.educationLevel,
@@ -29,7 +29,16 @@ class RegisterButtonClicked extends RegisterEvent {
         assert(password != null);
 
   @override
-  List<Object> get props => [email, password, fname, lname, educationLevel, eduYear, langpref, usertags];
+  List<Object> get props => [
+        email,
+        password,
+        fname,
+        lname,
+        educationLevel,
+        eduYear,
+        langpref,
+        usertags
+      ];
 }
 
 class GoogleSignUpClicked extends RegisterEvent {}

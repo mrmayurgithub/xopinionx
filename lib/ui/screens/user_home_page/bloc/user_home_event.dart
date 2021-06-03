@@ -24,7 +24,7 @@ class GlobalProblemsRequested extends UserHomeEvent {}
 class UserHomeChatRequested extends UserHomeEvent {
   final String chatUserId;
 
-  UserHomeChatRequested({this.chatUserId});
+  const UserHomeChatRequested({this.chatUserId});
 
   @override
   List<Object> get props => [chatUserId];

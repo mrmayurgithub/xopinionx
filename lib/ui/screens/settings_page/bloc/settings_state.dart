@@ -21,7 +21,7 @@ class SettingsSaved extends SettingsState {}
 class SettingsFailure extends SettingsState {
   final String message;
 
-  SettingsFailure({this.message});
+  const SettingsFailure({this.message});
   @override
   List<Object> get props => [message];
 }

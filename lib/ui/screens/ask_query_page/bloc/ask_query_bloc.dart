@@ -23,8 +23,8 @@ class AskQueryBloc extends Bloc<AskQueryEvent, AskQueryState> {
       if (event is QuerySubmitButtonPressed) {
         yield AskQueryInProgress();
         logger.i('Submitting Problem');
-        DateTime now = DateTime.now();
-        DateTime date = DateTime(now.year, now.month, now.day);
+        final DateTime now = DateTime.now();
+        final DateTime date = DateTime(now.year, now.month, now.day);
         // var parsedDate = DateTime.parse('1974-03-20 00:00:00.000');
         // final _currentUser = FirebaseAuth.instance.currentUser;
 
@@ -47,13 +47,13 @@ class AskQueryBloc extends Bloc<AskQueryEvent, AskQueryState> {
         yield AskQueryCancelled();
       }
     } on PlatformException catch (e) {
-      yield (AskQueryFailure(message: "Error: ${e.message}"));
+      yield AskQueryFailure(message: "Error: ${e.message}");
     } on FirebaseAuthException catch (e) {
-      yield (AskQueryFailure(message: "Error: ${e.message}"));
+      yield AskQueryFailure(message: "Error: ${e.message}");
     } on TimeoutException catch (e) {
-      yield (AskQueryFailure(message: "Timeout: ${e.message}"));
+      yield AskQueryFailure(message: "Timeout: ${e.message}");
     } catch (e) {
-      yield (AskQueryFailure(message: e.toString()));
+      yield AskQueryFailure(message: e.toString());
     }
   }
 }

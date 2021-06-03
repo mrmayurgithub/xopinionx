@@ -7,12 +7,14 @@ import 'package:xopinionx/ui/global/constants.dart';
 import 'package:xopinionx/ui/screens/chats_page/bloc/chat_bloc.dart';
 
 class ChatPage extends StatelessWidget {
-  final ChatModel chatModel;
+  // final ChatModel chatModel;
 
-  ChatPage({@required this.chatModel});
+  // const ChatPage({@required this.chatModel});
 
   @override
   Widget build(BuildContext context) {
+    //TODO: this is wrong
+    ChatModel chatModel;
     return BlocProvider(
       create: (context) => ChatBloc()..add(ChatListRequested()),
       child: MainChatPage(
@@ -64,7 +66,7 @@ class _MainChatPageState extends State<MainChatPage> {
             },
             child: Center(
               child: Container(
-                constraints: BoxConstraints(
+                constraints: const BoxConstraints(
                   maxWidth: kMaxWidth,
                 ),
                 color: kSecondaryColor,
@@ -72,7 +74,6 @@ class _MainChatPageState extends State<MainChatPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
-                      flex: 1,
                       child: SingleChildScrollView(
                         child: Container(
                           height: MediaQuery.of(context).size.height,
@@ -82,7 +83,7 @@ class _MainChatPageState extends State<MainChatPage> {
                           child: Column(
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(10.0),
+                                padding: const EdgeInsets.all(10.0),
                                 child: TextFormField(
                                   style: TextStyle(
                                     fontSize: 13,
@@ -92,7 +93,7 @@ class _MainChatPageState extends State<MainChatPage> {
                                   ),
                                   decoration: InputDecoration(
                                     hintText: "Search from your chats",
-                                    hintStyle: TextStyle(
+                                    hintStyle: const TextStyle(
                                       fontSize: 13,
                                     ),
                                     prefixIcon: Icon(
@@ -122,7 +123,7 @@ class _MainChatPageState extends State<MainChatPage> {
                         ),
                       ),
                     ),
-                    VerticalDivider(
+                    const VerticalDivider(
                       width: 1.0,
                       color: Colors.black45,
                     ),
@@ -137,7 +138,7 @@ class _MainChatPageState extends State<MainChatPage> {
                             height: MediaQuery.of(context).size.height - 100,
                             child: widget.chatModel != null
                                 ? ListView()
-                                : Center(
+                                : const Center(
                                     child: Text(
                                       "No chat to show",
                                       style: TextStyle(fontSize: 30),
@@ -147,13 +148,15 @@ class _MainChatPageState extends State<MainChatPage> {
                           Container(
                             decoration: BoxDecoration(
                               color: kSecondaryColor,
-                              border: Border(
+                              border: const Border(
                                 top: BorderSide(
-                                    color: Colors.black45, width: 2.0),
+                                  color: Colors.black45,
+                                  width: 2.0,
+                                ),
                               ),
                             ),
                             height: 40,
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                               horizontal: kDefaultPadding / 4,
                               vertical: kDefaultPadding / 5,
                             ),
@@ -161,15 +164,15 @@ class _MainChatPageState extends State<MainChatPage> {
                               child: TextField(
                                 decoration: InputDecoration(
                                   hintText: "Type a message",
-                                  hintStyle: TextStyle(
+                                  hintStyle: const TextStyle(
                                     fontSize: 13,
                                   ),
-                                  border: OutlineInputBorder(
+                                  border: const OutlineInputBorder(
                                     borderSide: BorderSide.none,
                                   ),
                                   suffixIcon: IconButton(
                                     onPressed: () {},
-                                    icon: Icon(
+                                    icon: const Icon(
                                       Icons.send,
                                     ),
                                   ),

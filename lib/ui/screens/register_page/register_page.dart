@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
@@ -30,7 +29,7 @@ class RegistrationPageMainBody extends StatelessWidget {
     return BlocConsumer<RegisterBloc, RegisterState>(
       listener: (context, state) async {
         if (state is RegisterInitial) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         }
         if (state is RegisterInProgress) {
           showProgress(context);
@@ -59,7 +58,7 @@ class RegistrationPageMainBody extends StatelessWidget {
                 // );
                 pNavigator(context, MainRoutes.userHomeRoute);
               },
-              child: Text(
+              child: const Text(
                 'OPINIONX',
                 style: TextStyle(
                   color: Colors.green,
@@ -72,7 +71,7 @@ class RegistrationPageMainBody extends StatelessWidget {
                   // Navigator.of(context).pushNamed(MainRoutes.loginRoute);
                   nNavigator(context, MainRoutes.loginRoute);
                 },
-                child: Text("Login"),
+                child: const Text("Login"),
               ),
             ],
           ),
@@ -80,13 +79,11 @@ class RegistrationPageMainBody extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
                     decoration: BoxDecoration(
                       // color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
-                      shape: BoxShape.rectangle,
                       // boxShadow: [
                       //   BoxShadow(
                       //     color: Colors.grey,
@@ -97,7 +94,7 @@ class RegistrationPageMainBody extends StatelessWidget {
                     // height: screenHeight / 2,
                     width: 570,
                     child: Padding(
-                      padding: EdgeInsets.all(40.0),
+                      padding: const EdgeInsets.all(40.0),
                       child: SignUpForm(),
                     ),
                   ),
@@ -110,6 +107,32 @@ class RegistrationPageMainBody extends StatelessWidget {
     );
   }
 }
+
+List<DropdownMenuItem<String>> _edLevel = <DropdownMenuItem<String>>[
+  const DropdownMenuItem<String>(
+    value: 'ss',
+    child: Text('School Student'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'cs',
+    child: Text('College Student'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'pr',
+    child: Text('Professional'),
+  ),
+];
+
+List<DropdownMenuItem<String>> _langs = <DropdownMenuItem<String>>[
+  const DropdownMenuItem<String>(
+    value: 'en',
+    child: Text('English'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'hi',
+    child: Text('Hindi'),
+  ),
+];
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -132,7 +155,7 @@ class _SignUpFormState extends State<SignUpForm> {
   bool _isObscure = true;
   final _eduYearTextController = TextEditingController();
   final _eduYearNode = FocusNode();
-  List<Tags> _usertags = [];
+  final List<Tags> _usertags = [];
   String _education;
   String _langPref;
   int eduYear;
@@ -140,11 +163,11 @@ class _SignUpFormState extends State<SignUpForm> {
   Widget build(BuildContext context) {
     Widget _showPassIcon() {
       return AnimatedContainer(
-        duration: Duration(milliseconds: 200),
+        duration: const Duration(milliseconds: 200),
         child: IconButton(
           icon: _isObscure
-              ? Icon(Icons.visibility_off_outlined)
-              : Icon(Icons.visibility_outlined),
+              ? const Icon(Icons.visibility_off_outlined)
+              : const Icon(Icons.visibility_outlined),
           onPressed: () {
             setState(() {
               _isObscure = !_isObscure;
@@ -159,7 +182,7 @@ class _SignUpFormState extends State<SignUpForm> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('Get Started with Opinionx'),
+          const Text('Get Started with Opinionx'),
           SizedBox(height: screenHeight * 0.024459975), // 22
           CustomTextFormField(
             currentNode: _firstnameNode,
@@ -170,7 +193,7 @@ class _SignUpFormState extends State<SignUpForm> {
             hintText: 'Full Name',
             keyboardType: TextInputType.name,
             validator: _validator.validateName,
-            prefixIcon: Icon(Icons.person_outline),
+            prefixIcon: const Icon(Icons.person_outline),
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
           CustomTextFormField(
@@ -182,7 +205,7 @@ class _SignUpFormState extends State<SignUpForm> {
             hintText: 'Last Name',
             keyboardType: TextInputType.name,
             validator: _validator.validateName,
-            prefixIcon: Icon(Icons.person_outline),
+            prefixIcon: const Icon(Icons.person_outline),
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
           CustomTextFormField(
@@ -194,7 +217,7 @@ class _SignUpFormState extends State<SignUpForm> {
             hintText: 'Email',
             keyboardType: TextInputType.emailAddress,
             validator: _validator.validateEmail,
-            prefixIcon: Icon(Icons.email_outlined),
+            prefixIcon: const Icon(Icons.email_outlined),
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
           CustomTextFormField(
@@ -203,7 +226,7 @@ class _SignUpFormState extends State<SignUpForm> {
             maxLines: 1,
             fieldController: _passtextController,
             hintText: 'Password',
-            prefixIcon: Icon(Icons.lock_outline),
+            prefixIcon: const Icon(Icons.lock_outline),
             keyboardType: TextInputType.text,
             validator: _validator.validatePassword,
             obscureText: _isObscure,
@@ -211,24 +234,15 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             child: DropdownButtonFormField(
               value: _langPref,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Language Preference',
                 hintText: 'Preferred mode of communication',
               ),
-              items: [
-                DropdownMenuItem<String>(
-                  child: Text('English'),
-                  value: 'en',
-                ),
-                DropdownMenuItem<String>(
-                  child: Text('Hindi'),
-                  value: 'hi',
-                ),
-              ],
-              onChanged: (value) {
+              items: _langs,
+              onChanged: (String value) {
                 setState(() {
                   _langPref = value;
                 });
@@ -237,110 +251,98 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            child: DropdownButtonFormField(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: DropdownButtonFormField<String>(
               value: _education,
               decoration: InputDecoration(
                 labelText: 'Education Level',
                 hintText: 'Education Level',
                 disabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(
-                    color: Colors.black,
-                  ),
                 ),
               ),
-              items: [
-                DropdownMenuItem<String>(
-                  child: Text('School Student'),
-                  value: 'ss',
-                ),
-                DropdownMenuItem<String>(
-                  child: Text('College Student'),
-                  value: 'cs',
-                ),
-                DropdownMenuItem<String>(
-                  child: Text('Professional'),
-                  value: 'pr',
-                ),
-              ],
-              onChanged: (value) {
+              items: _edLevel,
+              onChanged: (String value) {
                 setState(() {
                   _education = value;
                 });
               },
             ),
           ),
-          _education != ''
-              ? SizedBox(height: screenHeight * 0.024459975)
-              : SizedBox(), // 22
+          if (_education != '')
+            SizedBox(height: screenHeight * 0.024459975)
+          else
+            const SizedBox(), // 22
 
-          _education == 'ss'
-              ? CustomTextFormField(
-                  nextNode: _chipNode,
-                  currentNode: _eduYearNode,
-                  textInputAction: TextInputAction.done,
-                  maxLines: 1,
-                  fieldController: _eduYearTextController,
-                  hintText: 'School Year',
-                  prefixIcon: Icon(Icons.lock_outline),
-                  keyboardType: TextInputType.text,
-                  validator: (val) {
-                    int x = int.parse(_eduYearTextController.text.toString());
-                    if (x >= 9 && x <= 12) {
-                      return null;
-                    } else {
-                      return 'Only students from 9th class upto 12th can register.';
-                    }
-                  },
-                )
-              : SizedBox(),
-          _education == 'cs'
-              ? CustomTextFormField(
-                  nextNode: _chipNode,
-                  currentNode: _eduYearNode,
-                  textInputAction: TextInputAction.done,
-                  maxLines: 1,
-                  fieldController: _eduYearTextController,
-                  hintText: 'Enter your College Year',
-                  prefixIcon: Icon(Icons.lock_outline),
-                  keyboardType: TextInputType.text,
-                  validator: (val) {
-                    int x = int.parse(_eduYearTextController.text.toString());
-                    if (x >= 1 && x <= 4) {
-                      return null;
-                    } else {
-                      return 'Only students from 1st year class upto 5th year can register.';
-                    }
-                  },
-                )
-              : SizedBox(),
-          _education == 'pr'
-              ? CustomTextFormField(
-                  nextNode: _chipNode,
-                  currentNode: _eduYearNode,
-                  textInputAction: TextInputAction.done,
-                  maxLines: 1,
-                  fieldController: _eduYearTextController,
-                  hintText: 'Enter years of experience',
-                  prefixIcon: Icon(Icons.lock_outline),
-                  keyboardType: TextInputType.text,
-                  validator: (val) {
-                    int x = int.parse(_eduYearTextController.text.toString());
-                    if (x <= 50) {
-                      return null;
-                    } else {
-                      return 'Enter a valid value';
-                    }
-                  },
-                )
-              : SizedBox(),
+          if (_education == 'ss')
+            CustomTextFormField(
+              nextNode: _chipNode,
+              currentNode: _eduYearNode,
+              textInputAction: TextInputAction.done,
+              maxLines: 1,
+              fieldController: _eduYearTextController,
+              hintText: 'School Year',
+              prefixIcon: const Icon(Icons.lock_outline),
+              keyboardType: TextInputType.text,
+              validator: (val) {
+                final int x = int.parse(_eduYearTextController.text.toString());
+                if (x >= 9 && x <= 12) {
+                  return null;
+                } else {
+                  return 'Only students from 9th class upto 12th can register.';
+                }
+              },
+            )
+          else
+            const SizedBox(),
+          if (_education == 'cs')
+            CustomTextFormField(
+              nextNode: _chipNode,
+              currentNode: _eduYearNode,
+              textInputAction: TextInputAction.done,
+              maxLines: 1,
+              fieldController: _eduYearTextController,
+              hintText: 'Enter your College Year',
+              prefixIcon: const Icon(Icons.lock_outline),
+              keyboardType: TextInputType.text,
+              validator: (val) {
+                final int x = int.parse(_eduYearTextController.text.toString());
+                if (x >= 1 && x <= 4) {
+                  return null;
+                } else {
+                  return 'Only students from 1st year class upto 5th year can register.';
+                }
+              },
+            )
+          else
+            const SizedBox(),
+          if (_education == 'pr')
+            CustomTextFormField(
+              nextNode: _chipNode,
+              currentNode: _eduYearNode,
+              textInputAction: TextInputAction.done,
+              maxLines: 1,
+              fieldController: _eduYearTextController,
+              hintText: 'Enter years of experience',
+              prefixIcon: const Icon(Icons.lock_outline),
+              keyboardType: TextInputType.text,
+              validator: (val) {
+                final int x = int.parse(_eduYearTextController.text.toString());
+                if (x <= 50) {
+                  return null;
+                } else {
+                  return 'Enter a valid value';
+                }
+              },
+            )
+          else
+            const SizedBox(),
           SizedBox(height: screenHeight * 0.024459975), // 22
-          Center(
+          const Center(
             child: Text('Select the fields you feel free to talk about'),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Column(
               children: [
                 ChipsInput(
@@ -349,7 +351,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   focusNode: _chipNode,
                   enabled: false,
                   findSuggestions: (String query) {
-                    var lowercaseQuery = query.toLowerCase();
+                    final String lowercaseQuery = query.toLowerCase();
                     if (query.isNotEmpty) {
                       return choiceTags.where((tag) {
                         return tag.tagname
@@ -412,6 +414,7 @@ class _SignUpFormState extends State<SignUpForm> {
             onPressed: () {
               if (_formkey.currentState.validate()) {
                 logger.i('validated');
+                // ignore: avoid_print
                 print(_usertags.toString());
                 BlocProvider.of<RegisterBloc>(context).add(
                   RegisterButtonClicked(
@@ -430,7 +433,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     msg: 'Check if the information you filled is correct');
               }
             },
-            child: Padding(
+            child: const Padding(
               padding: EdgeInsets.symmetric(
                 vertical: 16,
                 horizontal: 120,
@@ -445,16 +448,6 @@ class _SignUpFormState extends State<SignUpForm> {
               ),
             ),
           ),
-          // SizedBox(height: screenHeight * 0.024459975), // 22
-          // Padding(
-          //   padding: EdgeInsets.symmetric(horizontal: 8),
-          //   child: DropDownField(
-          //     hintText: 'Field you wanna talk about',
-          //     enabled: true,
-          //     itemsVisibleInDropdown: 5,
-          //     items: choicetags,
-          //   ),
-          // ),
         ],
       ),
     );

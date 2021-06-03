@@ -16,7 +16,7 @@ class SaveButtonPressed extends SettingsEvent {
   final int eduYear;
   final String langpref;
   final List<Tags> usertags;
-  SaveButtonPressed({
+  const SaveButtonPressed({
     @required this.fname,
     @required this.lname,
     @required this.educationLevel,
@@ -26,7 +26,8 @@ class SaveButtonPressed extends SettingsEvent {
   })  : assert(fname != null),
         assert(lname != null);
   @override
-  List<Object> get props => [fname, lname, educationLevel, eduYear, langpref, usertags];
+  List<Object> get props =>
+      [fname, lname, educationLevel, eduYear, langpref, usertags];
 }
 
 class CancelButtonPressed extends SettingsEvent {}

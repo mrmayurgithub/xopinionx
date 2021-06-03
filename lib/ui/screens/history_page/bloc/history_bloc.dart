@@ -1,6 +1,8 @@
-import 'dart:html';
+import 'dart:async';
 
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xopinionx/api/models/problem_model.dart';
@@ -23,6 +25,14 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
         logger.v("Collecting user history");
         yield HistorySuccess();
       }
-    } catch (e) {}
+    } on PlatformException catch (e) {
+      yield HistoryFailure(message: "Error: ${e.message}");
+    } on FirebaseAuthException catch (e) {
+      yield HistoryFailure(message: "Error: ${e.message}");
+    } on TimeoutException catch (e) {
+      yield HistoryFailure(message: "Timeout: ${e.message}");
+    } catch (e) {
+      yield HistoryFailure(message: e.toString());
+    }
   }
 }

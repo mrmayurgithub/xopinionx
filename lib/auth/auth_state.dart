@@ -13,7 +13,7 @@ class AuthAuthenticated extends AuthState {}
 
 class AuthUnAuthenticated extends AuthState {
   final bool justLoggedOut;
-  AuthUnAuthenticated({this.justLoggedOut = false});
+  const AuthUnAuthenticated({this.justLoggedOut = false});
 
   @override
   List<Object> get props => [justLoggedOut];
@@ -27,7 +27,7 @@ class AuthNeedsProfileComplete extends AuthState {}
 
 class AuthFailure extends AuthState {
   final String message;
-  AuthFailure({this.message});
+  const AuthFailure({this.message});
 
   @override
   List<Object> get props => [message];

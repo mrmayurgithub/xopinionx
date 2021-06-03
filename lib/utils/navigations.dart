@@ -18,8 +18,9 @@ void nNavigator(BuildContext context, String route) {
 }
 
 void pNavigator(BuildContext context, String route) {
-  if (UserLoginStatus().isLoggedIn())
+  if (UserLoginStatus().isLoggedIn()) {
     context.vxNav.clearAndPush(Uri.parse(route));
-  else
+  } else {
     context.vxNav.clearAndPush(Uri.parse(MainRoutes.homePageRoute));
+  }
 }

@@ -10,7 +10,7 @@ abstract class UserQueriesEvent extends Equatable {
 class ChatRequested extends UserQueriesEvent {
   final ProblemModel problem;
 
-  ChatRequested({this.problem});
+  const ChatRequested({this.problem});
 
   @override
   List<Object> get props => [problem];
@@ -19,7 +19,7 @@ class ChatRequested extends UserQueriesEvent {
 class DeleteProblemRequested extends UserQueriesEvent {
   final ProblemModel problem;
 
-  DeleteProblemRequested({this.problem});
+  const DeleteProblemRequested({this.problem});
 
   @override
   List<Object> get props => [problem];
@@ -28,7 +28,7 @@ class DeleteProblemRequested extends UserQueriesEvent {
 class EditProblemRequested extends UserQueriesEvent {
   final ProblemModel problem;
 
-  EditProblemRequested({this.problem});
+  const EditProblemRequested({this.problem});
 
   @override
   List<Object> get props => [problem];
@@ -37,7 +37,7 @@ class EditProblemRequested extends UserQueriesEvent {
 class SolveProblem extends UserQueriesEvent {
   final ProblemModel problem;
 
-  SolveProblem({this.problem});
+  const SolveProblem({this.problem});
 
   @override
   List<Object> get props => [problem];

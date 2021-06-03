@@ -247,33 +247,30 @@ class UserHomeMainBody extends StatelessWidget {
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             elevation: 0.0,
             centerTitle: false,
-            title: Text("Opinionx"),
+            title: const Text("Opinionx"),
             actions: [
               Container(
+                padding: const EdgeInsets.all(kDefaultPadding / 4),
                 child: TextButton(
                   onPressed: () {
                     BlocProvider.of<UserHomeBloc>(context)
                         .add(UserHomeAskQueryRequested());
                   },
-                  child: Text("Ask Question"),
+                  child: const Text("Ask Question"),
                 ),
-                padding: EdgeInsets.all(kDefaultPadding / 4),
-                decoration: BoxDecoration(),
               )
             ],
           ),
           drawer: MainDrawer(),
           body: SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
+            physics: const ClampingScrollPhysics(),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // Divider(),
                 Center(
                   child: Container(
                     // padding: EdgeInsets.all(kDefaultPadding),
-                    constraints: BoxConstraints(maxWidth: kMaxWidth),
+                    constraints: const BoxConstraints(maxWidth: kMaxWidth),
                     child: SafeArea(child: HomeMainList()),
                   ),
                 ),
@@ -311,164 +308,158 @@ class QueryList extends StatelessWidget {
     return Expanded(
       flex: 4,
       child: Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: kDefaultPadding),
-            _problems.length != 0
-                ? Scrollbar(
-                    child: SingleChildScrollView(
-                      physics: ClampingScrollPhysics(),
-                      child: Column(
-                        children: [
-                          for (ProblemModel ele in _problems)
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: kDefaultPadding / 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    border: Border(
-                                      top: BorderSide(color: kSecondaryColor),
-                                      bottom:
-                                          BorderSide(color: kSecondaryColor),
+            const SizedBox(height: kDefaultPadding),
+            if (_problems.isNotEmpty)
+              Scrollbar(
+                child: SingleChildScrollView(
+                  physics: const ClampingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      for (ProblemModel ele in _problems)
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: kDefaultPadding / 4,
+                              ),
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(color: kSecondaryColor),
+                                  bottom: BorderSide(color: kSecondaryColor),
+                                ),
+                              ),
+                              child: ExpansionTile(
+                                collapsedTextColor: Colors.white,
+                                // childrenPadding: EdgeInsets.symmetric(
+                                //     vertical: kDefaultPadding / 5,
+                                //     horizontal: kDefaultPadding / 4),
+                                title: Text(
+                                  ele.problemTitle.toString(),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                subtitle: Row(
+                                  children: [
+                                    TextButton(
+                                      onPressed: () {},
+                                      style: TextButton.styleFrom(
+                                          backgroundColor: Colors.grey[800]),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: Text(tagsMap[ele.tag]),
+                                      ),
                                     ),
-                                  ),
-                                  child: ExpansionTile(
-                                    collapsedTextColor: Colors.white,
-                                    // childrenPadding: EdgeInsets.symmetric(
-                                    //     vertical: kDefaultPadding / 5,
-                                    //     horizontal: kDefaultPadding / 4),
-                                    title: Text(
-                                      ele.problemTitle.toString(),
-                                      maxLines: 2,
+                                  ],
+                                ),
+                                trailing: IconButton(
+                                  icon: const Icon(Icons.report),
+                                  onPressed: () async {
+                                    return showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return ReportContent();
+                                      },
+                                    );
+                                  },
+                                ),
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: kDefaultPadding / 6,
+                                      horizontal: kDefaultPadding / 6,
+                                    ),
+                                    child: Text(
+                                      ele.problemDescription,
                                       overflow: TextOverflow.ellipsis,
+                                      maxLines: 10,
                                     ),
-                                    subtitle: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        TextButton(
-                                          onPressed: () {},
-                                          child: Padding(
-                                            padding: EdgeInsets.all(4.0),
-                                            child: Text(tagsMap[ele.tag]),
-                                          ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                          bottom: kDefaultPadding / 5,
+                                        ),
+                                        child: TextButton(
+                                          onPressed: () {
+                                            //TODO: implement
+                                            // Navigator.of(context).pushNamed(ChatPage.id);
+                                          },
                                           style: TextButton.styleFrom(
                                               backgroundColor:
                                                   Colors.grey[800]),
-                                        ),
-                                      ],
-                                    ),
-                                    trailing: IconButton(
-                                      icon: Icon(Icons.report),
-                                      onPressed: () {
-                                        return showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return ReportContent();
-                                          },
-                                        );
-                                      },
-                                    ),
-                                    children: [
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                          vertical: kDefaultPadding / 6,
-                                          horizontal: kDefaultPadding / 6,
-                                        ),
-                                        child: Text(
-                                          ele.problemDescription,
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 10,
-                                        ),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                              bottom: kDefaultPadding / 5,
-                                            ),
-                                            child: TextButton(
-                                              onPressed: () {
-                                                //TODO: implement
-                                                // Navigator.of(context).pushNamed(ChatPage.id);
-                                              },
-                                              child: Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 8.0),
-                                                child: Text('Chat'),
-                                              ),
-                                              style: TextButton.styleFrom(
-                                                  backgroundColor:
-                                                      Colors.grey[800]),
-                                            ),
+                                          child: const Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 8.0),
+                                            child: Text('Chat'),
                                           ),
-                                        ],
+                                        ),
                                       ),
                                     ],
                                   ),
-                                ),
-                                // ListTile(
-                                //   onTap: () {},
-                                //   title: Text(
-                                //     ele.problemTitle.toString(),
-                                //     maxLines: 2,
-                                //     overflow: TextOverflow.ellipsis,
-                                //   ),
-                                //   subtitle: Column(
-                                //     crossAxisAlignment: CrossAxisAlignment.start,
-                                //     mainAxisSize: MainAxisSize.min,
-                                //     children: [
-                                //       Text(
-                                //         ele.problemDescription,
-                                //         maxLines: 2,
-                                //         overflow: TextOverflow.ellipsis,
-                                //       ),
-                                //       SizedBox(height: kDefaultPadding / 2),
-                                //       TextButton(
-                                //         onPressed: () {},
-                                //         child: Text(ele.tag.toString()),
-                                //       ),
-                                //     ],
-                                //   ),
-                                // ),
-                                // Divider(),
-                              ],
+                                ],
+                              ),
                             ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  "Previous",
-                                  style: TextStyle(
-                                    color: currentIndex == 0
-                                        ? Colors.blue.withOpacity(0.3)
-                                        : Colors.blue,
-                                  ),
-                                ),
+                            // ListTile(
+                            //   onTap: () {},
+                            //   title: Text(
+                            //     ele.problemTitle.toString(),
+                            //     maxLines: 2,
+                            //     overflow: TextOverflow.ellipsis,
+                            //   ),
+                            //   subtitle: Column(
+                            //     crossAxisAlignment: CrossAxisAlignment.start,
+                            //     mainAxisSize: MainAxisSize.min,
+                            //     children: [
+                            //       Text(
+                            //         ele.problemDescription,
+                            //         maxLines: 2,
+                            //         overflow: TextOverflow.ellipsis,
+                            //       ),
+                            //       SizedBox(height: kDefaultPadding / 2),
+                            //       TextButton(
+                            //         onPressed: () {},
+                            //         child: Text(ele.tag.toString()),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
+                            // Divider(),
+                          ],
+                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              "Previous",
+                              style: TextStyle(
+                                color: currentIndex == 0
+                                    ? Colors.blue.withOpacity(0.3)
+                                    : Colors.blue,
                               ),
-                              TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  "Next",
-                                  style: TextStyle(),
-                                ),
-                              ),
-                            ],
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              "Next",
+                              style: TextStyle(),
+                            ),
                           ),
                         ],
                       ),
-                    ),
-                  )
-                : SelectableText("No Questions to show"),
+                    ],
+                  ),
+                ),
+              )
+            else
+              const SelectableText("No Questions to show"),
           ],
         ),
       ),

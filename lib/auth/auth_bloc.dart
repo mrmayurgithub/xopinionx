@@ -18,7 +18,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> mapEventToState(AuthEvent event) async* {
     try {
       if (event is AppStarted) {
-        yield (AuthInProgress());
+        yield AuthInProgress();
         // final _currentUser = FirebaseAuth.instance.currentUser;
         // if (_currentUser != null) {
         //   logger.i('Checking whether user is verified');
@@ -59,23 +59,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             yield AuthNeedsVerification();
           }
         } else {
-          yield AuthUnAuthenticated();
+          yield const AuthUnAuthenticated();
         }
       } else if (event is JustLoggedOut) {
         yield AuthInProgress();
         await FirebaseAuth.instance.signOut();
         await GoogleSignIn().signOut();
         await disposeApi;
-        yield AuthUnAuthenticated(justLoggedOut: true);
+        yield const AuthUnAuthenticated(justLoggedOut: true);
       }
     } on PlatformException catch (e) {
-      yield (AuthFailure(message: "Error: ${e.message}"));
+      yield AuthFailure(message: "Error: ${e.message}");
     } on TimeoutException catch (e) {
-      yield (AuthFailure(message: "Timeout: ${e.message}"));
+      yield AuthFailure(message: "Timeout: ${e.message}");
     } on FirebaseAuthException catch (e) {
-      yield (AuthFailure(message: "Error: ${e.message}"));
+      yield AuthFailure(message: "Error: ${e.message}");
     } catch (e) {
-      yield (AuthFailure(message: e.toString()));
+      yield AuthFailure(message: e.toString());
     }
   }
 }

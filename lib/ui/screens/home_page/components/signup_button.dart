@@ -12,20 +12,6 @@ class _SignUpButtonState extends State<SignUpButton> {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: Container(
-        child: Text(
-          'SignUp',
-          style: TextStyle(
-            letterSpacing: 1.3,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        padding: EdgeInsets.symmetric(
-          vertical: kDefaultPadding / 1.5,
-          horizontal: kDefaultPadding * 6,
-        ),
-      ),
       onPressed: () {
         // Navigator.of(context).pushNamed(MainRoutes.registerRoute);
         nNavigator(context, MainRoutes.registerRoute);
@@ -34,6 +20,20 @@ class _SignUpButtonState extends State<SignUpButton> {
         backgroundColor: Colors.green,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(kDefaultPadding * 2),
+        ),
+      ),
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          vertical: kDefaultPadding / 1.5,
+          horizontal: kDefaultPadding * 6,
+        ),
+        child: const Text(
+          'SignUp',
+          style: TextStyle(
+            letterSpacing: 1.3,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );

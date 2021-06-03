@@ -9,7 +9,7 @@ abstract class VerificationEvent extends Equatable {
 
 class VerificationInitiated extends VerificationEvent {
   final bool isFirstTime;
-  VerificationInitiated({this.isFirstTime = false});
+  const VerificationInitiated({this.isFirstTime = false});
 
   @override
   List<Object> get props => [];

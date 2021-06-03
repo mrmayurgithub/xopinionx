@@ -11,7 +11,7 @@ class QuerySubmitButtonPressed extends AskQueryEvent {
   final String description;
   final Tags tag;
 
-  QuerySubmitButtonPressed({
+  const QuerySubmitButtonPressed({
     @required this.problem,
     @required this.description,
     @required this.tag,

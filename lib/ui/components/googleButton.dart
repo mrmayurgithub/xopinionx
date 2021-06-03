@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 
 class GoogleButton extends StatelessWidget {
-  final Function onPressed;
+  final Callback onPressed;
   final String title;
-  GoogleButton({@required this.title, @required this.onPressed})
+  const GoogleButton({@required this.title, @required this.onPressed})
       : assert(onPressed != null),
         assert(title != null);
   @override
@@ -23,7 +24,6 @@ class GoogleButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
             side: BorderSide(
-              width: 1.0,
               color: Colors.grey[500].withOpacity(0.5),
             ),
           ),
@@ -44,9 +44,7 @@ class GoogleButton extends StatelessWidget {
             ),
             Text(
               title,
-              style: TextStyle(
-                fontSize: 40,
-              ),
+              style: const TextStyle(fontSize: 40),
             ),
           ],
         ),

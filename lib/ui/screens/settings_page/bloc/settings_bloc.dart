@@ -45,13 +45,13 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         yield EditableSettingsPage();
       }
     } on PlatformException catch (e) {
-      yield (SettingsFailure(message: "Error: ${e.message}"));
+      yield SettingsFailure(message: "Error: ${e.message}");
     } on FirebaseAuthException catch (e) {
-      yield (SettingsFailure(message: "Error: ${e.message}"));
+      yield SettingsFailure(message: "Error: ${e.message}");
     } on TimeoutException catch (e) {
-      yield (SettingsFailure(message: "Timeout: ${e.message}"));
+      yield SettingsFailure(message: "Timeout: ${e.message}");
     } catch (e) {
-      yield (SettingsFailure(message: e.toString()));
+      yield SettingsFailure(message: e.toString());
     }
   }
 }

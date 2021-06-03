@@ -27,7 +27,7 @@ class ProblemFunctions {
         .where('userId', isEqualTo: globalUser.id)
         .get();
     final _docList = _queryList.docs;
-    List<ProblemModel> _problemsList = [];
+    final List<ProblemModel> _problemsList = [];
     for (var i = 0; i < _docList.length; i++) {
       _problemsList.add(ProblemModel.fromJson(_docList[i].data()));
     }
@@ -55,24 +55,25 @@ class ProblemFunctions {
 
   static Future<List<ProblemModel>> getGlobalProblems() async {
     logger.i('GETGLOBALPROBLEMS: getting problems');
-    List<ProblemModel> _problems = [];
-    Query q = _firestore.collection('problems').limit(20);
-    QuerySnapshot querySnapshot = await q.get();
-    var _data = querySnapshot.docs;
+    final List<ProblemModel> _problems = [];
+    final Query q = _firestore.collection('problems').limit(20);
+    final QuerySnapshot querySnapshot = await q.get();
+    final List<QueryDocumentSnapshot> _data = querySnapshot.docs;
     logger.e(_data.length);
-    _data.forEach((element) {
-      Map<String, dynamic> json = element.data();
+
+    for (final element in _data) {
+      final Map<String, dynamic> json = element.data();
       // logger.v(a);
-      ProblemModel _problem = ProblemModel.fromJson(json);
+      final ProblemModel _problem = ProblemModel.fromJson(json);
       //TODO: complete
-      for (var tag in globalUser.userTags) {
+      for (final tag in globalUser.userTags) {
         if (tag.toString().toLowerCase() ==
             _problem.tag.toString().toLowerCase()) {
           _problems.add(_problem);
         }
       }
       logger.d('PROBLEM: ${_problem.tag.toString()}');
-    });
+    }
 
     logger.d(
         'GETGLOBALPROBLEMS: ${_problems.length} ${globalUser.userTags.toString()}');
@@ -87,7 +88,7 @@ class ProblemFunctions {
   }
 
   Stream<List<ProblemModel>> get userQueries {
-    var aaa = _firestore
+    final Stream<QuerySnapshot> aaa = _firestore
         .collection("problems")
         .where('userId', isEqualTo: globalUser.id)
         .snapshots();

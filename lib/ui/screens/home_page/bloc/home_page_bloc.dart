@@ -33,13 +33,13 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
         yield DonationPageLoaded();
       }
     } on PlatformException catch (e) {
-      yield (HomePageFailure(message: "Error: ${e.message}"));
+      yield HomePageFailure(message: "Error: ${e.message}");
     } on FirebaseAuthException catch (e) {
-      yield (HomePageFailure(message: "Error: ${e.message}"));
+      yield HomePageFailure(message: "Error: ${e.message}");
     } on TimeoutException catch (e) {
-      yield (HomePageFailure(message: "Error: ${e.message}"));
+      yield HomePageFailure(message: "Error: ${e.message}");
     } catch (e) {
-      yield (HomePageFailure(message: "Error: ${e.message}"));
+      yield HomePageFailure(message: "Error: ${e.message}");
     }
   }
 }

@@ -46,7 +46,7 @@ class HomePageMainBody extends StatelessWidget {
         if (state is HomePageFailure) {
           // Navigator.of(context).pop();
           context.vxNav.pop();
-          Fluttertoast.showToast(msg: "HomePage Error: " + state.message);
+          Fluttertoast.showToast(msg: "HomePage Error: ${state.message}");
           logger.wtf(state.message);
         }
       },

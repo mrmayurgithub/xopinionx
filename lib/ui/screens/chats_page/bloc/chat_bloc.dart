@@ -20,13 +20,13 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       //   //TODO: complete
       // }
     } on PlatformException catch (e) {
-      yield (ChatFailure(message: "Error: ${e.message}"));
+      yield ChatFailure(message: "Error: ${e.message}");
     } on TimeoutException catch (e) {
-      yield (ChatFailure(message: "Timeout: ${e.message}"));
+      yield ChatFailure(message: "Timeout: ${e.message}");
     } on FirebaseAuthException catch (e) {
-      yield (ChatFailure(message: "Error: ${e.message}"));
+      yield ChatFailure(message: "Error: ${e.message}");
     } catch (e) {
-      yield (ChatFailure(message: e.toString()));
+      yield ChatFailure(message: e.toString());
     }
   }
 }
