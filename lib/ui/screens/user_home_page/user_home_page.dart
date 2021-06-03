@@ -250,7 +250,6 @@ class UserHomeMainBody extends StatelessWidget {
             title: Text("Opinionx"),
             actions: [
               Container(
-                padding: EdgeInsets.all(kDefaultPadding / 4),
                 child: TextButton(
                   onPressed: () {
                     BlocProvider.of<UserHomeBloc>(context)
@@ -258,6 +257,8 @@ class UserHomeMainBody extends StatelessWidget {
                   },
                   child: Text("Ask Question"),
                 ),
+                padding: EdgeInsets.all(kDefaultPadding / 4),
+                decoration: BoxDecoration(),
               )
             ],
           ),

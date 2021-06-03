@@ -80,5 +80,19 @@ class ProblemFunctions {
     return _problems;
   }
 
+  List<ProblemModel> _userproblemList(QuerySnapshot snapshot) {
+    return snapshot.docs.map((e) {
+      return ProblemModel.fromJson(e.data());
+    }).toList();
+  }
+
+  Stream<List<ProblemModel>> get userQueries {
+    var aaa = _firestore
+        .collection("problems")
+        .where('userId', isEqualTo: globalUser.id)
+        .snapshots();
+    return aaa.map(_userproblemList);
+  }
+
   // static Future<List<ProblemModel>> againGetGlobalProblems() async {}
 }

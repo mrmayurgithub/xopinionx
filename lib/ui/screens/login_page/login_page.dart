@@ -230,6 +230,8 @@ class _LoginFormState extends State<LoginForm> {
                     ),
                   ),
             onPressed: () {
+              FocusScope.of(context).unfocus();
+              TextEditingController().clear();
               if (_formkey.currentState.validate()) {
                 logger.i('validated');
                 BlocProvider.of<LoginBloc>(context).add(

@@ -17,7 +17,7 @@ class UserQueriesBloc extends Bloc<UserQueriesEvent, UserQueriesState> {
     try {
       if (event is UserQueriesRequested) {
         yield UserQueriesInProgress();
-        await loadUserProblems();
+        // await loadUserProblems();
         yield UserQueriesLoaded();
         // yield UserQueriesSuccess();
       }
