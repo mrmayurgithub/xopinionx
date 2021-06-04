@@ -3,13 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xopinionx/global/enums.dart';
 import 'package:xopinionx/global/logger.dart';
-import 'package:xopinionx/responsive.dart';
 import 'package:xopinionx/ui/components/customFormField.dart';
+import 'package:xopinionx/ui/components/drawer.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/constants.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/screens/ask_query_page/bloc/ask_query_bloc.dart';
-import 'package:xopinionx/utils/navigations.dart';
 import 'package:xopinionx/utils/routes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -39,76 +38,19 @@ class _AskQueryMainBodyState extends State<AskQueryMainBody> {
         }
         if (state is AskQueryPostedSuccess) {
           logger.i('Success: Query Posted');
-          // Navigator.of(context).pushReplacementNamed(MainRoutes.userHomeRoute);
-          context.vxNav.popToRoot();
-          pNavigator(context, MainRoutes.userHomeRoute);
+          context.vxNav.clearAndPush(Uri.parse(MainRoutes.userHomeRoute));
         }
         if (state is AskQueryCancelled) {
-          // Navigator.of(context).pop();
           context.vxNav.pop();
         }
         if (state is AskQueryFailure) {
-          // Navigator.of(context).pop();
           context.vxNav.pop();
         }
       },
       builder: (context, state) {
         return Scaffold(
-          // appBar: AppBar(
-          //   actions: [
-          //     IconButton(
-          //       icon: Icon(Icons.cancel),
-          //       onPressed: () {
-          //         // Navigator.of(context).pop();
-          //         context.vxNav.pop();
-          //       },
-          //     ),
-          //   ],
-          // ),
-          // drawer: MainDrawer(),
-          appBar: AppBar(
-            backgroundColor: Colors.black54,
-            automaticallyImplyLeading: false,
-            elevation: 0.0,
-            centerTitle: true,
-            title: Container(
-              width: double.infinity,
-              color: Colors.black54,
-              child: Column(
-                children: [
-                  Container(
-                    constraints: const BoxConstraints(maxWidth: kMaxWidth),
-                    padding: const EdgeInsets.all(kDefaultPadding),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            if (!Responsive.isDesktop(context))
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.menu,
-                                  color: Colors.white,
-                                ),
-                                onPressed: () {},
-                              ),
-                            const Text("OPINIONX"),
-                            const Spacer(),
-                            TextButton(
-                              onPressed: () {},
-                              child: const Text(
-                                "Cancel",
-                                style: TextStyle(),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          appBar: AppBar(),
+          drawer: MainDrawer(),
           body: Center(
             child: SingleChildScrollView(
               child: Column(
@@ -118,15 +60,7 @@ class _AskQueryMainBodyState extends State<AskQueryMainBody> {
                     decoration: BoxDecoration(
                       color: Colors.black26,
                       borderRadius: BorderRadius.circular(20),
-                      // boxShadow: [
-                      //   BoxShadow(
-                      //     color: Colors.grey,
-                      //     blurRadius: 15.0,
-                      //   ),
-                      // ],
                     ),
-                    // height: screenHeight / 2,
-
                     width: kMaxWidth / 2,
                     padding: const EdgeInsets.all(kDefaultPadding),
                     constraints: const BoxConstraints(maxWidth: kMaxWidth),

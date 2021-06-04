@@ -8,6 +8,7 @@ void showProgress(BuildContext context) {
     builder: (context) => Center(
       // ignore: sized_box_for_whitespace
       child: Container(
+        color: Colors.transparent,
         height: 50,
         width: 50,
         child: const CircularProgressIndicator(

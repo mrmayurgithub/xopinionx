@@ -23,7 +23,7 @@ class DonationPageLoaded extends HomePageState {}
 
 class HomePageFailure extends HomePageState {
   final String message;
-  HomePageFailure({this.message});
+  const HomePageFailure({this.message});
 
   @override
   List<Object> get props => [message];

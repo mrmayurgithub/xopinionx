@@ -68,7 +68,9 @@ class ProblemFunctions {
       //TODO: complete
       for (final tag in globalUser.userTags) {
         if (tag.toString().toLowerCase() ==
-            _problem.tag.toString().toLowerCase()) {
+                _problem.tag.toString().toLowerCase() &&
+            _problem.userId.toString().toLowerCase() !=
+                globalUser.id.toString().toLowerCase()) {
           _problems.add(_problem);
         }
       }

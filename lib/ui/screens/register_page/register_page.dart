@@ -10,8 +10,9 @@ import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/global/validators.dart';
 import 'package:xopinionx/ui/screens/register_page/bloc/register_bloc.dart';
 import 'package:xopinionx/ui/screens/settings_page/settings_page.dart';
-import 'package:xopinionx/utils/navigations.dart';
 import 'package:xopinionx/utils/routes.dart';
+import 'package:xopinionx/utils/status.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class RegisterPage extends StatelessWidget {
   @override
@@ -35,8 +36,11 @@ class RegistrationPageMainBody extends StatelessWidget {
           showProgress(context);
         }
         if (state is RegisterSuccess) {
-          // Navigator.of(context).pushReplacementNamed(MainRoutes.verificationRoute);
-          pNavigator(context, MainRoutes.verificationRoute);
+          if (isLoggedIn()) {
+            context.vxNav.replace(Uri.parse(MainRoutes.verificationRoute));
+          } else {
+            context.vxNav.clearAndPush(Uri.parse(MainRoutes.homePageRoute));
+          }
         }
         if (state is RegisterFailed) {
           logger.d(state.message);
@@ -51,12 +55,7 @@ class RegistrationPageMainBody extends StatelessWidget {
             backgroundColor: Colors.transparent,
             title: GestureDetector(
               onTap: () {
-                // Navigator.of(context).pushReplacementNamed(HomePage.id);
-                // Navigator.of(context).pushNamedAndRemoveUntil(
-                //   MainRoutes.homePageRoute,
-                //   (route) => false,
-                // );
-                pNavigator(context, MainRoutes.userHomeRoute);
+                context.vxNav.clearAndPush(Uri.parse(MainRoutes.homePageRoute));
               },
               child: const Text(
                 'OPINIONX',
@@ -68,8 +67,7 @@ class RegistrationPageMainBody extends StatelessWidget {
             actions: [
               TextButton(
                 onPressed: () {
-                  // Navigator.of(context).pushNamed(MainRoutes.loginRoute);
-                  nNavigator(context, MainRoutes.loginRoute);
+                  context.vxNav.replace(Uri.parse(MainRoutes.loginRoute));
                 },
                 child: const Text("Login"),
               ),
@@ -82,16 +80,8 @@ class RegistrationPageMainBody extends StatelessWidget {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      // color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
-                      // boxShadow: [
-                      //   BoxShadow(
-                      //     color: Colors.grey,
-                      //     blurRadius: 15.0,
-                      //   ),
-                      // ],
                     ),
-                    // height: screenHeight / 2,
                     width: 570,
                     child: Padding(
                       padding: const EdgeInsets.all(40.0),

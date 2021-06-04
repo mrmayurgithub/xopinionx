@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xopinionx/auth/auth_bloc.dart';
 import 'package:xopinionx/global/global_helpers.dart';
 import 'package:xopinionx/global/logger.dart';
-import 'package:xopinionx/utils/navigations.dart';
 import 'package:xopinionx/utils/routes.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class MainDrawer extends StatelessWidget {
   @override
@@ -34,7 +34,8 @@ class MainDrawer extends StatelessWidget {
               onTap: () {
                 // Navigator.of(context).pushNamed(MainRoutes.userHomeRoute);
                 logger.i("User Home Pressed");
-                nNavigator(context, MainRoutes.userHomeRoute);
+                // nNavigator(context, MainRoutes.userHomeRoute);
+                context.vxNav.clearAndPush(Uri.parse(MainRoutes.userHomeRoute));
               },
             ),
             ListTile(
@@ -42,7 +43,8 @@ class MainDrawer extends StatelessWidget {
               leading: const Icon(Icons.meeting_room_outlined),
               onTap: () {
                 // Navigator.of(context).pushNamed(MainRoutes.chatRoute);
-                nNavigator(context, MainRoutes.chatRoute);
+                // nNavigator(context, MainRoutes.chatRoute);
+                context.vxNav.push(Uri.parse(MainRoutes.chatRoute));
               },
             ),
             ListTile(
@@ -50,7 +52,8 @@ class MainDrawer extends StatelessWidget {
               leading: const Icon(Icons.question_answer_outlined),
               onTap: () {
                 // Navigator.of(context).pushNamed(MainRoutes.userQueries);
-                nNavigator(context, MainRoutes.userQueries);
+                // nNavigator(context, MainRoutes.userQueries);
+                context.vxNav.push(Uri.parse(MainRoutes.userQueries));
               },
             ),
             ListTile(
@@ -70,7 +73,8 @@ class MainDrawer extends StatelessWidget {
               leading: const Icon(Icons.history_outlined),
               onTap: () {
                 // Navigator.of(context).pushNamed(MainRoutes.historyRoute);
-                nNavigator(context, MainRoutes.historyRoute);
+                // nNavigator(context, MainRoutes.historyRoute);
+                context.vxNav.push(Uri.parse(MainRoutes.historyRoute));
               },
             ),
             ListTile(
@@ -78,7 +82,8 @@ class MainDrawer extends StatelessWidget {
               leading: const Icon(Icons.settings_outlined),
               onTap: () {
                 // Navigator.of(context).pushNamed(MainRoutes.settingsRoute);
-                nNavigator(context, MainRoutes.settingsRoute);
+                // nNavigator(context, MainRoutes.settingsRoute);
+                context.vxNav.push(Uri.parse(MainRoutes.settingsRoute));
               },
             ),
             ListTile(
@@ -88,7 +93,8 @@ class MainDrawer extends StatelessWidget {
                 BlocProvider.of<AuthBloc>(context).add(JustLoggedOut());
                 //TODO: change this to streams instead
                 // Navigator.of(context).pushReplacementNamed(MainRoutes.homePageRoute);
-                pNavigator(context, MainRoutes.homePageRoute);
+                // pNavigator(context, MainRoutes.homePageRoute);
+                context.vxNav.clearAndPush(Uri.parse(MainRoutes.homePageRoute));
               },
             ),
             // ListTile(

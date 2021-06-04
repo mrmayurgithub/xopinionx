@@ -7,7 +7,6 @@ import 'package:xopinionx/ui/global/constants.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/global/validators.dart';
 import 'package:xopinionx/ui/screens/login_page/bloc/login_bloc.dart';
-import 'package:xopinionx/utils/navigations.dart';
 import 'package:xopinionx/utils/routes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -40,18 +39,14 @@ class LoginMainBody extends StatelessWidget {
           logger.wtf(state.message);
         }
         if (state is LoginSuccess) {
-          // Navigator.of(context).pop();
           await Fluttertoast.showToast(msg: 'Login Successful');
-          // Navigator.of(context).pushReplacementNamed(MainRoutes.userHomeRoute);
-          pNavigator(context, MainRoutes.userHomeRoute);
+          context.vxNav.clearAndPush(Uri.parse(MainRoutes.userHomeRoute));
         }
         if (state is LoginInProgress) {
-          // showProgress(context);
           isProgress = true;
         }
         if (state is LoginNeedsVerification) {
           //TODO: change
-          // Navigator.of(context).popUntil((route) => route.isFirst);
           context.vxNav.popToRoot();
           Fluttertoast.showToast(msg: 'Please verify your email');
         }
@@ -68,12 +63,8 @@ class LoginMainBody extends StatelessWidget {
               backgroundColor: Colors.transparent,
               title: GestureDetector(
                 onTap: () {
-                  // Navigator.of(context).pushReplacementNamed(HomePage.id);
-                  // Navigator.of(context).pushNamedAndRemoveUntil(
-                  //   MainRoutes.homePageRoute,
-                  //   (route) => false,
-                  // );
-                  pNavigator(context, MainRoutes.homePageRoute);
+                  context.vxNav
+                      .clearAndPush(Uri.parse(MainRoutes.homePageRoute));
                 },
                 child: const Text(
                   'OPINIONX',
@@ -86,8 +77,7 @@ class LoginMainBody extends StatelessWidget {
               actions: [
                 TextButton(
                   onPressed: () {
-                    // Navigator.of(context).pushNamed(MainRoutes.registerRoute);
-                    nNavigator(context, MainRoutes.registerRoute);
+                    context.vxNav.replace(Uri.parse(MainRoutes.registerRoute));
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(

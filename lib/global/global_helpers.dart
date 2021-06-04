@@ -21,6 +21,7 @@ Future<void> loadCurrentUser() async {
 
 Future<void> _disposeApi() async {
   _globalProblemsList = [];
+  _globalUser = null;
 //   _userProblemsList = [];
 // }
 }

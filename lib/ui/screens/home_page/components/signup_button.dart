@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:xopinionx/ui/global/constants.dart';
-import 'package:xopinionx/utils/navigations.dart';
 import 'package:xopinionx/utils/routes.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class SignUpButton extends StatefulWidget {
   @override
@@ -13,8 +13,7 @@ class _SignUpButtonState extends State<SignUpButton> {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        // Navigator.of(context).pushNamed(MainRoutes.registerRoute);
-        nNavigator(context, MainRoutes.registerRoute);
+        context.vxNav.push(Uri.parse(MainRoutes.registerRoute));
       },
       style: TextButton.styleFrom(
         backgroundColor: Colors.green,

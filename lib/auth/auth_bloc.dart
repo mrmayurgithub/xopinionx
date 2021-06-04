@@ -45,7 +45,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         //   yield AuthUnAuthenticated();
         // }
 
-        if (UserLoginStatus().isLoggedIn()) {
+        if (isLoggedIn()) {
           logger.i('Checking whether user is verified');
           final _currentUser = FirebaseAuth.instance.currentUser;
           if (_currentUser.emailVerified) {

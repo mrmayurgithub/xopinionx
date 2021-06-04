@@ -50,7 +50,7 @@ dependencies:
   responsive_builder: ^0.3.0
   responsive_framework: ^0.0.14
   url_strategy: ^0.2.0
-  velocity_x: ^2.6.1
+  velocity_x: ^3.2.0
   get: ^4.1.4
   font_awesome_flutter: ^9.0.0  
 
