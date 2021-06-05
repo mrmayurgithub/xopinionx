@@ -22,10 +22,11 @@ class UserHomeAskQueryRequested extends UserHomeEvent {}
 class GlobalProblemsRequested extends UserHomeEvent {}
 
 class UserHomeChatRequested extends UserHomeEvent {
-  final String chatUserId;
+  final String studentId;
+  final String problemId;
 
-  const UserHomeChatRequested({this.chatUserId});
+  const UserHomeChatRequested({this.studentId, this.problemId});
 
   @override
-  List<Object> get props => [chatUserId];
+  List<Object> get props => [studentId, problemId];
 }

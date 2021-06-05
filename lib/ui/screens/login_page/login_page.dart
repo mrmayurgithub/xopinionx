@@ -193,53 +193,50 @@ class _LoginFormState extends State<LoginForm> {
             suffix: _showPassIcon(),
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
-
-          TextButton(
-            onPressed: () {
-              FocusScope.of(context).unfocus();
-              TextEditingController().clear();
-              if (_formkey.currentState.validate()) {
-                logger.i('validated');
-                BlocProvider.of<LoginBloc>(context).add(
-                  LoginButtonPressed(
-                    email: _emailTextController.text,
-                    password: _passtextController.text,
+          if (widget.isLoading == true)
+            CircularProgressIndicator(
+              color: kPrimaryColor,
+            )
+          else
+            TextButton(
+              onPressed: () {
+                FocusScope.of(context).unfocus();
+                TextEditingController().clear();
+                if (_formkey.currentState.validate()) {
+                  logger.i('validated');
+                  BlocProvider.of<LoginBloc>(context).add(
+                    LoginButtonPressed(
+                      email: _emailTextController.text,
+                      password: _passtextController.text,
+                    ),
+                  );
+                } else {
+                  Fluttertoast.showToast(
+                      msg: 'Email or password is incorrect !');
+                }
+              },
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.green,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(kDefaultPadding / 2),
+                ),
+              ),
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  vertical: kDefaultPadding / 2.5,
+                  horizontal: kDefaultPadding * 3,
+                ),
+                child: const Text(
+                  'Login',
+                  style: TextStyle(
+                    letterSpacing: 1.3,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
                   ),
-                );
-              } else {
-                Fluttertoast.showToast(msg: 'Email or password is incorrect !');
-              }
-            },
-            style: TextButton.styleFrom(
-              backgroundColor: Colors.green,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(kDefaultPadding / 2),
+                ),
               ),
             ),
-            child: widget.isLoading
-                ? Container(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: kDefaultPadding / 3.5,
-                      horizontal: kDefaultPadding * 3.9,
-                    ),
-                    child: const CircularProgressIndicator(),
-                  )
-                : Container(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: kDefaultPadding / 2.5,
-                      horizontal: kDefaultPadding * 3,
-                    ),
-                    child: const Text(
-                      'Login',
-                      style: TextStyle(
-                        letterSpacing: 1.3,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
-          ),
           // SizedBox(height: screenHeight * 0.024459975), // 22
 
           // TextButton(s

@@ -13,14 +13,18 @@ class UserHomeInProgress extends UserHomeState {}
 
 class QueryNotAllowed extends UserHomeState {}
 
-class UserHomeSuccess extends UserHomeState {}
+// class UserHomeSuccess extends UserHomeState {}
+
+class UserHomeLoaded extends UserHomeState {}
+
+class UserHomeChatPage extends UserHomeState {}
 
 class AskQueryLoaded extends UserHomeState {}
 
 class UserHomeFailure extends UserHomeState {
   final String message;
 
-  UserHomeFailure({@required this.message});
+  const UserHomeFailure({@required this.message});
   @override
   List<Object> get props => [message];
 }

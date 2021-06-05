@@ -40,8 +40,13 @@ class UserHomeMainBody extends StatelessWidget {
           Fluttertoast.showToast(
               msg: 'You cannot ask more than 3 Queries at a time');
         }
-        if (state is UserHomeSuccess) {
+
+        if (state is UserHomeLoaded) {
           Navigator.of(context).pop();
+        }
+        if (state is UserHomeChatPage) {
+          logger.i("Moving to Chat Page");
+          //TODO: implement
         }
         if (state is UserHomeFailure) {
           // Navigator.of(context).pop();
@@ -190,15 +195,22 @@ class QueryList extends StatelessWidget {
                                     ),
                                   ),
                                   Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.only(
                                           bottom: kDefaultPadding / 5,
+                                          right: kDefaultPadding / 6,
                                         ),
                                         child: TextButton(
                                           onPressed: () {
-                                            //TODO: implement
-                                            // Navigator.of(context).pushNamed(ChatPage.id);
+                                            //TODO: check
+                                            BlocProvider.of<UserHomeBloc>(
+                                                    context)
+                                                .add(UserHomeChatRequested(
+                                              studentId: ele.userId,
+                                              problemId: ele.problemId,
+                                            ));
                                           },
                                           style: TextButton.styleFrom(
                                               backgroundColor:
