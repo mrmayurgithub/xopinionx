@@ -17,7 +17,12 @@ class QueryNotAllowed extends UserHomeState {}
 
 class UserHomeLoaded extends UserHomeState {}
 
-class UserHomeChatPage extends UserHomeState {}
+class UserHomeChatPage extends UserHomeState {
+  final ChatModel chatModel;
+  const UserHomeChatPage({@required this.chatModel});
+  @override
+  List<Object> get props => [chatModel];
+}
 
 class AskQueryLoaded extends UserHomeState {}
 

@@ -10,6 +10,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:xopinionx/api/models/chat_model.dart';
 import 'package:xopinionx/auth/auth_bloc.dart';
 import 'package:xopinionx/global/bloc_observer.dart';
 import 'package:xopinionx/global/logger.dart';
@@ -109,9 +110,8 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
           VxRoutePage(pageName: "AskQueryPage", child: AskQueryPage()),
       MainRoutes.settingsRoute: (_, __) =>
           VxRoutePage(pageName: "SettingsPage", child: SettingsPage()),
-      // TODO: Pass Chat Model
-      MainRoutes.chatRoute: (_, chatModel) =>
-          VxRoutePage(pageName: "ChatPage", child: ChatPage()),
+      MainRoutes.chatRoute: (_, chatModel) => VxRoutePage(
+          pageName: "ChatPage", child: ChatPage(chatModel: chatModel)),
       MainRoutes.userQueries: (_, __) =>
           VxRoutePage(pageName: "UserQueries", child: UserQueries()),
     },

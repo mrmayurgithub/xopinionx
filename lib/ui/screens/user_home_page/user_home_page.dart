@@ -42,11 +42,15 @@ class UserHomeMainBody extends StatelessWidget {
         }
 
         if (state is UserHomeLoaded) {
+          // context.vxNav.pop();
           Navigator.of(context).pop();
         }
         if (state is UserHomeChatPage) {
           logger.i("Moving to Chat Page");
           //TODO: implement
+          Navigator.of(context).pop();
+          context.vxNav
+              .push(Uri.parse(MainRoutes.chatRoute), params: state.chatModel);
         }
         if (state is UserHomeFailure) {
           // Navigator.of(context).pop();

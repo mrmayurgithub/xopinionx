@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:xopinionx/api/models/chat_model.dart';
 import 'package:xopinionx/ui/components/drawer.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
@@ -7,19 +8,15 @@ import 'package:xopinionx/ui/global/constants.dart';
 import 'package:xopinionx/ui/screens/chats_page/bloc/chat_bloc.dart';
 
 class ChatPage extends StatelessWidget {
-  // final ChatModel chatModel;
+  final ChatModel chatModel;
 
-  // const ChatPage({@required this.chatModel});
+  const ChatPage({@required this.chatModel});
 
   @override
   Widget build(BuildContext context) {
-    //TODO: this is wrong
-    ChatModel chatModel;
     return BlocProvider(
       create: (context) => ChatBloc()..add(ChatListRequested()),
-      child: MainChatPage(
-        chatModel: chatModel,
-      ),
+      child: MainChatPage(chatModel: chatModel),
     );
   }
 }
@@ -114,6 +111,11 @@ class _MainChatPageState extends State<MainChatPage> {
                                 color: Colors.grey.shade800,
                                 height: 0.0,
                               ),
+                              ChatType(),
+                              Divider(
+                                color: Colors.grey.shade800,
+                                height: 0.0,
+                              ),
                               ListView(
                                 shrinkWrap: true,
                                 children: [],
@@ -137,7 +139,14 @@ class _MainChatPageState extends State<MainChatPage> {
                             ),
                             height: MediaQuery.of(context).size.height - 100,
                             child: widget.chatModel != null
-                                ? ListView()
+                                ? ListView(
+                                    shrinkWrap: true,
+                                    children: [
+                                      Text(
+                                        "Chat Selected",
+                                      ),
+                                    ],
+                                  )
                                 : const Center(
                                     child: Text(
                                       "No chat to show",
@@ -190,6 +199,44 @@ class _MainChatPageState extends State<MainChatPage> {
           ),
         );
       },
+    );
+  }
+}
+
+class ChatType extends StatefulWidget {
+  @override
+  _ChatTypeState createState() => _ChatTypeState();
+}
+
+class _ChatTypeState extends State<ChatType> {
+  int grVal;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          RadioListTile(
+            value: 0,
+            groupValue: grVal,
+            onChanged: (val) {
+              setState(() {
+                grVal = val;
+              });
+            },
+            title: Text('Student'),
+          ),
+          RadioListTile(
+            value: 1,
+            groupValue: grVal,
+            onChanged: (val) {
+              setState(() {
+                grVal = val;
+              });
+            },
+            title: Text('Teacher'),
+          ),
+        ],
+      ),
     );
   }
 }

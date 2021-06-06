@@ -10,16 +10,11 @@ class ChatFunctions {
 
   static Future<void> createChat({@required ChatModel chatModel}) async {
     //TODO: implement
-    final _docId = _firestore.collection('chats').doc().id;
-    await _firestore.collection('chats').doc(_docId).set(
-          ChatModel(
-            studentId: chatModel.studentId,
-            teacherId: chatModel.teacherId,
-            problemId: chatModel.problemId,
-            chatId: _docId,
-            review: chatModel.review,
-          ).toJson(),
-        );
+    // final _docId = _firestore.collection('chats').doc().id;
+    await _firestore
+        .collection('chats')
+        .doc(chatModel.chatId)
+        .set(chatModel.toJson());
   }
 
   static Future<void> deleteChat({ChatModel chatModel}) async {
@@ -31,5 +26,23 @@ class ChatFunctions {
     //TODO: implement
   }
 
-  //TODO: implement chat stream
+  List<ChatModel> _userChatList(QuerySnapshot snapshot) {
+    return snapshot.docs.map((e) => ChatModel.fromJson(e.data())).toList();
+  }
+
+  Stream<List<ChatModel>> get userTeahcerList {
+    final Stream<QuerySnapshot> _q = _firestore
+        .collection('chats')
+        .where('teacherId', isEqualTo: globalUser.id)
+        .snapshots();
+    return _q.map((_userChatList));
+  }
+
+  Stream<List<ChatModel>> get userStudentList {
+    final Stream<QuerySnapshot> _q = _firestore
+        .collection('chats')
+        .where('studentId', isEqualTo: globalUser.id)
+        .snapshots();
+    return _q.map((_userChatList));
+  }
 }

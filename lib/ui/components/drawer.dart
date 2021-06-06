@@ -44,7 +44,8 @@ class MainDrawer extends StatelessWidget {
               onTap: () {
                 // Navigator.of(context).pushNamed(MainRoutes.chatRoute);
                 // nNavigator(context, MainRoutes.chatRoute);
-                context.vxNav.push(Uri.parse(MainRoutes.chatRoute));
+                context.vxNav
+                    .push(Uri.parse(MainRoutes.chatRoute), params: null);
               },
             ),
             ListTile(
