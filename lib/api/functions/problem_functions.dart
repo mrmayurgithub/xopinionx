@@ -59,7 +59,7 @@ class ProblemFunctions {
     final Query q = _firestore.collection('problems').limit(20);
     final QuerySnapshot querySnapshot = await q.get();
     final List<QueryDocumentSnapshot> _data = querySnapshot.docs;
-    logger.e(_data.length);
+    // logger.e(_data.length);
 
     for (final element in _data) {
       final Map<String, dynamic> json = element.data();
@@ -74,11 +74,11 @@ class ProblemFunctions {
           _problems.add(_problem);
         }
       }
-      logger.d('PROBLEM: ${_problem.tag.toString()}');
+      // logger.d('PROBLEM: ${_problem.tag.toString()}');
     }
 
-    logger.d(
-        'GETGLOBALPROBLEMS: ${_problems.length} ${globalUser.userTags.toString()}');
+    // logger.d(
+    //     'GETGLOBALPROBLEMS: ${_problems.length} ${globalUser.userTags.toString()}');
 
     return _problems;
   }

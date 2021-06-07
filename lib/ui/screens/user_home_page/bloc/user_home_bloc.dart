@@ -9,7 +9,6 @@ import 'package:xopinionx/api/functions/chat_functions.dart';
 import 'package:xopinionx/api/models/chat_model.dart';
 import 'package:xopinionx/global/global_helpers.dart';
 import 'package:xopinionx/global/logger.dart';
-import 'package:xopinionx/ui/screens/user_queries/bloc/user_queries_bloc.dart';
 
 part 'user_home_state.dart';
 part 'user_home_event.dart';
@@ -62,11 +61,14 @@ class UserHomeBloc extends Bloc<UserHomeEvent, UserHomeState> {
           //TODO: implement
           String _docId =
               FirebaseFirestore.instance.collection('chats').doc().id;
+          final DateTime now = DateTime.now();
+          final DateTime date = DateTime(now.year, now.month, now.day);
           ChatModel _chatModel = ChatModel(
             studentId: event.studentId,
             teacherId: globalUser.id,
             problemId: event.problemId,
             chatId: _docId,
+            date: date.toString(),
           );
           await ChatFunctions.createChat(chatModel: _chatModel);
           logger.i('New Chat CREATED');
@@ -76,9 +78,12 @@ class UserHomeBloc extends Bloc<UserHomeEvent, UserHomeState> {
           logger.i('Chat Found');
           //TODO: implement
           Map<String, dynamic> doc;
-          _docList.forEach((element) {
+          // _docList.forEach((element) {
+          //   doc = element.data();
+          // });
+          for (final element in _docList) {
             doc = element.data();
-          });
+          }
           logger.d(doc.toString());
           yield UserHomeChatPage(chatModel: ChatModel.fromJson(doc));
         }

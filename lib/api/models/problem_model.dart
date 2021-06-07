@@ -21,6 +21,7 @@ class ProblemModel {
   String datePosted;
   bool status;
   Tags tag;
-  factory ProblemModel.fromJson(Map<String, dynamic> data) => _$ProblemModelFromJson(data);
+  factory ProblemModel.fromJson(Map<String, dynamic> data) =>
+      _$ProblemModelFromJson(data);
   Map<String, dynamic> toJson() => _$ProblemModelToJson(this);
 }

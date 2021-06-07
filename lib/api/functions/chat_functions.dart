@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:xopinionx/api/models/chat_model.dart';
 import 'package:xopinionx/global/global_helpers.dart';
-import 'package:xopinionx/global/logger.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class ChatFunctions {
@@ -30,12 +29,12 @@ class ChatFunctions {
     return snapshot.docs.map((e) => ChatModel.fromJson(e.data())).toList();
   }
 
-  Stream<List<ChatModel>> get userTeahcerList {
+  Stream<List<ChatModel>> get userTeacherList {
     final Stream<QuerySnapshot> _q = _firestore
         .collection('chats')
         .where('teacherId', isEqualTo: globalUser.id)
         .snapshots();
-    return _q.map((_userChatList));
+    return _q.map(_userChatList);
   }
 
   Stream<List<ChatModel>> get userStudentList {
@@ -43,6 +42,6 @@ class ChatFunctions {
         .collection('chats')
         .where('studentId', isEqualTo: globalUser.id)
         .snapshots();
-    return _q.map((_userChatList));
+    return _q.map(_userChatList);
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 import 'package:xopinionx/api/models/problem_model.dart';
 import 'package:xopinionx/global/global_helpers.dart';
 import 'package:xopinionx/global/logger.dart';
@@ -9,6 +10,7 @@ import 'package:xopinionx/global/tags_map.dart';
 import 'package:xopinionx/ui/components/drawer.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/constants.dart';
+import 'package:xopinionx/ui/screens/chats_page/chats_screen.dart';
 import 'package:xopinionx/ui/screens/user_home_page/bloc/user_home_bloc.dart';
 import 'package:xopinionx/ui/screens/user_home_page/components/report_content.dart';
 import 'package:xopinionx/utils/routes.dart';
@@ -49,8 +51,10 @@ class UserHomeMainBody extends StatelessWidget {
           logger.i("Moving to Chat Page");
           //TODO: implement
           Navigator.of(context).pop();
-          context.vxNav
-              .push(Uri.parse(MainRoutes.chatRoute), params: state.chatModel);
+          final _ch =
+              Provider.of<ChatSelectionProvider>(context, listen: false);
+          _ch.setChat(chat: state.chatModel);
+          context.vxNav.push(Uri.parse(MainRoutes.chatRoute));
         }
         if (state is UserHomeFailure) {
           // Navigator.of(context).pop();

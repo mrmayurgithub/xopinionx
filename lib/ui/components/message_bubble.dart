@@ -21,7 +21,7 @@ class MessageBubble extends StatelessWidget {
             sender,
             style: const TextStyle(
               fontSize: 12.0,
-              color: Colors.black54,
+              color: Colors.white70,
             ),
           ),
           Material(

@@ -9,12 +9,14 @@ class ChatModel {
     this.problemId,
     this.chatId,
     this.review,
+    this.date,
   });
   String studentId;
   String teacherId;
   String problemId;
   String chatId;
   double review;
+  String date;
   factory ChatModel.fromJson(Map<String, dynamic> data) =>
       _$ChatModelFromJson(data);
 
