@@ -3,8 +3,8 @@ import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xopinionx/api/functions/problem_functions.dart';
-import 'package:xopinionx/api/models/problem_model.dart';
+import 'package:xopinionx/core/api/functions/problem_functions.dart';
+import 'package:xopinionx/core/api/models/problem_model.dart';
 import 'package:xopinionx/global/logger.dart';
 
 part 'user_queries_event.dart';

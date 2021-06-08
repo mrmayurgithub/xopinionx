@@ -2,14 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:xopinionx/api/functions/chat_functions.dart';
-import 'package:xopinionx/api/models/chat_model.dart';
 import 'package:xopinionx/global/global_helpers.dart';
 import 'package:xopinionx/ui/components/drawer.dart';
 import 'package:xopinionx/ui/components/message_bubble.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/constants.dart';
 import 'package:xopinionx/ui/screens/chats_page/bloc/chat_bloc.dart';
+import 'package:xopinionx/ui/screens/chats_page/chat_area.dart';
+import 'package:xopinionx/ui/screens/chats_page/chat_provider.dart';
+import 'package:xopinionx/ui/screens/chats_page/chat_type.dart';
 
 final _firestore = FirebaseFirestore.instance;
 
@@ -106,10 +107,7 @@ class _MainChatPageState extends State<MainChatPage> {
                                 ),
                               ),
                             ),
-                            Divider(
-                              color: Colors.grey.shade800,
-                              height: 0.0,
-                            ),
+                            Divider(color: Colors.grey.shade800, height: 0.0),
                             ChatType(),
                           ],
                         ),
@@ -193,168 +191,5 @@ class _MainChatPageState extends State<MainChatPage> {
         );
       },
     );
-  }
-}
-
-class ChatType extends StatefulWidget {
-  @override
-  _ChatTypeState createState() => _ChatTypeState();
-}
-
-class _ChatTypeState extends State<ChatType> {
-  int grVal = 1;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              RadioListTile(
-                value: 0,
-                groupValue: grVal,
-                onChanged: (int val) {
-                  setState(() {
-                    grVal = val;
-                  });
-                },
-                title: const Text('Student'),
-              ),
-              RadioListTile(
-                value: 1,
-                groupValue: grVal,
-                onChanged: (int val) {
-                  setState(() {
-                    grVal = val;
-                  });
-                },
-                title: const Text('Teacher'),
-              ),
-            ],
-          ),
-          Divider(
-            color: Colors.grey.shade800,
-            height: 0.0,
-          ),
-          const ListTile(
-            dense: true,
-            title: Text("Chats"),
-          ),
-          Divider(
-            color: Colors.grey.shade800,
-            height: 0.0,
-          ),
-          StreamProvider<List<ChatModel>>.value(
-            value: grVal == 0
-                ? ChatFunctions().userStudentList
-                : ChatFunctions().userTeacherList,
-            child: ChatUsers(),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ChatUsers extends StatefulWidget {
-  @override
-  _ChatUsersState createState() => _ChatUsersState();
-}
-
-class _ChatUsersState extends State<ChatUsers> {
-  @override
-  Widget build(BuildContext context) {
-    final sChat = Provider.of<ChatSelectionProvider>(context, listen: false);
-
-    final _chatlist = Provider.of<List<ChatModel>>(context);
-    return _chatlist == null
-        ? const Center(
-            child: CircularProgressIndicator(),
-          )
-        : _chatlist.isEmpty
-            ? const Center(
-                child: Text("No Chats to show"),
-              )
-            : ListView.builder(
-                physics: const ClampingScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: _chatlist.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(
-                      _chatlist[index].problemId,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    tileColor: sChat.selectedChat.problemId ==
-                            _chatlist[index].problemId
-                        ? Colors.grey.shade800
-                        : Colors.grey.shade700,
-                    onTap: () {
-                      sChat.setChat(chat: _chatlist[index]);
-                    },
-                  );
-                },
-              );
-  }
-}
-
-class ChatArea extends StatefulWidget {
-  @override
-  _ChatAreaState createState() => _ChatAreaState();
-}
-
-class _ChatAreaState extends State<ChatArea> {
-  @override
-  Widget build(BuildContext context) {
-    final _ch = Provider.of<ChatSelectionProvider>(context);
-    return StreamBuilder<QuerySnapshot>(
-      stream: _firestore
-          .collection('chats')
-          .doc(_ch.selectedChat.chatId)
-          .collection('messages')
-          .snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return Center(
-            child: const CircularProgressIndicator(
-              backgroundColor: Colors.lightBlueAccent,
-            ),
-          );
-        }
-        List<MessageBubble> messageBubbles = [];
-        print(" ${snapshot.data} CHATAREA");
-        if (snapshot != null) {
-          final messages = snapshot.data.docs.reversed;
-          for (var msg in messages) {
-            final json = msg.data();
-            final messageText = json['text'];
-            final messageSender = json['sender'];
-            final currentUser = globalUser.email;
-            final messageBubble = MessageBubble(
-              sender: messageSender,
-              msg: messageText,
-              isMe: globalUser.email == currentUser,
-            );
-            messageBubbles.add(messageBubble);
-          }
-        }
-        return ListView(
-          reverse: true,
-          children: snapshot != null ? messageBubbles : [],
-        );
-      },
-    );
-  }
-}
-
-class ChatSelectionProvider with ChangeNotifier {
-  ChatModel _selectedChat;
-  ChatModel get selectedChat => _selectedChat;
-  void setChat({@required ChatModel chat}) {
-    _selectedChat = chat;
-    notifyListeners();
   }
 }

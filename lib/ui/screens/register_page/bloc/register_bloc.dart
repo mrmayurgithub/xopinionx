@@ -7,9 +7,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:xopinionx/api/functions/user_functions.dart';
-import 'package:xopinionx/api/models/user_model.dart';
-import 'package:xopinionx/auth/functions/signUp.dart';
+import 'package:xopinionx/core/api/functions/user_functions.dart';
+import 'package:xopinionx/core/api/models/user_model.dart';
+import 'package:xopinionx/core/auth/functions/signUp.dart';
 import 'package:xopinionx/global/enums.dart';
 import 'package:xopinionx/global/logger.dart';
 

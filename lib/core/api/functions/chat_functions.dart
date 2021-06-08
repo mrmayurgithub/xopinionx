@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:xopinionx/api/models/chat_model.dart';
+import 'package:xopinionx/core/api/models/chat_model.dart';
 import 'package:xopinionx/global/global_helpers.dart';
 
 // ignore: avoid_classes_with_only_static_members

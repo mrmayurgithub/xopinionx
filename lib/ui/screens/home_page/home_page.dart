@@ -6,7 +6,7 @@ import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/screens/home_page/bloc/home_page_bloc.dart';
 import 'package:xopinionx/ui/screens/home_page/home_page_desktop.dart';
-import 'package:xopinionx/utils/routes.dart';
+import 'package:xopinionx/config/routes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomePage extends StatelessWidget {

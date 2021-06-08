@@ -204,7 +204,7 @@ class _SettingsFormState extends State<SettingsForm> {
                 labelText: 'Language Preference',
                 hintText: 'Preferred mode of communication',
               ),
-              items: _langs,
+              items: widget.enabled ? _langs : [],
               onChanged: (value) {
                 setState(() {
                   _langPref = value;
@@ -224,7 +224,7 @@ class _SettingsFormState extends State<SettingsForm> {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              items: _edLevel,
+              items: widget.enabled ? _edLevel : [],
               onChanged: (value) {
                 setState(() {
                   _education = value;

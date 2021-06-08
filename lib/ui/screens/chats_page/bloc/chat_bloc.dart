@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xopinionx/api/models/chat_model.dart';
+import 'package:xopinionx/core/api/models/chat_model.dart';
 
 part 'chat_event.dart';
 part 'chat_state.dart';

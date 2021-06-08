@@ -10,12 +10,13 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:xopinionx/auth/auth_bloc.dart';
+import 'package:xopinionx/config/theme/bloc/theme_bloc.dart';
+import 'package:xopinionx/core/auth/auth_bloc.dart';
 import 'package:xopinionx/global/bloc_observer.dart';
 import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/ui/global/constants.dart';
-import 'package:xopinionx/ui/global/theme/bloc/theme_bloc.dart';
 import 'package:xopinionx/ui/screens/ask_query_page/ask_query_page.dart';
+import 'package:xopinionx/ui/screens/chats_page/chat_provider.dart';
 import 'package:xopinionx/ui/screens/chats_page/chats_screen.dart';
 import 'package:xopinionx/ui/screens/donation_page/donation_page.dart';
 import 'package:xopinionx/ui/screens/history_page/history_page.dart';
@@ -29,7 +30,7 @@ import 'package:xopinionx/ui/screens/settings_page/settings_page.dart';
 import 'package:xopinionx/ui/screens/user_home_page/user_home_page.dart';
 import 'package:xopinionx/ui/screens/user_queries/user_queries.dart';
 import 'package:xopinionx/ui/screens/verification_page/verification_page.dart';
-import 'package:xopinionx/utils/routes.dart';
+import 'package:xopinionx/config/routes.dart';
 
 void main() {
   Bloc.observer = SimpleBlocObserver();

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:xopinionx/api/functions/problem_functions.dart';
-import 'package:xopinionx/api/models/problem_model.dart';
+import 'package:xopinionx/core/api/functions/problem_functions.dart';
+import 'package:xopinionx/core/api/models/problem_model.dart';
 import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/global/tags_map.dart';
 import 'package:xopinionx/ui/components/drawer.dart';

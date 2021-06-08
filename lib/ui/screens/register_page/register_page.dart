@@ -10,7 +10,7 @@ import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/global/validators.dart';
 import 'package:xopinionx/ui/screens/register_page/bloc/register_bloc.dart';
 import 'package:xopinionx/ui/screens/settings_page/settings_page.dart';
-import 'package:xopinionx/utils/routes.dart';
+import 'package:xopinionx/config/routes.dart';
 import 'package:xopinionx/utils/status.dart';
 import 'package:velocity_x/velocity_x.dart';
 

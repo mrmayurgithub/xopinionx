@@ -9,7 +9,7 @@ import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/constants.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/screens/ask_query_page/bloc/ask_query_bloc.dart';
-import 'package:xopinionx/utils/routes.dart';
+import 'package:xopinionx/config/routes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class AskQueryPage extends StatelessWidget {

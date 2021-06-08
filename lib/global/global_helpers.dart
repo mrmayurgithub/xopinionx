@@ -1,10 +1,10 @@
 //TODO: Complete
-import 'package:xopinionx/api/functions/problem_functions.dart';
-import 'package:xopinionx/api/functions/user_functions.dart';
-import 'package:xopinionx/api/models/problem_model.dart';
-import 'package:xopinionx/api/models/user_model.dart';
-
 //TODO: Compplete
+import 'package:xopinionx/core/api/functions/problem_functions.dart';
+import 'package:xopinionx/core/api/functions/user_functions.dart';
+import 'package:xopinionx/core/api/models/problem_model.dart';
+import 'package:xopinionx/core/api/models/user_model.dart';
+
 Future<void> _initializeApi() async {
   await loadCurrentUser();
   // await loadGlobalProblems();

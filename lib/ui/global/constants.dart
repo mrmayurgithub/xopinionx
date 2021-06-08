@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xopinionx/api/models/tags_model.dart';
+import 'package:xopinionx/core/api/models/tags_model.dart';
 import 'package:xopinionx/global/enums.dart';
 
 const kDefaultPadding = 20.0;

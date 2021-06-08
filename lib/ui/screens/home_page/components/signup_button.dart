@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xopinionx/ui/global/constants.dart';
-import 'package:xopinionx/utils/routes.dart';
+import 'package:xopinionx/config/routes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SignUpButton extends StatefulWidget {

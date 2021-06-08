@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xopinionx/responsive.dart';
+import 'package:xopinionx/config/responsive.dart';
 import 'package:xopinionx/ui/global/constants.dart';
 import 'package:xopinionx/ui/screens/home_page/components/login_button.dart';
 import 'package:xopinionx/ui/screens/home_page/components/signup_button.dart';
@@ -25,15 +25,18 @@ class _HomePageDesktopState extends State<HomePageDesktop> {
           centerTitle: isMobile,
           actions: [
             if (!isMobile)
-              TextButton(
-                onPressed: () {},
-                child: const Text('About Us'),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextButton(
+                  onPressed: () {},
+                  child: const Text('About Us'),
+                ),
               ),
-            if (!isMobile)
-              TextButton(
-                onPressed: () {},
-                child: const Text('Donate'),
-              ),
+            // if (!isMobile)
+            //   TextButton(
+            //     onPressed: () {},
+            //     child: const Text('Donate'),
+            //   ),
           ],
         ),
         body: Center(

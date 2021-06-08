@@ -7,10 +7,10 @@ import 'package:xopinionx/ui/global/constants.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/global/validators.dart';
 import 'package:xopinionx/ui/screens/login_page/bloc/login_bloc.dart';
-import 'package:xopinionx/utils/routes.dart';
+import 'package:xopinionx/config/routes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-import '../../../responsive.dart';
+import '../../../config/responsive.dart';
 
 class LoginPage extends StatelessWidget {
   @override
