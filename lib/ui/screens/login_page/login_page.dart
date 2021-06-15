@@ -9,6 +9,7 @@ import 'package:xopinionx/ui/global/validators.dart';
 import 'package:xopinionx/ui/screens/login_page/bloc/login_bloc.dart';
 import 'package:xopinionx/config/routes.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:xopinionx/ui/screens/login_page/forgot_password_bloc/forgot_p_bloc.dart';
 
 import '../../../config/responsive.dart';
 
@@ -49,9 +50,6 @@ class LoginMainBody extends StatelessWidget {
           //TODO: change
           context.vxNav.popToRoot();
           Fluttertoast.showToast(msg: 'Please verify your email');
-        }
-        if (state is ForgetPasswordSuccess) {
-          //TODO: complete
         }
       },
       builder: (context, state) {
@@ -192,6 +190,22 @@ class _LoginFormState extends State<LoginForm> {
             obscureText: _isObscure,
             suffix: _showPassIcon(),
           ),
+          SizedBox(height: screenHeight * 0.014459975), // 22
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                onPressed: () {
+                  showDialog(
+                    barrierColor: Theme.of(context).scaffoldBackgroundColor,
+                    context: context,
+                    builder: (context) => ForgotPasswordBox(),
+                  );
+                },
+                child: Text("Forgot Password"),
+              ),
+            ],
+          ),
           SizedBox(height: screenHeight * 0.024459975), // 22
           if (widget.isLoading == true)
             CircularProgressIndicator(
@@ -275,6 +289,124 @@ class _LoginFormState extends State<LoginForm> {
           //   ),
           // ),
         ],
+      ),
+    );
+  }
+}
+
+class ForgotPasswordBox extends StatefulWidget {
+  @override
+  _ForgotPasswordBoxState createState() => _ForgotPasswordBoxState();
+}
+
+class _ForgotPasswordBoxState extends State<ForgotPasswordBox> {
+  final _formkey = GlobalKey<FormState>();
+
+  final _emailTextController = TextEditingController();
+
+  final _validator = Validator();
+
+  bool isLoading = false;
+
+  bool emailSent = false;
+
+  bool err = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => ForgotPasswordBloc(),
+      child: Builder(
+        builder: (BuildContext context) => AlertDialog(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          content: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: 400, maxHeight: 400),
+            child: BlocConsumer<ForgotPasswordBloc, ForgotPasswordState>(
+              listener: (context, state) async {
+                if (state is ForgotPasswordLoading) {
+                  setState(() {
+                    isLoading = true;
+                  });
+                }
+                if (state is ForgotPasswordSuccess) {
+                  setState(() {
+                    isLoading = false;
+                    emailSent = true;
+                  });
+                }
+                if (state is ForgotPasswordFailure) {
+                  setState(() {
+                    isLoading = false;
+                    emailSent = false;
+                    err = true;
+                  });
+                  logger.wtf(state.message);
+                }
+              },
+              builder: (context, state) => Container(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Form(
+                      key: _formkey,
+                      child: TextFormField(
+                        validator: _validator.validateEmail,
+                        controller: _emailTextController,
+                        textAlignVertical: TextAlignVertical.center,
+                        style: Theme.of(context).textTheme.caption.copyWith(
+                              fontSize: screenHeight * 0.015565438, // 14
+                            ),
+                        decoration: InputDecoration(
+                          border: kInputBorderStyle,
+                          focusedBorder: kInputBorderStyle,
+                          enabledBorder: kInputBorderStyle,
+                          hintStyle:
+                              Theme.of(context).textTheme.caption.copyWith(
+                                    fontSize: screenHeight * 0.015565438, // 14
+                                  ),
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: screenWidth * 0.036458333,
+                              vertical:
+                                  screenHeight * 0.021124524), // h=15, v=19
+                          hintText: "Enter your Email",
+                          suffixIcon: null,
+
+                          suffix: null,
+                          prefixIcon: Icon(Icons.email_outlined),
+                        ),
+                      ),
+                    ),
+                    if (err || emailSent) SizedBox(height: 10),
+                    if (err)
+                      Text("Something went wrong!")
+                    else if (emailSent)
+                      Text("Email has been sent!"),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          actions: [
+            if (!isLoading)
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: emailSent ? Text("Done") : Text("Cancel"),
+              ),
+            if (!isLoading && !emailSent)
+              TextButton(
+                onPressed: () {
+                  if (_formkey.currentState.validate()) {
+                    BlocProvider.of<ForgotPasswordBloc>(context).add(
+                        ForgotPasswordRequested(
+                            email: _emailTextController.text));
+                  } else {}
+                },
+                child: Text("Send Link"),
+              )
+          ],
+        ),
       ),
     );
   }

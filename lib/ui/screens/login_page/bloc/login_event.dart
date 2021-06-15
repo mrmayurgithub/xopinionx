@@ -18,12 +18,12 @@ class LoginButtonPressed extends LoginEvent {
   List<Object> get props => [email, password];
 }
 
-class ForgetPassword extends LoginEvent {
-  final String email;
-  const ForgetPassword({this.email});
+// class ForgetPassword extends LoginEvent {
+//   final String email;
+//   const ForgetPassword({this.email});
 
-  @override
-  List<Object> get props => [email];
-}
+//   @override
+//   List<Object> get props => [email];
+// }
 
 class LoginWithGoogle extends LoginEvent {}

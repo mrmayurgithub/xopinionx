@@ -68,7 +68,7 @@ class UserHomeBloc extends Bloc<UserHomeEvent, UserHomeState> {
             teacherId: globalUser.id,
             problemId: event.problemId,
             chatId: _docId,
-            date: date.toString(),
+            dateCreated: date.toIso8601String(),
           );
           await ChatFunctions.createChat(chatModel: _chatModel);
           logger.i('New Chat CREATED');

@@ -13,7 +13,8 @@ ChatModel _$ChatModelFromJson(Map<String, dynamic> json) {
     problemId: json['problemId'] as String,
     chatId: json['chatId'] as String,
     review: (json['review'] as num)?.toDouble(),
-    date: json['date'] as String,
+    dateCreated: json['dateCreated'] as String,
+    dateUpdated: json['dateUpdated'] as String,
   );
 }
 
@@ -23,5 +24,6 @@ Map<String, dynamic> _$ChatModelToJson(ChatModel instance) => <String, dynamic>{
       'problemId': instance.problemId,
       'chatId': instance.chatId,
       'review': instance.review,
-      'date': instance.date,
+      'dateCreated': instance.dateCreated,
+      'dateUpdated': instance.dateUpdated,
     };

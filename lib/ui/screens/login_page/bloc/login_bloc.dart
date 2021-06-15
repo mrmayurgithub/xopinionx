@@ -51,11 +51,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         logger.i("Initializing API");
         await initializeApi;
         yield LoginSuccess();
-      } else if (event is ForgetPassword) {
-        yield LoginInProgress();
-        await FirebaseAuth.instance.sendPasswordResetEmail(email: event.email);
-        logger.i('Password reset email sent');
-        yield ForgetPasswordSuccess();
       }
     } on PlatformException catch (e) {
       yield LoginFailure(message: "Error: ${e.message}");

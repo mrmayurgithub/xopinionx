@@ -95,6 +95,6 @@ final kBorderRadius = BorderRadius.circular(7);
 final kInputBorderStyle = OutlineInputBorder(
   borderRadius: kBorderRadius,
   borderSide: BorderSide(
-    color: Colors.grey[300].withOpacity(0.5),
+    color: Colors.grey[200].withOpacity(0.5),
   ),
 );

@@ -33,6 +33,7 @@ class ChatFunctions {
     final Stream<QuerySnapshot> _q = _firestore
         .collection('chats')
         .where('teacherId', isEqualTo: globalUser.id)
+        .orderBy('dateUpdated')
         .snapshots();
     return _q.map(_userChatList);
   }
@@ -41,6 +42,7 @@ class ChatFunctions {
     final Stream<QuerySnapshot> _q = _firestore
         .collection('chats')
         .where('studentId', isEqualTo: globalUser.id)
+        .orderBy('dateUpdated')
         .snapshots();
     return _q.map(_userChatList);
   }
