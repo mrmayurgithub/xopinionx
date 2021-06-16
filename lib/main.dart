@@ -157,7 +157,8 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
           child: GetMaterialApp.router(
             title: 'Opinionx',
             debugShowCheckedModeBanner: false,
-            theme: widget.state.appThemeData,
+            // theme: widget.state.appThemeData,
+            theme: ThemeData.light(),
             routeInformationParser: VxInformationParser(),
             routerDelegate: _navigator,
             builder: (context, widget) {

@@ -1,11 +1,9 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:xopinionx/global/logger.dart';
-
 part 'verification_event.dart';
 part 'verification_state.dart';
 
@@ -27,14 +25,12 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
         if (_isEmailVerified) {
           yield VerificationSuccess();
         } else if (event.isFirstTime) {
-          yield VerificationFailed(
-            message: "Click on the link sent to verify your email id",
-          );
+          yield const VerificationFailed(
+              message: "Click on the link sent to verify your email id");
         } else {
-          yield VerificationFailed(
-            message:
-                "Verification Failed. Please Click on the link sent to your email id",
-          );
+          yield const VerificationFailed(
+              message:
+                  "Verification Failed. Please Click on the link sent to your email id");
         }
       } else if (event is ResendVerificationMail) {
         yield VerificationInProgress();

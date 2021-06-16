@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:xopinionx/core/api/models/user_model.dart';
 
+// ignore: avoid_classes_with_only_static_members
 class UserFunctions {
   static final _firestore = FirebaseFirestore.instance;
 

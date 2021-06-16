@@ -44,8 +44,7 @@ class MainDrawer extends StatelessWidget {
               onTap: () {
                 // Navigator.of(context).pushNamed(MainRoutes.chatRoute);
                 // nNavigator(context, MainRoutes.chatRoute);
-                context.vxNav
-                    .push(Uri.parse(MainRoutes.chatRoute), params: null);
+                context.vxNav.push(Uri.parse(MainRoutes.chatRoute));
               },
             ),
             ListTile(
@@ -69,15 +68,15 @@ class MainDrawer extends StatelessWidget {
               subtitle: Text(globalUser.sessionBalance.toString()),
               onTap: () {},
             ),
-            ListTile(
-              title: const Text('History'),
-              leading: const Icon(Icons.history_outlined),
-              onTap: () {
-                // Navigator.of(context).pushNamed(MainRoutes.historyRoute);
-                // nNavigator(context, MainRoutes.historyRoute);
-                context.vxNav.push(Uri.parse(MainRoutes.historyRoute));
-              },
-            ),
+            // ListTile(
+            //   title: const Text('History'),
+            //   leading: const Icon(Icons.history_outlined),
+            //   onTap: () {
+            //     // Navigator.of(context).pushNamed(MainRoutes.historyRoute);
+            //     // nNavigator(context, MainRoutes.historyRoute);
+            //     context.vxNav.push(Uri.parse(MainRoutes.historyRoute));
+            //   },
+            // ),
             ListTile(
               title: const Text('Settings'),
               leading: const Icon(Icons.settings_outlined),

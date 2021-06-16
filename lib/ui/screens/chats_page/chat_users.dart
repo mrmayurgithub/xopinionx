@@ -1,18 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:xopinionx/core/api/models/chat_model.dart';
-import 'package:xopinionx/global/global_helpers.dart';
-import 'package:xopinionx/ui/components/drawer.dart';
-import 'package:xopinionx/ui/components/message_bubble.dart';
-import 'package:xopinionx/ui/components/showProgress.dart';
-import 'package:xopinionx/ui/global/constants.dart';
-import 'package:xopinionx/ui/screens/chats_page/bloc/chat_bloc.dart';
 import 'package:xopinionx/ui/screens/chats_page/chat_provider.dart';
-import 'package:xopinionx/ui/screens/chats_page/chats_screen.dart';
-
-final _firestore = FirebaseFirestore.instance;
 
 class ChatUsers extends StatefulWidget {
   @override

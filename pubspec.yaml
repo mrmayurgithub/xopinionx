@@ -38,6 +38,8 @@ dependencies:
   flutter_custom_clippers: ^1.1.2
   flutter_svg: ^0.19.2+1
   fluttertoast: ^7.1.6
+  font_awesome_flutter: ^9.0.0  
+  get: ^4.1.4
   google_fonts: ^2.0.0
   google_sign_in: ^4.5.9
   http: ^0.13.1
@@ -51,8 +53,6 @@ dependencies:
   responsive_framework: ^0.0.14
   url_strategy: ^0.2.0
   velocity_x: ^3.2.0
-  get: ^4.1.4
-  font_awesome_flutter: ^9.0.0  
 
 dev_dependencies:
   flutter_test:

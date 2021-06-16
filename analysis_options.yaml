@@ -3,6 +3,7 @@
 # linter: 
 #   rules: 
 #     - parameter_assignments
+#     - sort_pub_dependencies 
 
 # analyzer: 
 #   errors:   

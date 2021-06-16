@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:xopinionx/global/logger.dart';
@@ -127,6 +128,8 @@ class LoginMainBody extends StatelessWidget {
   }
 }
 
+class LoginIntent extends Intent {}
+
 class LoginForm extends StatefulWidget {
   final bool isLoading;
 
@@ -162,133 +165,115 @@ class _LoginFormState extends State<LoginForm> {
       );
     }
 
+    void LoginMethod() {
+      FocusScope.of(context).unfocus();
+      TextEditingController().clear();
+      if (_formkey.currentState.validate()) {
+        logger.i('validated');
+        BlocProvider.of<LoginBloc>(context).add(
+          LoginButtonPressed(
+            email: _emailTextController.text,
+            password: _passtextController.text,
+          ),
+        );
+      } else {
+        Fluttertoast.showToast(msg: 'Email or password is incorrect !');
+      }
+    }
+
     return Form(
       key: _formkey,
-      child: Column(
-        children: [
-          CustomTextFormField(
-            currentNode: _emailNode,
-            nextNode: _passwordNode,
-            textInputAction: TextInputAction.next,
-            maxLines: 1,
-            fieldController: _emailTextController,
-            hintText: 'Email',
-            keyboardType: TextInputType.emailAddress,
-            validator: _validator.validateEmail,
-            prefixIcon: const Icon(Icons.email_outlined),
-          ),
-          SizedBox(height: screenHeight * 0.024459975), // 22
-          CustomTextFormField(
-            currentNode: _passwordNode,
-            textInputAction: TextInputAction.done,
-            maxLines: 1,
-            fieldController: _passtextController,
-            hintText: 'Password',
-            prefixIcon: const Icon(Icons.lock_outline),
-            keyboardType: TextInputType.text,
-            validator: _validator.validatePassword,
-            obscureText: _isObscure,
-            suffix: _showPassIcon(),
-          ),
-          SizedBox(height: screenHeight * 0.014459975), // 22
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+      child: Shortcuts(
+        shortcuts: {
+          LogicalKeySet(LogicalKeyboardKey.enter): LoginIntent(),
+          LogicalKeySet(LogicalKeyboardKey.numpadEnter): LoginIntent(),
+        },
+        child: Actions(
+          actions: {
+            LoginIntent:
+                CallbackAction<LoginIntent>(onInvoke: (intent) => LoginMethod())
+          },
+          child: Column(
             children: [
-              TextButton(
-                onPressed: () {
-                  showDialog(
-                    barrierColor: Theme.of(context).scaffoldBackgroundColor,
-                    context: context,
-                    builder: (context) => ForgotPasswordBox(),
-                  );
-                },
-                child: Text("Forgot Password"),
+              CustomTextFormField(
+                currentNode: _emailNode,
+                nextNode: _passwordNode,
+                textInputAction: TextInputAction.next,
+                maxLines: 1,
+                fieldController: _emailTextController,
+                hintText: 'Email',
+                keyboardType: TextInputType.emailAddress,
+                validator: _validator.validateEmail,
+                prefixIcon: const Icon(Icons.email_outlined),
               ),
-            ],
-          ),
-          SizedBox(height: screenHeight * 0.024459975), // 22
-          if (widget.isLoading == true)
-            CircularProgressIndicator(
-              color: kPrimaryColor,
-            )
-          else
-            TextButton(
-              onPressed: () {
-                FocusScope.of(context).unfocus();
-                TextEditingController().clear();
-                if (_formkey.currentState.validate()) {
-                  logger.i('validated');
-                  BlocProvider.of<LoginBloc>(context).add(
-                    LoginButtonPressed(
-                      email: _emailTextController.text,
-                      password: _passtextController.text,
+              SizedBox(height: screenHeight * 0.024459975), // 22
+              CustomTextFormField(
+                currentNode: _passwordNode,
+                textInputAction: TextInputAction.done,
+                maxLines: 1,
+                fieldController: _passtextController,
+                hintText: 'Password',
+                prefixIcon: const Icon(Icons.lock_outline),
+                keyboardType: TextInputType.text,
+                validator: _validator.validatePassword,
+                obscureText: _isObscure,
+                suffix: _showPassIcon(),
+              ),
+              SizedBox(height: screenHeight * 0.014459975), // 22
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      showDialog(
+                        barrierColor: Theme.of(context).scaffoldBackgroundColor,
+                        context: context,
+                        builder: (context) => ForgotPasswordBox(),
+                      );
+                    },
+                    child: Text("Forgot Password"),
+                  ),
+                ],
+              ),
+              SizedBox(height: screenHeight * 0.024459975), // 22
+              if (widget.isLoading == true)
+                CircularProgressIndicator(
+                  color: kPrimaryColor,
+                )
+              else
+                Focus(
+                  autofocus: true,
+                  child: TextButton(
+                    onPressed: () {
+                      LoginMethod();
+                    },
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(kDefaultPadding / 2),
+                      ),
                     ),
-                  );
-                } else {
-                  Fluttertoast.showToast(
-                      msg: 'Email or password is incorrect !');
-                }
-              },
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.green,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(kDefaultPadding / 2),
-                ),
-              ),
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  vertical: kDefaultPadding / 2.5,
-                  horizontal: kDefaultPadding * 3,
-                ),
-                child: const Text(
-                  'Login',
-                  style: TextStyle(
-                    letterSpacing: 1.3,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: kDefaultPadding / 2.5,
+                        horizontal: kDefaultPadding * 3,
+                      ),
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(
+                          letterSpacing: 1.3,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-          // SizedBox(height: screenHeight * 0.024459975), // 22
-
-          // TextButton(s
-          //   // color: Colors.blue,
-          //   // shape: RoundedRectangleBorder(
-          //   //   borderRadius: BorderRadius.circular(10),
-          //   // ),
-
-          //   onPressed: () {
-          //     if (_formkey.currentState.validate()) {
-          //       // BlocProvider.of<LoginBloc>(context).add(
-          //       //   LoginButtonPressed(
-          //       //     email: _emailTextController.text,
-          //       //     password: _passtextController.text,
-          //       //   ),
-          //       // );
-          //     } else {
-          //       Fluttertoast.showToast(msg: 'Email or password is incorrect !');
-          //     }
-          //   },
-          //   child: Padding(
-          //     padding: EdgeInsets.symmetric(
-          //       vertical: 16,
-          //       horizontal: 120,
-          //     ),
-          //     child: widget.isLoading
-          //         ? CircularProgressIndicator()
-          //         : Text(
-          //             'Continue with Google',
-          //             style: TextStyle(
-          //               letterSpacing: 1.3,
-          //               color: Colors.white,
-          //               fontWeight: FontWeight.bold,
-          //             ),
-          //           ),
-          //   ),
-          // ),
-        ],
+            ],
+          ),
+        ),
       ),
     );
   }

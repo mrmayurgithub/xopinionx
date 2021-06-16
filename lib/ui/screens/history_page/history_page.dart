@@ -35,6 +35,7 @@ class _HistoryMainBodyState extends State<HistoryMainBody> {
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   const Text('History'),
                   const ExpansionTile(

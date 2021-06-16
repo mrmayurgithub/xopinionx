@@ -26,7 +26,7 @@ class ProblemSolved extends UserQueriesState {}
 class UserQueriesFailure extends UserQueriesState {
   final String message;
 
-  UserQueriesFailure({this.message});
+  const UserQueriesFailure({this.message});
 
   @override
   List<Object> get props => [message];

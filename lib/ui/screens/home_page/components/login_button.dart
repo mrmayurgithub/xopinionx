@@ -27,7 +27,7 @@ class _LoginButtonState extends State<LoginButton> {
           horizontal: kDefaultPadding * 6,
         ),
         child: const Text(
-          'Login',
+          'Login  ',
           style: TextStyle(
             letterSpacing: 1.3,
             color: Colors.green,

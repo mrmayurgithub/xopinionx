@@ -20,43 +20,55 @@ class _HomePageDesktopState extends State<HomePageDesktop> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           elevation: 0.0,
-          backgroundColor: Colors.transparent,
-          title: const Text('OPINIONX'),
+          backgroundColor: Color(0xff1d2834),
+          title: const Text('OpinionX'),
           centerTitle: isMobile,
           actions: [
             if (!isMobile)
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 15,
+                ),
                 child: TextButton(
                   onPressed: () {},
-                  child: const Text('About Us'),
+                  child: const Text(
+                    'About Us',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
-            // if (!isMobile)
-            //   TextButton(
-            //     onPressed: () {},
-            //     child: const Text('Donate'),
-            //   ),
           ],
         ),
-        body: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SelectableText(
-                  "Got some doubts ?\nWant a genuine opinion ?\nAsk your doubts now",
-                  style: TextStyle(
-                    fontSize: isMobile ? 22 : 30,
-                    color: Colors.white,
-                  ),
-                  textAlign: TextAlign.center,
+        body: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: kDefaultPadding * 2.2,
+                  vertical: kDefaultPadding,
                 ),
-                const SizedBox(height: kDefaultPadding * 2),
-                SignUpButton(),
-                const SizedBox(height: kDefaultPadding * 2),
-                LoginButton(),
-              ],
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    SelectableText(
+                      "Got some doubts ?\nWant a genuine opinion ?\nAsk your doubts now !",
+                      style: TextStyle(
+                        fontSize: isMobile ? 26 : 40,
+                        color: Color(0xff1d2834),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: kDefaultPadding * 2),
+                    SignUpButton(),
+                    const SizedBox(height: kDefaultPadding * 2),
+                    LoginButton(),
+                  ],
+                ),
+              ),
             ),
           ),
         ),

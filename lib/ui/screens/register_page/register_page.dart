@@ -28,6 +28,7 @@ class RegistrationPageMainBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterBloc, RegisterState>(
+      // ignore: void_checks
       listener: (context, state) async {
         if (state is RegisterInitial) {
           return const CircularProgressIndicator();

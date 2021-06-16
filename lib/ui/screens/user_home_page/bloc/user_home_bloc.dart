@@ -51,19 +51,18 @@ class UserHomeBloc extends Bloc<UserHomeEvent, UserHomeState> {
             // .where('teacherId', isNotEqualTo: globalUser.id)
             .get();
 
-        final _docList = await _queryList.docs
+        final _docList = _queryList.docs
             .where((element) => element['teacherId'] == globalUser.id);
 
         final _len = _docList.length;
-        print("$_len....");
         if (_len == 0) {
           logger.i('New Chat will be created');
           //TODO: implement
-          String _docId =
+          final String _docId =
               FirebaseFirestore.instance.collection('chats').doc().id;
           final DateTime now = DateTime.now();
           final DateTime date = DateTime(now.year, now.month, now.day);
-          ChatModel _chatModel = ChatModel(
+          final ChatModel _chatModel = ChatModel(
             studentId: event.studentId,
             teacherId: globalUser.id,
             problemId: event.problemId,

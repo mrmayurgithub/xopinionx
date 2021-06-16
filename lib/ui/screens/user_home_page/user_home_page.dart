@@ -11,7 +11,6 @@ import 'package:xopinionx/ui/components/drawer.dart';
 import 'package:xopinionx/ui/components/showProgress.dart';
 import 'package:xopinionx/ui/global/constants.dart';
 import 'package:xopinionx/ui/screens/chats_page/chat_provider.dart';
-import 'package:xopinionx/ui/screens/chats_page/chats_screen.dart';
 import 'package:xopinionx/ui/screens/user_home_page/bloc/user_home_bloc.dart';
 import 'package:xopinionx/ui/screens/user_home_page/components/report_content.dart';
 import 'package:xopinionx/config/routes.dart';
@@ -96,6 +95,23 @@ class UserHomeMainBody extends StatelessWidget {
             physics: const ClampingScrollPhysics(),
             child: Column(
               children: [
+                Container(
+                  padding: const EdgeInsets.all(kDefaultPadding),
+                  width: double.infinity,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    color: Colors.black45.withOpacity(0.4),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SelectableText(
+                        "Answer Some Questions !",
+                        style: TextStyle(fontSize: 40),
+                      ),
+                    ],
+                  ),
+                ),
                 Center(
                   child: Container(
                     constraints: const BoxConstraints(maxWidth: kMaxWidth),
@@ -160,80 +176,87 @@ class QueryList extends StatelessWidget {
                                   bottom: BorderSide(color: kSecondaryColor),
                                 ),
                               ),
-                              child: ExpansionTile(
-                                collapsedTextColor: Colors.white,
-                                title: Text(
-                                  ele.problemTitle.toString(),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                subtitle: Row(
-                                  children: [
-                                    TextButton(
-                                      onPressed: () {},
-                                      style: TextButton.styleFrom(
-                                          backgroundColor: Colors.grey[800]),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(4.0),
-                                        child: Text(tagsMap[ele.tag]),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                trailing: IconButton(
-                                  icon: const Icon(Icons.report),
-                                  onPressed: () async {
-                                    return showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return ReportContent();
-                                      },
-                                    );
-                                  },
-                                ),
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: kDefaultPadding / 6,
-                                      horizontal: kDefaultPadding / 6,
-                                    ),
-                                    child: Text(
-                                      ele.problemDescription,
+                              child: StatefulBuilder(
+                                builder: (BuildContext context,
+                                    void Function(void Function()) setState) {
+                                  return ExpansionTile(
+                                    collapsedTextColor: Colors.white,
+                                    title: Text(
+                                      ele.problemTitle.toString(),
+                                      maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
-                                      maxLines: 10,
                                     ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                          bottom: kDefaultPadding / 5,
-                                          right: kDefaultPadding / 6,
-                                        ),
-                                        child: TextButton(
-                                          onPressed: () {
-                                            //TODO: check
-                                            BlocProvider.of<UserHomeBloc>(
-                                                    context)
-                                                .add(UserHomeChatRequested(
-                                              studentId: ele.userId,
-                                              problemId: ele.problemId,
-                                            ));
-                                          },
+                                    subtitle: Row(
+                                      children: [
+                                        TextButton(
+                                          onPressed: () {},
                                           style: TextButton.styleFrom(
                                               backgroundColor:
                                                   Colors.grey[800]),
-                                          child: const Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 8.0),
-                                            child: Text('Chat'),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(4.0),
+                                            child: Text(tagsMap[ele.tag]),
                                           ),
                                         ),
+                                      ],
+                                    ),
+                                    trailing: IconButton(
+                                      icon: const Icon(Icons.flag_outlined),
+                                      color: Colors.white,
+                                      onPressed: () async {
+                                        return showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return ReportContent();
+                                          },
+                                        );
+                                      },
+                                    ),
+                                    children: [
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: kDefaultPadding / 6,
+                                          horizontal: kDefaultPadding / 6,
+                                        ),
+                                        child: Text(
+                                          ele.problemDescription,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 10,
+                                        ),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              bottom: kDefaultPadding / 5,
+                                              right: kDefaultPadding / 6,
+                                            ),
+                                            child: TextButton(
+                                              onPressed: () {
+                                                BlocProvider.of<UserHomeBloc>(
+                                                        context)
+                                                    .add(UserHomeChatRequested(
+                                                  studentId: ele.userId,
+                                                  problemId: ele.problemId,
+                                                ));
+                                              },
+                                              style: TextButton.styleFrom(
+                                                  backgroundColor:
+                                                      Colors.grey[800]),
+                                              child: const Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8.0),
+                                                child: Text('Chat'),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
-                                  ),
-                                ],
+                                  );
+                                },
                               ),
                             ),
                             // ListTile(
