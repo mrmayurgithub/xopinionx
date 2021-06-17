@@ -56,17 +56,18 @@ class LoginMainBody extends StatelessWidget {
       builder: (context, state) {
         return SafeArea(
           child: Scaffold(
+            backgroundColor: kSecondaryColor,
             appBar: AppBar(
               automaticallyImplyLeading: false,
-              elevation: 0.0,
-              backgroundColor: Colors.transparent,
+              elevation: 4.0,
+              backgroundColor: kSecondaryColor,
               title: GestureDetector(
                 onTap: () {
                   context.vxNav
                       .clearAndPush(Uri.parse(MainRoutes.homePageRoute));
                 },
                 child: const Text(
-                  'OPINIONX',
+                  'Opinionx',
                   style: TextStyle(
                     color: Colors.green,
                     fontWeight: FontWeight.bold,
@@ -99,17 +100,17 @@ class LoginMainBody extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    SelectableText(
                       "Get started with Opinionx",
                       maxLines: 3,
                       style: TextStyle(
                         fontSize: isMobile ? 22 : 30,
-                        color: Colors.white,
+                        color: kTextColor,
                       ),
                     ),
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(5),
                       ),
                       width: 570,
                       child: Padding(
@@ -154,8 +155,14 @@ class _LoginFormState extends State<LoginForm> {
         duration: const Duration(milliseconds: 200),
         child: IconButton(
           icon: _isObscure
-              ? const Icon(Icons.visibility_off_outlined)
-              : const Icon(Icons.visibility_outlined),
+              ? Icon(
+                  Icons.visibility_off_outlined,
+                  color: kTextColor,
+                )
+              : Icon(
+                  Icons.visibility_outlined,
+                  color: kTextColor,
+                ),
           onPressed: () {
             setState(() {
               _isObscure = !_isObscure;
@@ -204,7 +211,10 @@ class _LoginFormState extends State<LoginForm> {
                 hintText: 'Email',
                 keyboardType: TextInputType.emailAddress,
                 validator: _validator.validateEmail,
-                prefixIcon: const Icon(Icons.email_outlined),
+                prefixIcon: Icon(
+                  Icons.email_outlined,
+                  color: kTextColor,
+                ),
               ),
               SizedBox(height: screenHeight * 0.024459975), // 22
               CustomTextFormField(
@@ -213,7 +223,10 @@ class _LoginFormState extends State<LoginForm> {
                 maxLines: 1,
                 fieldController: _passtextController,
                 hintText: 'Password',
-                prefixIcon: const Icon(Icons.lock_outline),
+                prefixIcon: Icon(
+                  Icons.lock_outline,
+                  color: kTextColor,
+                ),
                 keyboardType: TextInputType.text,
                 validator: _validator.validatePassword,
                 obscureText: _isObscure,
@@ -250,13 +263,12 @@ class _LoginFormState extends State<LoginForm> {
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.green,
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(kDefaultPadding / 2),
+                        borderRadius: BorderRadius.circular(5),
                       ),
                     ),
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                        vertical: kDefaultPadding / 2.5,
+                        vertical: kDefaultPadding / 1.5,
                         horizontal: kDefaultPadding * 3,
                       ),
                       child: const Text(

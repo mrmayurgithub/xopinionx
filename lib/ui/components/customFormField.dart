@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:xopinionx/ui/global/constants.dart';
 import 'package:xopinionx/ui/global/utils.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -79,6 +80,7 @@ class CustomTextFormField extends StatelessWidget {
         enabledBorder: kInputBorderStyle,
         hintStyle: Theme.of(context).textTheme.caption.copyWith(
               fontSize: screenHeight * 0.015565438, // 14
+              color: kTextColor,
             ),
         contentPadding: EdgeInsets.symmetric(
             horizontal: screenWidth * 0.036458333,

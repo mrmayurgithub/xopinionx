@@ -71,54 +71,78 @@ class UserHomeMainBody extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            elevation: 0.0,
-            centerTitle: false,
-            title: const Text("Opinionx"),
-            actions: [
-              Container(
-                padding: const EdgeInsets.all(kDefaultPadding / 4),
-                child: TextButton(
-                  onPressed: () {
-                    BlocProvider.of<UserHomeBloc>(context)
-                        .add(UserHomeAskQueryRequested());
-                  },
-                  child: const Text("Ask Question"),
+        return GestureDetector(
+          onTap: () {
+            FocusScopeNode currentFocus = FocusScope.of(context);
+
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
+          },
+          child: Scaffold(
+            backgroundColor: kSecondaryColor,
+            appBar: AppBar(
+              elevation: 4.0,
+              backgroundColor: kSecondaryColor,
+              centerTitle: false,
+              title: const Text(
+                "Opinionx",
+                style: TextStyle(
+                  color: Colors.green,
+                  fontWeight: FontWeight.bold,
                 ),
-              )
-            ],
-          ),
-          drawer: MainDrawer(),
-          body: SingleChildScrollView(
-            physics: const ClampingScrollPhysics(),
-            child: Column(
-              children: [
+              ),
+              actions: [
                 Container(
-                  padding: const EdgeInsets.all(kDefaultPadding),
-                  width: double.infinity,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    color: Colors.black45.withOpacity(0.4),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SelectableText(
-                        "Answer Some Questions !",
-                        style: TextStyle(fontSize: 40),
+                  padding: const EdgeInsets.all(kDefaultPadding / 4),
+                  child: TextButton(
+                    onPressed: () {
+                      BlocProvider.of<UserHomeBloc>(context)
+                          .add(UserHomeAskQueryRequested());
+                    },
+                    child: const Text(
+                      "Post a Query",
+                      style: TextStyle(
+                        letterSpacing: 1.2,
+                        fontWeight: FontWeight.w600,
                       ),
-                    ],
+                    ),
                   ),
-                ),
-                Center(
-                  child: Container(
-                    constraints: const BoxConstraints(maxWidth: kMaxWidth),
-                    child: SafeArea(child: HomeMainList()),
-                  ),
-                ),
+                )
               ],
+            ),
+            drawer: MainDrawer(),
+            body: SingleChildScrollView(
+              physics: const ClampingScrollPhysics(),
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(kDefaultPadding),
+                    width: double.infinity,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      // color: Colors.black45.withOpacity(0.4),
+                      color: kSecondaryColor,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SelectableText(
+                          "Help Your Juniors !",
+                          style: TextStyle(fontSize: 40),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Center(
+                    child: Container(
+                      constraints: const BoxConstraints(maxWidth: kMaxWidth),
+                      color: kSecondaryColor,
+                      child: SafeArea(child: HomeMainList()),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );
@@ -188,18 +212,34 @@ class QueryList extends StatelessWidget {
                                     ),
                                     subtitle: Row(
                                       children: [
-                                        TextButton(
-                                          onPressed: () {},
-                                          style: TextButton.styleFrom(
-                                              backgroundColor:
-                                                  Colors.grey[800]),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(4.0),
-                                            child: Text(tagsMap[ele.tag]),
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: kDefaultPadding / 4),
+                                          child: TextButton(
+                                            onPressed: () {},
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: Text(tagsMap[ele.tag]),
+                                            ),
                                           ),
                                         ),
                                       ],
                                     ),
+                                    // trailing: PopupMenuButton(
+                                    //   offset: Offset(90, 0),
+                                    //   color: kSecondaryColor,
+                                    //   itemBuilder: (context) {
+                                    //     return <PopupMenuItem<String>>[
+                                    //       PopupMenuItem<String>(
+                                    //           child: const Text('Flag'),
+                                    //           value: 'flag'),
+                                    //     ];
+                                    //   },
+                                    //   onSelected: (value) {
+                                    //     return ReportContent();
+                                    //   },
+                                    // ),
                                     trailing: IconButton(
                                       icon: const Icon(Icons.flag_outlined),
                                       color: Colors.white,
@@ -216,7 +256,7 @@ class QueryList extends StatelessWidget {
                                       Container(
                                         padding: const EdgeInsets.symmetric(
                                           vertical: kDefaultPadding / 6,
-                                          horizontal: kDefaultPadding / 6,
+                                          horizontal: kDefaultPadding / 4,
                                         ),
                                         child: Text(
                                           ele.problemDescription,
@@ -226,8 +266,23 @@ class QueryList extends StatelessWidget {
                                       ),
                                       Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.end,
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(4.0),
+                                            child: ele.datePosted == null
+                                                ? "Update"
+                                                : Text(
+                                                    'Asked - ' +
+                                                        ele.datePosted
+                                                            .split(" ")
+                                                            .first,
+                                                    style: TextStyle(
+                                                      color: kTextColor,
+                                                      fontSize: 10,
+                                                    ),
+                                                  ),
+                                          ),
                                           Padding(
                                             padding: const EdgeInsets.only(
                                               bottom: kDefaultPadding / 5,
@@ -259,31 +314,6 @@ class QueryList extends StatelessWidget {
                                 },
                               ),
                             ),
-                            // ListTile(
-                            //   onTap: () {},
-                            //   title: Text(
-                            //     ele.problemTitle.toString(),
-                            //     maxLines: 2,
-                            //     overflow: TextOverflow.ellipsis,
-                            //   ),
-                            //   subtitle: Column(
-                            //     crossAxisAlignment: CrossAxisAlignment.start,
-                            //     mainAxisSize: MainAxisSize.min,
-                            //     children: [
-                            //       Text(
-                            //         ele.problemDescription,
-                            //         maxLines: 2,
-                            //         overflow: TextOverflow.ellipsis,
-                            //       ),
-                            //       SizedBox(height: kDefaultPadding / 2),
-                            //       TextButton(
-                            //         onPressed: () {},
-                            //         child: Text(ele.tag.toString()),
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
-                            // Divider(),
                           ],
                         ),
                       Row(

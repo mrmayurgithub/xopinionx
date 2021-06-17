@@ -14,7 +14,7 @@ class _LoginButtonState extends State<LoginButton> {
     return TextButton(
       style: TextButton.styleFrom(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(5),
           side: const BorderSide(color: Colors.green),
         ),
       ),
@@ -24,7 +24,7 @@ class _LoginButtonState extends State<LoginButton> {
       child: Container(
         padding: const EdgeInsets.symmetric(
           vertical: kDefaultPadding / 1.5,
-          horizontal: kDefaultPadding * 6,
+          horizontal: kDefaultPadding * 3,
         ),
         child: const Text(
           'Login  ',

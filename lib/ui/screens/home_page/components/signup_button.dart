@@ -18,13 +18,13 @@ class _SignUpButtonState extends State<SignUpButton> {
       style: TextButton.styleFrom(
         backgroundColor: Colors.green,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(kDefaultPadding * 2),
+          borderRadius: BorderRadius.circular(5),
         ),
       ),
       child: Container(
         padding: const EdgeInsets.symmetric(
           vertical: kDefaultPadding / 1.5,
-          horizontal: kDefaultPadding * 6,
+          horizontal: kDefaultPadding * 3,
         ),
         child: const Text(
           'SignUp',

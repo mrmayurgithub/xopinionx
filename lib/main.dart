@@ -158,7 +158,7 @@ class _MainAppWithThemeState extends State<MainAppWithTheme> {
             title: 'Opinionx',
             debugShowCheckedModeBanner: false,
             // theme: widget.state.appThemeData,
-            theme: ThemeData.light(),
+            theme: ThemeData.dark(),
             routeInformationParser: VxInformationParser(),
             routerDelegate: _navigator,
             builder: (context, widget) {

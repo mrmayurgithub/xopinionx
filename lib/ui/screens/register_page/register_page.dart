@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:xopinionx/config/responsive.dart';
 import 'package:xopinionx/global/enums.dart';
 import 'package:xopinionx/global/logger.dart';
 import 'package:xopinionx/ui/components/customFormField.dart';
@@ -13,6 +14,9 @@ import 'package:xopinionx/ui/screens/settings_page/settings_page.dart';
 import 'package:xopinionx/config/routes.dart';
 import 'package:xopinionx/utils/status.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+const Color _kBackgroundColor = Color(0xff212121);
+Color _kTextColor = Colors.white.withOpacity(0.8);
 
 class RegisterPage extends StatelessWidget {
   @override
@@ -50,10 +54,12 @@ class RegistrationPageMainBody extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           // extendBodyBehindAppBar: true,
+          backgroundColor: _kBackgroundColor,
+
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            elevation: 0.0,
-            backgroundColor: Colors.transparent,
+            elevation: 4.0,
+            backgroundColor: _kBackgroundColor,
             title: GestureDetector(
               onTap: () {
                 context.vxNav.clearAndPush(Uri.parse(MainRoutes.homePageRoute));
@@ -70,7 +76,13 @@ class RegistrationPageMainBody extends StatelessWidget {
                 onPressed: () {
                   context.vxNav.replace(Uri.parse(MainRoutes.loginRoute));
                 },
-                child: const Text("Login"),
+                child: const Text(
+                  "Login",
+                  style: TextStyle(
+                    letterSpacing: 1.2,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
             ],
           ),
@@ -152,13 +164,21 @@ class _SignUpFormState extends State<SignUpForm> {
   int eduYear;
   @override
   Widget build(BuildContext context) {
+    final bool isMobile = Responsive.isMobile(context);
+
     Widget _showPassIcon() {
       return AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         child: IconButton(
           icon: _isObscure
-              ? const Icon(Icons.visibility_off_outlined)
-              : const Icon(Icons.visibility_outlined),
+              ? Icon(
+                  Icons.visibility_off_outlined,
+                  color: _kTextColor,
+                )
+              : Icon(
+                  Icons.visibility_outlined,
+                  color: _kTextColor,
+                ),
           onPressed: () {
             setState(() {
               _isObscure = !_isObscure;
@@ -173,7 +193,14 @@ class _SignUpFormState extends State<SignUpForm> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text('Get Started with Opinionx'),
+          Text(
+            'Get Started with Opinionx',
+            maxLines: 3,
+            style: TextStyle(
+              fontSize: isMobile ? 22 : 30,
+              color: _kTextColor,
+            ),
+          ),
           SizedBox(height: screenHeight * 0.024459975), // 22
           CustomTextFormField(
             currentNode: _firstnameNode,
@@ -184,7 +211,10 @@ class _SignUpFormState extends State<SignUpForm> {
             hintText: 'Full Name',
             keyboardType: TextInputType.name,
             validator: _validator.validateName,
-            prefixIcon: const Icon(Icons.person_outline),
+            prefixIcon: Icon(
+              Icons.person_outline,
+              color: _kTextColor,
+            ),
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
           CustomTextFormField(
@@ -196,7 +226,10 @@ class _SignUpFormState extends State<SignUpForm> {
             hintText: 'Last Name',
             keyboardType: TextInputType.name,
             validator: _validator.validateName,
-            prefixIcon: const Icon(Icons.person_outline),
+            prefixIcon: Icon(
+              Icons.person_outline,
+              color: _kTextColor,
+            ),
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
           CustomTextFormField(
@@ -208,7 +241,10 @@ class _SignUpFormState extends State<SignUpForm> {
             hintText: 'Email',
             keyboardType: TextInputType.emailAddress,
             validator: _validator.validateEmail,
-            prefixIcon: const Icon(Icons.email_outlined),
+            prefixIcon: Icon(
+              Icons.email_outlined,
+              color: _kTextColor,
+            ),
           ),
           SizedBox(height: screenHeight * 0.024459975), // 22
           CustomTextFormField(
@@ -217,7 +253,10 @@ class _SignUpFormState extends State<SignUpForm> {
             maxLines: 1,
             fieldController: _passtextController,
             hintText: 'Password',
-            prefixIcon: const Icon(Icons.lock_outline),
+            prefixIcon: Icon(
+              Icons.lock_outline,
+              color: _kTextColor,
+            ),
             keyboardType: TextInputType.text,
             validator: _validator.validatePassword,
             obscureText: _isObscure,
@@ -228,8 +267,14 @@ class _SignUpFormState extends State<SignUpForm> {
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: DropdownButtonFormField(
               value: _langPref,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'Language Preference',
+                labelStyle: TextStyle(
+                  color: _kTextColor,
+                ),
+                hintStyle: TextStyle(
+                  color: _kTextColor,
+                ),
                 hintText: 'Preferred mode of communication',
               ),
               items: _langs,
@@ -248,6 +293,12 @@ class _SignUpFormState extends State<SignUpForm> {
               decoration: InputDecoration(
                 labelText: 'Education Level',
                 hintText: 'Education Level',
+                labelStyle: TextStyle(
+                  color: _kTextColor,
+                ),
+                hintStyle: TextStyle(
+                  color: _kTextColor,
+                ),
                 disabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -329,8 +380,13 @@ class _SignUpFormState extends State<SignUpForm> {
           else
             const SizedBox(),
           SizedBox(height: screenHeight * 0.024459975), // 22
-          const Center(
-            child: Text('Select the fields you feel free to talk about'),
+          Center(
+            child: Text(
+              'Select the fields you feel free to talk about',
+              style: TextStyle(
+                color: _kTextColor,
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -386,7 +442,9 @@ class _SignUpFormState extends State<SignUpForm> {
                       onTap: () {
                         state.selectSuggestion(tag);
                         _usertags.add(tag.tagcode);
-                        logger.w('tag pressed ${tag.tagname}');
+                        logger.w(
+                          'tag pressed ${tag.tagname}',
+                        );
                       },
                     );
                   },
