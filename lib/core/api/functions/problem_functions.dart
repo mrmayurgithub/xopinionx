@@ -6,7 +6,6 @@ import 'package:xopinionx/global/logger.dart';
 class ProblemFunctions {
   static final _firestore = FirebaseFirestore.instance;
   static Future<void> createProblem({ProblemModel problem}) async {
-    //TODO: maybe also add to the local list for optimization and don't use await then
     final _docId = _firestore.collection('problems').doc().id;
     await _firestore.collection('problems').doc(_docId).set(
           ProblemModel(
@@ -35,8 +34,6 @@ class ProblemFunctions {
   }
 
   static Future<void> finishProblem({ProblemModel problem}) async {
-    //TODO: maybe update local list
-
     await _firestore.collection('problems').doc(problem.problemId).set({
       'id': problem.problemId,
       'userId': problem.userId,
@@ -49,23 +46,19 @@ class ProblemFunctions {
   }
 
   static Future<void> deleteProblem({ProblemModel problem}) async {
-    //TODO: maybe also delete from the local list or update the list
     await _firestore.collection('problems').doc(problem.problemId).delete();
   }
 
   static Future<List<ProblemModel>> getGlobalProblems() async {
     logger.i('GETGLOBALPROBLEMS: getting problems');
     final List<ProblemModel> _problems = [];
-    final Query q = _firestore.collection('problems').limit(20);
+    final Query q =
+        _firestore.collection('problems').orderBy('datePosted').limit(20);
     final QuerySnapshot querySnapshot = await q.get();
     final List<QueryDocumentSnapshot> _data = querySnapshot.docs;
-    // logger.e(_data.length);
-
     for (final element in _data) {
       final Map<String, dynamic> json = element.data();
-      // logger.v(a);
       final ProblemModel _problem = ProblemModel.fromJson(json);
-      //TODO: complete
       for (final tag in globalUser.userTags) {
         if (tag.toString().toLowerCase() ==
                 _problem.tag.toString().toLowerCase() &&
@@ -74,12 +67,7 @@ class ProblemFunctions {
           _problems.add(_problem);
         }
       }
-      // logger.d('PROBLEM: ${_problem.tag.toString()}');
     }
-
-    // logger.d(
-    //     'GETGLOBALPROBLEMS: ${_problems.length} ${globalUser.userTags.toString()}');
-
     return _problems;
   }
 

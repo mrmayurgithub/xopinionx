@@ -159,8 +159,8 @@ class _QueryFormState extends State<QueryForm> {
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.next,
             validator: (_) {
-              if (_problemTextController.text.length <= 30) {
-                return 'The problem title must be atlease 30 characters long';
+              if (_problemTextController.text.length <= 10) {
+                return 'The problem title must be atlease 10 characters long';
               } else {
                 return null;
               }
@@ -175,8 +175,8 @@ class _QueryFormState extends State<QueryForm> {
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.next,
             validator: (_) {
-              if (_descriptionTextController.text.length <= 150) {
-                return 'The description should consist of 150 characters or more';
+              if (_descriptionTextController.text.length <= 80) {
+                return 'The description should consist of 80 characters or more';
               } else {
                 return null;
               }

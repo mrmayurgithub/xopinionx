@@ -11,6 +11,7 @@ class _ReportContentState extends State<ReportContent> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: kSecondaryColor,
       content: Container(
         color: kSecondaryColor,
         child: SingleChildScrollView(

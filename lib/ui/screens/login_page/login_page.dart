@@ -244,7 +244,7 @@ class _LoginFormState extends State<LoginForm> {
                         builder: (context) => ForgotPasswordBox(),
                       );
                     },
-                    child: Text("Forgot Password"),
+                    child: const Text("Forgot Password"),
                   ),
                 ],
               ),
@@ -317,7 +317,7 @@ class _ForgotPasswordBoxState extends State<ForgotPasswordBox> {
         builder: (BuildContext context) => AlertDialog(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           content: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: 400, maxHeight: 400),
+            constraints: const BoxConstraints(maxWidth: 400, maxHeight: 400),
             child: BlocConsumer<ForgotPasswordBloc, ForgotPasswordState>(
               listener: (context, state) async {
                 if (state is ForgotPasswordLoading) {
@@ -340,46 +340,40 @@ class _ForgotPasswordBoxState extends State<ForgotPasswordBox> {
                   logger.wtf(state.message);
                 }
               },
-              builder: (context, state) => Container(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Form(
-                      key: _formkey,
-                      child: TextFormField(
-                        validator: _validator.validateEmail,
-                        controller: _emailTextController,
-                        textAlignVertical: TextAlignVertical.center,
-                        style: Theme.of(context).textTheme.caption.copyWith(
+              builder: (context, state) => Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Form(
+                    key: _formkey,
+                    child: TextFormField(
+                      validator: _validator.validateEmail,
+                      controller: _emailTextController,
+                      textAlignVertical: TextAlignVertical.center,
+                      style: Theme.of(context).textTheme.caption.copyWith(
+                            fontSize: screenHeight * 0.015565438, // 14
+                          ),
+                      decoration: InputDecoration(
+                        border: kInputBorderStyle,
+                        focusedBorder: kInputBorderStyle,
+                        enabledBorder: kInputBorderStyle,
+                        hintStyle: Theme.of(context).textTheme.caption.copyWith(
                               fontSize: screenHeight * 0.015565438, // 14
                             ),
-                        decoration: InputDecoration(
-                          border: kInputBorderStyle,
-                          focusedBorder: kInputBorderStyle,
-                          enabledBorder: kInputBorderStyle,
-                          hintStyle:
-                              Theme.of(context).textTheme.caption.copyWith(
-                                    fontSize: screenHeight * 0.015565438, // 14
-                                  ),
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: screenWidth * 0.036458333,
-                              vertical:
-                                  screenHeight * 0.021124524), // h=15, v=19
-                          hintText: "Enter your Email",
-                          suffixIcon: null,
+                        contentPadding: EdgeInsets.symmetric(
+                            horizontal: screenWidth * 0.036458333,
+                            vertical: screenHeight * 0.021124524), // h=15, v=19
+                        hintText: "Enter your Email",
 
-                          suffix: null,
-                          prefixIcon: Icon(Icons.email_outlined),
-                        ),
+                        prefixIcon: const Icon(Icons.email_outlined),
                       ),
                     ),
-                    if (err || emailSent) SizedBox(height: 10),
-                    if (err)
-                      Text("Something went wrong!")
-                    else if (emailSent)
-                      Text("Email has been sent!"),
-                  ],
-                ),
+                  ),
+                  if (err || emailSent) const SizedBox(height: 10),
+                  if (err)
+                    const Text("Something went wrong!")
+                  else if (emailSent)
+                    const Text("Email has been sent!"),
+                ],
               ),
             ),
           ),
@@ -389,7 +383,7 @@ class _ForgotPasswordBoxState extends State<ForgotPasswordBox> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: emailSent ? Text("Done") : Text("Cancel"),
+                child: emailSent ? const Text("Done") : const Text("Cancel"),
               ),
             if (!isLoading && !emailSent)
               TextButton(
@@ -400,7 +394,7 @@ class _ForgotPasswordBoxState extends State<ForgotPasswordBox> {
                             email: _emailTextController.text));
                   } else {}
                 },
-                child: Text("Send Link"),
+                child: const Text("Send Link"),
               )
           ],
         ),

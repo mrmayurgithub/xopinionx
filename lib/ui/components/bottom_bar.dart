@@ -8,14 +8,13 @@ class BottomBar extends StatelessWidget {
     bool isMobile = Responsive.isMobile(context);
     return Container(
       width: double.infinity,
-      constraints: BoxConstraints(
+      constraints: const BoxConstraints(
         minHeight: 100,
       ),
       decoration: BoxDecoration(color: kSecondaryColor),
       child: Flex(
         direction: isMobile ? Axis.vertical : Axis.horizontal,
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // Column(
           //   mainAxisAlignment: MainAxisAlignment.center,
@@ -43,13 +42,14 @@ class BottomBar extends StatelessWidget {
             style:
                 TextStyle(color: kTextColor, fontSize: 13, letterSpacing: 1.1),
           ),
-          isMobile
-              ? SizedBox(
-                  height: kDefaultPadding / 4,
-                )
-              : SizedBox(
-                  width: kDefaultPadding * 1.5,
-                ),
+          if (isMobile)
+            const SizedBox(
+              height: kDefaultPadding / 4,
+            )
+          else
+            const SizedBox(
+              width: kDefaultPadding * 1.5,
+            ),
           TextButton(
             onPressed: () {},
             child: Text(
@@ -62,13 +62,14 @@ class BottomBar extends StatelessWidget {
               ),
             ),
           ),
-          isMobile
-              ? SizedBox(
-                  height: kDefaultPadding / 4,
-                )
-              : SizedBox(
-                  width: kDefaultPadding,
-                ),
+          if (isMobile)
+            const SizedBox(
+              height: kDefaultPadding / 4,
+            )
+          else
+            const SizedBox(
+              width: kDefaultPadding,
+            ),
           TextButton(
             onPressed: () {},
             child: Text(

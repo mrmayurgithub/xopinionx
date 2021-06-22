@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:xopinionx/config/responsive.dart';
 import 'package:xopinionx/ui/components/bottom_bar.dart';
 import 'package:xopinionx/ui/global/constants.dart';
-import 'package:xopinionx/ui/global/utils.dart';
 import 'package:xopinionx/ui/screens/home_page/components/login_button.dart';
 import 'package:xopinionx/ui/screens/home_page/components/signup_button.dart';
 
@@ -20,19 +19,18 @@ class _HomePageDesktopState extends State<HomePageDesktop> {
       child: GestureDetector(
         onTap: () {
           FocusScopeNode currentFocus = FocusScope.of(context);
-
           if (!currentFocus.hasPrimaryFocus) {
             currentFocus.unfocus();
           }
         },
         child: Scaffold(
           // backgroundColor: Color(0xff212121),
-          // extendBodyBehindAppBar: true,
+          extendBodyBehindAppBar: true,
           appBar: AppBar(
             automaticallyImplyLeading: false,
             elevation: 4.0,
             backgroundColor: kSecondaryColor,
-            title: const Text('OpinionX'),
+            title: const Text('Opinionx'),
             centerTitle: isMobile,
             actions: [
               if (!isMobile)
@@ -80,14 +78,13 @@ class _HomePageDesktopState extends State<HomePageDesktop> {
             child: LayoutBuilder(
               builder: (context, constraints) => Scrollbar(
                 child: SingleChildScrollView(
-                  physics: ClampingScrollPhysics(),
+                  physics: const ClampingScrollPhysics(),
                   child: ConstrainedBox(
                     constraints: BoxConstraints(
                         minWidth: constraints.maxWidth,
                         minHeight: constraints.maxHeight),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
                           width: double.infinity,
@@ -96,7 +93,6 @@ class _HomePageDesktopState extends State<HomePageDesktop> {
                           child: Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 SelectableText(
                                   "Got some doubts ?\nWant a genuine opinion ?\nClear your doubts now !",
@@ -115,11 +111,10 @@ class _HomePageDesktopState extends State<HomePageDesktop> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     SignUpButton(),
-                                    isMobile
-                                        ? const SizedBox(
-                                            height: kDefaultPadding)
-                                        : const SizedBox(
-                                            width: kDefaultPadding),
+                                    if (isMobile)
+                                      const SizedBox(height: kDefaultPadding)
+                                    else
+                                      const SizedBox(width: kDefaultPadding),
                                     LoginButton(),
                                   ],
                                 ),
