@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:xopinionx/core/api/functions/chat_functions.dart';
 import 'package:xopinionx/core/api/models/chat_model.dart';
 
+import 'chat_provider.dart';
 import 'chat_users.dart';
 
 class ChatType extends StatefulWidget {
@@ -15,6 +16,7 @@ class _ChatTypeState extends State<ChatType> {
 
   @override
   Widget build(BuildContext context) {
+    final sChat = Provider.of<ChatSelectionProvider>(context, listen: false);
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -26,6 +28,7 @@ class _ChatTypeState extends State<ChatType> {
                 onChanged: (int val) {
                   setState(() {
                     grVal = val;
+                    sChat.setChat(chat: null);
                   });
                 },
                 title: const Text('Student'),
@@ -36,6 +39,7 @@ class _ChatTypeState extends State<ChatType> {
                 onChanged: (int val) {
                   setState(() {
                     grVal = val;
+                    sChat.setChat(chat: null);
                   });
                 },
                 title: const Text('Teacher'),
@@ -55,6 +59,9 @@ class _ChatTypeState extends State<ChatType> {
             height: 0.0,
           ),
           StreamProvider<List<ChatModel>>.value(
+            catchError: (context, error) {
+              return null;
+            },
             value: grVal == 0
                 ? ChatFunctions().userStudentList
                 : ChatFunctions().userTeacherList,

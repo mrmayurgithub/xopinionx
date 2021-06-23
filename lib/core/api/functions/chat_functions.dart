@@ -8,8 +8,6 @@ class ChatFunctions {
   static final _firestore = FirebaseFirestore.instance;
 
   static Future<void> createChat({@required ChatModel chatModel}) async {
-    //TODO: implement
-    // final _docId = _firestore.collection('chats').doc().id;
     await _firestore
         .collection('chats')
         .doc(chatModel.chatId)
@@ -17,7 +15,6 @@ class ChatFunctions {
   }
 
   static Future<void> deleteChat({ChatModel chatModel}) async {
-    //TODO: maybe also delete from the local list or update the list
     await _firestore.collection('chats').doc(chatModel.chatId).delete();
   }
 

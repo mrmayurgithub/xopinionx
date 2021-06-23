@@ -133,51 +133,60 @@ class _MainChatPageState extends State<MainChatPage> {
                                     ),
                                   ),
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: kSecondaryColor,
-                              border: const Border(
-                                top: BorderSide(
-                                  color: Colors.black45,
-                                  width: 2.0,
-                                ),
-                              ),
-                            ),
-                            height: 40,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: kDefaultPadding / 4,
-                              vertical: kDefaultPadding / 5,
-                            ),
-                            child: Center(
-                              child: TextField(
-                                controller: messageTextController,
-                                decoration: InputDecoration(
-                                  hintText: "Type a message",
-                                  hintStyle: const TextStyle(
-                                    fontSize: 13,
-                                  ),
-                                  border: const OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  suffixIcon: IconButton(
-                                    onPressed: () {
-                                      _firestore
-                                          .collection('chats')
-                                          .doc(sChat.selectedChat.chatId)
-                                          .collection('messages')
-                                          .add({
-                                        'text': messageTextController.text,
-                                        'sender': globalUser.email,
-                                      }).then((value) {
-                                        messageTextController.clear();
-                                      });
-                                    },
-                                    icon: const Icon(Icons.send),
+                          if (sChat.selectedChat != null)
+                            Container(
+                              decoration: BoxDecoration(
+                                color: kSecondaryColor,
+                                border: const Border(
+                                  top: BorderSide(
+                                    color: Colors.black45,
+                                    width: 2.0,
                                   ),
                                 ),
                               ),
+                              height: 40,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: kDefaultPadding / 4,
+                                vertical: kDefaultPadding / 5,
+                              ),
+                              child: Center(
+                                child: TextField(
+                                  controller: messageTextController,
+                                  decoration: InputDecoration(
+                                    hintText: "Type a message",
+                                    hintStyle: const TextStyle(
+                                      fontSize: 13,
+                                    ),
+                                    border: const OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                    ),
+                                    suffixIcon: IconButton(
+                                      onPressed: () {
+                                        if (messageTextController.text.length !=
+                                            0) {
+                                          final DateTime now = DateTime.now();
+                                          final DateTime date = DateTime(
+                                              now.year, now.month, now.day);
+                                          _firestore
+                                              .collection('chats')
+                                              .doc(sChat.selectedChat.chatId)
+                                              .collection('messages')
+                                              .add({
+                                            'text': messageTextController.text,
+                                            'sender': globalUser.email,
+                                            'dateCreated':
+                                                date.toIso8601String(),
+                                          }).then((value) {
+                                            messageTextController.clear();
+                                          });
+                                        }
+                                      },
+                                      icon: const Icon(Icons.send),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
                         ],
                       ),
                     ),

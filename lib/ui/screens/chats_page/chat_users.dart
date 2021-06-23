@@ -30,7 +30,6 @@ class _ChatUsersState extends State<ChatUsers> {
                   return ListTile(
                     title: Text(
                       _chatlist[index].problemId,
-                      // "a",
                       overflow: TextOverflow.ellipsis,
                     ),
                     // tileColor: sChat.selectedChat.problemId ==
@@ -39,6 +38,7 @@ class _ChatUsersState extends State<ChatUsers> {
                     //     : Colors.grey.shade700,
                     onTap: () {
                       sChat.setChat(chat: _chatlist[index]);
+                      Scaffold.of(context).setState(() {});
                     },
                   );
                 },
